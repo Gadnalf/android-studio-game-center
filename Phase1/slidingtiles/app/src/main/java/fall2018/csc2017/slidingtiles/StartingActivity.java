@@ -1,4 +1,4 @@
-package fall2018.csc2017.GameCentre;
+package fall2018.csc2017.slidingtiles;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +38,7 @@ public class StartingActivity extends AppCompatActivity {
         boardManager = new BoardManager();
         saveToFile(TEMP_SAVE_FILENAME);
 
-        setContentView(fall2018.csc2017.GameCentre.R.layout.activity_starting_);
+        setContentView(R.layout.activity_starting_);
         addStartButtonListener();
         addLoadButtonListener();
         addSaveButtonListener();
@@ -48,7 +48,7 @@ public class StartingActivity extends AppCompatActivity {
      * Activate the start button.
      */
     private void addStartButtonListener() {
-        Button startButton = findViewById(fall2018.csc2017.GameCentre.R.id.StartButton);
+        Button startButton = findViewById(R.id.StartButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class StartingActivity extends AppCompatActivity {
      * Activate the load button.
      */
     private void addLoadButtonListener() {
-        Button loadButton = findViewById(fall2018.csc2017.GameCentre.R.id.LoadButton);
+        Button loadButton = findViewById(R.id.LoadButton);
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +85,7 @@ public class StartingActivity extends AppCompatActivity {
      * Activate the save button.
      */
     private void addSaveButtonListener() {
-        Button saveButton = findViewById(fall2018.csc2017.GameCentre.R.id.SaveButton);
+        Button saveButton = findViewById(R.id.SaveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
