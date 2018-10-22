@@ -1,0 +1,9 @@
+*.bin
+*.idea
+*.iml
+*.xml
+*.properties
+*.lock
+*.jar
+*.bat
+local.properties
