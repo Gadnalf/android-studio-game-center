@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package fall2018.csc2017.GameCentre;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -58,10 +58,10 @@ public class GameActivity extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         loadFromFile(StartingActivity.TEMP_SAVE_FILENAME);
         createTileButtons(this);
-        setContentView(R.layout.activity_main);
+        setContentView(fall2018.csc2017.GameCentre.R.layout.activity_main);
 
         // Add View to activity
-        gridView = findViewById(R.id.grid);
+        gridView = findViewById(fall2018.csc2017.GameCentre.R.id.grid);
         gridView.setNumColumns(Board.NUM_COLS);
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().addObserver(this);
