@@ -20,7 +20,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     final static int NUM_ROWS = 4;
 
     /**
-     * The number of rows.
+     * The number of columns.
      */
     final static int NUM_COLS = 4;
 
