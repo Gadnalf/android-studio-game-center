@@ -1,17 +1,20 @@
 # CS Project
 
-
 ### lifting up the application
 1. pull the master
 2. open android studio, open existing android studio project
   - open from the GameCentre folder
-3. Gradle sync
-4. hit play
+3. Build -> clean
+    - build is a top option in android studio
+4. Build -> rebuild
+5. Gradle sync
+6. hit play
+
+
 
 ### troubleshooting
-- import errors
-    - Build -> clean
-    - Build -> rebuild
+- Build -> clean
+- Build -> rebuild
 
 
 ### work allocations
