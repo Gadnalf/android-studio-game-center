@@ -15,6 +15,7 @@ class BoardManager implements Serializable {
      * The board being managed.
      */
     private Board board;
+    private ScoreBoard scoreBoard;
 
     /**
      * Manage a board that has been pre-populated.
@@ -22,6 +23,7 @@ class BoardManager implements Serializable {
      */
     BoardManager(Board board) {
         this.board = board;
+        this.scoreBoard = new ScoreBoard();
     }
 
     /**
@@ -43,6 +45,7 @@ class BoardManager implements Serializable {
 
         Collections.shuffle(tiles);
         this.board = new Board(tiles);
+        this.scoreBoard = new ScoreBoard();
     }
 
     /**
@@ -98,6 +101,7 @@ class BoardManager implements Serializable {
         int col = position % Board.NUM_COLS;
         int blankId = board.numTiles();
         if(isValidTap(position)){
+            this.scoreBoard.move();
             Tile above = row == 0 ? null : board.getTile(row - 1, col);
             Tile below = row == Board.NUM_ROWS - 1 ? null : board.getTile(row + 1, col);
             Tile left = col == 0 ? null : board.getTile(row, col - 1);

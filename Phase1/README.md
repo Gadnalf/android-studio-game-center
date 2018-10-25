@@ -10,6 +10,9 @@
 5. Gradle sync
 6. hit play
 
+### Note
+- be sure anything that needs to be saved implements Serializable like BoardManager does
+
 
 
 ### troubleshooting
@@ -33,6 +36,7 @@ scoreboard: me, also game launch center and timer functionality
 
 ### resources
 - google docs: https://drive.google.com/drive/folders/1XiT48jNzuS5Zl_41no0xJYRhyoBdAgU2
+- repo: 
 - git tutorial: https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
 - vscode: 
     - use for viewing conflicts
