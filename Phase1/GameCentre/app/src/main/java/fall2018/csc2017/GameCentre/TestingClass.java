@@ -7,7 +7,7 @@ public class TestingClass {
     }
 
     public static void testBoardManager() {
-        BoardManager bm = new BoardManager();
-        bm.touchMove(4);
+//        BoardManager bm = new BoardManager();
+//        bm.touchMove(4);
     }
 }

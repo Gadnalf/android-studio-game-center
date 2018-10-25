@@ -15,15 +15,16 @@ class BoardManager implements Serializable {
      * The board being managed.
      */
     private Board board;
-    private int numMoves;
+    private ScoreBoard scoreBoard;
+    private long score;
 
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    BoardManager(Board board) {
-        this.numMoves = 0;
+    BoardManager(Board board, ScoreBoard scoreBoard) {
         this.board = board;
+        this.scoreBoard = scoreBoard;
     }
 
     /**
@@ -36,7 +37,7 @@ class BoardManager implements Serializable {
     /**
      * Manage a new shuffled board.
      */
-    BoardManager() {
+    BoardManager(ScoreBoard scoreBoard) {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = Board.NUM_ROWS * Board.NUM_COLS;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
@@ -45,6 +46,7 @@ class BoardManager implements Serializable {
 
         Collections.shuffle(tiles);
         this.board = new Board(tiles);
+        this.scoreBoard = scoreBoard;
     }
 
     /**
@@ -63,6 +65,9 @@ class BoardManager implements Serializable {
             if (last_tile.compareTo(current_tile)<0){
                 solved = false;
             }
+        }
+        if (solved) {
+            this.score = this.scoreBoard.getScoreAndUpdateScoreBoard();
         }
         return solved;
     }
@@ -100,7 +105,7 @@ class BoardManager implements Serializable {
         int col = position % Board.NUM_COLS;
         int blankId = board.numTiles();
         if(isValidTap(position)){
-            this.numMoves ++;
+            this.scoreBoard.move();
             Tile above = row == 0 ? null : board.getTile(row - 1, col);
             Tile below = row == Board.NUM_ROWS - 1 ? null : board.getTile(row + 1, col);
             Tile left = col == 0 ? null : board.getTile(row, col - 1);
@@ -120,7 +125,7 @@ class BoardManager implements Serializable {
         }
     }
 
-    public int getNumMoves() {
-        return this.numMoves;
+    public long getScore() {
+        return this.score;
     }
 }

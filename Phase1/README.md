@@ -18,11 +18,19 @@
 - you can inherit from TestingGameLaunch to put your tests
 - please kick off ScoreBoardTest after changes you've made
 
-### Scoreboard
-- takes user, game, and boardmanager
-- from board manager it pulls the number of moves
+## Scoreboard
+- takes user, game
 - uses static variables to store top games per game and per player
 - assumes User and Game will store these max scores
+
+#### GameActivity and Starting Activity
+- both now kick off the game launch center and get the boardmanager from that
+
+#### Board Manager
+- if the game is finished, the first time this is called the scores are updated and stored
+- Altered BoardManager to take ScoreBoard as param
+    - only class passing a param to this was StartingActivity
+    - Altered Starting Activity to require an input boardManager passed to it
 
 ### troubleshooting
 - Build -> clean

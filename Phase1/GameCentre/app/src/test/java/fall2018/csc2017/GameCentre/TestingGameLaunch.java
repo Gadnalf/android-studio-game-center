@@ -16,14 +16,14 @@ public class TestingGameLaunch {
 
     /** The board manager for testing. */
     BoardManager boardManager;
-    StartingActivity startingActivity;
     BoardManager winningBoardManager;
+    ScoreBoard scoreBoard;
 
     /**
      * Make a set of tiles that are in order.
      * @return a set of tiles that are in order
      */
-    private List<Tile> makeTiles() {
+    public List<Tile> makeTiles() {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = Board.NUM_ROWS * Board.NUM_COLS;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
@@ -39,10 +39,12 @@ public class TestingGameLaunch {
     public void setUpCorrect() {
         List<Tile> tiles = makeTiles();
         Board board = new Board(tiles);
-        boardManager = new BoardManager(board);
-        winningBoardManager = new BoardManager(board);
-        startingActivity = new StartingActivity();
-        startingActivity.setBoardManager(boardManager);
+        scoreBoard = new ScoreBoard(
+                new User("jim", "testing"),
+                new Game(3)
+        );
+        boardManager = new BoardManager(board, scoreBoard);
+        winningBoardManager = new BoardManager(board, scoreBoard);
 
     }
 
@@ -59,6 +61,7 @@ public class TestingGameLaunch {
     @Test
     public void testIsSolved() {
         setUpCorrect();
+        System.out.println(boardManager.puzzleSolved());
         assertEquals(true, boardManager.puzzleSolved());
         swapFirstTwoTiles();
         assertEquals(false, boardManager.puzzleSolved());

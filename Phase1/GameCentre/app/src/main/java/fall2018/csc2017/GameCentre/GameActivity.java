@@ -24,7 +24,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private GameLaunchCentre gameLaunchCentre = new GameLaunchCentre();
+    private BoardManager boardManager = gameLaunchCentre.getBoardManager();
 
     /**
      * The buttons to display.
@@ -42,6 +43,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
     // Grid View and calculated column height and width based on device size
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
+
 
     /**
      * Set up the background image for each button based on the master list

@@ -8,7 +8,7 @@ public class Game {
 
     public Game(int numTiles) {
         this.numTiles = numTiles;
-        this.maxScore = 0;
+        this.maxScore = 1;
         this.gameId = this.numGames + 1;
     }
 

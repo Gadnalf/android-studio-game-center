@@ -10,19 +10,20 @@ import java.util.ArrayList;
  * This scoreboard needs to get updated if the users finishes with higher scores. => only care about top scores
  */
 public class ScoreBoard implements Serializable {
-    public static ArrayList<Game> perGameScoreBoard;
-    public static ArrayList<User> perUserScoreBoard;
+    public static ArrayList<Game> perGameScoreBoard = new ArrayList<>();
+    public static ArrayList<User> perUserScoreBoard = new ArrayList<>();
 
     private long startTime;
     private User user;
     private Game game;
     private BoardManager boardManager;
+    private int numMoves;
 
-    public ScoreBoard(User user, Game game, BoardManager boardManager) {
-        this.boardManager = boardManager;
+    public ScoreBoard(User user, Game game) {
         this.startTime = System.nanoTime();
         this.user = user;
         this.game = game;
+        this.numMoves = 0;
     }
 
     public long getTimePlayed() {
@@ -30,16 +31,18 @@ public class ScoreBoard implements Serializable {
         return endTime - this.startTime;
     }
 
+
     public long getScore() {
-        return (long) this.boardManager.getNumMoves() / getTimePlayed();
+        long a = (long) getNumMoves();
+        long b = getTimePlayed();
+        return 10-(a/b); //want to maximize this
     }
 
-    public void getScoreAndUpdateScoreBoard() {
-        if (this.boardManager.puzzleSolved()) {
-            long newScore = getScore();
-            updateGameScores(newScore);
-            updateUserScore(newScore);
-        }
+    public long getScoreAndUpdateScoreBoard() {
+        long newScore = getScore();
+        updateGameScores(newScore);
+        updateUserScore(newScore);
+        return newScore;
     }
 
     public boolean isNewGame() {
@@ -69,7 +72,12 @@ public class ScoreBoard implements Serializable {
         }
     }
 
+    public void move() {
+        this.numMoves ++;
+    }
 
-
+    public int getNumMoves() {
+        return numMoves;
+    }
 
 }
