@@ -15,15 +15,15 @@ class BoardManager implements Serializable {
      * The board being managed.
      */
     private Board board;
-    private ScoreBoard scoreBoard;
+    private int numMoves;
 
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
     BoardManager(Board board) {
+        this.numMoves = 0;
         this.board = board;
-        this.scoreBoard = new ScoreBoard();
     }
 
     /**
@@ -45,7 +45,6 @@ class BoardManager implements Serializable {
 
         Collections.shuffle(tiles);
         this.board = new Board(tiles);
-        this.scoreBoard = new ScoreBoard();
     }
 
     /**
@@ -101,7 +100,7 @@ class BoardManager implements Serializable {
         int col = position % Board.NUM_COLS;
         int blankId = board.numTiles();
         if(isValidTap(position)){
-            this.scoreBoard.move();
+            this.numMoves ++;
             Tile above = row == 0 ? null : board.getTile(row - 1, col);
             Tile below = row == Board.NUM_ROWS - 1 ? null : board.getTile(row + 1, col);
             Tile left = col == 0 ? null : board.getTile(row, col - 1);
@@ -121,4 +120,7 @@ class BoardManager implements Serializable {
         }
     }
 
+    public int getNumMoves() {
+        return this.numMoves;
+    }
 }

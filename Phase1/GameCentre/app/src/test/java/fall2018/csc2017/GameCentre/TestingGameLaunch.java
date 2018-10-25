@@ -12,10 +12,12 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class BoardAndTileTest {
+public class TestingGameLaunch {
 
     /** The board manager for testing. */
     BoardManager boardManager;
+    StartingActivity startingActivity;
+    BoardManager winningBoardManager;
 
     /**
      * Make a set of tiles that are in order.
@@ -34,16 +36,20 @@ public class BoardAndTileTest {
     /**
      * Make a solved Board.
      */
-    private void setUpCorrect() {
+    public void setUpCorrect() {
         List<Tile> tiles = makeTiles();
         Board board = new Board(tiles);
         boardManager = new BoardManager(board);
+        winningBoardManager = new BoardManager(board);
+        startingActivity = new StartingActivity();
+        startingActivity.setBoardManager(boardManager);
+
     }
 
     /**
      * Shuffle a few tiles.
      */
-    private void swapFirstTwoTiles() {
+    public void swapFirstTwoTiles() {
         boardManager.getBoard().swapTiles(0, 0, 0, 1);
     }
 

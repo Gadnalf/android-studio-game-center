@@ -32,9 +32,18 @@ public class StartingActivity extends AppCompatActivity {
      */
     private BoardManager boardManager;
 
+    public BoardManager getBoardManager() {
+        return boardManager;
+    }
+
+    public void setBoardManager(BoardManager boardManager) {
+        this.boardManager = boardManager;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         boardManager = new BoardManager();
         saveToFile(TEMP_SAVE_FILENAME);
 

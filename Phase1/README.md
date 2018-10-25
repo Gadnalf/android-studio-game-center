@@ -12,8 +12,17 @@
 
 ### Note
 - be sure anything that needs to be saved implements Serializable like BoardManager does
+- to print stuff see MovementContoller
 
+### Testing
+- you can inherit from TestingGameLaunch to put your tests
+- please kick off ScoreBoardTest after changes you've made
 
+### Scoreboard
+- takes user, game, and boardmanager
+- from board manager it pulls the number of moves
+- uses static variables to store top games per game and per player
+- assumes User and Game will store these max scores
 
 ### troubleshooting
 - Build -> clean
