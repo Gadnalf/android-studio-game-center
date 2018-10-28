@@ -88,7 +88,10 @@ public class Account {
      * Gets the maximum score for the specified game.
      */
     Long getMaxScore(String game){
-        return max_scores.get(game);
+        if(max_scores.containsKey(game)){
+            return max_scores.get(game);
+        }
+        return Long.valueOf(0);
     }
 
     @Override

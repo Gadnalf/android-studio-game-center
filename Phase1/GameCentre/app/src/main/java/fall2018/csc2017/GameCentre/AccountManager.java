@@ -28,13 +28,14 @@ class AccountManager {
     boolean addAccount(String username, String password){
         if (accounts.contains(username)) {
             accounts.add(new Account(username, password));
+            this.login(username, password);
             return true;
         }
         return false;
     }
 
     /**
-     * Removes the account with the specified username and returns true.
+     * Removes the account with the specified username and returns true. If the account doesn't exist, returns false.
      */
     boolean removeAccount(String username) {
         if (accounts.contains(username)) {
