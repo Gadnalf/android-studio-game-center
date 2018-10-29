@@ -32,6 +32,11 @@ public class StartingActivity extends AppCompatActivity {
      */
     private BoardManager boardManager;
 
+    public StartingActivity() {};
+
+    public StartingActivity(BoardManager boardManager) {
+        this.boardManager = boardManager;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

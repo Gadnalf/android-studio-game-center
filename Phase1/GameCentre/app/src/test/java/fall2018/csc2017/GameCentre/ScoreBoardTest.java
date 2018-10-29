@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 
-public class ScoreBoardTest extends TestingGameLaunch{
+public class ScoreBoardTest extends TestingGameLaunch {
 
 //    @Test
 //    public void testIsSolved2() {
@@ -45,6 +45,33 @@ public class ScoreBoardTest extends TestingGameLaunch{
         setUpCorrect();
         assertEquals(10, scoreBoard.perGameScoreBoard.get(0).getMaxScore());
         assertEquals(10, scoreBoard.perUserScoreBoard.get(0).getMaxScore());
+    }
+
+    @Test
+    public void testSavingAndLoading(){
+        //---------add one user to scoreboard
+        setUpCorrect();
+        System.out.println(boardManager.puzzleSolved());
+        //puzzle is solved so will add to the scoreboard
+        //---------add another user to the scoreboard
+        List<Tile> tiles = makeTiles();
+        Board board = new Board(tiles);
+        scoreBoard = new ScoreBoard(
+                new User("bill", "testing"),
+                new Game(4)
+        );
+        boardManager = new BoardManager(board, scoreBoard);
+        //puzzle solved so we add to the scoreboard
+        System.out.println(boardManager.puzzleSolved());
+        //save this scoreboard
+        saveToFile(SAVE_FILENAME);
+        //wipe the scoreboard
+        ScoreBoard.perGameScoreBoard = new ArrayList<>();
+        ScoreBoard.perUserScoreBoard = new ArrayList<>();
+        loadFromFile(SAVE_FILENAME);
+        //------------check that we load properly
+        assertEquals(2, scoreBoard.perGameScoreBoard.size());
+        assertEquals(2, scoreBoard.perUserScoreBoard.size());
     }
 
 //    @Test
