@@ -2,6 +2,7 @@ package fall2018.csc2017.GameCentre;
 import java.util.Scanner;
 
 public class GameLaunchCentre {
+    private AccountManager accountManager;
     private User user;
     private Game game;
     private StartingActivity startingActivity;
@@ -15,7 +16,9 @@ public class GameLaunchCentre {
 //        String userName = input.next();
 //        System.out.println("enter pwd");
 //        String userName = input.next();
-        this.user = new User("testing", "testing");
+        this.accountManager = new AccountManager();
+        accountManager.addAccount("testing", "testing");
+        this.user = new User("testing","testing");
         this.game = new Game(4);
         scoreBoard = new ScoreBoard(user, game);
         this.boardManager = new BoardManager(scoreBoard);
