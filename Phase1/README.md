@@ -10,6 +10,8 @@
 5. Gradle sync
 6. hit play
 
+**note: if the application does not lift, please alarm the rest of the group immediately**
+
 ### Note
 - be sure anything that needs to be saved implements Serializable like BoardManager does
 - to print stuff see MovementContoller
@@ -35,6 +37,34 @@
 ### troubleshooting
 - Build -> clean
 - Build -> rebuild
+- double check your AndroidManifest.xml which is located in: Phase1/GameCentre/app/src/main
+    - I've had some weird issues with this not versioning in git, and also it being a git tracked file, which is weird
+    - should look like the following:
+
+```{java}
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fall2018.csc2017.GameCentre">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="GameCentre"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name="fall2018.csc2017.GameCentre.StartingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="fall2018.csc2017.GameCentre.GameActivity"></activity>
+    </application>
+
+</manifest>
+```
 
 
 ### work allocations
