@@ -51,6 +51,9 @@ scoreboard: me, also game launch center and timer functionality
     - clean project
     - build project
 
+### when making a new activity
+- be sure to select GameCentre not slidingtiles
+
 ### resources
 - google docs: https://drive.google.com/drive/folders/1XiT48jNzuS5Zl_41no0xJYRhyoBdAgU2
 - repo: 

@@ -40,4 +40,20 @@
         android:layout_toEndOf="@+id/StartButton"
         android:text="Save Game" />
 
+    <Button
+        android:id="@+id/UserScoreBoardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LoadButton"
+        android:layout_toEndOf="@+id/StartButton"
+        android:text="User Score Board" />
+
+    <Button
+        android:id="@+id/GameScoreBoardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LoadButton"
+        android:layout_toStartOf="@+id/StartButton"
+        android:text="Game Score Board" />
+
 </RelativeLayout>

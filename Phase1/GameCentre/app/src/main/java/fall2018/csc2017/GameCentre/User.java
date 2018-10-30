@@ -1,6 +1,8 @@
 package fall2018.csc2017.GameCentre;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String userName;
     private String userPassword;

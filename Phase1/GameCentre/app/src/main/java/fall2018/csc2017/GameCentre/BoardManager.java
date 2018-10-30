@@ -128,4 +128,12 @@ class BoardManager implements Serializable {
     public long getScore() {
         return this.score;
     }
+
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
+    }
+
+    public User getUser() {
+        return scoreBoard.getUser();
+    }
 }

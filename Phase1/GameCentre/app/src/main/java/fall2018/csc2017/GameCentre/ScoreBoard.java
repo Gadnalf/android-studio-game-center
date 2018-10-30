@@ -88,4 +88,8 @@ public class ScoreBoard implements Serializable {
     public static ArrayList<Game> getPerUserScoreBoard() {
         return perUserScoreBoard;
     }
+
+    public User getUser() {
+        return user;
+    }
 }

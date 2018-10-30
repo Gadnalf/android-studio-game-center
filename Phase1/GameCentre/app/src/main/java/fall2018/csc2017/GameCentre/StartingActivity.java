@@ -31,6 +31,7 @@ public class StartingActivity extends AppCompatActivity {
      * The board manager.
      */
     private BoardManager boardManager;
+//    private ScoreBoard scoreBoard;
 
     public StartingActivity() {};
 
@@ -50,6 +51,8 @@ public class StartingActivity extends AppCompatActivity {
         addStartButtonListener();
         addLoadButtonListener();
         addSaveButtonListener();
+        addGameScoreBoardButton();
+        addUserScoreBoardButton();
     }
 
     /**
@@ -161,9 +164,48 @@ public class StartingActivity extends AppCompatActivity {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
             outputStream.writeObject(boardManager);
+//            outputStream.writeObject(scoreBoard);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
+    }
+
+    /**
+     * Switch to the UserScoreBoard view
+     */
+    private void switchToUserScoreBoard() {
+        Intent tmp = new Intent(this, UserScoreBoardActivity.class);
+        saveToFile(StartingActivity.TEMP_SAVE_FILENAME);
+//        TODO: user proper file paths
+        startActivity(tmp);
+    }
+
+    private void switchToGameScoreBoard() {
+        Intent tmp = new Intent(this, GameScoreBoardActivity.class);
+        saveToFile(StartingActivity.TEMP_SAVE_FILENAME);
+        startActivity(tmp);
+    }
+
+    private void addUserScoreBoardButton() {
+        Button saveButton = findViewById(R.id.UserScoreBoardButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boardManager = new GameLaunchCentre().getBoardManager();
+                switchToUserScoreBoard();
+            }
+        });
+    }
+
+    private void addGameScoreBoardButton() {
+        Button saveButton = findViewById(R.id.GameScoreBoardButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boardManager = new GameLaunchCentre().getBoardManager();
+                switchToGameScoreBoard();
+            }
+        });
     }
 }

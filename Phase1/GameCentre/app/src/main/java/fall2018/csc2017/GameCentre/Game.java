@@ -1,10 +1,13 @@
 package fall2018.csc2017.GameCentre;
 
-public class Game {
+import java.io.Serializable;
+
+public class Game implements Serializable {
     private int numTiles;
     private long maxScore;
     private static int numGames = -1;
     private int gameId;
+    private int numUndos;
 
     public Game(int numTiles) {
         this.numTiles = numTiles;
@@ -32,4 +35,7 @@ public class Game {
         return gameId;
     }
 
+    public int getNumUndos() {
+        return numUndos;
+    }
 }
