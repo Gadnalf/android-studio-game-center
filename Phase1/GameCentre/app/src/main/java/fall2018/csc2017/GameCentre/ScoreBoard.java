@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class ScoreBoard implements Serializable {
     public static ArrayList<Game> perGameScoreBoard = new ArrayList<>();
-    public static ArrayList<User> perUserScoreBoard = new ArrayList<>();
+    public static ArrayList<Game> perUserScoreBoard = new ArrayList<>();
 
     private long startTime;
     private User user;
@@ -55,11 +55,12 @@ public class ScoreBoard implements Serializable {
 
     public void updateUserScore(long newScore) {
         //TODO: make sure the user will be updated after user changes
-        if (newScore > this.user.getMaxScore()) {
-            this.user.setMaxScore(newScore);
+        //TODO: make sure these wont be overwritten with different users
+        if (newScore > this.game.getMaxScore()) {
+            this.game.setMaxScore(newScore);
         }
         if (isNewUser()) {
-            perUserScoreBoard.add(this.user);
+            perUserScoreBoard.add(this.game);
         }
     }
 
@@ -80,4 +81,11 @@ public class ScoreBoard implements Serializable {
         return numMoves;
     }
 
+    public static ArrayList<Game> getPerGameScoreBoard() {
+        return perGameScoreBoard;
+    }
+
+    public static ArrayList<Game> getPerUserScoreBoard() {
+        return perUserScoreBoard;
+    }
 }
