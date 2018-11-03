@@ -10,8 +10,8 @@ import java.util.ArrayList;
  * This scoreboard needs to get updated if the users finishes with higher scores. => only care about top scores
  */
 public class ScoreBoard implements Serializable {
-    public static ArrayList<Game> perGameScoreBoard = new ArrayList<>();
-    public static ArrayList<Game> perUserScoreBoard = new ArrayList<>();
+    public ArrayList<Game> perGameScoreBoard;
+    public ArrayList<Game> perUserScoreBoard;
 
     private long startTime;
     private User user;
@@ -24,6 +24,8 @@ public class ScoreBoard implements Serializable {
         this.user = user;
         this.game = game;
         this.numMoves = 0;
+        this.perGameScoreBoard = new ArrayList<>();
+        this.perUserScoreBoard = new ArrayList<>();
     }
 
     public long getTimePlayed() {
@@ -60,7 +62,7 @@ public class ScoreBoard implements Serializable {
             this.game.setMaxScore(newScore);
         }
         if (isNewUser()) {
-            perUserScoreBoard.add(this.game);
+            this.perUserScoreBoard.add(this.game);
         }
     }
 
@@ -69,7 +71,7 @@ public class ScoreBoard implements Serializable {
             this.game.setMaxScore(newScore);
         }
         if (isNewGame()) {
-            perGameScoreBoard.add(this.game);
+            this.perGameScoreBoard.add(this.game);
         }
     }
 
@@ -81,15 +83,17 @@ public class ScoreBoard implements Serializable {
         return numMoves;
     }
 
-    public static ArrayList<Game> getPerGameScoreBoard() {
-        return perGameScoreBoard;
+    public ArrayList<Game> getPerGameScoreBoard() {
+        return this.perGameScoreBoard;
     }
 
-    public static ArrayList<Game> getPerUserScoreBoard() {
-        return perUserScoreBoard;
+    public ArrayList<Game> getPerUserScoreBoard() {
+        return this.perUserScoreBoard;
     }
 
     public User getUser() {
         return user;
     }
+
+
 }
