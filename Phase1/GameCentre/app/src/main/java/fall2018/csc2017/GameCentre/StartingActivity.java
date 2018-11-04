@@ -28,6 +28,10 @@ public class StartingActivity extends AppCompatActivity {
      */
     public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
     /**
+     * A game score board save file.
+     */
+    public static final String GAME_SCORE_BOARD_FILEPREFIX = "game_score_board_";
+    /**
      * The board manager.
      */
     private BoardManager boardManager;
@@ -45,12 +49,15 @@ public class StartingActivity extends AppCompatActivity {
 
         GameLaunchCentre gameLaunchCentre = new GameLaunchCentre();
         boardManager = gameLaunchCentre.getBoardManager();
-        saveToFile(TEMP_SAVE_FILENAME);
+        SaveAndLoad.saveBoardManagerTemp(
+                boardManager,
+                this);
+//        saveToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_starting_);
         addStartButtonListener();
-        addLoadButtonListener();
-        addSaveButtonListener();
+        addLoadButtonListener(this);
+        addSaveButtonListener(this);
         addGameScoreBoardButton();
         addUserScoreBoardButton();
     }
@@ -72,13 +79,18 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Activate the load button.
      */
-    private void addLoadButtonListener() {
+    private void addLoadButtonListener(final AppCompatActivity appCompatActivity) {
         Button loadButton = findViewById(R.id.LoadButton);
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile(SAVE_FILENAME);
-                saveToFile(TEMP_SAVE_FILENAME);
+                boardManager = SaveAndLoad.loadBoardManagerPermanent(
+                        boardManager.getUser().getUserName(),
+                        appCompatActivity);
+//                loadFromFile(SAVE_FILENAME);
+                SaveAndLoad.saveBoardManagerTemp(
+                        boardManager, appCompatActivity);
+//                saveToFile(TEMP_SAVE_FILENAME);
                 makeToastLoadedText();
                 switchToGame();
             }
@@ -95,13 +107,18 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Activate the save button.
      */
-    private void addSaveButtonListener() {
+    private void addSaveButtonListener(final AppCompatActivity appCompatActivity) {
         Button saveButton = findViewById(R.id.SaveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(SAVE_FILENAME);
-                saveToFile(TEMP_SAVE_FILENAME);
+                SaveAndLoad.saveBoardManagerPermanent(
+                        boardManager,
+                        appCompatActivity);
+//                saveToFile(SAVE_FILENAME);
+                SaveAndLoad.saveBoardManagerTemp(
+                        boardManager, appCompatActivity);
+//                saveToFile(TEMP_SAVE_FILENAME);
                 makeToastSavedText();
             }
             });
@@ -119,16 +136,62 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadFromFile(TEMP_SAVE_FILENAME);
+        boardManager = SaveAndLoad.loadBoardManagerTemp(this);
+        SaveAndLoad.saveBoardManagerTemp(boardManager, this);
     }
+
 
     /**
      * Switch to the GameActivity view to play the game.
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, GameActivity.class);
-        saveToFile(StartingActivity.TEMP_SAVE_FILENAME);
+        SaveAndLoad.saveBoardManagerTemp(
+                boardManager, this);
+//        saveToFile(TEMP_SAVE_FILENAME);
         startActivity(tmp);
+    }
+
+    /**
+     * Switch to the UserScoreBoard view
+     */
+    private void switchToUserScoreBoard() {
+        Intent tmp = new Intent(this, UserScoreBoardActivity.class);
+        SaveAndLoad.saveBoardManagerTemp(
+                boardManager, this);
+//        saveToFile(TEMP_SAVE_FILENAME);
+//        TODO: user proper file paths
+        startActivity(tmp);
+    }
+
+    private void switchToGameScoreBoard() {
+        Intent tmp = new Intent(this, GameScoreBoardActivity.class);
+        SaveAndLoad.saveBoardManagerTemp(
+                boardManager, this);
+        saveToFile(TEMP_SAVE_FILENAME);
+        startActivity(tmp);
+    }
+
+    private void addUserScoreBoardButton() {
+        Button saveButton = findViewById(R.id.UserScoreBoardButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boardManager = new GameLaunchCentre().getBoardManager();
+                switchToUserScoreBoard();
+            }
+        });
+    }
+
+    private void addGameScoreBoardButton() {
+        Button saveButton = findViewById(R.id.GameScoreBoardButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boardManager = new GameLaunchCentre().getBoardManager();
+                switchToGameScoreBoard();
+            }
+        });
     }
 
     /**
@@ -169,43 +232,5 @@ public class StartingActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
-    }
-
-    /**
-     * Switch to the UserScoreBoard view
-     */
-    private void switchToUserScoreBoard() {
-        Intent tmp = new Intent(this, UserScoreBoardActivity.class);
-        saveToFile(StartingActivity.TEMP_SAVE_FILENAME);
-//        TODO: user proper file paths
-        startActivity(tmp);
-    }
-
-    private void switchToGameScoreBoard() {
-        Intent tmp = new Intent(this, GameScoreBoardActivity.class);
-        saveToFile(StartingActivity.TEMP_SAVE_FILENAME);
-        startActivity(tmp);
-    }
-
-    private void addUserScoreBoardButton() {
-        Button saveButton = findViewById(R.id.UserScoreBoardButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boardManager = new GameLaunchCentre().getBoardManager();
-                switchToUserScoreBoard();
-            }
-        });
-    }
-
-    private void addGameScoreBoardButton() {
-        Button saveButton = findViewById(R.id.GameScoreBoardButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boardManager = new GameLaunchCentre().getBoardManager();
-                switchToGameScoreBoard();
-            }
-        });
     }
 }

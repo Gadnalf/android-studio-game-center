@@ -22,8 +22,8 @@ public class UserScoreBoardActivity extends ScoreBoardAbstractActivity {
         super.onCreate(savedInstanceState);
 //        boardManager = (BoardManager) SaveAndLoad.loadFromFile(StartingActivity.TEMP_SAVE_FILENAME, this);
         System.out.println(TestingHelpers.testSavingAndLoading(this));
-        BoardManager  boardManager = (BoardManager) SaveAndLoad.loadFromFile(StartingActivity.SAVE_FILENAME, this);
-        int id = R.layout.activity_user_score_board;
+        BoardManager boardManager = SaveAndLoad.loadBoardManagerTemp(
+                this);
         setContentView(R.layout.activity_user_score_board);
         super.addRowsToScoreBoard(R.id.activity_user_score_board, boardManager, this);
     }

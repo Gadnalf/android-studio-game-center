@@ -50,6 +50,8 @@ class BoardManager implements Serializable {
 
         Collections.shuffle(tiles);
         this.board = new Board(tiles);
+        this.user = user;
+        this.game = game;
         this.scoreBoard = new ScoreBoard(user, game);
     }
 

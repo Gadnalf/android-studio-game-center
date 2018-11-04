@@ -95,5 +95,19 @@ public class ScoreBoard implements Serializable {
         return user;
     }
 
+    public void setPerGameScoreBoard(ArrayList<Game> perGameScoreBoard) {
+        this.perGameScoreBoard = perGameScoreBoard;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }

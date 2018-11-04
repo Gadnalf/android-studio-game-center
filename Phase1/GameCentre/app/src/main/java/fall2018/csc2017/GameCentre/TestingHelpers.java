@@ -5,13 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import fall2018.csc2017.GameCentre.Board;
-import fall2018.csc2017.GameCentre.BoardManager;
-import fall2018.csc2017.GameCentre.Game;
-import fall2018.csc2017.GameCentre.ScoreBoard;
-import fall2018.csc2017.GameCentre.Tile;
-import fall2018.csc2017.GameCentre.User;
-
 public class TestingHelpers {
     /**
      * Make a set of tiles that are in order.
@@ -29,14 +22,18 @@ public class TestingHelpers {
     /**
      * Make a solved Board.
      */
-    public static BoardManager makeWinningBoardManager() {
+    public static BoardManager makeWinningBoardManager(String userName,
+                                                       int numTiles,
+                                                       AppCompatActivity appCompatActivity) {
         List<Tile> tiles = makeTiles();
         Board board = new Board(tiles);
-        ScoreBoard scoreBoard = new ScoreBoard(
-                new User("jim", "testing"),
-                new Game(3)
+        BoardManager boardManager = SaveAndLoad.loadBoardManagerPermanent(
+                userName, appCompatActivity
         );
-        BoardManager boardManager = new BoardManager(board, scoreBoard);
+        boardManager.setBoard(board);
+        boardManager.setUser(new User(userName, "testing"));
+        boardManager.setGame(new Game(numTiles));
+        System.out.println(boardManager.puzzleSolved());
         return boardManager;
     }
 
@@ -51,23 +48,18 @@ public class TestingHelpers {
 
     public static boolean testSavingAndLoading(AppCompatActivity appCompatActivity){
         //---------add one user to scoreboard
-        BoardManager boardManager = makeWinningBoardManager();
-        System.out.println(boardManager.puzzleSolved());
-        SaveAndLoad.saveToFile(boardManager, StartingActivity.SAVE_FILENAME,
-                appCompatActivity);
-        //wipe the scoreboard
-//        scoreBoard.perGameScoreBoard = new ArrayList<>();
-//        scoreBoard.perUserScoreBoard = new ArrayList<>();
-////        loadFromFile(SAVE_FILENAME);
-//        BoardManager boardManagerFinal = (BoardManager) SaveAndLoad.loadFromFile(StartingActivity.SAVE_FILENAME, appCompatActivity);
-//        //------------check that we load properly
-////        assertEquals(2, scoreBoard.perGameScoreBoard.size());
-////        assertEquals(2, scoreBoard.perUserScoreBoard.size());
-//        boolean perGameScoreBoardSizeCorrect = 2 == scoreBoard.perGameScoreBoard.size();
-//        boolean perUserScoreBoardSizeCorrect = 2 == scoreBoard.perUserScoreBoard.size();
-////        SaveAndLoad.saveToFile(boardManagerFinal, StartingActivity.SAVE_FILENAME,
-////                appCompatActivity);
-//        return perGameScoreBoardSizeCorrect && perUserScoreBoardSizeCorrect;
-        return (true);
+        BoardManager boardManager = makeWinningBoardManager("phil", 3, appCompatActivity);
+        SaveAndLoad.saveBoardManagerPermanent(boardManager, appCompatActivity);
+        BoardManager boardManager1 = makeWinningBoardManager("felip", 5, appCompatActivity);
+        SaveAndLoad.saveBoardManagerPermanent(boardManager1, appCompatActivity);
+        BoardManager boardManager2 = makeWinningBoardManager("phil", 5, appCompatActivity);
+        SaveAndLoad.saveBoardManagerPermanent(boardManager2, appCompatActivity);
+        BoardManager boardManager3 = makeWinningBoardManager("phil", 7, appCompatActivity);
+        SaveAndLoad.saveBoardManagerTemp(boardManager3, appCompatActivity);
+        //------------check that we load properly
+        ScoreBoard scoreBoard = boardManager3.getScoreBoard();
+        boolean perGameScoreBoardSizeCorrect = 4 == scoreBoard.perGameScoreBoard.size();
+        boolean perUserScoreBoardSizeCorrect = 4 == scoreBoard.perUserScoreBoard.size();
+        return perGameScoreBoardSizeCorrect && perUserScoreBoardSizeCorrect;
     }
 }
