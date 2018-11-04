@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
+
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
@@ -19,6 +21,7 @@ class BoardManager implements Serializable {
     private long score;
     private User user;
     private Game game;
+    private Stack<int[]> moves = new Stack<>();
 
     /**
      * Manage a board that has been pre-populated.
@@ -101,6 +104,41 @@ class BoardManager implements Serializable {
     }
 
     /**
+     * Return whether the tile is the blank tile.
+     *
+     * @param position the tile to check
+     * @return whether the tile at position is the blank tile
+     */
+    boolean isValidRedo(int position) {
+        int row = position / Board.NUM_COLS;
+        int col = position % Board.NUM_COLS;
+        int blankId = board.numTiles();
+        Tile current = board.getTile(row, col);
+        return (current.getId() == blankId);
+    }
+
+    /**
+     * Process a touch at position in the board, redo last move if appropriate.
+     *
+     * @param position the position
+     */
+    void tapRedo(int position) {
+        if(isValidRedo(position)){
+            int numUndos = game.getNumUndos();
+            if(numUndos > 0) {
+                int[] lastMove = moves.pop();
+                int row1 = lastMove[0];
+                int col1 = lastMove[1];
+                int row2 = lastMove[2];
+                int col2 = lastMove[3];
+                board.swapTiles(row1,col1,row2,col2);
+                game.setNumUndos(numUndos - 1);
+            }
+        }
+
+    }
+
+    /**
      * Process a touch at position in the board, swapping tiles as appropriate.
      *
      * @param position the position
@@ -118,18 +156,29 @@ class BoardManager implements Serializable {
             Tile right = col == Board.NUM_COLS - 1 ? null : board.getTile(row, col + 1);
             if(below != null && below.getId() == blankId){
                 board.swapTiles(row,col,row+1,col);
+                int[] move = {row, col, row + 1, col};
+                moves.push(move);
+
             }
             if(above != null && above.getId() == blankId){
                 board.swapTiles(row,col,row-1,col);
+                int[] move = {row, col, row - 1, col};
+                moves.push(move);
             }
             if(left != null && left.getId() == blankId){
                 board.swapTiles(row,col,row,col-1);
+                int[] move = {row, col, row, col - 1};
+                moves.push(move);
             }
             if(right != null && right.getId() == blankId){
                 board.swapTiles(row,col,row,col+1);
+                int[] move = {row, col, row, col + 1};
+                moves.push(move);
             }
         }
     }
+
+
 
     public long getScore() {
         return this.score;

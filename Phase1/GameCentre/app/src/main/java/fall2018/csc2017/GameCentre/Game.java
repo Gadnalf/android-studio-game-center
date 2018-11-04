@@ -41,6 +41,11 @@ public class Game implements Serializable {
         return numUndos;
     }
 
+    public void setNumUndos(int numUndos) {
+
+        this.numUndos = numUndos;
+    }
+
     public String getMaxScoreSetBy() {
         return this.maxScoreSetBy;
     }

@@ -23,6 +23,12 @@ public class MovementController {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "you scored=" + newScore, Toast.LENGTH_SHORT).show();
             }
+        } else if(boardManager.isValidRedo(position)) {
+            if(boardManager.getGame().getNumUndos() > 0){
+                boardManager.tapRedo(position);
+            } else{
+                Toast.makeText(context, "No more Undos left", Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
         }
