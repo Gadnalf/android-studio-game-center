@@ -15,16 +15,20 @@ class BoardManager implements Serializable {
      * The board being managed.
      */
     private Board board;
-    private ScoreBoard scoreBoard;
+    public ScoreBoard scoreBoard;
     private long score;
+    private User user;
+    private Game game;
 
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    BoardManager(Board board, ScoreBoard scoreBoard) {
+    BoardManager(Board board, User user, Game game) {
         this.board = board;
-        this.scoreBoard = scoreBoard;
+        this.scoreBoard = new ScoreBoard(user, game);
+        this.user = user;
+        this.game = game;
     }
 
     /**
@@ -37,7 +41,7 @@ class BoardManager implements Serializable {
     /**
      * Manage a new shuffled board.
      */
-    BoardManager(ScoreBoard scoreBoard) {
+    BoardManager(User user, Game game) {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = Board.NUM_ROWS * Board.NUM_COLS;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
@@ -46,7 +50,7 @@ class BoardManager implements Serializable {
 
         Collections.shuffle(tiles);
         this.board = new Board(tiles);
-        this.scoreBoard = scoreBoard;
+        this.scoreBoard = new ScoreBoard(user, game);
     }
 
     /**
@@ -133,7 +137,30 @@ class BoardManager implements Serializable {
         return scoreBoard;
     }
 
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public void setScoreBoard(ScoreBoard scoreBoard) {
+        this.scoreBoard = scoreBoard;
+    }
+
     public User getUser() {
-        return scoreBoard.getUser();
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        this.scoreBoard.setUser(user);
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+        this.scoreBoard.setGame(game);
     }
 }

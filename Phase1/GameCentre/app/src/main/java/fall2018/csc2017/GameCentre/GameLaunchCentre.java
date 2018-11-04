@@ -20,8 +20,7 @@ public class GameLaunchCentre {
         accountManager.addAccount("testing", "testing");
         this.user = new User("testing","testing");
         this.game = new Game(4);
-        scoreBoard = new ScoreBoard(user, game);
-        this.boardManager = new BoardManager(scoreBoard);
+        this.boardManager = new BoardManager(user, game);
     }
 
     public BoardManager getBoardManager() {
