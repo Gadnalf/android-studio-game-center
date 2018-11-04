@@ -16,12 +16,14 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
 
 
-    abstract public ArrayList<Game> getScoreBoard(BoardManager boardManager);
+    abstract public HashMap<String, Game> getScoreBoard(BoardManager boardManager);
 //    @Override
 //    abstract protected void onCreate(Bundle savedInstanceState);
 
@@ -29,8 +31,40 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
                                     BoardManager boardManager,
                                     AppCompatActivity appCompatActivity) { //might not be an int?
         // https://technotzz.wordpress.com/2011/11/04/android-dynamically-add-rows-to-table-layout/
-        ArrayList<Game> scoreBoard = getScoreBoard(boardManager);
+        HashMap<String, Game> scoreBoard = getScoreBoard(boardManager);
         TableLayout tl = (TableLayout) findViewById(scoreBoardId);
+
+        Iterator<String> scoreBoarKeysIterator = scoreBoard.keySet().iterator();
+        int i = 0;
+        while (scoreBoarKeysIterator.hasNext()) {
+            TableRow tr1 = new TableRow(appCompatActivity);
+            tr1.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT));
+
+
+            Game row = scoreBoard.get(scoreBoarKeysIterator.next());
+
+            TextView textview1 = new TextView(appCompatActivity);
+            textview1.setText(row.getMaxScoreSetBy());
+            tr1.addView(textview1);
+
+            TextView textview2 = new TextView(appCompatActivity);
+            textview2.setText(Long.toString(row.getMaxScore()));
+            tr1.addView(textview2);
+
+            TextView textview3 = new TextView(appCompatActivity);
+            textview3.setText(
+                    Integer.toString(row.getNumUndos())
+            );
+            tr1.addView(textview3);
+
+            TextView textview4 = new TextView(appCompatActivity);
+            textview4.setText(Integer.toString(row.getNumTiles()));
+            tr1.addView(textview4);
+
+            tl.addView(tr1, i);
+            i++;
+        }
 
         TableRow trHead = new TableRow(appCompatActivity);
         trHead.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
@@ -52,33 +86,5 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
         textviewHead4.setText("             Board Width and Height");
         trHead.addView(textviewHead4);
         tl.addView(trHead, 0);
-
-        for (int i = 0; i < scoreBoard.size(); i++) {
-            TableRow tr1 = new TableRow(appCompatActivity);
-            tr1.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT));
-
-            Game row = scoreBoard.get(i);
-
-            TextView textview1 = new TextView(appCompatActivity);
-            textview1.setText(boardManager.getUser().getUserName());
-            tr1.addView(textview1);
-
-            TextView textview2 = new TextView(appCompatActivity);
-            textview2.setText(Long.toString(row.getMaxScore()));
-            tr1.addView(textview2);
-
-            TextView textview3 = new TextView(appCompatActivity);
-            textview3.setText(
-                    Integer.toString(row.getNumUndos())
-            );
-            tr1.addView(textview3);
-
-            TextView textview4 = new TextView(appCompatActivity);
-            textview4.setText(Integer.toString(row.getNumTiles()));
-            tr1.addView(textview4);
-
-            tl.addView(tr1, i + 1);
-        }
     }
 }

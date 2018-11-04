@@ -1,6 +1,7 @@
 package fall2018.csc2017.GameCentre;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * used to keep track of the scores on game
@@ -10,8 +11,8 @@ import java.util.ArrayList;
  * This scoreboard needs to get updated if the users finishes with higher scores. => only care about top scores
  */
 public class ScoreBoard implements Serializable {
-    public ArrayList<Game> perGameScoreBoard;
-    public ArrayList<Game> perUserScoreBoard;
+    public HashMap<String, Game> perGameScoreBoard;
+    public HashMap<String, Game> perUserScoreBoard;
 
     private long startTime;
     private User user;
@@ -24,8 +25,8 @@ public class ScoreBoard implements Serializable {
         this.user = user;
         this.game = game;
         this.numMoves = 0;
-        this.perGameScoreBoard = new ArrayList<>();
-        this.perUserScoreBoard = new ArrayList<>();
+        this.perGameScoreBoard = new HashMap<>();
+        this.perUserScoreBoard = new HashMap<>();
     }
 
     public long getTimePlayed() {
@@ -48,30 +49,40 @@ public class ScoreBoard implements Serializable {
     }
 
     public boolean isNewGame() {
-        return this.game.getGameId() >= perGameScoreBoard.size();
+
+        return this.perGameScoreBoard.containsKey(this.game.getGameId()) == false;
     }
 
-    public boolean isNewUser() {
-        return this.user.getUserId() >= perUserScoreBoard.size();
+    public boolean isNewGameForUser() {
+
+        return this.perUserScoreBoard.containsKey(this.game.getGameId()) == false;
     }
 
     public void updateUserScore(long newScore) {
         //TODO: make sure the user will be updated after user changes
         //TODO: make sure these wont be overwritten with different users
-        if (newScore > this.game.getMaxScore()) {
-            this.game.setMaxScore(newScore);
-        }
-        if (isNewUser()) {
-            this.perUserScoreBoard.add(this.game);
+        if (isNewGameForUser()) {
+            this.game.setMaxScore(newScore, getUser().getUserName());
+            this.perUserScoreBoard.put(this.game.getGameId(), this.game);
+        } else {
+            if (newScore > getPerUserScoreBoard()
+                    .get(this.game.getGameId())
+                    .getMaxScore()) {
+                this.perUserScoreBoard.get(this.game.getGameId()).setMaxScore(newScore, getUser().getUserName());
+            }
         }
     }
 
     public void updateGameScores(long newScore) {
-        if (newScore > this.game.getMaxScore()) {
-            this.game.setMaxScore(newScore);
-        }
         if (isNewGame()) {
-            this.perGameScoreBoard.add(this.game);
+            this.game.setMaxScore(newScore, getUser().getUserName());
+            this.perGameScoreBoard.put(this.game.getGameId(), this.game);
+        } else {
+            if (newScore > getPerGameScoreBoard()
+                    .get(this.game.getGameId())
+                    .getMaxScore()) {
+                this.perGameScoreBoard.get(this.game.getGameId()).setMaxScore(newScore, getUser().getUserName());
+            }
         }
     }
 
@@ -79,24 +90,32 @@ public class ScoreBoard implements Serializable {
         this.numMoves ++;
     }
 
-    public int getNumMoves() {
-        return numMoves;
+    public HashMap<String, Game> getPerGameScoreBoard() {
+        return perGameScoreBoard;
     }
 
-    public ArrayList<Game> getPerGameScoreBoard() {
-        return this.perGameScoreBoard;
+    public void setPerGameScoreBoard(HashMap<String, Game> perGameScoreBoard) {
+        this.perGameScoreBoard = perGameScoreBoard;
     }
 
-    public ArrayList<Game> getPerUserScoreBoard() {
-        return this.perUserScoreBoard;
+    public HashMap<String, Game> getPerUserScoreBoard() {
+        return perUserScoreBoard;
+    }
+
+    public void setPerUserScoreBoard(HashMap<String, Game> perUserScoreBoard) {
+        this.perUserScoreBoard = perUserScoreBoard;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 
     public User getUser() {
         return user;
-    }
-
-    public void setPerGameScoreBoard(ArrayList<Game> perGameScoreBoard) {
-        this.perGameScoreBoard = perGameScoreBoard;
     }
 
     public void setUser(User user) {
@@ -109,5 +128,21 @@ public class ScoreBoard implements Serializable {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public BoardManager getBoardManager() {
+        return boardManager;
+    }
+
+    public void setBoardManager(BoardManager boardManager) {
+        this.boardManager = boardManager;
+    }
+
+    public int getNumMoves() {
+        return numMoves;
+    }
+
+    public void setNumMoves(int numMoves) {
+        this.numMoves = numMoves;
     }
 }

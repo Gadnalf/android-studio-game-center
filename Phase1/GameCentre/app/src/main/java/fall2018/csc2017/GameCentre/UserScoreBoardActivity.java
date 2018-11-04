@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserScoreBoardActivity extends ScoreBoardAbstractActivity {
 
@@ -21,7 +22,8 @@ public class UserScoreBoardActivity extends ScoreBoardAbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        boardManager = (BoardManager) SaveAndLoad.loadFromFile(StartingActivity.TEMP_SAVE_FILENAME, this);
-        System.out.println(TestingHelpers.testSavingAndLoading(this));
+        boolean testsPass = TestingHelpers.testSavingAndLoading(this);
+        System.out.println(testsPass);
         BoardManager boardManager = SaveAndLoad.loadBoardManagerTemp(
                 this);
         setContentView(R.layout.activity_user_score_board);
@@ -29,7 +31,7 @@ public class UserScoreBoardActivity extends ScoreBoardAbstractActivity {
     }
 
     @Override
-    public ArrayList<Game> getScoreBoard(BoardManager boardManager) {
+    public HashMap<String, Game> getScoreBoard(BoardManager boardManager) {
         return boardManager.getScoreBoard().getPerUserScoreBoard();
     }
 }

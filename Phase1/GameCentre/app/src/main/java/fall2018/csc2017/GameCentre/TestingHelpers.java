@@ -32,7 +32,7 @@ public class TestingHelpers {
         );
         boardManager.setBoard(board);
         boardManager.setUser(new User(userName, "testing"));
-        boardManager.setGame(new Game(numTiles));
+        boardManager.setGame(new Game(numTiles, 2));
         System.out.println(boardManager.puzzleSolved());
         return boardManager;
     }
@@ -50,16 +50,16 @@ public class TestingHelpers {
         //---------add one user to scoreboard
         BoardManager boardManager = makeWinningBoardManager("phil", 3, appCompatActivity);
         SaveAndLoad.saveBoardManagerPermanent(boardManager, appCompatActivity);
-        BoardManager boardManager1 = makeWinningBoardManager("felip", 5, appCompatActivity);
+        BoardManager boardManager1 = makeWinningBoardManager("felip", 50, appCompatActivity);
         SaveAndLoad.saveBoardManagerPermanent(boardManager1, appCompatActivity);
         BoardManager boardManager2 = makeWinningBoardManager("phil", 5, appCompatActivity);
         SaveAndLoad.saveBoardManagerPermanent(boardManager2, appCompatActivity);
-        BoardManager boardManager3 = makeWinningBoardManager("phil", 7, appCompatActivity);
+        BoardManager boardManager3 = makeWinningBoardManager("phil", 4, appCompatActivity);
         SaveAndLoad.saveBoardManagerTemp(boardManager3, appCompatActivity);
         //------------check that we load properly
         ScoreBoard scoreBoard = boardManager3.getScoreBoard();
         boolean perGameScoreBoardSizeCorrect = 4 == scoreBoard.perGameScoreBoard.size();
-        boolean perUserScoreBoardSizeCorrect = 4 == scoreBoard.perUserScoreBoard.size();
+        boolean perUserScoreBoardSizeCorrect = 3 == scoreBoard.perUserScoreBoard.size();
         return perGameScoreBoardSizeCorrect && perUserScoreBoardSizeCorrect;
     }
 }

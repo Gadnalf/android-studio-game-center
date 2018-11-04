@@ -5,14 +5,13 @@ import java.io.Serializable;
 public class Game implements Serializable {
     private int numTiles;
     private long maxScore;
-    private static int numGames = -1;
-    private int gameId;
     private int numUndos;
+    private String maxScoreSetBy;
 
-    public Game(int numTiles) {
+    public Game(int numTiles, int numUndos) {
         this.numTiles = numTiles;
         this.maxScore = 1;
-        this.gameId = this.numGames + 1;
+        this.numUndos = numUndos;
     }
 
     public int getNumTiles() {
@@ -27,15 +26,22 @@ public class Game implements Serializable {
         return maxScore;
     }
 
-    public void setMaxScore(long maxScore) {
+    public void setMaxScore(long maxScore, String userName) {
+
         this.maxScore = maxScore;
+        this.maxScoreSetBy = userName;
     }
 
-    public int getGameId() {
+    public String getGameId() {
+        String gameId = "num_tiles_" + Integer.toString(numTiles) + "num_undos_" + Integer.toString(numUndos);
         return gameId;
     }
 
     public int getNumUndos() {
         return numUndos;
+    }
+
+    public String getMaxScoreSetBy() {
+        return this.maxScoreSetBy;
     }
 }

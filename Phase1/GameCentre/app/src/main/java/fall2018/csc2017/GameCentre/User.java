@@ -7,14 +7,11 @@ public class User implements Serializable {
     private String userName;
     private String userPassword;
     private long maxScore;
-    private static int numUsers = -1;
-    private static int userId;
 
     public User(String userName, String userPassword) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.maxScore = 1;
-        this.userId = numUsers + 1;
     }
 
     public String getUserName() {
@@ -41,8 +38,8 @@ public class User implements Serializable {
         this.maxScore = maxScore;
     }
 
-    public static int getUserId() {
-        return userId;
+    public String getUserId() {
+        return userName;
     }
 
 }

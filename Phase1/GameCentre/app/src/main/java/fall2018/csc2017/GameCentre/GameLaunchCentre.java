@@ -19,7 +19,7 @@ public class GameLaunchCentre {
         this.accountManager = new AccountManager();
         accountManager.addAccount("testing", "testing");
         this.user = new User("testing","testing");
-        this.game = new Game(4);
+        this.game = new Game(4, 2);
         this.boardManager = new BoardManager(user, game);
     }
 
