@@ -33,17 +33,17 @@ public class SlidingTileSettings implements Serializable {
     }
 
     public String getGameId() {
-        String gameId = "num_tiles_" + Integer.toString(numTiles) + "num_undos_" + Integer.toString(numUndos);
+        String gameId = "num_tiles_" + Integer.toString(numTiles) + "num_undoes_" + Integer.toString(numUndos);
         return gameId;
     }
 
-    public int getNumUndos() {
+    public int getNumUndoes() {
         return numUndos;
     }
 
-    public void setNumUndos(int numUndos) {
+    public void setNumUndoes(int numUndoes) {
 
-        this.numUndos = numUndos;
+        this.numUndos = numUndoes;
     }
 
     public String getMaxScoreSetBy() {
