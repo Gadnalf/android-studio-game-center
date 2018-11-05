@@ -42,7 +42,7 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
 
             TextView textview3 = new TextView(appCompatActivity);
             textview3.setText(
-                    Integer.toString(row.getNumUndos())
+                    Integer.toString(row.getNumUndoes())
             );
             tr1.addView(textview3);
 

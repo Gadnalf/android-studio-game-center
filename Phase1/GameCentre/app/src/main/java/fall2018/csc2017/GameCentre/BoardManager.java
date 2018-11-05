@@ -109,7 +109,7 @@ class BoardManager implements Serializable {
      * @param position the tile to check
      * @return whether the tile at position is the blank tile
      */
-    boolean isValidRedo(int position) {
+    boolean isValidUndo(int position) {
         int row = position / Board.NUM_COLS;
         int col = position % Board.NUM_COLS;
         int blankId = board.numTiles();
@@ -123,8 +123,8 @@ class BoardManager implements Serializable {
      * @param position the position
      */
     void tapRedo(int position) {
-        if(isValidRedo(position)){
-            int numUndos = slidingTileSettings.getNumUndos();
+        if(isValidUndo(position)){
+            int numUndos = slidingTileSettings.getNumUndoes();
             if(numUndos > 0) {
                 int[] lastMove = moves.pop();
                 int row1 = lastMove[0];
@@ -132,7 +132,7 @@ class BoardManager implements Serializable {
                 int row2 = lastMove[2];
                 int col2 = lastMove[3];
                 board.swapTiles(row1,col1,row2,col2);
-                slidingTileSettings.setNumUndos(numUndos - 1);
+                slidingTileSettings.setNumUndoes(numUndos - 1);
             }
         }
 
@@ -178,6 +178,9 @@ class BoardManager implements Serializable {
         }
     }
 
+    public boolean moveIsEmpty() {
+        return moves.empty();
+    }
 
 
     public long getScore() {

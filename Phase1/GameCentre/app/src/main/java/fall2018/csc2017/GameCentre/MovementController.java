@@ -23,11 +23,13 @@ public class MovementController {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "you scored=" + newScore, Toast.LENGTH_SHORT).show();
             }
-        } else if(boardManager.isValidRedo(position)) {
-            if(boardManager.getSlidingTileSettings().getNumUndos() > 0){
+        } else if(boardManager.isValidUndo(position)) {
+            if(boardManager.moveIsEmpty()) {
+                Toast.makeText(context, "No moves to Undo!", Toast.LENGTH_SHORT).show();
+            }else if(boardManager.getSlidingTileSettings().getNumUndoes() > 0){
                 boardManager.tapRedo(position);
             } else{
-                Toast.makeText(context, "No more Undos left", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "No more Undoes left", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
