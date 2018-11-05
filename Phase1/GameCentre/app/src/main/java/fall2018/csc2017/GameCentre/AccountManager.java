@@ -108,7 +108,7 @@ class AccountManager {
     }
 
     /**
-     * Gets the current account's username.
+     * Gets the current account's username. Returns "Guest" if there is no current user.
      */
     public String getName(){
         if(current == null){

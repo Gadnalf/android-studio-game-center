@@ -72,9 +72,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(accountManager.login(username.getText().toString(), password.getText().toString())){
                     updateHeader();
                     makeToastLoginSuccessText();
+                    clearEditFields();
                 }
                 else{
                     makeToastLoginFailText();
+                    clearEditFields();
                 }
             }
         });
@@ -91,9 +93,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(accountManager.addAccount(username.getText().toString(), password.getText().toString())){
                     updateHeader();
                     makeToastLoginSuccessText();
+                    clearEditFields();
                 }
                 else{
                     makeToastNameTakenText();
+                    clearEditFields();
                 }
             }
         });
@@ -110,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                 accountManager.logout();
                 makeToastLogout();
                 updateHeader();
+                clearEditFields();
             }
         });
     }
@@ -122,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         newAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                clearEditFields();
                 saveToFile(StartingActivity.ACCOUNT_SAVE_FILENAME);
                 finish();
             }
@@ -162,6 +168,11 @@ public class LoginActivity extends AppCompatActivity {
     private void updateHeader() {
         String tmp = "Welcome, " + accountManager.getName();
         greeting.setText(tmp);
+    }
+
+    private void clearEditFields() {
+        username.setText("");
+        password.setText("");
     }
 
     /**
