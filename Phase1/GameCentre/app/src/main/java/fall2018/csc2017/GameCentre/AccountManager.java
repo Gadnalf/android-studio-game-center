@@ -20,6 +20,7 @@ class AccountManager {
 
     AccountManager(){
         accounts = new ArrayList<>();
+        current = null;
     }
 
     /**
@@ -27,11 +28,14 @@ class AccountManager {
      */
     boolean addAccount(String username, String password){
         if (accounts.contains(username)) {
+            return false;
+        }
+        else{
             accounts.add(new Account(username, password));
             this.login(username, password);
             return true;
         }
-        return false;
+
     }
 
     /**
@@ -92,6 +96,9 @@ class AccountManager {
      * Gets the current account's username.
      */
     public String getName(){
+        if(current == null){
+            return "Guest";
+        }
         return current.getName();
     }
 
