@@ -30,10 +30,18 @@ class AccountManager {
         if (accounts.contains(username)) {
             return false;
         }
+        if(username.equals("") || password.equals("")){
+            return false;
+        }
         else{
-            accounts.add(new Account(username, password));
-            this.login(username, password);
-            return true;
+            try {
+                accounts.add(new Account(username, password));
+                this.login(username, password);
+                return true;
+            }
+            catch(Exception e){
+                return false;
+            }
         }
 
     }

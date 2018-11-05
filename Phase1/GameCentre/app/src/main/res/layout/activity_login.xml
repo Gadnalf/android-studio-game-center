@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="21dp"
         android:text="New Account"
         app:layout_constraintBottom_toTopOf="@+id/return_button"
         app:layout_constraintStart_toStartOf="@+id/return_button"
