@@ -40,29 +40,26 @@ public class StartingActivity extends AppCompatActivity {
      * The board manager.
      */
     private BoardManager boardManager;
-//    private ScoreBoard scoreBoard;
+
     /**
      * The account manager.
      */
     private AccountManager accountManager;
 
-    public StartingActivity() {};
-
-    public StartingActivity(BoardManager boardManager) {
-        this.boardManager = boardManager;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        GameLaunchCentre gameLaunchCentre = new GameLaunchCentre();
-        boardManager = gameLaunchCentre.getBoardManager();
         accountManager = new AccountManager();
+        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
+        SlidingTileSettings slidingTileSettings = new SlidingTileSettings(4,4);
+        //these will be altered if the user decides change them in the next activity
+        boardManager = new BoardManager(new User(accountManager.getName()),
+                slidingTileSettings);
         SaveAndLoad.saveBoardManagerTemp(
                 boardManager,
                 this);
-//        saveToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_starting_);
         addStartButtonListener();
@@ -81,7 +78,7 @@ public class StartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager = new GameLaunchCentre().getBoardManager();
+//                boardManager = new GameLaunchCentre().getBoardManager();
                 switchToGame();
             }
         });
@@ -181,8 +178,8 @@ public class StartingActivity extends AppCompatActivity {
      */
     private void switchToAccounts() {
         Intent tmp = new Intent(this, LoginActivity.class);
-        SaveAndLoad.saveBoardManagerTemp(
-                boardManager, this);
+//        SaveAndLoad.saveBoardManagerTemp(
+//                boardManager, this);
         startActivity(tmp);
     }
 
@@ -202,7 +199,7 @@ public class StartingActivity extends AppCompatActivity {
         Intent tmp = new Intent(this, GameScoreBoardActivity.class);
         SaveAndLoad.saveBoardManagerTemp(
                 boardManager, this);
-        saveToFile(TEMP_SAVE_FILENAME);
+        SaveAndLoad.saveBoardManagerTemp(boardManager, this);
         startActivity(tmp);
     }
 
@@ -211,7 +208,7 @@ public class StartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager = new GameLaunchCentre().getBoardManager();
+//                boardManager = new GameLaunchCentre().getBoardManager();
                 switchToUserScoreBoard();
             }
         });
@@ -222,34 +219,12 @@ public class StartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager = new GameLaunchCentre().getBoardManager();
+//                boardManager = new GameLaunchCentre().getBoardManager();
                 switchToGameScoreBoard();
             }
         });
     }
 
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadBoardFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
 
     /**
      * Load the account manager from fileName.
@@ -290,20 +265,4 @@ public class StartingActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-//            outputStream.writeObject(scoreBoard);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
 }

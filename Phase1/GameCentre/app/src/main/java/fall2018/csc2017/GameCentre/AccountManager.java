@@ -94,20 +94,6 @@ class AccountManager {
     }
 
     /**
-     * Sets the current account's max score for the specified game.
-     */
-    public void setMaxScore(String game, Long max_score) {
-        current.setMaxScore(game, max_score);
-    }
-
-    /**
-     * Gets the current account's max score for the specified game.
-     */
-    public long getMaxScore(String game) {
-        return current.getMaxScore(game);
-    }
-
-    /**
      * Gets the current account's username. Returns "Guest" if there is no current user.
      */
     public String getName(){
