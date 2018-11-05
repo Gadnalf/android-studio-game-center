@@ -22,6 +22,7 @@ class BoardManager implements Serializable {
     private User user;
     private SlidingTileSettings slidingTileSettings;
     private Stack<int[]> moves = new Stack<>();
+    private int moveCount;
 
     /**
      * Manage a board that has been pre-populated.
@@ -32,6 +33,7 @@ class BoardManager implements Serializable {
         this.scoreBoard = new ScoreBoard(user, slidingTileSettings);
         this.user = user;
         this.slidingTileSettings = slidingTileSettings;
+        this.moveCount = 0;
     }
 
     /**
@@ -133,6 +135,7 @@ class BoardManager implements Serializable {
                 int col2 = lastMove[3];
                 board.swapTiles(row1,col1,row2,col2);
                 slidingTileSettings.setNumUndoes(numUndoes - 1);
+                moveCount += 1;
             }else if(numUndoes == -1) {
                 int[] lastMove = moves.pop();
                 int row1 = lastMove[0];
@@ -140,6 +143,7 @@ class BoardManager implements Serializable {
                 int row2 = lastMove[2];
                 int col2 = lastMove[3];
                 board.swapTiles(row1,col1,row2,col2);
+                moveCount += 1;
             }
         }
 
@@ -165,22 +169,26 @@ class BoardManager implements Serializable {
                 board.swapTiles(row,col,row+1,col);
                 int[] move = {row, col, row + 1, col};
                 moves.push(move);
+                moveCount += 1;
 
             }
             if(above != null && above.getId() == blankId){
                 board.swapTiles(row,col,row-1,col);
                 int[] move = {row, col, row - 1, col};
                 moves.push(move);
+                moveCount += 1;
             }
             if(left != null && left.getId() == blankId){
                 board.swapTiles(row,col,row,col-1);
                 int[] move = {row, col, row, col - 1};
                 moves.push(move);
+                moveCount += 1;
             }
             if(right != null && right.getId() == blankId){
                 board.swapTiles(row,col,row,col+1);
                 int[] move = {row, col, row, col + 1};
                 moves.push(move);
+                moveCount += 1;
             }
         }
     }
