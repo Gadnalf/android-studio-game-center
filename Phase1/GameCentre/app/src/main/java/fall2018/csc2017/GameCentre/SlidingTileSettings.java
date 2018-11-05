@@ -2,13 +2,13 @@ package fall2018.csc2017.GameCentre;
 
 import java.io.Serializable;
 
-public class Game implements Serializable {
+public class SlidingTileSettings implements Serializable {
     private int numTiles;
     private long maxScore;
     private int numUndos;
     private String maxScoreSetBy;
 
-    public Game(int numTiles, int numUndos) {
+    public SlidingTileSettings(int numTiles, int numUndos) {
         this.numTiles = numTiles;
         this.maxScore = 1;
         this.numUndos = numUndos;

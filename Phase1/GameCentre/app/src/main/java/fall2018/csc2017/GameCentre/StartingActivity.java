@@ -112,7 +112,7 @@ public class StartingActivity extends AppCompatActivity {
      * Display that a game was loaded successfully.
      */
     private void makeToastLoadedText() {
-        Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Loaded SlidingTileSettings", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -152,7 +152,7 @@ public class StartingActivity extends AppCompatActivity {
      * Display that a game was saved successfully.
      */
     private void makeToastSavedText() {
-        Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "SlidingTileSettings Saved", Toast.LENGTH_SHORT).show();
     }
     /**
      * Read the temporary board from disk.

@@ -1,10 +1,9 @@
 package fall2018.csc2017.GameCentre;
-import java.util.Scanner;
 
 public class GameLaunchCentre {
     private AccountManager accountManager;
     private User user;
-    private Game game;
+    private SlidingTileSettings slidingTileSettings;
     private StartingActivity startingActivity;
     private ScoreBoard scoreBoard;
     private BoardManager boardManager;
@@ -19,8 +18,8 @@ public class GameLaunchCentre {
         this.accountManager = new AccountManager();
         accountManager.addAccount("testing", "testing");
         this.user = new User("testing","testing");
-        this.game = new Game(4, 2);
-        this.boardManager = new BoardManager(user, game);
+        this.slidingTileSettings = new SlidingTileSettings(4, 2);
+        this.boardManager = new BoardManager(user, slidingTileSettings);
     }
 
     public BoardManager getBoardManager() {

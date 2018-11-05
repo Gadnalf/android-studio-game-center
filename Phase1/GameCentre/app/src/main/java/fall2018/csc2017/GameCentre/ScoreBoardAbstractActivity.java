@@ -1,29 +1,17 @@
 package fall2018.csc2017.GameCentre;
 
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.ViewGroup;
-import android.webkit.SafeBrowsingResponse;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
 
 
-    abstract public HashMap<String, Game> getScoreBoard(BoardManager boardManager);
+    abstract public HashMap<String, SlidingTileSettings> getScoreBoard(BoardManager boardManager);
 //    @Override
 //    abstract protected void onCreate(Bundle savedInstanceState);
 
@@ -31,7 +19,7 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
                                     BoardManager boardManager,
                                     AppCompatActivity appCompatActivity) { //might not be an int?
         // https://technotzz.wordpress.com/2011/11/04/android-dynamically-add-rows-to-table-layout/
-        HashMap<String, Game> scoreBoard = getScoreBoard(boardManager);
+        HashMap<String, SlidingTileSettings> scoreBoard = getScoreBoard(boardManager);
         TableLayout tl = (TableLayout) findViewById(scoreBoardId);
 
         Iterator<String> scoreBoarKeysIterator = scoreBoard.keySet().iterator();
@@ -42,7 +30,7 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
                     TableLayout.LayoutParams.WRAP_CONTENT));
 
 
-            Game row = scoreBoard.get(scoreBoarKeysIterator.next());
+            SlidingTileSettings row = scoreBoard.get(scoreBoarKeysIterator.next());
 
             TextView textview1 = new TextView(appCompatActivity);
             textview1.setText(row.getMaxScoreSetBy());

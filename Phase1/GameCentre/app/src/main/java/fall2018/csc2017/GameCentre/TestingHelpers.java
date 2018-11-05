@@ -32,7 +32,7 @@ public class TestingHelpers {
         );
         boardManager.setBoard(board);
         boardManager.setUser(new User(userName, "testing"));
-        boardManager.setGame(new Game(numTiles, 2));
+        boardManager.setSlidingTileSettings(new SlidingTileSettings(numTiles, 2));
         System.out.println(boardManager.puzzleSolved());
         return boardManager;
     }

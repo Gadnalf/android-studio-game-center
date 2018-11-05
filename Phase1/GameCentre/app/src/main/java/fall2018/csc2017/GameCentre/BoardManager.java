@@ -20,18 +20,18 @@ class BoardManager implements Serializable {
     public ScoreBoard scoreBoard;
     private long score;
     private User user;
-    private Game game;
+    private SlidingTileSettings slidingTileSettings;
     private Stack<int[]> moves = new Stack<>();
 
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    BoardManager(Board board, User user, Game game) {
+    BoardManager(Board board, User user, SlidingTileSettings slidingTileSettings) {
         this.board = board;
-        this.scoreBoard = new ScoreBoard(user, game);
+        this.scoreBoard = new ScoreBoard(user, slidingTileSettings);
         this.user = user;
-        this.game = game;
+        this.slidingTileSettings = slidingTileSettings;
     }
 
     /**
@@ -44,7 +44,7 @@ class BoardManager implements Serializable {
     /**
      * Manage a new shuffled board.
      */
-    BoardManager(User user, Game game) {
+    BoardManager(User user, SlidingTileSettings slidingTileSettings) {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = Board.NUM_ROWS * Board.NUM_COLS;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
@@ -54,8 +54,8 @@ class BoardManager implements Serializable {
         Collections.shuffle(tiles);
         this.board = new Board(tiles);
         this.user = user;
-        this.game = game;
-        this.scoreBoard = new ScoreBoard(user, game);
+        this.slidingTileSettings = slidingTileSettings;
+        this.scoreBoard = new ScoreBoard(user, slidingTileSettings);
     }
 
     /**
@@ -124,7 +124,7 @@ class BoardManager implements Serializable {
      */
     void tapRedo(int position) {
         if(isValidRedo(position)){
-            int numUndos = game.getNumUndos();
+            int numUndos = slidingTileSettings.getNumUndos();
             if(numUndos > 0) {
                 int[] lastMove = moves.pop();
                 int row1 = lastMove[0];
@@ -132,7 +132,7 @@ class BoardManager implements Serializable {
                 int row2 = lastMove[2];
                 int col2 = lastMove[3];
                 board.swapTiles(row1,col1,row2,col2);
-                game.setNumUndos(numUndos - 1);
+                slidingTileSettings.setNumUndos(numUndos - 1);
             }
         }
 
@@ -206,12 +206,12 @@ class BoardManager implements Serializable {
         this.scoreBoard.setUser(user);
     }
 
-    public Game getGame() {
-        return game;
+    public SlidingTileSettings getSlidingTileSettings() {
+        return slidingTileSettings;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
-        this.scoreBoard.setGame(game);
+    public void setSlidingTileSettings(SlidingTileSettings slidingTileSettings) {
+        this.slidingTileSettings = slidingTileSettings;
+        this.scoreBoard.setSlidingTileSettings(slidingTileSettings);
     }
 }

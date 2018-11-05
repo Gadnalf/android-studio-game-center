@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SaveAndLoad extends AppCompatActivity {
@@ -46,7 +45,7 @@ public class SaveAndLoad extends AppCompatActivity {
             AppCompatActivity appCompatActivity) {
 
         BoardManager boardManager;
-        HashMap<String, Game> gameScoreBoard;
+        HashMap<String, SlidingTileSettings> gameScoreBoard;
 
         //if permanent file not there load the temp
         try{
@@ -59,11 +58,11 @@ public class SaveAndLoad extends AppCompatActivity {
 
         //if permanent file not there load the temp
         try{
-            gameScoreBoard = (HashMap<String, Game>) loadFromFile(
+            gameScoreBoard = (HashMap<String, SlidingTileSettings>) loadFromFile(
                     StartingActivity.GAME_SCORE_BOARD_FILEPREFIX + StartingActivity.SAVE_FILENAME,
                     appCompatActivity);
         } catch (RuntimeException e) {
-            gameScoreBoard = (HashMap<String, Game>) loadFromFile(
+            gameScoreBoard = (HashMap<String, SlidingTileSettings>) loadFromFile(
                     StartingActivity.GAME_SCORE_BOARD_FILEPREFIX + StartingActivity.TEMP_SAVE_FILENAME,
                     appCompatActivity);
         }
@@ -81,7 +80,7 @@ public class SaveAndLoad extends AppCompatActivity {
         String fileName = StartingActivity.TEMP_SAVE_FILENAME;
         BoardManager boardManager = (BoardManager) loadFromFile(
                 fileName, appCompatActivity);
-        HashMap<String, Game> gameScoreBoard = (HashMap<String, Game>) loadFromFile(
+        HashMap<String, SlidingTileSettings> gameScoreBoard = (HashMap<String, SlidingTileSettings>) loadFromFile(
                 StartingActivity.GAME_SCORE_BOARD_FILEPREFIX + StartingActivity.TEMP_SAVE_FILENAME,
                 appCompatActivity);
         boardManager.scoreBoard.setPerGameScoreBoard(gameScoreBoard);
