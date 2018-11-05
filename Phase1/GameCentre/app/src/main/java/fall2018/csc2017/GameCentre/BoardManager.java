@@ -202,6 +202,14 @@ class BoardManager implements Serializable {
         return this.score;
     }
 
+    public int getMoveCount() {
+        return this.moveCount;
+    }
+
+    public void setMoveCount(int moveCount) {
+        this.moveCount = moveCount;
+    }
+
     public ScoreBoard getScoreBoard() {
         return scoreBoard;
     }

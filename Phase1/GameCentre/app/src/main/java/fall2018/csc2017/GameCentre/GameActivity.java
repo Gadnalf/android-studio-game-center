@@ -116,6 +116,17 @@ public class GameActivity extends AppCompatActivity implements Observer {
     }
 
     /**
+     * Auto-save the game
+     */
+    private void autoSave() {
+        if(boardManager.getMoveCount() == 10) {
+            SaveAndLoad.saveBoardManagerPermanent(boardManager, this);
+            SaveAndLoad.saveBoardManagerTemp(boardManager, this);
+            boardManager.setMoveCount(0);
+        }
+    }
+
+    /**
      * Dispatch onPause() to fragments.
      */
     @Override
