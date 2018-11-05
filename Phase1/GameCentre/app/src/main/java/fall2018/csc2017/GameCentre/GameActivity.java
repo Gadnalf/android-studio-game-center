@@ -113,6 +113,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
             b.setBackgroundResource(board.getTile(row, col).getBackground());
             nextPos++;
         }
+        autoSave();
     }
 
     /**
