@@ -1,5 +1,6 @@
 package fall2018.csc2017.GameCentre;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,7 +21,7 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
     private TextView undoDisplay;
 
     /**
-     * The undos input field.
+     * The undoes input field.
      */
     EditText undoInput;
 
@@ -32,7 +33,10 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
     /**
      * The undo setting. (-1 indicates infinite)
      */
-    private int numUndos;
+    private int numUndoes;
+
+    private BoardManager boardManager;
+
 
 
     @Override
@@ -41,13 +45,15 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tiles_setting);
 
         boardSize = 4;
-        numUndos = 0;
+        numUndoes = 4;
+        boardManager = SaveAndLoad.loadBoardManagerTemp(this);
         addStartButtonListener();
         addUndoInputListener();
         addUnlimitedUndoListener();
         addFiveByFiveButtonListener();
         addFourByFourButtonListener();
         addThreeByThreeButtonListener();
+
     }
 
     @Override
@@ -69,9 +75,19 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
                 //TODO: Link this to GameActivity, pass boardSize and numUndo parameters?
                 // It probably needs to initiate the new BoardManager from here, since handling
                 // half of it in StartingActivity and half of it here would be super janky.
+                switchToGame();
             }
         });
     }
+
+    private void switchToGame() {
+        Intent tmp = new Intent(this, GameActivity.class);
+        SaveAndLoad.saveBoardManagerTemp(
+                boardManager, this);
+//        saveToFile(TEMP_SAVE_FILENAME);
+        startActivity(tmp);
+    }
+
 
     /**
      * Activate the undo text field listener.
@@ -88,8 +104,8 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         infiniteUndoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                numUndos = -1;
-                updateBoardSizeDisplay();
+                numUndoes = -1;
+                updateUndoDisplay();
             }
         });
     }
@@ -139,10 +155,12 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
     void updateBoardSizeDisplay() {
         String tmp = "Select Board Size: " + boardSize + "x" + boardSize;
         boardSizeDisplay.setText(tmp);
+        boardManager.getSlidingTileSettings().setBoardSize(boardSize);
     }
 
     void updateUndoDisplay() {
-        String tmp = "Select Number of Undoes: " + numUndos;
+        String tmp = "Select Number of Undoes: " + numUndoes;
         undoDisplay.setText(tmp);
+        boardManager.getSlidingTileSettings().setNumUndoes(numUndoes);
     }
 }

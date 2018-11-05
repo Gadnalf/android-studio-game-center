@@ -78,8 +78,7 @@ public class StartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                boardManager = new GameLaunchCentre().getBoardManager();
-                switchToGame();
+                switchToSetting();
             }
         });
     }
@@ -173,6 +172,15 @@ public class StartingActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
+    /**
+     * Switch to the SlidingTileSetting to change the setting.
+     */
+    private void switchToSetting() {
+        Intent tmp = new Intent(this, SlidingTileSettingsActivity.class);
+        SaveAndLoad.saveBoardManagerTemp(
+                boardManager, this);
+        startActivity(tmp);
+    }
     /**
      * Switch to the LoginActivity view to change the user account.
      */
