@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/GameText"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
         android:text="New Game" />
 
     <Button
@@ -37,6 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/GameText"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/StartButton"
         android:text="Save Game" />
 
@@ -45,6 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LoadButton"
+        android:layout_marginStart="-30dp"
+        android:layout_marginTop="29dp"
         android:layout_toEndOf="@+id/StartButton"
         android:text="User Score Board" />
 
@@ -53,7 +58,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LoadButton"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="-26dp"
         android:layout_toStartOf="@+id/StartButton"
         android:text="Game Score Board" />
+
+    <Button
+        android:id="@+id/account_change_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/StartButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-26dp"
+        android:layout_marginBottom="110dp"
+        android:text="Account Settings" />
 
 </RelativeLayout>

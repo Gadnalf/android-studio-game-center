@@ -88,4 +88,11 @@ class AccountManager {
         return current.getMaxScore(game);
     }
 
+    /**
+     * Gets the current account's username.
+     */
+    public String getName(){
+        return current.getName();
+    }
+
 }

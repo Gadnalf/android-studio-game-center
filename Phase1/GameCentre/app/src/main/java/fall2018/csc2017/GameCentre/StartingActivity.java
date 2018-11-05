@@ -32,10 +32,19 @@ public class StartingActivity extends AppCompatActivity {
      */
     public static final String GAME_SCORE_BOARD_FILEPREFIX = "game_score_board_";
     /**
+     * An account manager save file.
+     */
+    public static final String ACCOUNT_SAVE_FILENAME = "save_file_accounts.ser";
+
+    /**
      * The board manager.
      */
     private BoardManager boardManager;
 //    private ScoreBoard scoreBoard;
+    /**
+     * The account manager.
+     */
+    private AccountManager accountManager;
 
     public StartingActivity() {};
 
@@ -49,6 +58,7 @@ public class StartingActivity extends AppCompatActivity {
 
         GameLaunchCentre gameLaunchCentre = new GameLaunchCentre();
         boardManager = gameLaunchCentre.getBoardManager();
+        accountManager = new AccountManager();
         SaveAndLoad.saveBoardManagerTemp(
                 boardManager,
                 this);
@@ -58,6 +68,7 @@ public class StartingActivity extends AppCompatActivity {
         addStartButtonListener();
         addLoadButtonListener(this);
         addSaveButtonListener(this);
+        addChangeAccountListener();
         addGameScoreBoardButton();
         addUserScoreBoardButton();
     }
@@ -125,6 +136,19 @@ public class StartingActivity extends AppCompatActivity {
     }
 
     /**
+     * Activates the change account button.
+     */
+    private void addChangeAccountListener() {
+        Button changeAccountButton = findViewById(R.id.account_change_button);
+        changeAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToAccounts();
+            }
+        });
+    }
+
+    /**
      * Display that a game was saved successfully.
      */
     private void makeToastSavedText() {
@@ -149,6 +173,16 @@ public class StartingActivity extends AppCompatActivity {
         SaveAndLoad.saveBoardManagerTemp(
                 boardManager, this);
 //        saveToFile(TEMP_SAVE_FILENAME);
+        startActivity(tmp);
+    }
+
+    /**
+     * Switch to the LoginActivity view to change the user account.
+     */
+    private void switchToAccounts() {
+        Intent tmp = new Intent(this, LoginActivity.class);
+        SaveAndLoad.saveBoardManagerTemp(
+                boardManager, this);
         startActivity(tmp);
     }
 
@@ -199,7 +233,7 @@ public class StartingActivity extends AppCompatActivity {
      *
      * @param fileName the name of the file
      */
-    private void loadFromFile(String fileName) {
+    private void loadBoardFromFile(String fileName) {
 
         try {
             InputStream inputStream = this.openFileInput(fileName);
@@ -214,6 +248,45 @@ public class StartingActivity extends AppCompatActivity {
             Log.e("login activity", "Can not read file: " + e.toString());
         } catch (ClassNotFoundException e) {
             Log.e("login activity", "File contained unexpected data type: " + e.toString());
+        }
+    }
+
+    /**
+     * Load the account manager from fileName.
+     *
+     * @param fileName the name of the file
+     */
+    private void loadAccountsFromFile(String fileName) {
+
+        try {
+            InputStream inputStream = this.openFileInput(fileName);
+            if (inputStream != null) {
+                ObjectInputStream input = new ObjectInputStream(inputStream);
+                accountManager = (AccountManager) input.readObject();
+                inputStream.close();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        } catch (ClassNotFoundException e) {
+            Log.e("login activity", "File contained unexpected data type: " + e.toString());
+        }
+    }
+
+    /**
+     * Save the account manager to fileName.
+     *
+     * @param fileName the name of the file
+     */
+    public void saveAccountsToFile(String fileName) {
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(
+                    this.openFileOutput(fileName, MODE_PRIVATE));
+            outputStream.writeObject(accountManager);
+            outputStream.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 
