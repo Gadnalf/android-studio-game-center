@@ -47,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         addLoginButtonListener();
         addNewAccountButtonListener();
+        addLogoutButtonListener();
+        addReturnButtonListener();
     }
 
     @Override
@@ -56,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         this.username = findViewById(R.id.name_input);
         this.password = findViewById(R.id.password_input);
         String tmp = "Welcome, " + accountManager.getName();
-        greeting.setText(tmp);
+        updateHeader();
     }
 
     /**
@@ -68,10 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(accountManager.login(username.getText().toString(), password.getText().toString())){
-//                if(accountManager.login(((EditText)(v.findViewById(R.id.name_input))).getText().toString(),
-//                        ((EditText)(v.findViewById(R.id.password_input))).getText().toString())){
-                    String tmp = "Welcome, " + accountManager.getName();
-                    greeting.setText(tmp);
+                    updateHeader();
                     makeToastLoginSuccessText();
                 }
                 else{
@@ -90,15 +89,41 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(accountManager.addAccount(username.getText().toString(), password.getText().toString())){
-//                if(accountManager.login(((EditText)(v.findViewById(R.id.name_input))).getText().toString(),
-//                        ((EditText)(v.findViewById(R.id.password_input))).getText().toString())){
-                    String tmp = "Welcome, " + accountManager.getName();
-                    greeting.setText(tmp);
+                    updateHeader();
                     makeToastLoginSuccessText();
                 }
                 else{
                     makeToastNameTakenText();
                 }
+            }
+        });
+    }
+
+    /**
+     * Activates the logout button.
+     */
+    private void addLogoutButtonListener() {
+        Button newAccount = findViewById(R.id.logout_button);
+        newAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                accountManager.logout();
+                makeToastLogout();
+                updateHeader();
+            }
+        });
+    }
+
+    /**
+     * Activates the logout button.
+     */
+    private void addReturnButtonListener() {
+        Button newAccount = findViewById(R.id.return_button);
+        newAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                saveToFile(StartingActivity.ACCOUNT_SAVE_FILENAME);
+                finish();
             }
         });
     }
@@ -122,6 +147,21 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void makeToastNameTakenText() {
         Toast.makeText(this, "Username Already In Use", Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Display that logging out was successful.
+     */
+    private void makeToastLogout() {
+        Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Updates the header with the current user's name.
+     */
+    private void updateHeader() {
+        String tmp = "Welcome, " + accountManager.getName();
+        greeting.setText(tmp);
     }
 
     /**
