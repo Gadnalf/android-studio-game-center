@@ -73,6 +73,13 @@ class AccountManager {
     }
 
     /**
+     * Logs out of the current account.
+     */
+    void logout(){
+        current = null;
+    }
+
+    /**
      * Adds the given filename under the specified game under the current account.
      */
     void getSaves(String game, String filename){
