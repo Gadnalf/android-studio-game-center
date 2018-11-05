@@ -48,7 +48,7 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         numUndoes = 4;
         boardManager = SaveAndLoad.loadBoardManagerTemp(this);
         addStartButtonListener();
-        addUndoInputListener();
+//        addUndoInputListener();
         addUnlimitedUndoListener();
         addFiveByFiveButtonListener();
         addFourByFourButtonListener();
@@ -89,12 +89,12 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * Activate the undo text field listener.
-     */
-    void addUndoInputListener() {
-        //TODO: I'll take care of this when I'm conscious again tomorrow.
-    }
+//    /**
+//     * Activate the undo text field listener.
+//     */
+//    void addUndoInputListener() {
+//        //TODO: I'll take care of this when I'm conscious again tomorrow.
+//    }
 
     /**
      * Activate the unlimited undo button.
@@ -114,8 +114,8 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
      * Activate the 5x5 button.
      */
     void addFiveByFiveButtonListener() {
-        Button loginButton = findViewById(R.id.login_button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        Button button_5x5 = findViewById(R.id.five_by_five);
+        button_5x5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boardSize = 5;
@@ -128,8 +128,8 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
      * Activate the 4x4 button.
      */
     void addFourByFourButtonListener() {
-        Button loginButton = findViewById(R.id.login_button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        Button button_4x4 = findViewById(R.id.four_by_four);
+        button_4x4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boardSize = 4;
@@ -142,8 +142,8 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
      * Activate the 3x3 button.
      */
     void addThreeByThreeButtonListener() {
-        Button loginButton = findViewById(R.id.login_button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        Button button_3x3 = findViewById(R.id.three_by_three);
+        button_3x3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boardSize = 3;
