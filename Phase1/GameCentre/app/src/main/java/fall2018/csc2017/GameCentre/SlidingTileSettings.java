@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class SlidingTileSettings implements Serializable {
     private int numTiles;
     private long maxScore;
-    private int numUndos;
+    private int numUndoes;
     private String maxScoreSetBy;
 
-    public SlidingTileSettings(int numTiles, int numUndos) {
+    public SlidingTileSettings(int numTiles, int numUndoes) {
         this.numTiles = numTiles;
         this.maxScore = 1;
-        this.numUndos = numUndos;
+        this.numUndoes = numUndoes;
     }
 
     public int getNumTiles() {
@@ -33,17 +33,17 @@ public class SlidingTileSettings implements Serializable {
     }
 
     public String getGameId() {
-        String gameId = "num_tiles_" + Integer.toString(numTiles) + "num_undoes_" + Integer.toString(numUndos);
+        String gameId = "num_tiles_" + Integer.toString(numTiles) + "num_undoes_" + Integer.toString(numUndoes);
         return gameId;
     }
 
     public int getNumUndoes() {
-        return numUndos;
+        return numUndoes;
     }
 
     public void setNumUndoes(int numUndoes) {
 
-        this.numUndos = numUndoes;
+        this.numUndoes = numUndoes;
     }
 
     public String getMaxScoreSetBy() {
