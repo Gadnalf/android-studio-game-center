@@ -47,7 +47,7 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
             tr1.addView(textview3);
 
             TextView textview4 = new TextView(appCompatActivity);
-            textview4.setText(Integer.toString(row.getNumTiles()));
+            textview4.setText(Integer.toString(row.getBoardSize()));
             tr1.addView(textview4);
 
             tl.addView(tr1, i);
