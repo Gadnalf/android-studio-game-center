@@ -10,62 +10,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="400dp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
-        android:text="Game Setting"
+        android:text="Game Settings"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61" />
 
     <TextView
         android:id="@+id/set_undoes_available"
         android:layout_width="0dp"
-        android:layout_height="25dp"
+        android:layout_height="0dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="252dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="23dp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
-        android:text="Set Undoes Available"
+        android:text="Set Number of Undoes"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/numUndoes_input"
+        app:layout_constraintBottom_toTopOf="@+id/unlimited_undo_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_setting" />
-
-    <EditText
-        android:id="@+id/numUndoes_input"
-        android:layout_width="wrap_content"
-        android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="0 - 999"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_setting" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/set_board_size"
+        android:id="@+id/board_size"
         android:layout_width="0dp"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="10dp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
-        android:text="Select Board Size"
+        android:text="Select Board Size: 4x4"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toTopOf="@+id/four_by_four"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +84,7 @@
         app:layout_constraintEnd_toStartOf="@+id/five_by_five"
         app:layout_constraintStart_toEndOf="@+id/three_by_three"
         app:layout_constraintTop_toBottomOf="@+id/game_setting"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <Button
         android:id="@+id/five_by_five"
@@ -118,7 +104,7 @@
         android:id="@+id/start_game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="210dp"
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="50dp"
         android:text="Start Game"
@@ -128,5 +114,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/game_setting"
         app:layout_constraintVertical_bias="0.74" />
+
+    <Button
+        android:id="@+id/unlimited_undo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="306dp"
+        android:text="Unlimited"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/undo_input"
+        app:layout_constraintTop_toBottomOf="@+id/set_undoes_available" />
+
+    <EditText
+        android:id="@+id/undo_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/unlimited_undo_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_undoes_available" />
 
 </android.support.constraint.ConstraintLayout>
