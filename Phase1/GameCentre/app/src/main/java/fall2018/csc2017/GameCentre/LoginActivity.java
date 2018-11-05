@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         loadFromFile(StartingActivity.ACCOUNT_SAVE_FILENAME);
         setContentView(R.layout.activity_login);
+
         addLoginButtonListener();
         addNewAccountButtonListener();
         addLogoutButtonListener();
