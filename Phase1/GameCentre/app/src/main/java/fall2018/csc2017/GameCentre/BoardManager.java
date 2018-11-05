@@ -122,17 +122,24 @@ class BoardManager implements Serializable {
      *
      * @param position the position
      */
-    void tapRedo(int position) {
+    void tapUndo(int position) {
         if(isValidUndo(position)){
-            int numUndos = slidingTileSettings.getNumUndoes();
-            if(numUndos > 0) {
+            int numUndoes = slidingTileSettings.getNumUndoes();
+            if(numUndoes > 0) {
                 int[] lastMove = moves.pop();
                 int row1 = lastMove[0];
                 int col1 = lastMove[1];
                 int row2 = lastMove[2];
                 int col2 = lastMove[3];
                 board.swapTiles(row1,col1,row2,col2);
-                slidingTileSettings.setNumUndoes(numUndos - 1);
+                slidingTileSettings.setNumUndoes(numUndoes - 1);
+            }else if(numUndoes == -1) {
+                int[] lastMove = moves.pop();
+                int row1 = lastMove[0];
+                int col1 = lastMove[1];
+                int row2 = lastMove[2];
+                int col2 = lastMove[3];
+                board.swapTiles(row1,col1,row2,col2);
             }
         }
 
