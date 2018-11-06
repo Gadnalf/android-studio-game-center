@@ -2,7 +2,7 @@
 - signing in, then navigating to home page (from both buttons) 
     - returning and still signed in
     - returning and signing in again (still remembered)
-- (failed) turning off app coming back trying same login
+- turning off app coming back trying same login
     - it doesn't but don't think it could?
 - making one user, then another, then logging into the 1st and then back to the 2nd
     - works fine
@@ -14,6 +14,8 @@
 - test that scoreboard is being updated over time?
     - it is, changed the user name and then altered the numtiles 
     - left the app and came back in and saw new scores for new user and old scores still showing
+- test that after changing the game settings the scoreboard will update
+    - TODO
 
 ### undo
 - after loading making sure undo still works
@@ -21,4 +23,5 @@
 
 ### game settings
 - ensure the tile sizes updating properly
+- moving from settings -> game -> settings (changing shit) -> game
     - TODO
