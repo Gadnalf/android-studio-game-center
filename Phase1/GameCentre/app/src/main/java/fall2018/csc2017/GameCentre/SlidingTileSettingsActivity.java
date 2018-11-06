@@ -99,12 +99,16 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numUndoes == 5 || numUndoes == -1) {
+                if(numUndoes == -1) {
                     updateUndoDisplay();
                 }else {
                     String input = undoInput.getText().toString().trim();
+                    if(input.equals("")){
+                        updateUndoDisplay();
+                    }else{
                     numUndoes = Integer.valueOf(input);
                     updateUndoDisplay();
+                    }
                 }
             }
         });
