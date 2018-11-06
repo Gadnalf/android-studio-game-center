@@ -56,6 +56,7 @@ public class TestingHelpers {
      * Shuffle a few tiles.
      */
     public static void swapFirstTwoTiles(BoardManager boardManager) {
+        boardManager.scoreBoard.move();
         boardManager.getBoard().swapTiles(0, 0, 0, 1);
     }
 
