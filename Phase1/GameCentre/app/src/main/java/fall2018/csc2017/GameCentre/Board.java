@@ -14,20 +14,12 @@ import java.util.List;
  */
 public class Board extends Observable implements Serializable, Iterable<Tile> {
 
-    /**
-     * The number of rows.
-     */
-    final static int NUM_ROWS = 4;
-
-    /**
-     * The number of rows.
-     */
-    final static int NUM_COLS = 4;
+    private int boardSize;
 
     /**
      * The tiles on the board in row-major order.
      */
-    private Tile[][] tiles = new Tile[NUM_ROWS][NUM_COLS];
+    private Tile[][] tiles = new Tile[boardSize][boardSize];
 
     /**
      * A new board of tiles in row-major order.
@@ -38,11 +30,31 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     Board(List<Tile> tiles) {
         Iterator<Tile> iter = tiles.iterator();
 
-        for (int row = 0; row != Board.NUM_ROWS; row++) {
-            for (int col = 0; col != Board.NUM_COLS; col++) {
+        for (int row = 0; row != boardSize; row++) {
+            for (int col = 0; col != boardSize; col++) {
                 this.tiles[row][col] = iter.next();
             }
         }
+    }
+
+    public void setTiles(List<Tile> tiles) {
+        this.tiles = new Tile[boardSize][boardSize];
+        Iterator<Tile> iter = tiles.iterator();
+
+        for (int row = 0; row != boardSize; row++) {
+            for (int col = 0; col != boardSize; col++) {
+                this.tiles[row][col] = iter.next();
+            }
+        }
+
+    }
+
+    public void setBoardSize (int boardSize) {
+        this.boardSize = boardSize;
+    }
+
+    public int getBoardSize () {
+        return this.boardSize;
     }
 
     @Override
@@ -68,7 +80,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
 
         @Override
         public Tile next() {
-            Tile result = getTile(next_id/4, next_id%4);
+            Tile result = getTile(next_id/boardSize, next_id%boardSize);
             next_id++;
             return result;
         }
@@ -80,7 +92,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @return the number of tiles on the board
      */
     int numTiles() {
-        return NUM_COLS*NUM_ROWS;
+        return boardSize*boardSize;
     }
 
     /**

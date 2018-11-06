@@ -10,11 +10,27 @@ public class TestingHelpers {
      * Make a set of tiles that are in order.
      * @return a set of tiles that are in order
      */
-    public static List<Tile> makeTiles() {
+    public static List<Tile> makeTiles(int boardSize) {
         List<Tile> tiles = new ArrayList<>();
-        final int numTiles = Board.NUM_ROWS * Board.NUM_COLS;
+        int numTiles = boardSize*boardSize;
+
+
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new Tile(tileNum + 1, tileNum));
+            tiles.add(new TileSizeFive(tileNum));
+        }
+
+        if (boardSize == 3) {
+            for (int tileNum = 0; tileNum != numTiles; tileNum++) {
+                tiles.add(new TileSizeThree(tileNum));
+            }
+        } else if (boardSize == 4) {
+            for (int tileNum = 0; tileNum != numTiles; tileNum++) {
+                tiles.add(new TileSizeFour(tileNum));
+            }
+        } else if (boardSize == 5) {
+            for (int tileNum = 0; tileNum != numTiles; tileNum ++) {
+                tiles.add(new TileSizeFive(tileNum));
+            }
         }
         return tiles;
     }
@@ -23,18 +39,26 @@ public class TestingHelpers {
      * Make a solved Board.
      */
     public static BoardManager makeWinningBoardManager(String userName,
-                                                       int numTiles,
+                                                       int boardSize,
                                                        AppCompatActivity appCompatActivity) {
-        List<Tile> tiles = makeTiles();
+        List<Tile> tiles = makeTiles(boardSize);
         Board board = new Board(tiles);
         BoardManager boardManager = SaveAndLoad.loadBoardManagerPermanent(
                 userName, appCompatActivity
         );
         boardManager.setBoard(board);
         boardManager.setUser(new User(userName));
-        boardManager.setSlidingTileSettings(new SlidingTileSettings(numTiles, 2));
+        boardManager.setSlidingTileSettings(new SlidingTileSettings(boardSize, 2));
         System.out.println(boardManager.puzzleSolved());
         return boardManager;
+    }
+
+
+    /**
+     * Shuffle a few tiles.
+     */
+    public void swapFirstTwoTiles(BoardManager boardManager) {
+        boardManager.getBoard().swapTiles(0, 0, 0, 1);
     }
 
 
@@ -42,17 +66,10 @@ public class TestingHelpers {
         //---------add one user to scoreboard
         BoardManager boardManager = makeWinningBoardManager("phil", 3, appCompatActivity);
         SaveAndLoad.saveBoardManagerPermanent(boardManager, appCompatActivity);
-        BoardManager boardManager1 = makeWinningBoardManager("felip", 50, appCompatActivity);
+        BoardManager boardManager1 = makeWinningBoardManager("felip", 5, appCompatActivity);
         SaveAndLoad.saveBoardManagerPermanent(boardManager1, appCompatActivity);
         BoardManager boardManager2 = makeWinningBoardManager("phil", 5, appCompatActivity);
         SaveAndLoad.saveBoardManagerPermanent(boardManager2, appCompatActivity);
-
-        BoardManager tmpBoardManager = SaveAndLoad.loadBoardManagerTemp(appCompatActivity);
-        String userId = tmpBoardManager.getUser().getUserName();
-        BoardManager boardManager4 = makeWinningBoardManager(userId, 5, appCompatActivity);
-        SaveAndLoad.saveBoardManagerPermanent(boardManager4, appCompatActivity);
-        BoardManager boardManager5 = makeWinningBoardManager(userId, 15, appCompatActivity);
-        SaveAndLoad.saveBoardManagerPermanent(boardManager5, appCompatActivity);
         BoardManager boardManager3 = makeWinningBoardManager("phil", 4, appCompatActivity);
         SaveAndLoad.saveBoardManagerTemp(boardManager3, appCompatActivity);
         //------------check that we load properly
