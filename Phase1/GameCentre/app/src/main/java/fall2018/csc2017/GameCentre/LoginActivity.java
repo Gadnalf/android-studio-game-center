@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * The account manager.
      */
-    private AccountManager accountManager = new AccountManager();
+    private AccountManager accountManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         this.greeting = findViewById(R.id.user_greeting);
         this.username = findViewById(R.id.name_input);
         this.password = findViewById(R.id.password_input);
-        String tmp = "Welcome, " + accountManager.getName();
         updateHeader();
     }
 
@@ -183,6 +182,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         saveToFile(StartingActivity.ACCOUNT_SAVE_FILENAME);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        saveToFile(StartingActivity.ACCOUNT_SAVE_FILENAME);
+        updateHeader();
     }
 
     /**
