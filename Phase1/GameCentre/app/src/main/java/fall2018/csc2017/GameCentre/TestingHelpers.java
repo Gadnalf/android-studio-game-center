@@ -14,11 +14,6 @@ public class TestingHelpers {
         List<Tile> tiles = new ArrayList<>();
         int numTiles = boardSize*boardSize;
 
-
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new TileSizeFive(tileNum));
-        }
-
         if (boardSize == 3) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
                 tiles.add(new TileSizeThree(tileNum));
