@@ -52,6 +52,7 @@ public class StartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         accountManager = new AccountManager();
+        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
         SlidingTileSettings slidingTileSettings = new SlidingTileSettings(4,4);
         //these will be altered if the user decides change them in the next activity
         boardManager = new BoardManager(new User(accountManager.getName()),
