@@ -34,6 +34,7 @@ class BoardManager implements Serializable {
         this.user = user;
         this.slidingTileSettings = slidingTileSettings;
         this.moveCount = 0;
+        this.moves = new Stack<>();
     }
 
     /**
