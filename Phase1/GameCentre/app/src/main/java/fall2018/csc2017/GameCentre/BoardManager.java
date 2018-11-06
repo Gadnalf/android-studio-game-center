@@ -18,7 +18,7 @@ class BoardManager implements Serializable {
      */
     private Board board;
     public ScoreBoard scoreBoard;
-    private long score;
+    private double score;
     private User user;
     private SlidingTileSettings slidingTileSettings;
     private Stack<int[]> moves = new Stack<>();
@@ -207,7 +207,7 @@ class BoardManager implements Serializable {
     }
 
 
-    public long getScore() {
+    public double getScore() {
         return this.score;
     }
 

@@ -28,9 +28,9 @@ public class ScoreBoard implements Serializable {
         this.perUserScoreBoard = new HashMap<>();
     }
 
-    public long getTimePlayed() {
+    public double getTimePlayed() {
         long endTime = System.nanoTime();
-        return endTime - this.startTime;
+        return (double) (endTime - this.startTime) / 1000000000.0;
     }
 
     /**
@@ -43,14 +43,16 @@ public class ScoreBoard implements Serializable {
      * - something to do with easier implementation
      * @return
      */
-    public long getScore() {
-        long a = (long) getNumMoves();
-        long b = getTimePlayed();
+    public double getScore() {
+        double a = (double) getNumMoves();
+        double timeWeight = (getTimePlayed()/1000);
+        double numUndosWeight = getSlidingTileSettings().getNumUndoes();
+        double b = (double) (timeWeight + numUndosWeight);
         return 10-(a/b); //want to maximize this
     }
 
-    public long getScoreAndUpdateScoreBoard() {
-        long newScore = getScore();
+    public double getScoreAndUpdateScoreBoard() {
+        double newScore = getScore();
         updateGameScores(newScore);
         updateUserScore(newScore);
         return newScore;
@@ -66,7 +68,7 @@ public class ScoreBoard implements Serializable {
         return this.perUserScoreBoard.containsKey(this.slidingTileSettings.getGameId()) == false;
     }
 
-    public void updateUserScore(long newScore) {
+    public void updateUserScore(double newScore) {
         //TODO: make sure the user will be updated after user changes
         //TODO: make sure these wont be overwritten with different users
         if (isNewGameForUser()) {
@@ -81,7 +83,7 @@ public class ScoreBoard implements Serializable {
         }
     }
 
-    public void updateGameScores(long newScore) {
+    public void updateGameScores(double newScore) {
         if (isNewGame()) {
             this.slidingTileSettings.setMaxScore(newScore, getUser().getUserName());
             this.perGameScoreBoard.put(this.slidingTileSettings.getGameId(), this.slidingTileSettings);
@@ -153,4 +155,5 @@ public class ScoreBoard implements Serializable {
     public void setNumMoves(int numMoves) {
         this.numMoves = numMoves;
     }
+
 }

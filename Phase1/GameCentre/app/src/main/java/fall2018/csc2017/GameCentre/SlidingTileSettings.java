@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class SlidingTileSettings implements Serializable {
     private int boardSize;
-    private long maxScore;
+    private double maxScore;
     private int numUndoes;
     private String maxScoreSetBy;
 
@@ -22,11 +22,11 @@ public class SlidingTileSettings implements Serializable {
         this.boardSize = boardSize;
     }
 
-    public long getMaxScore() {
+    public double getMaxScore() {
         return maxScore;
     }
 
-    public void setMaxScore(long maxScore, String userName) {
+    public void setMaxScore(double maxScore, String userName) {
 
         this.maxScore = maxScore;
         this.maxScoreSetBy = userName;

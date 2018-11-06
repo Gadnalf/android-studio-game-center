@@ -37,7 +37,7 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
             tr1.addView(textview1);
 
             TextView textview2 = new TextView(appCompatActivity);
-            textview2.setText(Long.toString(row.getMaxScore()));
+            textview2.setText(Double.toString(row.getMaxScore()).substring(0, 4));
             tr1.addView(textview2);
 
             TextView textview3 = new TextView(appCompatActivity);
