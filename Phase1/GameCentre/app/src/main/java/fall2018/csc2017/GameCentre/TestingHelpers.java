@@ -38,14 +38,6 @@ public class TestingHelpers {
     }
 
 
-    /**
-     * Shuffle a few tiles.
-     */
-    public void swapFirstTwoTiles(BoardManager boardManager) {
-        boardManager.getBoard().swapTiles(0, 0, 0, 1);
-    }
-
-
     public static boolean testSavingAndLoading(AppCompatActivity appCompatActivity){
         //---------add one user to scoreboard
         BoardManager boardManager = makeWinningBoardManager("phil", 3, appCompatActivity);
@@ -54,6 +46,13 @@ public class TestingHelpers {
         SaveAndLoad.saveBoardManagerPermanent(boardManager1, appCompatActivity);
         BoardManager boardManager2 = makeWinningBoardManager("phil", 5, appCompatActivity);
         SaveAndLoad.saveBoardManagerPermanent(boardManager2, appCompatActivity);
+
+        BoardManager tmpBoardManager = SaveAndLoad.loadBoardManagerTemp(appCompatActivity);
+        String userId = tmpBoardManager.getUser().getUserName();
+        BoardManager boardManager4 = makeWinningBoardManager(userId, 5, appCompatActivity);
+        SaveAndLoad.saveBoardManagerPermanent(boardManager4, appCompatActivity);
+        BoardManager boardManager5 = makeWinningBoardManager(userId, 15, appCompatActivity);
+        SaveAndLoad.saveBoardManagerPermanent(boardManager5, appCompatActivity);
         BoardManager boardManager3 = makeWinningBoardManager("phil", 4, appCompatActivity);
         SaveAndLoad.saveBoardManagerTemp(boardManager3, appCompatActivity);
         //------------check that we load properly
