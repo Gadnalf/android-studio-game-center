@@ -33,7 +33,16 @@ public class ScoreBoard implements Serializable {
         return endTime - this.startTime;
     }
 
-
+    /**
+     * notice higher a/b => lower score
+     * higher b => lower score
+     * lower a => lower score
+     * min a and max b => higher score
+     * we go with 10 bc I forget :)
+     * TODO: add why I went with 10
+     * - something to do with easier implementation
+     * @return
+     */
     public long getScore() {
         long a = (long) getNumMoves();
         long b = getTimePlayed();
