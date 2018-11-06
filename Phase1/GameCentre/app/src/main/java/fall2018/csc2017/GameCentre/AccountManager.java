@@ -1,12 +1,13 @@
 package fall2018.csc2017.GameCentre;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Stores and manages a list of user accounts, including data retrieval, account creation, and deletion.
  */
 
-class AccountManager {
+class AccountManager implements Serializable {
 
     /**
      * A list of user accounts.

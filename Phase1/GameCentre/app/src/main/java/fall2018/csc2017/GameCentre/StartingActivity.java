@@ -52,7 +52,6 @@ public class StartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         accountManager = new AccountManager();
-        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
         SlidingTileSettings slidingTileSettings = new SlidingTileSettings(4,4);
         //these will be altered if the user decides change them in the next activity
         boardManager = new BoardManager(new User(accountManager.getName()),
@@ -159,6 +158,7 @@ public class StartingActivity extends AppCompatActivity {
         super.onResume();
         boardManager = SaveAndLoad.loadBoardManagerTemp(this);
         SaveAndLoad.saveBoardManagerTemp(boardManager, this);
+        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
     }
 
 
@@ -178,8 +178,7 @@ public class StartingActivity extends AppCompatActivity {
      */
     private void switchToAccounts() {
         Intent tmp = new Intent(this, LoginActivity.class);
-//        SaveAndLoad.saveBoardManagerTemp(
-//                boardManager, this);
+        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
         startActivity(tmp);
     }
 
