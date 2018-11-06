@@ -10,6 +10,10 @@
 5. Gradle sync
 6. hit play
 
+### Testing the application
+- run all the tests in the test folder
+- uncomment lines 13 and 14 from UserScoreBoardActivity and GameScoreBoardActivity
+
 **note: if the application does not lift, please alarm the rest of the group immediately**
 
 ### Note
