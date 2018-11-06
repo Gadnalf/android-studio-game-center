@@ -16,6 +16,12 @@
     - left the app and came back in and saw new scores for new user and old scores still showing
 - test that after changing the game settings the scoreboard will update
     - TODO
+- scores are updating
+    - TODO
+- test winning with higher score updates
+    - TODO
+- transitioning to scoreboard -> settings (updating) -> back to scoreboard
+    - 
 
 ### undo
 - after loading making sure undo still works
@@ -25,3 +31,8 @@
 - ensure the tile sizes updating properly
 - moving from settings -> game -> settings (changing shit) -> game
     - TODO
+- do we want to be resetting the game settings per user?
+
+
+### auto save
+- new game, move, leave come back same spot
