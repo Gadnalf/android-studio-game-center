@@ -45,11 +45,11 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tiles_setting);
 
         boardSize = 4;
-        numUndoes = 4;
+        numUndoes = 5;
         boardManager = SaveAndLoad.loadBoardManagerTemp(this);
         addStartButtonListener();
-//        addUndoInputListener();
         addUnlimitedUndoListener();
+        addConfirmButtonListener();
         addFiveByFiveButtonListener();
         addFourByFourButtonListener();
         addThreeByThreeButtonListener();
@@ -72,9 +72,12 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Link this to GameActivity, pass boardSize and numUndo parameters?
-                // It probably needs to initiate the new BoardManager from here, since handling
-                // half of it in StartingActivity and half of it here would be super janky.
+                if(boardSize == 4) {
+                    updateBoardSizeDisplay();
+                }
+                if(numUndoes == 5) {
+                    updateUndoDisplay();
+                }
                 switchToGame();
             }
         });
@@ -88,13 +91,24 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
-
-//    /**
-//     * Activate the undo text field listener.
-//     */
-//    void addUndoInputListener() {
-//        //TODO: I'll take care of this when I'm conscious again tomorrow.
-//    }
+    /**
+     * Activates the confirm button
+     */
+    void addConfirmButtonListener() {
+        Button confirmButton = findViewById(R.id.confirm_button);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(numUndoes == 5 || numUndoes == -1) {
+                    updateUndoDisplay();
+                }else {
+                    String input = undoInput.getText().toString().trim();
+                    numUndoes = Integer.valueOf(input);
+                    updateUndoDisplay();
+                }
+            }
+        });
+    }
 
     /**
      * Activate the unlimited undo button.
@@ -105,7 +119,6 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 numUndoes = -1;
-                updateUndoDisplay();
             }
         });
     }
