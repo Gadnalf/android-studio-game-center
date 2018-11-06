@@ -93,6 +93,11 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
 
     /**
      * Activates the confirm button
+     *
+     * Code adapted from "Android Studio Studio Tutorials - 15 : EditText and TextView Example"
+     * (Source: https://www.youtube.com/watch?v=sXWFuar2Oq4 retrieved in November 2018)
+     * and "TextInputLayout (Floating Label EditText) - Android Studio Tutorial"
+     * (Source: https://www.youtube.com/watch?v=veOZTvAdzJ8 retrieved in November 2018)
      */
     void addConfirmButtonListener() {
         Button confirmButton = findViewById(R.id.confirm_button);
