@@ -34,7 +34,7 @@ public class TileSizeThree extends Tile{
                 background = R.drawable.tile_3x3_2;
                 break;
             case 3:
-                background = R.drawable.tile_3x3_2;
+                background = R.drawable.tile_3x3_3;
                 break;
             case 4:
                 background = R.drawable.tile_3x3_4;
