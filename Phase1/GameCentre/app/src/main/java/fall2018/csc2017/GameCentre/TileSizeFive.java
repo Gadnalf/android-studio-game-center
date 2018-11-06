@@ -33,7 +33,7 @@ public class TileSizeFive extends Tile{
                 background = R.drawable.tile_5x5_4;
                 break;
             case 5:
-                background = R.drawable.tile_5x5_6;
+                background = R.drawable.tile_5x5_5;
                 break;
             case 6:
                 background = R.drawable.tile_5x5_6;
@@ -60,10 +60,10 @@ public class TileSizeFive extends Tile{
                 background = R.drawable.tile_5x5_13;
                 break;
             case 14:
-                background = R.drawable.tile_5x5_15;
+                background = R.drawable.tile_5x5_14;
                 break;
             case 15:
-                background = R.drawable.tile_5x5_16;
+                background = R.drawable.tile_5x5_15;
                 break;
             case 16:
                 background = R.drawable.tile_5x5_16;

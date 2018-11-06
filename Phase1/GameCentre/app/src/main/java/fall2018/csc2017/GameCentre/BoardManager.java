@@ -255,7 +255,6 @@ class BoardManager implements Serializable {
             List<Tile> tiles = new ArrayList<>();
             int numTiles = boardSize*boardSize;
 
-
             if (boardSize == 3) {
                 for (int tileNum = 0; tileNum != numTiles; tileNum++) {
                     tiles.add(new TileSizeThree(tileNum));

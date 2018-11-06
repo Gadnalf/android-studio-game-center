@@ -174,7 +174,6 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         boardSizeDisplay.setText(tmp);
         boardManager.getSlidingTileSettings().setBoardSize(boardSize);
         boardManager.setBoardSize(boardSize);
-
     }
 
     void updateUndoDisplay() {
