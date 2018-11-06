@@ -10,9 +10,8 @@ public class GameScoreBoardActivity extends ScoreBoardAbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        boardManager = (BoardManager) SaveAndLoad.loadFromFile(StartingActivity.TEMP_SAVE_FILENAME, this);
-        boolean testsPass = TestingHelpers.testSavingAndLoading(this);
-        System.out.println(testsPass);
+//        boolean testsPass = TestingHelpers.testSavingAndLoading(this);
+//        System.out.println(testsPass);
         BoardManager boardManager = SaveAndLoad.loadBoardManagerTemp(
                 this);
         setContentView(R.layout.activity_game_score_board);
