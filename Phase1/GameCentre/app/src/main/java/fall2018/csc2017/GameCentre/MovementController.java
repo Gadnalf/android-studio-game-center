@@ -26,10 +26,14 @@ public class MovementController {
         } else if(boardManager.isValidUndo(position)) {
             if(boardManager.moveIsEmpty()) {
                 Toast.makeText(context, "No moves to Undo!", Toast.LENGTH_SHORT).show();
-            }else if(boardManager.getSlidingTileSettings().getNumUndoes() > 0 ||
-                    boardManager.getSlidingTileSettings().getNumUndoes() == -1){
+            }else if(boardManager.getSlidingTileSettings().getNumUndoes() > 0){
                 boardManager.tapUndo(position);
-            } else{
+                Toast.makeText(context, "You have " +
+                        boardManager.getSlidingTileSettings().getNumUndoes() +
+                        " undoes left", Toast.LENGTH_SHORT).show();
+            }else if (boardManager.getSlidingTileSettings().getNumUndoes() == -1) {
+                boardManager.tapUndo(position);
+            }else{
                 Toast.makeText(context, "No more Undoes left", Toast.LENGTH_SHORT).show();
             }
         } else {
