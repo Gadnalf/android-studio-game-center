@@ -161,7 +161,9 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
         boardManager = SaveAndLoad.loadBoardManagerTemp(this);
+        boardManager.setUser(new User(accountManager.getName()));
         SaveAndLoad.saveBoardManagerTemp(boardManager, this);
         loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
     }
