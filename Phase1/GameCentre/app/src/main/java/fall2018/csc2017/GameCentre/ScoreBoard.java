@@ -78,7 +78,10 @@ public class ScoreBoard implements Serializable {
             if (newScore > getPerUserScoreBoard()
                     .get(this.slidingTileSettings.getGameId())
                     .getMaxScore()) {
-                this.perUserScoreBoard.get(this.slidingTileSettings.getGameId()).setMaxScore(newScore, getUser().getUserName());
+                SlidingTileSettings updatedSettings = this.perUserScoreBoard.get(
+                        this.slidingTileSettings.getGameId());
+                updatedSettings.setMaxScore(newScore, getUser().getUserName());
+                this.perUserScoreBoard.put(this.slidingTileSettings.getGameId(), updatedSettings);
             }
         }
     }
@@ -91,7 +94,10 @@ public class ScoreBoard implements Serializable {
             if (newScore > getPerGameScoreBoard()
                     .get(this.slidingTileSettings.getGameId())
                     .getMaxScore()) {
-                this.perGameScoreBoard.get(this.slidingTileSettings.getGameId()).setMaxScore(newScore, getUser().getUserName());
+                SlidingTileSettings updatedSettings = this.perGameScoreBoard.get(
+                        this.slidingTileSettings.getGameId());
+                updatedSettings.setMaxScore(newScore, getUser().getUserName());
+                this.perGameScoreBoard.put(this.slidingTileSettings.getGameId(), updatedSettings);
             }
         }
     }
