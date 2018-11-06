@@ -27,18 +27,17 @@
     <TextView
         android:id="@+id/set_undoes_available"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="30dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="25dp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="Set Number of Undoes"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toTopOf="@+id/unlimited_undo_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,6 +46,7 @@
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="10dp"
         android:autoSizeTextType="uniform"
@@ -56,7 +56,8 @@
         app:layout_constraintBottom_toTopOf="@+id/four_by_four"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_button" />
 
     <Button
         android:id="@+id/three_by_three"
@@ -84,7 +85,7 @@
         app:layout_constraintEnd_toStartOf="@+id/five_by_five"
         app:layout_constraintStart_toEndOf="@+id/three_by_three"
         app:layout_constraintTop_toBottomOf="@+id/game_setting"
-        app:layout_constraintVertical_bias="0.657" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/five_by_five"
@@ -113,13 +114,13 @@
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/game_setting"
-        app:layout_constraintVertical_bias="0.74" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/unlimited_undo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="306dp"
+        android:layout_marginBottom="350dp"
         android:text="Unlimited"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,14 +129,28 @@
 
     <EditText
         android:id="@+id/undo_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="152dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
+        android:hint="Undoes available"
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/unlimited_undo_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/set_undoes_available" />
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="10dp"
+        android:text="Confirm"
+        android:onClick="confirmInput"
+        app:layout_constraintEnd_toStartOf="@+id/unlimited_undo_button"
+        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintStart_toEndOf="@+id/undo_input"
+        app:layout_constraintTop_toBottomOf="@+id/game_setting" />
 
 </android.support.constraint.ConstraintLayout>
