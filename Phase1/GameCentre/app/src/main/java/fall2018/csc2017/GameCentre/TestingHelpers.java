@@ -34,17 +34,19 @@ public class TestingHelpers {
     /**
      * Make a solved Board.
      */
-    public static BoardManager makeWinningBoardManager(String userName,
-                                                       int boardSize,
-                                                       AppCompatActivity appCompatActivity) {
-        List<Tile> tiles = makeTiles(boardSize);
-        Board board = new Board(tiles);
+    public static BoardManager makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
+                                                       boolean swapTiles) {
         BoardManager boardManager = SaveAndLoad.loadBoardManagerPermanent(
                 userName, appCompatActivity
         );
+        List<Tile> tiles = makeTiles(boardManager.getBoard().getBoardSize());
+        Board board = new Board(tiles);
         boardManager.setBoard(board);
         boardManager.setUser(new User(userName));
-        boardManager.setSlidingTileSettings(new SlidingTileSettings(boardSize, 2));
+        if (swapTiles) {
+            swapFirstTwoTiles(boardManager);
+            swapFirstTwoTiles(boardManager);
+        }
         System.out.println(boardManager.puzzleSolved());
         return boardManager;
     }
@@ -53,32 +55,18 @@ public class TestingHelpers {
     /**
      * Shuffle a few tiles.
      */
-    public void swapFirstTwoTiles(BoardManager boardManager) {
+    public static void swapFirstTwoTiles(BoardManager boardManager) {
         boardManager.getBoard().swapTiles(0, 0, 0, 1);
     }
 
 
-    public static boolean testSavingAndLoading(AppCompatActivity appCompatActivity){
+    public static void testSavingAndLoading(AppCompatActivity appCompatActivity){
         //---------add one user to scoreboard
-        BoardManager boardManager = makeWinningBoardManager("phil", 3, appCompatActivity);
-        SaveAndLoad.saveBoardManagerPermanent(boardManager, appCompatActivity);
-        BoardManager boardManager1 = makeWinningBoardManager("felip", 50, appCompatActivity);
-        SaveAndLoad.saveBoardManagerPermanent(boardManager1, appCompatActivity);
-        BoardManager boardManager2 = makeWinningBoardManager("phil", 5, appCompatActivity);
-        SaveAndLoad.saveBoardManagerPermanent(boardManager2, appCompatActivity);
-
         BoardManager tmpBoardManager = SaveAndLoad.loadBoardManagerTemp(appCompatActivity);
         String userId = tmpBoardManager.getUser().getUserName();
-        BoardManager boardManager4 = makeWinningBoardManager(userId, 5, appCompatActivity);
+        BoardManager boardManager4 = makeWinningBoardManager(userId, appCompatActivity, true);
         SaveAndLoad.saveBoardManagerPermanent(boardManager4, appCompatActivity);
-        BoardManager boardManager5 = makeWinningBoardManager(userId, 15, appCompatActivity);
-        SaveAndLoad.saveBoardManagerPermanent(boardManager5, appCompatActivity);
-        BoardManager boardManager3 = makeWinningBoardManager("phil", 4, appCompatActivity);
-        SaveAndLoad.saveBoardManagerTemp(boardManager3, appCompatActivity);
-        //------------check that we load properly
-        ScoreBoard scoreBoard = boardManager3.getScoreBoard();
-        boolean perGameScoreBoardSizeCorrect = 4 == scoreBoard.perGameScoreBoard.size();
-        boolean perUserScoreBoardSizeCorrect = 3 == scoreBoard.perUserScoreBoard.size();
-        return perGameScoreBoardSizeCorrect && perUserScoreBoardSizeCorrect;
+//        BoardManager boardManager3 = makeWinningBoardManager(userId, appCompatActivity, false);
+//        SaveAndLoad.saveBoardManagerPermanent(boardManager3, appCompatActivity);
     }
 }

@@ -10,10 +10,11 @@ public class UserScoreBoardActivity extends ScoreBoardAbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean testsPass = TestingHelpers.testSavingAndLoading(this);
-        System.out.println(testsPass);
-        BoardManager boardManager = SaveAndLoad.loadBoardManagerTemp(
+        TestingHelpers.testSavingAndLoading(this);
+        BoardManager tmpBoardManager = SaveAndLoad.loadBoardManagerTemp(
                 this);
+        BoardManager boardManager = SaveAndLoad.loadBoardManagerPermanent(
+                tmpBoardManager.getUser().getUserName(), this);
         setContentView(R.layout.activity_user_score_board);
         super.addRowsToScoreBoard(R.id.activity_user_score_board, boardManager, this);
     }
