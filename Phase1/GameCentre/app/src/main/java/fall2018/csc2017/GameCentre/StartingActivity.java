@@ -62,6 +62,7 @@ public class StartingActivity extends AppCompatActivity {
                 this);
 
         setContentView(R.layout.activity_starting_);
+
         addStartButtonListener();
         addLoadButtonListener(this);
         addSaveButtonListener(this);
