@@ -10,7 +10,7 @@ public class GameScoreBoardActivity extends ScoreBoardAbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TestingHelpers.testSavingAndLoading(this);
+        // TestingHelpers.testSavingAndLoading(this);
         BoardManager tmpBoardManager = SaveAndLoad.loadBoardManagerTemp(
                 this);
         BoardManager boardManager = SaveAndLoad.loadBoardManagerPermanent(

@@ -55,15 +55,23 @@ public class StartingActivity extends AppCompatActivity {
         if (accountManager == null) {
             accountManager = new AccountManager();
         }
-
         saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
-        SlidingTileSettings slidingTileSettings = new SlidingTileSettings(4,4);
-        //these will be altered if the user decides change them in the next activity
-        boardManager = new BoardManager(new User(accountManager.getName()),
-                slidingTileSettings);
+
+        boardManager = SaveAndLoad.loadBoardManagerPermanent(accountManager.getName(), this);
+
+        if (boardManager == null) {
+            SlidingTileSettings slidingTileSettings = new SlidingTileSettings(4,4);
+            //these will be altered if the user decides change them in the next activity
+            boardManager = new BoardManager(new User(accountManager.getName()),
+                    slidingTileSettings);
+        }
+
         SaveAndLoad.saveBoardManagerTemp(
                 boardManager,
                 this);
+//        SaveAndLoad.saveBoardManagerPermanent(
+//                boardManager,
+//                this);
 
         setContentView(R.layout.activity_starting_);
 
@@ -164,8 +172,9 @@ public class StartingActivity extends AppCompatActivity {
         loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
         boardManager = SaveAndLoad.loadBoardManagerTemp(this);
         boardManager.setUser(new User(accountManager.getName()));
+//        boardManager.setUser(new User(accountManager.getName()));
+        boardManager = SaveAndLoad.loadBoardManagerPermanent(accountManager.getName(), this);
         SaveAndLoad.saveBoardManagerTemp(boardManager, this);
-        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
     }
 
 
