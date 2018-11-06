@@ -16,15 +16,16 @@ public class TestingHelpers {
 
         if (boardSize == 3) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                tiles.add(new TileSizeThree(tileNum));
+                tiles.add(new TileSizeThree(tileNum+1)); //this is how they had it before (+1)
+                //may not matter though
             }
         } else if (boardSize == 4) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                tiles.add(new TileSizeFour(tileNum));
+                tiles.add(new TileSizeFour(tileNum+1));
             }
         } else if (boardSize == 5) {
             for (int tileNum = 0; tileNum != numTiles; tileNum ++) {
-                tiles.add(new TileSizeFive(tileNum));
+                tiles.add(new TileSizeFive(tileNum+1));
             }
         }
         return tiles;

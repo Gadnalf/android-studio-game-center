@@ -65,7 +65,7 @@ class BoardManager implements Serializable {
         tiles = tilesFactory.getTiles(boardSize);
 
         Collections.shuffle(tiles);
-        this.board.setBoardSize(boardSize);
+        this.slidingTileSettings.setBoardSize(boardSize);
         this.board.setTiles(tiles);
     }
 
