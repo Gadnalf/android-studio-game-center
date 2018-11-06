@@ -45,7 +45,7 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tiles_setting);
 
         boardSize = 4;
-        numUndoes = 5;
+        numUndoes = 3;
         boardManager = SaveAndLoad.loadBoardManagerTemp(this);
         addStartButtonListener();
         addUnlimitedUndoListener();
@@ -75,7 +75,7 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
                 if(boardSize == 4) {
                     updateBoardSizeDisplay();
                 }
-                if(numUndoes == 5) {
+                if(numUndoes == 3) {
                     updateUndoDisplay();
                 }
                 switchToGame();
