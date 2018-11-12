@@ -34,6 +34,7 @@ class BoardManager implements Serializable {
         this.user = user;
         this.slidingTileSettings = slidingTileSettings;
         this.moveCount = 0;
+        this.moves = new Stack<>();
     }
 
     /**
@@ -136,23 +137,15 @@ class BoardManager implements Serializable {
     void tapUndo(int position) {
         if(isValidUndo(position)){
             int numUndoes = slidingTileSettings.getNumUndoes();
+            int[] lastMove = moves.pop();
+            int row1 = lastMove[0];
+            int col1 = lastMove[1];
+            int row2 = lastMove[2];
+            int col2 = lastMove[3];
+            board.swapTiles(row1,col1,row2,col2);
+            moveCount += 1;
             if(numUndoes > 0) {
-                int[] lastMove = moves.pop();
-                int row1 = lastMove[0];
-                int col1 = lastMove[1];
-                int row2 = lastMove[2];
-                int col2 = lastMove[3];
-                board.swapTiles(row1,col1,row2,col2);
                 slidingTileSettings.setNumUndoes(numUndoes - 1);
-                moveCount += 1;
-            }else if(numUndoes == -1) {
-                int[] lastMove = moves.pop();
-                int row1 = lastMove[0];
-                int col1 = lastMove[1];
-                int row2 = lastMove[2];
-                int col2 = lastMove[3];
-                board.swapTiles(row1,col1,row2,col2);
-                moveCount += 1;
             }
         }
 
