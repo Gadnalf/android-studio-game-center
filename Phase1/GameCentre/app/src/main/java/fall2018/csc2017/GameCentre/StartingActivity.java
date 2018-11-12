@@ -179,8 +179,12 @@ public class StartingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
-        boardManager = SaveAndLoad.loadBoardManagerTemp(this);
-        boardManager.setUser(new User(accountManager.getName()));
+//        boardManager = SaveAndLoad.loadBoardManagerTemp(this);
+//        boardManager.setUser(new User(accountManager.getName()));
+        boardManager = new BoardManager(
+                new User(accountManager.getName()),
+                new SlidingTileSettings(4,4)); // how do we know we'll get the right settings? after settings are defined we save permanently => will overwrite this
+        //why do this instead of load old temp? bc we'll end up bringing per user scoreboard from old user
         SaveAndLoad.saveBoardManagerTemp(boardManager, this); // => when we try and load the perm one below
         // if its not defined it will load this one instead of the last users tmp save
 //        boardManager.setUser(new User(accountManager.getName()));

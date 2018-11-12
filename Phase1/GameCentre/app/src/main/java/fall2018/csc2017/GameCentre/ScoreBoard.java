@@ -72,8 +72,10 @@ public class ScoreBoard implements Serializable {
         //TODO: make sure the user will be updated after user changes
         //TODO: make sure these wont be overwritten with different users
         if (isNewGameForUser()) {
-            this.slidingTileSettings.setMaxScore(newScore, getUser().getUserName());
-            this.perUserScoreBoard.put(this.slidingTileSettings.getGameId(), this.slidingTileSettings);
+            SlidingTileSettings slidingTileSettingsCopy = new SlidingTileSettings(this.slidingTileSettings.getBoardSize(),
+                    this.slidingTileSettings.getNumUndoes());
+            slidingTileSettingsCopy.setMaxScore(newScore, getUser().getUserName());
+            this.perUserScoreBoard.put(this.slidingTileSettings.getGameId(), slidingTileSettingsCopy);
         } else {
             if (newScore > getPerUserScoreBoard()
                     .get(this.slidingTileSettings.getGameId())
@@ -131,7 +133,7 @@ public class ScoreBoard implements Serializable {
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(User user) {
