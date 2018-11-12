@@ -51,27 +51,36 @@ public class StartingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //load in the accounts
         loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
         if (accountManager == null) {
             accountManager = new AccountManager();
         }
         saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
 
+        //make a temp file just in case there is none yet
+        SaveAndLoad.saveBoardManagerTemp(new BoardManager(new User(accountManager.getName()),
+                new SlidingTileSettings(4,4)),
+                this);
+
+        //load the board manager if it exists if not load the temp file
         boardManager = SaveAndLoad.loadBoardManagerPermanent(accountManager.getName(), this);
 
-        if (boardManager == null) {
-            SlidingTileSettings slidingTileSettings = new SlidingTileSettings(4,4);
-            //these will be altered if the user decides change them in the next activity
-            boardManager = new BoardManager(new User(accountManager.getName()),
-                    slidingTileSettings);
-        }
+//        if (boardManager == null) {
+//            SlidingTileSettings slidingTileSettings = new SlidingTileSettings(4,4);
+//            //these will be altered if the user decides change them in the next activity
+//            boardManager = new BoardManager(new User(accountManager.getName()),
+//                    slidingTileSettings);
+//        }
 
+        //save the new board manager as temp if its loaded
         SaveAndLoad.saveBoardManagerTemp(
                 boardManager,
                 this);
-//        SaveAndLoad.saveBoardManagerPermanent(
-//                boardManager,
-//                this);
+        //save the baord manager as perm too (to save the temp as permanent in save it doesnt exist yet)
+        SaveAndLoad.saveBoardManagerPermanent(
+                boardManager,
+                this);
 
         setContentView(R.layout.activity_starting_);
 
