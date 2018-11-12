@@ -181,8 +181,11 @@ public class StartingActivity extends AppCompatActivity {
         loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
         boardManager = SaveAndLoad.loadBoardManagerTemp(this);
         boardManager.setUser(new User(accountManager.getName()));
+        SaveAndLoad.saveBoardManagerTemp(boardManager, this); // => when we try and load the perm one below
+        // if its not defined it will load this one instead of the last users tmp save
 //        boardManager.setUser(new User(accountManager.getName()));
-        boardManager = SaveAndLoad.loadBoardManagerPermanent(accountManager.getName(), this);
+        String accName = accountManager.getName();
+        boardManager = SaveAndLoad.loadBoardManagerPermanent(accName, this);
         SaveAndLoad.saveBoardManagerTemp(boardManager, this);
     }
 
