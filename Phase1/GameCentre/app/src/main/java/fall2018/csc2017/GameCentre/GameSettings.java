@@ -13,6 +13,7 @@ import java.io.Serializable;
 public abstract class GameSettings implements Serializable {
     private String maxScoreSetBy;
     private double maxScore;
+    private int boardSize;
 
     /**
      * this is the default
@@ -23,6 +24,15 @@ public abstract class GameSettings implements Serializable {
     }
 
     public GameSettings(double startingScore) {
+        this.maxScore = startingScore;
+    }
+
+    public GameSettings(int boardSize) {
+        this.boardSize = boardSize;
+    }
+
+    public GameSettings(double startingScore, int boardSize) {
+        this.boardSize = boardSize;
         this.maxScore = startingScore;
     }
 
@@ -47,6 +57,14 @@ public abstract class GameSettings implements Serializable {
 
     public double getMaxScore() {
         return maxScore;
+    }
+
+    public int getBoardSize() {
+        return boardSize;
+    }
+
+    public void setBoardSize(int boardSize) {
+        this.boardSize = boardSize;
     }
 
 }

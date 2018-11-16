@@ -4,24 +4,14 @@ import java.io.Serializable;
 
 //public class SlidingTileSettings implements Serializable, GameSettings {
 public class SlidingTileSettings extends GameSettings implements Serializable {
-    private int boardSize;
     private int numUndoes;
 
     public SlidingTileSettings(int boardSize, int numUndoes) {
-        this.boardSize = boardSize;
         this.numUndoes = numUndoes;
     }
 
-    public int getBoardSize() {
-        return boardSize;
-    }
-
-    public void setBoardSize(int boardSize) {
-        this.boardSize = boardSize;
-    }
-
     public String getGameId() {
-        String gameId = "SlidingTiles\n" + "num_tiles_" + Integer.toString(boardSize) + "\nnum_undoes_" + Integer.toString(numUndoes);
+        String gameId = "SlidingTiles\n" + "num_tiles_" + Integer.toString(getBoardSize()) + "\nnum_undoes_" + Integer.toString(numUndoes);
         return gameId;
     }
 
@@ -36,6 +26,6 @@ public class SlidingTileSettings extends GameSettings implements Serializable {
 
     @Override
     public GameSettings copy() {
-        return new SlidingTileSettings(boardSize, numUndoes);
+        return new SlidingTileSettings(getBoardSize(), numUndoes);
     }
 }
