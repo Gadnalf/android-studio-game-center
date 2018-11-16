@@ -2,7 +2,11 @@
 - 1. need to implement GameSettings making some gameSettings for your game
     - need a starting score, if you dont pass one the default will be 1
     - if its possible to get below 1 in your scores then you must change this
+    - see SlidingTileSettings for an example
 - 2. you'll need to call addScoreToScoreboard every time someone wins your game
     - this is a static method
     - just need to pass the username, a class inherited from GameSettings, and the new score
-
+    - see BoardManager as an example (the last 3 functions)
+- 3. you'll need to pass the app compat activity all the way down from your activity to where your trying to save the scoreboard
+    - see on create in GameActivity as an example
+        - just the one line in onCreate

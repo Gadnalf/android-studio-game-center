@@ -39,6 +39,7 @@ public class TestingHelpers {
         BoardManager boardManager = SaveAndLoad.loadBoardManagerPermanent(
                 userName, appCompatActivity
         );
+        boardManager.setAppCompatActivity(appCompatActivity);
         List<Tile> tiles = makeTiles(boardManager.getBoard().getBoardSize());
         Board board = new Board(tiles);
         boardManager.setBoard(board);
@@ -56,7 +57,6 @@ public class TestingHelpers {
      * Shuffle a few tiles.
      */
     public static void swapFirstTwoTiles(BoardManager boardManager) {
-        boardManager.scoreBoard.move();
         boardManager.getBoard().swapTiles(0, 0, 0, 1);
     }
 

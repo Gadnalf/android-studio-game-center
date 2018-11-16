@@ -34,4 +34,8 @@ public class SlidingTileSettings extends GameSettings implements Serializable {
         this.numUndoes = numUndoes;
     }
 
+    @Override
+    public GameSettings copy() {
+        return new SlidingTileSettings(boardSize, numUndoes);
+    }
 }

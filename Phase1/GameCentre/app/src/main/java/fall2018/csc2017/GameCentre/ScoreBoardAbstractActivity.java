@@ -13,15 +13,15 @@ import static java.lang.Math.round;
 public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
 
 
-    abstract public HashMap<String, SlidingTileSettings> getScoreBoard(BoardManager boardManager);
+    abstract public HashMap<String, GameSettings> getScoreBoard(String userName);
 //    @Override
 //    abstract protected void onCreate(Bundle savedInstanceState);
 
     public void addRowsToScoreBoard(int scoreBoardId,
-                                    BoardManager boardManager,
+                                    String userName,
                                     AppCompatActivity appCompatActivity) { //might not be an int?
         // https://technotzz.wordpress.com/2011/11/04/android-dynamically-add-rows-to-table-layout/
-        HashMap<String, SlidingTileSettings> scoreBoard = getScoreBoard(boardManager);
+        HashMap<String, GameSettings> scoreBoard = getScoreBoard(userName);
         TableLayout tl = (TableLayout) findViewById(scoreBoardId);
 
         Iterator<String> scoreBoarKeysIterator = scoreBoard.keySet().iterator();
@@ -32,7 +32,7 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
                     TableLayout.LayoutParams.WRAP_CONTENT));
 
 
-            SlidingTileSettings row = scoreBoard.get(scoreBoarKeysIterator.next());
+            GameSettings row = scoreBoard.get(scoreBoarKeysIterator.next());
 
             TextView textview1 = new TextView(appCompatActivity);
             textview1.setText(row.getMaxScoreSetBy());

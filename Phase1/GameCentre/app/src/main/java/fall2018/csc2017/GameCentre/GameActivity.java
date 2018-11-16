@@ -59,6 +59,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boardManager = SaveAndLoad.loadBoardManagerTemp(this);
+        // Will not work w out the line below
+        boardManager.setAppCompatActivity(this);
 
         createTileButtons(this);
         setContentView(R.layout.activity_main);

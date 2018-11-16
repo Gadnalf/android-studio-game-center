@@ -13,14 +13,16 @@ public class GameScoreBoardActivity extends ScoreBoardAbstractActivity {
          TestingHelpers.testSavingAndLoading(this);
         BoardManager tmpBoardManager = SaveAndLoad.loadBoardManagerTemp(
                 this);
-        BoardManager boardManager = SaveAndLoad.loadBoardManagerPermanent(
-                tmpBoardManager.getUser().getUserName(), this);
         setContentView(R.layout.activity_game_score_board);
-        super.addRowsToScoreBoard(R.id.activity_game_score_board, boardManager, this);
+        super.addRowsToScoreBoard(R.id.activity_game_score_board,
+                tmpBoardManager.getUser().getUserName(),
+                this);
     }
 
     @Override
-    public HashMap<String, SlidingTileSettings> getScoreBoard(BoardManager boardManager) {
-        return boardManager.getScoreBoard().getPerGameScoreBoard();
+    public HashMap<String, GameSettings> getScoreBoard(String userName) {
+        HashMap<String, GameSettings> gameScoreBoard = SaveAndLoad.loadPermGameScoreboard(
+                this);
+        return gameScoreBoard;
     }
 }

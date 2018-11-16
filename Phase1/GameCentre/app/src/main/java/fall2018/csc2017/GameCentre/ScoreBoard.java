@@ -1,58 +1,32 @@
 package fall2018.csc2017.GameCentre;
+import android.support.v7.app.AppCompatActivity;
+
 import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * used to keep track of the scores on slidingTileSettings
+ * used to keep track of the scores on gameSettings
  *
- * automatically calculate the score after the user finishes the slidingTileSettings and store their score on the scoreboard.
- * You should be able to implement and show per-slidingTileSettings and per-user scoreboards.
+ * automatically calculate the score after the user finishes the gameSettings and store their score on the scoreboard.
+ * You should be able to implement and show per-gameSettings and per-user scoreboards.
  * This scoreboard needs to get updated if the users finishes with higher scores. => only care about top scores
  */
 public class ScoreBoard implements Serializable {
-    public HashMap<String, SlidingTileSettings> perGameScoreBoard;
-    public HashMap<String, SlidingTileSettings> perUserScoreBoard;
+    public HashMap<String, GameSettings> perGameScoreBoard;
+    public HashMap<String, GameSettings> perUserScoreBoard;
 
-    private long startTime;
     private User user;
-    private SlidingTileSettings slidingTileSettings;
-    private BoardManager boardManager;
-    private int numMoves;
+    private GameSettings gameSettings;
 
-    public ScoreBoard(User user, SlidingTileSettings slidingTileSettings) {
-        this.startTime = System.nanoTime();
+    public ScoreBoard(User user, GameSettings gameSettings) {
         this.user = user;
-        this.slidingTileSettings = slidingTileSettings;
-        this.numMoves = 0;
+        this.gameSettings = gameSettings;
         this.perGameScoreBoard = new HashMap<>();
         this.perUserScoreBoard = new HashMap<>();
     }
 
-    public double getTimePlayed() {
-        long endTime = System.nanoTime();
-        return (double) (endTime - this.startTime) / 1000000000.0;
-    }
 
-    /**
-     * notice higher a/b => lower score
-     * higher b => lower score
-     * lower a => lower score
-     * min a and max b => higher score
-     * we go with 10 bc I forget :)
-     * TODO: add why I went with 10
-     * - something to do with easier implementation
-     * @return
-     */
-    public double getScore() {
-        double a = (double) getNumMoves();
-        double timeWeight = (getTimePlayed()/1000);
-        double numUndosWeight = getSlidingTileSettings().getNumUndoes();
-        double b = (double) (timeWeight + numUndosWeight);
-        return 10-(a/b); //want to maximize this
-    }
-
-    public double getScoreAndUpdateScoreBoard() {
-        double newScore = getScore();
+    public double updateScoreBoard(double newScore) {
         updateGameScores(newScore);
         updateUserScore(newScore);
         return newScore;
@@ -60,80 +34,85 @@ public class ScoreBoard implements Serializable {
 
     public boolean isNewGame() {
 
-        return this.perGameScoreBoard.containsKey(this.slidingTileSettings.getGameId()) == false;
+        return this.perGameScoreBoard.containsKey(this.gameSettings.getGameId()) == false;
     }
 
     public boolean isNewGameForUser() {
 
-        return this.perUserScoreBoard.containsKey(this.slidingTileSettings.getGameId()) == false;
+        return this.perUserScoreBoard.containsKey(this.gameSettings.getGameId()) == false;
     }
 
     public void updateUserScore(double newScore) {
         //TODO: make sure the user will be updated after user changes
         //TODO: make sure these wont be overwritten with different users
         if (isNewGameForUser()) {
-            SlidingTileSettings slidingTileSettingsCopy = new SlidingTileSettings(this.slidingTileSettings.getBoardSize(),
-                    this.slidingTileSettings.getNumUndoes());
-            slidingTileSettingsCopy.setMaxScore(newScore, getUser().getUserName());
-            this.perUserScoreBoard.put(this.slidingTileSettings.getGameId(), slidingTileSettingsCopy);
+            GameSettings gameSettingsCopy = this.gameSettings.copy();
+            gameSettingsCopy.setMaxScore(newScore, getUser().getUserName());
+            this.perUserScoreBoard.put(this.gameSettings.getGameId(),
+                    gameSettingsCopy);
         } else {
             if (newScore > getPerUserScoreBoard()
-                    .get(this.slidingTileSettings.getGameId())
+                    .get(this.gameSettings.getGameId())
                     .getMaxScore()) {
-                SlidingTileSettings updatedSettings = this.perUserScoreBoard.get(
-                        this.slidingTileSettings.getGameId());
+                GameSettings updatedSettings = this.perUserScoreBoard.get(
+                        this.gameSettings.getGameId());
                 updatedSettings.setMaxScore(newScore, getUser().getUserName());
-                this.perUserScoreBoard.put(this.slidingTileSettings.getGameId(), updatedSettings);
+                this.perUserScoreBoard.put(this.gameSettings.getGameId(), updatedSettings);
             }
         }
     }
 
     public void updateGameScores(double newScore) {
         if (isNewGame()) {
-            this.slidingTileSettings.setMaxScore(newScore, getUser().getUserName());
-            this.perGameScoreBoard.put(this.slidingTileSettings.getGameId(), this.slidingTileSettings);
+            this.gameSettings.setMaxScore(newScore, getUser().getUserName());
+            this.perGameScoreBoard.put(this.gameSettings.getGameId(), this.gameSettings);
         } else {
             if (newScore > getPerGameScoreBoard()
-                    .get(this.slidingTileSettings.getGameId())
+                    .get(this.gameSettings.getGameId())
                     .getMaxScore()) {
-                SlidingTileSettings updatedSettings = this.perGameScoreBoard.get(
-                        this.slidingTileSettings.getGameId());
+                GameSettings updatedSettings = this.perGameScoreBoard.get(
+                        this.gameSettings.getGameId());
                 updatedSettings.setMaxScore(newScore, getUser().getUserName());
-                this.perGameScoreBoard.put(this.slidingTileSettings.getGameId(), updatedSettings);
+                this.perGameScoreBoard.put(this.gameSettings.getGameId(), updatedSettings);
             }
         }
     }
 
-    public void move() {
-        this.numMoves ++;
+    public static void addScoreToScoreboard(User user,
+                                            double score,
+                                            GameSettings gameSettings,
+                                            AppCompatActivity appCompatActivity) {
+        ScoreBoard scoreBoard = new ScoreBoard(user, gameSettings);
+        scoreBoard.setPerGameScoreBoard(
+                SaveAndLoad.loadPermGameScoreboard(appCompatActivity)
+        );
+        scoreBoard.setPerUserScoreBoard(
+                SaveAndLoad.loadPermUserScoreboard(appCompatActivity, user.getUserName())
+        );
+        scoreBoard.updateScoreBoard(score);
+        SaveAndLoad.savePermScoreboard(
+                appCompatActivity,
+                user.getUserName(),
+                scoreBoard);
     }
 
-    public static void addScoreToScoreboard(User user, double score, GameSettings gameSettings) {
 
-    }
+    //---------------------setters and getters
 
-    public HashMap<String, SlidingTileSettings> getPerGameScoreBoard() {
+    public HashMap<String, GameSettings> getPerGameScoreBoard() {
         return perGameScoreBoard;
     }
 
-    public void setPerGameScoreBoard(HashMap<String, SlidingTileSettings> perGameScoreBoard) {
+    public void setPerGameScoreBoard(HashMap<String, GameSettings> perGameScoreBoard) {
         this.perGameScoreBoard = perGameScoreBoard;
     }
 
-    public HashMap<String, SlidingTileSettings> getPerUserScoreBoard() {
+    public HashMap<String, GameSettings> getPerUserScoreBoard() {
         return perUserScoreBoard;
     }
 
-    public void setPerUserScoreBoard(HashMap<String, SlidingTileSettings> perUserScoreBoard) {
+    public void setPerUserScoreBoard(HashMap<String, GameSettings> perUserScoreBoard) {
         this.perUserScoreBoard = perUserScoreBoard;
-    }
-
-    public long getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
     }
 
     public User getUser() {
@@ -144,28 +123,12 @@ public class ScoreBoard implements Serializable {
         this.user = user;
     }
 
-    public SlidingTileSettings getSlidingTileSettings() {
-        return slidingTileSettings;
+    public GameSettings getGameSettings() {
+        return gameSettings;
     }
 
-    public void setSlidingTileSettings(SlidingTileSettings slidingTileSettings) {
-        this.slidingTileSettings = slidingTileSettings;
-    }
-
-    public BoardManager getBoardManager() {
-        return boardManager;
-    }
-
-    public void setBoardManager(BoardManager boardManager) {
-        this.boardManager = boardManager;
-    }
-
-    public int getNumMoves() {
-        return numMoves;
-    }
-
-    public void setNumMoves(int numMoves) {
-        this.numMoves = numMoves;
+    public void setGameSettings(GameSettings slidingTileSettings) {
+        this.gameSettings = slidingTileSettings;
     }
 
 }

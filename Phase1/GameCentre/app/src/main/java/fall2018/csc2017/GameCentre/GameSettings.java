@@ -34,6 +34,8 @@ public abstract class GameSettings implements Serializable {
      */
     abstract public String getGameId();
 
+    abstract public GameSettings copy();
+
     public void setMaxScore(double maxScore, String userName) {
         this.maxScore = maxScore;
         this.maxScoreSetBy = userName;

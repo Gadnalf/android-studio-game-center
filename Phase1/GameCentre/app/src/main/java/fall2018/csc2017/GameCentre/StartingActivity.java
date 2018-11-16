@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Paths;
+import java.util.HashMap;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -28,9 +30,18 @@ public class StartingActivity extends AppCompatActivity {
      */
     public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
     /**
+     * where we store the scoreboards
+     */
+//    public final String APP_DATA_DIR = this.getExternalCacheDir().toString();
+//    public final String APP_DATA_DIR = this.getFilesDir().toString();
+    /**
      * A game score board save file.
      */
-    public static final String GAME_SCORE_BOARD_FILEPREFIX = "game_score_board_";
+    public static final String GAME_SCORE_BOARD_FILEPREFIX =   "game_score_board_";
+    /**
+     * A user score board save file.
+     */
+    public static final String USER_SCORE_BOARD_FILEPREFIX =  "_user_score_board_";
     /**
      * An account manager save file.
      */
@@ -50,7 +61,17 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupStartingActivity();
+        setContentView(R.layout.activity_starting_);
+        addStartButtonListener();
+        addLoadButtonListener(this);
+        addSaveButtonListener(this);
+        addChangeAccountListener();
+        addGameScoreBoardButton();
+        addUserScoreBoardButton();
+    }
 
+    private void setupStartingActivity() {
         //load in the accounts
         loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
         if (accountManager == null) {
@@ -59,37 +80,20 @@ public class StartingActivity extends AppCompatActivity {
         saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
 
         //make a temp file just in case there is none yet
-        SaveAndLoad.saveBoardManagerTemp(new BoardManager(new User(accountManager.getName()),
-                new SlidingTileSettings(4,4)),
+        SaveAndLoad.saveAllTemp(
+                new BoardManager(
+                        new User(accountManager.getName()),
+                        new SlidingTileSettings(4,4)),
                 this);
 
         //load the board manager if it exists if not load the temp file
-        boardManager = SaveAndLoad.loadBoardManagerPermanent(accountManager.getName(), this);
-
-//        if (boardManager == null) {
-//            SlidingTileSettings slidingTileSettings = new SlidingTileSettings(4,4);
-//            //these will be altered if the user decides change them in the next activity
-//            boardManager = new BoardManager(new User(accountManager.getName()),
-//                    slidingTileSettings);
-//        }
-
-        //save the new board manager as temp if its loaded
+        boardManager = SaveAndLoad.loadBoardManagerPermanent(
+                accountManager.getName(),
+                this);
+        //save the new board manager as temp if its been loaded
         SaveAndLoad.saveBoardManagerTemp(
                 boardManager,
-                this);
-        //save the baord manager as perm too (to save the temp as permanent in save it doesnt exist yet)
-        SaveAndLoad.saveBoardManagerPermanent(
-                boardManager,
-                this);
-
-        setContentView(R.layout.activity_starting_);
-
-        addStartButtonListener();
-        addLoadButtonListener(this);
-        addSaveButtonListener(this);
-        addChangeAccountListener();
-        addGameScoreBoardButton();
-        addUserScoreBoardButton();
+                this); //this will save the loaded board manager to tmp to be used in the other activities
     }
 
     /**
@@ -178,19 +182,7 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
-//        boardManager = SaveAndLoad.loadBoardManagerTemp(this);
-//        boardManager.setUser(new User(accountManager.getName()));
-        boardManager = new BoardManager(
-                new User(accountManager.getName()),
-                new SlidingTileSettings(4,4)); // how do we know we'll get the right settings? after settings are defined we save permanently => will overwrite this
-        //why do this instead of load old temp? bc we'll end up bringing per user scoreboard from old user
-        SaveAndLoad.saveBoardManagerTemp(boardManager, this); // => when we try and load the perm one below
-        // if its not defined it will load this one instead of the last users tmp save
-//        boardManager.setUser(new User(accountManager.getName()));
-        String accName = accountManager.getName();
-        boardManager = SaveAndLoad.loadBoardManagerPermanent(accName, this);
-        SaveAndLoad.saveBoardManagerTemp(boardManager, this);
+        setupStartingActivity();
     }
 
 

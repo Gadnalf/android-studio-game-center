@@ -1,5 +1,7 @@
 package fall2018.csc2017.GameCentre;
 
+import android.support.v7.app.AppCompatActivity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,18 +25,22 @@ class BoardManager implements Serializable {
     private SlidingTileSettings slidingTileSettings;
     private Stack<int[]> moves = new Stack<>();
     private int moveCount;
+    private long startTime;
+    private AppCompatActivity appCompatActivity;
 
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    BoardManager(Board board, User user, SlidingTileSettings slidingTileSettings) {
+    BoardManager(Board board, User user, SlidingTileSettings slidingTileSettings,
+                 AppCompatActivity appCompatActivity) {
         this.board = board;
-        this.scoreBoard = new ScoreBoard(user, slidingTileSettings);
         this.user = user;
         this.slidingTileSettings = slidingTileSettings;
         this.moveCount = 0;
         this.moves = new Stack<>();
+        this.startTime = System.nanoTime();
+        this.appCompatActivity = appCompatActivity;
     }
 
     /**
@@ -88,7 +94,7 @@ class BoardManager implements Serializable {
             }
         }
         if (solved) {
-            this.score = this.scoreBoard.getScoreAndUpdateScoreBoard();
+            updateScoreboard();
         }
         return solved;
     }
@@ -162,7 +168,6 @@ class BoardManager implements Serializable {
         int col = position % this.getSlidingTileSettings().getBoardSize();
         int blankId = board.numTiles();
         if(isValidTap(position)){
-            this.scoreBoard.move();
             Tile above = row == 0 ? null : board.getTile(row - 1, col);
             Tile below = row == this.getSlidingTileSettings().getBoardSize() - 1 ? null : board.getTile(row + 1, col);
             Tile left = col == 0 ? null : board.getTile(row, col - 1);
@@ -200,10 +205,6 @@ class BoardManager implements Serializable {
     }
 
 
-    public double getScore() {
-        return this.score;
-    }
-
     public int getMoveCount() {
         return this.moveCount;
     }
@@ -221,10 +222,6 @@ class BoardManager implements Serializable {
         this.board = board;
     }
 
-    public void setScoreBoard(ScoreBoard scoreBoard) {
-        this.scoreBoard = scoreBoard;
-    }
-
     public User getUser() {
         return user;
     }
@@ -240,7 +237,10 @@ class BoardManager implements Serializable {
 
     public void setSlidingTileSettings(SlidingTileSettings slidingTileSettings) {
         this.slidingTileSettings = slidingTileSettings;
-        this.scoreBoard.setSlidingTileSettings(slidingTileSettings);
+    }
+
+    public void setAppCompatActivity(AppCompatActivity appCompatActivity) {
+        this.appCompatActivity = appCompatActivity;
     }
 
     public class TilesFactory {
@@ -261,10 +261,40 @@ class BoardManager implements Serializable {
                     tiles.add(new TileSizeFive(tileNum));
                 }
             }
-
             return tiles;
 
 
         }
+    }
+
+    public double getTimePlayed() {
+        long endTime = System.nanoTime();
+        return (double) (endTime - this.startTime) / 1000000000.0;
+    }
+
+    /**
+     * notice higher a/b => lower score
+     * higher b => lower score
+     * lower a => lower score
+     * min a and max b => higher score
+     * we go with 10 bc I forget :)
+     * TODO: add why I went with 10
+     * - something to do with easier implementation
+     * @return
+     */
+    public double getScore() {
+        double a = (double) getMoveCount();
+        double timeWeight = (getTimePlayed()/1000);
+        double numUndosWeight = getSlidingTileSettings().getNumUndoes();
+        double b = (double) (timeWeight + numUndosWeight);
+        return 10-(a/b); //want to maximize this
+    }
+
+    public void updateScoreboard() {
+        this.score = getScore();
+        ScoreBoard.addScoreToScoreboard(this.user,
+                this.score,
+                this.slidingTileSettings,
+                this.appCompatActivity);
     }
 }
