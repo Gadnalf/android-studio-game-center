@@ -8,6 +8,8 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import static java.lang.Math.round;
+
 public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
 
 
@@ -37,19 +39,14 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
             tr1.addView(textview1);
 
             TextView textview2 = new TextView(appCompatActivity);
-            textview2.setText(Double.toString(row.getMaxScore()).substring(0, 4));
+            textview2.setText(Double.toString(round(row.getMaxScore() * 1000.0)/1000.0));
             tr1.addView(textview2);
 
             TextView textview3 = new TextView(appCompatActivity);
             textview3.setText(
-                    Integer.toString(row.getNumUndoes())
+                    row.getGameId()
             );
             tr1.addView(textview3);
-
-            TextView textview4 = new TextView(appCompatActivity);
-            textview4.setText(Integer.toString(row.getBoardSize()));
-            tr1.addView(textview4);
-
             tl.addView(tr1, i);
             i++;
         }
@@ -67,12 +64,8 @@ public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
         trHead.addView(textviewHead2);
 
         TextView textviewHead3 = new TextView(appCompatActivity);
-        textviewHead3.setText("Num Undos");
+        textviewHead3.setText("Game Info");
         trHead.addView(textviewHead3);
-
-        TextView textviewHead4 = new TextView(appCompatActivity);
-        textviewHead4.setText("             Board Width and Height");
-        trHead.addView(textviewHead4);
         tl.addView(trHead, 0);
     }
 }

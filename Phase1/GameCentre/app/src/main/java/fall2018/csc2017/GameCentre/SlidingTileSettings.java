@@ -2,15 +2,13 @@ package fall2018.csc2017.GameCentre;
 
 import java.io.Serializable;
 
-public class SlidingTileSettings implements Serializable {
+//public class SlidingTileSettings implements Serializable, GameSettings {
+public class SlidingTileSettings extends GameSettings implements Serializable {
     private int boardSize;
-    private double maxScore;
     private int numUndoes;
-    private String maxScoreSetBy;
 
     public SlidingTileSettings(int boardSize, int numUndoes) {
         this.boardSize = boardSize;
-        this.maxScore = 1;
         this.numUndoes = numUndoes;
     }
 
@@ -22,18 +20,8 @@ public class SlidingTileSettings implements Serializable {
         this.boardSize = boardSize;
     }
 
-    public double getMaxScore() {
-        return maxScore;
-    }
-
-    public void setMaxScore(double maxScore, String userName) {
-
-        this.maxScore = maxScore;
-        this.maxScoreSetBy = userName;
-    }
-
     public String getGameId() {
-        String gameId = "num_tiles_" + Integer.toString(boardSize) + "num_undoes_" + Integer.toString(numUndoes);
+        String gameId = "SlidingTiles\n" + "num_tiles_" + Integer.toString(boardSize) + "\nnum_undoes_" + Integer.toString(numUndoes);
         return gameId;
     }
 
@@ -46,7 +34,4 @@ public class SlidingTileSettings implements Serializable {
         this.numUndoes = numUndoes;
     }
 
-    public String getMaxScoreSetBy() {
-        return this.maxScoreSetBy;
-    }
 }

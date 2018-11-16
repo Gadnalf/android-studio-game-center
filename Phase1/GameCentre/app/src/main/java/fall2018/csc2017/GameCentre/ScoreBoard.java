@@ -108,6 +108,10 @@ public class ScoreBoard implements Serializable {
         this.numMoves ++;
     }
 
+    public static void addScoreToScoreboard(User user, double score, GameSettings gameSettings) {
+
+    }
+
     public HashMap<String, SlidingTileSettings> getPerGameScoreBoard() {
         return perGameScoreBoard;
     }
