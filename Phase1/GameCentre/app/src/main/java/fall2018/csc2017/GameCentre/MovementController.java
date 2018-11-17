@@ -23,19 +23,21 @@ public class MovementController {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "you scored=" + newScore, Toast.LENGTH_SHORT).show();
             }
-        } else if(abstractBoardManager.isValidUndo(position)) {
-            if(abstractBoardManager.moveIsEmpty()) {
+        } else if (abstractBoardManager.isValidUndo(position)) {
+            if (abstractBoardManager.moveIsEmpty()) {
                 Toast.makeText(context, "No moves to Undo!", Toast.LENGTH_SHORT).show();
-            }else if(abstractBoardManager.getGameSettings().getNumUndoes() > 0){
+            } else if (abstractBoardManager.getGameSettings().getNumUndoes() > 0) {
                 abstractBoardManager.tapUndo(position);
                 Toast.makeText(context, "You have " +
                         abstractBoardManager.getGameSettings().getNumUndoes() +
                         " undoes left", Toast.LENGTH_SHORT).show();
-            }else if (abstractBoardManager.getGameSettings().getNumUndoes() == -1) {
+            } else if (abstractBoardManager.getGameSettings().getNumUndoes() == -1) {
                 abstractBoardManager.tapUndo(position);
-            }else{
+            } else {
                 Toast.makeText(context, "No more Undoes left", Toast.LENGTH_SHORT).show();
             }
+        } else if (abstractBoardManager.isValidShoot(position)) {
+            //TODO: implement
         } else {
             Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
         }

@@ -9,7 +9,7 @@ import java.util.Iterator;
 public class SeaInvadersBoardManager extends AbstractBoardManager implements Serializable {
 
 
-    int lastOccupiedColumn = 0; //TODO: make sure he starts here
+    int lastOccupiedColumn = -1; //TODO: make sure he starts here
 
     /**
      * Manage a board that has been pre-populated.
@@ -19,11 +19,13 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                              AppCompatActivity appCompatActivity) {
         super(board, user, seaInvaderSettings,
                 appCompatActivity);
+        this.lastOccupiedColumn = seaInvaderSettings.getBoardSize()-1;
     }
 
 
     SeaInvadersBoardManager(User user, SeaInvaderSettings seaInvaderSettings) {
         super(user, seaInvaderSettings, new SeaInvadersTileFactory());
+        this.lastOccupiedColumn = seaInvaderSettings.getBoardSize()-1;
     }
 
     /**
@@ -58,9 +60,12 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     @Override
     boolean isValidTap(int position) {
+        if (this.lastOccupiedColumn == -1) {
+            setLastOccupiedColumnToStart();
+        }
         int row = position / getGameSettings().getBoardSize();
         int col = position % getGameSettings().getBoardSize();
-        if (row == 0 && col != lastOccupiedColumn) {
+        if (row == getGameSettings().getBoardSize()-1 && col != this.lastOccupiedColumn) {
             return true;
         } else {
             return false;
@@ -80,33 +85,33 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         int col = position % this.getGameSettings().getBoardSize();
         int blankId = board.numTiles();
         if(isValidTap(position)){
-            board.swapTiles(1, lastOccupiedColumn, 1, col);
+            board.swapTiles(
+                    this.getGameSettings().getBoardSize()-1,
+                    col,
+                    this.getGameSettings().getBoardSize()-1,
+                    this.lastOccupiedColumn);
+            this.lastOccupiedColumn = col;
         }
     }
 
 
     /**
-     * notice higher a/b => lower score
-     * higher b => lower score
-     * lower a => lower score
-     * min a and max b => higher score
-     * we go with 10 bc I forget :)
-     * TODO: add why I went with 10
      * - something to do with easier implementation
      * @return
      */
     @Override
     public double getScore() {
-        double a = (double) getMoveCount();
-        double timeWeight = (getTimePlayed()/1000);
-        double numUndosWeight = getSeaInvaderSettings().getNumUndoes();
-        double b = (double) (timeWeight + numUndosWeight);
-        return 10-(a/b); //want to maximize this
+        //TODO: implement
+        return 1.0;
     }
 
 
     public SeaInvaderSettings getSeaInvaderSettings() {
         return (SeaInvaderSettings) getGameSettings();
+    }
+
+    public void setLastOccupiedColumnToStart() {
+        this.lastOccupiedColumn =  getSeaInvaderSettings().getBoardSize()-1;
     }
 
 }

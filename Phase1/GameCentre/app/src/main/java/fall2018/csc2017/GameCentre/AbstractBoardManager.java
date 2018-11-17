@@ -87,6 +87,8 @@ abstract public class AbstractBoardManager implements Serializable {
     void tapUndo(int position) {
     }
 
+    boolean isValidShoot(int position) {return false;}
+
     public boolean moveIsEmpty() {
         return moves.empty();
     }
