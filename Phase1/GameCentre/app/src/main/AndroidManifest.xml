@@ -21,7 +21,7 @@
         <activity android:name=".GameScoreBoardActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SlidingTileSettingsActivity" />
-        <activity android:name=".SeaInvaderActivity"></activity>
+        <activity android:name=".SeaInvaderGameActivity"></activity>
     </application>
 
 </manifest>

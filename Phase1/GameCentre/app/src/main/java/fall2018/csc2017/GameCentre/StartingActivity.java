@@ -262,7 +262,7 @@ public class StartingActivity extends AppCompatActivity {
     }
 
     private void switchToSeaInvaders() {
-        Intent tmp = new Intent(this, SeaInvaderActivity.class);
+        Intent tmp = new Intent(this, SeaInvaderGameActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         SaveAndLoad.saveGameHubTemp(gameHub, this);
