@@ -5,12 +5,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import static java.lang.Math.round;
 
-public abstract class ScoreBoardAbstractActivity extends AppCompatActivity {
+public abstract class ScoreBoardAbstractActivity extends AppCompatActivity implements Serializable {
 
 
     abstract public HashMap<String, GameSettings> getScoreBoard(String userName);

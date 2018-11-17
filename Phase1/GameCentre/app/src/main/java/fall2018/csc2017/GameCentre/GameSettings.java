@@ -14,6 +14,7 @@ public abstract class GameSettings implements Serializable {
     private String maxScoreSetBy;
     private double maxScore;
     private int boardSize;
+    private int numUndoes;
 
     /**
      * this is the default
@@ -30,6 +31,12 @@ public abstract class GameSettings implements Serializable {
     public GameSettings(int boardSize) {
         this.boardSize = boardSize;
     }
+
+    public GameSettings(int boardSize, int numUndoes) {
+        this.boardSize = boardSize;
+        this.numUndoes = numUndoes;
+    }
+
 
     public GameSettings(double startingScore, int boardSize) {
         this.boardSize = boardSize;
@@ -67,4 +74,7 @@ public abstract class GameSettings implements Serializable {
         this.boardSize = boardSize;
     }
 
+    public int getNumUndoes() {
+        return numUndoes;
+    }
 }

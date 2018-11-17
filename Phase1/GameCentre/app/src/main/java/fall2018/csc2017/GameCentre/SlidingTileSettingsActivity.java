@@ -35,7 +35,8 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
      */
     private int numUndoes;
 
-    private BoardManager boardManager;
+    private SlidingTilesBoardManager slidingTilesBoardManager;
+    private GameHub gameHub;
 
 
 
@@ -46,7 +47,8 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
 
         boardSize = 4;
         numUndoes = 3;
-        boardManager = SaveAndLoad.loadBoardManagerTemp(this);
+        gameHub = SaveAndLoad.loadGameHubTemp(this);
+        slidingTilesBoardManager = gameHub.getSlidingTilesBoardManager();
         addStartButtonListener();
         addUnlimitedUndoListener();
         addConfirmButtonListener();
@@ -84,9 +86,10 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
     }
 
     private void switchToGame() {
-        Intent tmp = new Intent(this, GameActivity.class);
-        SaveAndLoad.saveBoardManagerTemp(
-                boardManager, this);
+        Intent tmp = new Intent(this, SlidingTilesGameActivity.class);
+        gameHub.setSlidingTilesBoardManager(slidingTilesBoardManager);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
 //        saveToFile(TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }
@@ -177,13 +180,13 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
     void updateBoardSizeDisplay() {
         String tmp = "Select Board Size: " + boardSize + "x" + boardSize;
         boardSizeDisplay.setText(tmp);
-        boardManager.getSlidingTileSettings().setBoardSize(boardSize);
-        boardManager.setBoardSize(boardSize);
+        slidingTilesBoardManager.getSlidingTileSettings().setBoardSize(boardSize);
+        slidingTilesBoardManager.setBoardSize(boardSize);
     }
 
     void updateUndoDisplay() {
         String tmp = "Select Number of Undoes: " + numUndoes;
         undoDisplay.setText(tmp);
-        boardManager.getSlidingTileSettings().setNumUndoes(numUndoes);
+        slidingTilesBoardManager.getSlidingTileSettings().setNumUndoes(numUndoes);
     }
 }

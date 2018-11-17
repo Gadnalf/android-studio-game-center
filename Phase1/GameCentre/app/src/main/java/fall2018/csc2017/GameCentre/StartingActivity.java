@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.file.Paths;
-import java.util.HashMap;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -50,7 +48,7 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private GameHub gameHub;
 
     /**
      * The account manager.
@@ -80,19 +78,22 @@ public class StartingActivity extends AppCompatActivity {
         saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
 
         //make a temp file just in case there is none yet
+        User user = new User(accountManager.getName());
         SaveAndLoad.saveAllTemp(
-                new BoardManager(
-                        new User(accountManager.getName()),
-                        new SlidingTileSettings(4,4)),
+                new GameHub(
+                        new SlidingTilesBoardManager(
+                                user,
+                                new SlidingTileSettings(4,4)),
+                        user),
                 this);
 
         //load the board manager if it exists if not load the temp file
-        boardManager = SaveAndLoad.loadBoardManagerPermanent(
+        gameHub = SaveAndLoad.loadGameHubPermanent(
                 accountManager.getName(),
                 this);
         //save the new board manager as temp if its been loaded
-        SaveAndLoad.saveBoardManagerTemp(
-                boardManager,
+        SaveAndLoad.saveGameHubTemp(
+                gameHub,
                 this); //this will save the loaded board manager to tmp to be used in the other activities
     }
 
@@ -117,12 +118,12 @@ public class StartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager = SaveAndLoad.loadBoardManagerPermanent(
-                        boardManager.getUser().getUserName(),
+                gameHub = SaveAndLoad.loadGameHubPermanent(
+                        gameHub.getUser().getUserName(),
                         appCompatActivity);
 //                loadFromFile(SAVE_FILENAME);
-                SaveAndLoad.saveBoardManagerTemp(
-                        boardManager, appCompatActivity);
+                SaveAndLoad.saveGameHubTemp(
+                        gameHub, appCompatActivity);
 //                saveToFile(TEMP_SAVE_FILENAME);
                 makeToastLoadedText();
                 switchToGame();
@@ -145,12 +146,12 @@ public class StartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveAndLoad.saveBoardManagerPermanent(
-                        boardManager,
+                SaveAndLoad.saveGameHubPermanent(
+                        gameHub,
                         appCompatActivity);
 //                saveToFile(SAVE_FILENAME);
-                SaveAndLoad.saveBoardManagerTemp(
-                        boardManager, appCompatActivity);
+                SaveAndLoad.saveGameHubTemp(
+                        gameHub, appCompatActivity);
 //                saveToFile(TEMP_SAVE_FILENAME);
                 makeToastSavedText();
             }
@@ -187,12 +188,12 @@ public class StartingActivity extends AppCompatActivity {
 
 
     /**
-     * Switch to the GameActivity view to play the game.
+     * Switch to the SlidingTilesGameActivity view to play the game.
      */
     private void switchToGame() {
-        Intent tmp = new Intent(this, GameActivity.class);
-        SaveAndLoad.saveBoardManagerTemp(
-                boardManager, this);
+        Intent tmp = new Intent(this, SlidingTilesGameActivity.class);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
 //        saveToFile(TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }
@@ -202,8 +203,8 @@ public class StartingActivity extends AppCompatActivity {
      */
     private void switchToSetting() {
         Intent tmp = new Intent(this, SlidingTileSettingsActivity.class);
-        SaveAndLoad.saveBoardManagerTemp(
-                boardManager, this);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
         startActivity(tmp);
     }
     /**
@@ -220,8 +221,8 @@ public class StartingActivity extends AppCompatActivity {
      */
     private void switchToUserScoreBoard() {
         Intent tmp = new Intent(this, UserScoreBoardActivity.class);
-        SaveAndLoad.saveBoardManagerTemp(
-                boardManager, this);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
 //        saveToFile(TEMP_SAVE_FILENAME);
 //        TODO: user proper file paths
         startActivity(tmp);
@@ -229,9 +230,9 @@ public class StartingActivity extends AppCompatActivity {
 
     private void switchToGameScoreBoard() {
         Intent tmp = new Intent(this, GameScoreBoardActivity.class);
-        SaveAndLoad.saveBoardManagerTemp(
-                boardManager, this);
-        SaveAndLoad.saveBoardManagerTemp(boardManager, this);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
+        SaveAndLoad.saveGameHubTemp(gameHub, this);
         startActivity(tmp);
     }
 
@@ -240,7 +241,7 @@ public class StartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                boardManager = new GameLaunchCentre().getBoardManager();
+//                gameHub = new GameLaunchCentre().getBoardManager();
                 switchToUserScoreBoard();
             }
         });
@@ -251,7 +252,7 @@ public class StartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                boardManager = new GameLaunchCentre().getBoardManager();
+//                gameHub = new GameLaunchCentre().getBoardManager();
                 switchToGameScoreBoard();
             }
         });

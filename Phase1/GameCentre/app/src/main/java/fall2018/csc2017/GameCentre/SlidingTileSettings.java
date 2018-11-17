@@ -7,7 +7,7 @@ public class SlidingTileSettings extends GameSettings implements Serializable {
     private int numUndoes;
 
     public SlidingTileSettings(int boardSize, int numUndoes) {
-        this.numUndoes = numUndoes;
+        super(boardSize, numUndoes);
     }
 
     public String getGameId() {
@@ -20,7 +20,6 @@ public class SlidingTileSettings extends GameSettings implements Serializable {
     }
 
     public void setNumUndoes(int numUndoes) {
-
         this.numUndoes = numUndoes;
     }
 

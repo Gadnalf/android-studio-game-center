@@ -4,9 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -101,56 +99,56 @@ public class SaveAndLoad extends AppCompatActivity {
      * @param appCompatActivity
      * @return
      */
-    public static BoardManager loadBoardManagerPermanent(
+    public static GameHub loadGameHubPermanent(
             String userName,
             AppCompatActivity appCompatActivity) {
 
-        BoardManager boardManager;
+        GameHub gameHub;
 
         //if permanent file not there load the temp
         try{
             String fileName = userName + "_" + StartingActivity.SAVE_FILENAME;
-            boardManager = (BoardManager) loadFromFile(
+            gameHub = (GameHub) loadFromFile(
                     fileName, appCompatActivity);
         } catch (RuntimeException e) {
-            boardManager = loadBoardManagerTemp(appCompatActivity);
+            gameHub = loadGameHubTemp(appCompatActivity);
         }
-        return boardManager;
+        return gameHub;
     }
 
     /**
      * @param appCompatActivity
      * @return
      */
-    public static BoardManager loadBoardManagerTemp(
+    public static GameHub loadGameHubTemp(
             AppCompatActivity appCompatActivity) {
         String fileName = StartingActivity.TEMP_SAVE_FILENAME;
-        BoardManager boardManager = (BoardManager) loadFromFile(
+        GameHub gameHub = (GameHub) loadFromFile(
                 fileName, appCompatActivity);
-        return boardManager;
+        return gameHub;
     }
 
 
 
     /**
-     * @param boardManager
+     * @param gameHub
      * @param appCompatActivity
      */
-    public static void saveBoardManagerTemp(BoardManager boardManager,
-                                            AppCompatActivity appCompatActivity) {
+    public static void saveGameHubTemp(GameHub gameHub,
+                                       AppCompatActivity appCompatActivity) {
         String fileName = StartingActivity.TEMP_SAVE_FILENAME;
-        saveToFile(boardManager, fileName, appCompatActivity);
+        saveToFile(gameHub, fileName, appCompatActivity);
     }
 
     /**
      * For temporary saves, save without user_id, for permanant ones use user id
-     * @param boardManager
+     * @param gameHub
      * @param appCompatActivity
      */
-    public static void saveBoardManagerPermanent(BoardManager boardManager,
-                                                 AppCompatActivity appCompatActivity) {
-        String fileName = boardManager.getUser().getUserName() + "_" + StartingActivity.SAVE_FILENAME;
-        saveToFile(boardManager,
+    public static void saveGameHubPermanent(GameHub gameHub,
+                                            AppCompatActivity appCompatActivity) {
+        String fileName = gameHub.getUser().getUserName() + "_" + StartingActivity.SAVE_FILENAME;
+        saveToFile(gameHub,
                 fileName,
                 appCompatActivity);
     }
@@ -261,9 +259,9 @@ public class SaveAndLoad extends AppCompatActivity {
 
     //----------------------------groupings of saves / loads
 
-    public static void saveAllTemp(BoardManager boardManager, AppCompatActivity appCompatActivity) {
+    public static void saveAllTemp(GameHub gameHub, AppCompatActivity appCompatActivity) {
         saveTempScoreboard(appCompatActivity);
-        saveBoardManagerTemp(boardManager, appCompatActivity);
+        saveGameHubTemp(gameHub, appCompatActivity);
     }
 
 }

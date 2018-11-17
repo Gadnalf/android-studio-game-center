@@ -34,40 +34,42 @@ public class TestingHelpers {
     /**
      * Make a solved Board.
      */
-    public static BoardManager makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
-                                                       boolean swapTiles) {
-        BoardManager boardManager = SaveAndLoad.loadBoardManagerPermanent(
+    public static GameHub makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
+                                                                   boolean swapTiles) {
+        GameHub gameHub = SaveAndLoad.loadGameHubPermanent(
                 userName, appCompatActivity
         );
-        boardManager.setAppCompatActivity(appCompatActivity);
-        List<Tile> tiles = makeTiles(boardManager.getBoard().getBoardSize());
+        SlidingTilesBoardManager slidingTilesBoardManager = gameHub.getSlidingTilesBoardManager();
+        slidingTilesBoardManager.setAppCompatActivity(appCompatActivity);
+        List<Tile> tiles = makeTiles(slidingTilesBoardManager.getBoard().getBoardSize());
         Board board = new Board(tiles);
-        boardManager.setBoard(board);
-        boardManager.setUser(new User(userName));
+        slidingTilesBoardManager.setBoard(board);
+        slidingTilesBoardManager.setUser(new User(userName));
         if (swapTiles) {
-            swapFirstTwoTiles(boardManager);
-            swapFirstTwoTiles(boardManager);
+            swapFirstTwoTiles(slidingTilesBoardManager);
+            swapFirstTwoTiles(slidingTilesBoardManager);
         }
-        System.out.println(boardManager.puzzleSolved());
-        return boardManager;
+        System.out.println(slidingTilesBoardManager.puzzleSolved());
+        gameHub.setSlidingTilesBoardManager(slidingTilesBoardManager);
+        return gameHub;
     }
 
 
     /**
      * Shuffle a few tiles.
      */
-    public static void swapFirstTwoTiles(BoardManager boardManager) {
-        boardManager.getBoard().swapTiles(0, 0, 0, 1);
+    public static void swapFirstTwoTiles(SlidingTilesBoardManager slidingTilesBoardManager) {
+        slidingTilesBoardManager.getBoard().swapTiles(0, 0, 0, 1);
     }
 
 
     public static void testSavingAndLoading(AppCompatActivity appCompatActivity){
         //---------add one user to scoreboard
-        BoardManager tmpBoardManager = SaveAndLoad.loadBoardManagerTemp(appCompatActivity);
-        String userId = tmpBoardManager.getUser().getUserName();
-        BoardManager boardManager4 = makeWinningBoardManager(userId, appCompatActivity, true);
-        SaveAndLoad.saveBoardManagerPermanent(boardManager4, appCompatActivity);
-//        BoardManager boardManager3 = makeWinningBoardManager(userId, appCompatActivity, false);
-//        SaveAndLoad.saveBoardManagerPermanent(boardManager3, appCompatActivity);
+        GameHub tmpGameHub = SaveAndLoad.loadGameHubTemp(appCompatActivity);
+        String userId = tmpGameHub.getUser().getUserName();
+        GameHub gameHub = makeWinningBoardManager(userId, appCompatActivity, true);
+        SaveAndLoad.saveGameHubPermanent(gameHub, appCompatActivity);
+//        SlidingTilesBoardManager boardManager3 = makeWinningBoardManager(userId, appCompatActivity, false);
+//        SaveAndLoad.saveGameHubPermanent(boardManager3, appCompatActivity);
     }
 }

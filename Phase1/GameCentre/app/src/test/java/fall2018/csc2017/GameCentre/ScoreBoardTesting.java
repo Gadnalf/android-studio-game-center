@@ -17,10 +17,10 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
 //    public void testIsSolved2() {
 ////        super.testIsSolved();
 //        setUpCorrect();
-//        System.out.println(boardManager.puzzleSolved());
-//        assertEquals(true, boardManager.puzzleSolved());
+//        System.out.println(slidingTilesBoardManager.puzzleSolved());
+//        assertEquals(true, slidingTilesBoardManager.puzzleSolved());
 //        swapFirstTwoTiles();
-//        assertEquals(false, boardManager.puzzleSolved());
+//        assertEquals(false, slidingTilesBoardManager.puzzleSolved());
 //    }
 
     public void setUpCorrect() {
@@ -28,9 +28,9 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
         Board board = new Board(tiles);
         user = new User("jim");
         slidingTileSettings =  new SlidingTileSettings(3, 4);
-        boardManager = new BoardManager(board, user, slidingTileSettings);
-        scoreBoard = boardManager.getScoreBoard();
-        System.out.println(boardManager.puzzleSolved());
+        slidingTilesBoardManager = new SlidingTilesBoardManager(board, user, slidingTileSettings);
+        scoreBoard = slidingTilesBoardManager.getScoreBoard();
+        System.out.println(slidingTilesBoardManager.puzzleSolved());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
 //    public void testSavingAndLoading(){
 //        //---------add one user to scoreboard
 //        setUpCorrect();
-//        System.out.println(boardManager.puzzleSolved());
+//        System.out.println(slidingTilesBoardManager.puzzleSolved());
 //        //puzzle is solved so will add to the scoreboard
 //        //---------add another user to the scoreboard
 //        List<Tile> tiles = makeTiles();
@@ -63,9 +63,9 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
 //                new User("bill", "testing"),
 //                new SlidingTileSettings(4)
 //        );
-//        boardManager = new BoardManager(board, scoreBoard);
+//        slidingTilesBoardManager = new SlidingTilesBoardManager(board, scoreBoard);
 //        //puzzle solved so we add to the scoreboard
-//        System.out.println(boardManager.puzzleSolved());
+//        System.out.println(slidingTilesBoardManager.puzzleSolved());
 //        //save this scoreboard
 //        saveToFile(SAVE_FILENAME);
 //        //wipe the scoreboard
