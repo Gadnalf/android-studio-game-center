@@ -94,6 +94,28 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         }
     }
 
+    /**
+     * return true if there's an enemy to shoot at
+     * @param position
+     * @return
+     */
+    @Override
+    boolean isValidShoot(int position) {
+        //TODO implement
+        return super.isValidShoot(position);
+    }
+
+    /**
+     * fire at the enemy and update the grid
+     * see MovementController processTapMovement for ideas on where to start
+     * Should be somewhat similar to undo
+     * @param position
+     */
+    @Override
+    public void fireAndUpdate(int position) {
+        //TODO implement
+        super.fireAndUpdate(position);
+    }
 
     /**
      * - something to do with easier implementation

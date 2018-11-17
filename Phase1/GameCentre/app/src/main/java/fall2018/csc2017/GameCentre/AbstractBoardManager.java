@@ -89,6 +89,8 @@ abstract public class AbstractBoardManager implements Serializable {
 
     boolean isValidShoot(int position) {return false;}
 
+    public void fireAndUpdate(int position) {};
+
     public boolean moveIsEmpty() {
         return moves.empty();
     }
