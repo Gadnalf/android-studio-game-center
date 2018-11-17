@@ -43,6 +43,12 @@ public abstract class GameSettings implements Serializable {
         this.maxScore = startingScore;
     }
 
+    public GameSettings(double startingScore, int boardSize, int numUndoes) {
+        this.boardSize = boardSize;
+        this.maxScore = startingScore;
+        this.numUndoes = numUndoes;
+    }
+
     /**
      * should return all relevant info about this game
      * will also be used to compare games
@@ -77,4 +83,6 @@ public abstract class GameSettings implements Serializable {
     public int getNumUndoes() {
         return numUndoes;
     }
+
+
 }

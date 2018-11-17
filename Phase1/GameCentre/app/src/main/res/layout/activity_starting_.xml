@@ -73,4 +73,14 @@
         android:layout_marginBottom="110dp"
         android:text="Account Settings" />
 
+    <Button
+        android:id="@+id/sea_invader_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/StartButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-6dp"
+        android:layout_marginBottom="413dp"
+        android:text="Sea Invaders" />
+
 </RelativeLayout>

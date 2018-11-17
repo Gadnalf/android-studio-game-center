@@ -67,6 +67,7 @@ public class StartingActivity extends AppCompatActivity {
         addChangeAccountListener();
         addGameScoreBoardButton();
         addUserScoreBoardButton();
+        addSeaInvaderButton();
     }
 
     private void setupStartingActivity() {
@@ -84,6 +85,8 @@ public class StartingActivity extends AppCompatActivity {
                         new SlidingTilesBoardManager(
                                 user,
                                 new SlidingTileSettings(4,4)),
+                        new SeaInvadersBoardManager(user,
+                                new SeaInvaderSettings(.5, .5)),
                         user),
                 this);
 
@@ -254,6 +257,24 @@ public class StartingActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                gameHub = new GameLaunchCentre().getBoardManager();
                 switchToGameScoreBoard();
+            }
+        });
+    }
+
+    private void switchToSeaInvaders() {
+        Intent tmp = new Intent(this, SeaInvaderActivity.class);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
+        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        startActivity(tmp);
+    }
+
+    private void addSeaInvaderButton() {
+        Button saveButton = findViewById(R.id.sea_invader_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToSeaInvaders();
             }
         });
     }
