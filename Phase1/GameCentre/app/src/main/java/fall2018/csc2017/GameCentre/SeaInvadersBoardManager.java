@@ -132,48 +132,12 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * based on the time inverval specified in SeaInvaderSettings
      */
     public void spawnTheInvaders() {
-//        while (this.currentRound < ((SeaInvaderSettings) this.gameSettings).getNumRounds()) {
-//            this.currentRound += 1;
         ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
         for (int pos : newSpawnPositions) {
             board.updateTile(pos, new InvaderTile());
         }
-//            try {
-//                TimeUnit.SECONDS.sleep(
-//                        (long)
-//                                ((SeaInvaderSettings) this.gameSettings)
-//                                        .getSecsBeforeSpawn());
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 
-//    public void makeInvadersSwim() {
-//        double scalingFactor = 100.0;
-//        long startMillis = System.currentTimeMillis(); // https://stackoverflow.com/questions/36323569/how-to-count-the-seconds-in-java
-//        while (!puzzleSolved() && !isGameOver() &&
-//                this.currentRound < ((SeaInvaderSettings) this.gameSettings).getNumRounds()) {
-//            long nowMillis = System.currentTimeMillis();
-//            double secsFromStart = (double)(((nowMillis - startMillis)*scalingFactor) / (1000 * scalingFactor));
-//            if (secsFromStart %
-//                    (((SeaInvaderSettings) this.gameSettings).getSecsBeforeMove() * scalingFactor)
-//                    == 0) {
-//                //TODO: separate spawn and move rounds (2)
-//                this.currentRound += 1;
-//                ArrayList<Integer> invaderPositions = getInvaderPositions();
-//                for (int pos : invaderPositions) {
-//                    int row1 = pos / this.gameSettings.getBoardSize();
-//                    int col1 = pos % this.gameSettings.getBoardSize();
-//                    if (row1+1 < this.gameSettings.getBoardSize()) {
-//                        board.swapTiles(row1, col1, row1 + 1, col1);
-//                    } else {
-//                        setGameOver(true);
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     public void swim() {
         if (!puzzleSolved() && !isGameOver() &&
@@ -191,58 +155,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                 }
             }
         }
-    }
-
-//    public void makeInvadersSwim() {
-//        //https://stackoverflow.com/questions/2258066/java-run-a-function-after-a-specific-number-of-seconds
-//        new Timer().schedule(
-//                new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        swim();
-//                        board.notifyObservers();
-//                    }
-//                },
-//            (int) ((SeaInvaderSettings) this.gameSettings).getSecsBeforeMove()
-//        );
-//    }
-
-
-//    public void makeInvadersSwim() {
-//        //https://stackoverflow.com/questions/4597690/android-timer-how-to
-//
-//        final Handler timerHandler = new Handler();
-//        Runnable timerRunnable = new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                swim();
-//                board.notifyObservers();
-////                timerHandler.postDelayed(this, 5000);
-//                timerHandler.postDelayed(this, 50);
-//            }
-//        };
-//    }
-
-
-    public void makeInvadersSwim() {
-        //https://stackoverflow.com/questions/4597690/android-timer-how-to
-//
-//        final Handler timerHandler = new Handler();
-//        Runnable timerRunnable = new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                swim();
-//                board.notifyObservers();
-////                timerHandler.postDelayed(this, 5000);
-//                timerHandler.postDelayed(this, 50);
-//            }
-//        };
-
-//        ScheduledExecutorService service = Executors
-//                .newSingleThreadScheduledExecutor();
-//        service.scheduleAtFixedRate(timerRunnable, 0, 1, TimeUnit.SECONDS);
     }
 
     /**
@@ -274,12 +186,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
             positions.add(i);
         }
         return positions;
-    }
-
-    @Override
-    public void startGame() {
-        makeInvadersSwim();
-        spawnTheInvaders();
     }
 
     /**
