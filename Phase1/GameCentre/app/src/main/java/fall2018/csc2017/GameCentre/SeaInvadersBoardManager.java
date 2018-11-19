@@ -127,21 +127,21 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * based on the time inverval specified in SeaInvaderSettings
      */
     public void spawnTheInvaders() {
-        while (this.currentRound < ((SeaInvaderSettings) this.gameSettings).getNumRounds()) {
-            this.currentRound += 1;
-            ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
-            for (int pos : newSpawnPositions) {
-                board.updateTile(pos, new InvaderTile());
-            }
-            try {
-                TimeUnit.SECONDS.sleep(
-                        (long)
-                                ((SeaInvaderSettings) this.gameSettings)
-                                        .getSecsBeforeSpawn());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//        while (this.currentRound < ((SeaInvaderSettings) this.gameSettings).getNumRounds()) {
+//            this.currentRound += 1;
+        ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
+        for (int pos : newSpawnPositions) {
+            board.updateTile(pos, new InvaderTile());
         }
+//            try {
+//                TimeUnit.SECONDS.sleep(
+//                        (long)
+//                                ((SeaInvaderSettings) this.gameSettings)
+//                                        .getSecsBeforeSpawn());
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     public void makeInvadersSwim() {
@@ -208,7 +208,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     @Override
     public void startGame() {
         makeInvadersSwim();
-//        spawnTheInvaders();
+        spawnTheInvaders();
     }
 
     /**
