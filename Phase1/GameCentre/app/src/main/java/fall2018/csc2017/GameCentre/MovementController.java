@@ -13,7 +13,6 @@ public class MovementController {
 
     public void setAbstractBoardManager(AbstractBoardManager abstractBoardManager) {
         this.abstractBoardManager = abstractBoardManager;
-        this.abstractBoardManager.startGame();
     }
 
     public void processTapMovement(Context context, int position, boolean display) {

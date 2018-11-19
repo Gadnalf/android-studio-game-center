@@ -117,6 +117,16 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
+    void swapTiles(int row1, int col1, int row2, int col2, boolean notifyObservers) {
+        Tile temp = tiles[row1][col1];
+        tiles[row1][col1] = tiles[row2][col2];
+        tiles[row2][col2] = temp;
+        setChanged();
+        if (notifyObservers){
+            notifyObservers();
+        }
+    }
+
     /**
      * update tile at pos with newTile
      * @param pos

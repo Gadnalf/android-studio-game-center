@@ -1,5 +1,6 @@
 package fall2018.csc2017.GameCentre;
 
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 
@@ -7,6 +8,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 
@@ -144,34 +149,100 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 //        }
     }
 
-    public void makeInvadersSwim() {
-//        while (this.currentRound < ((SeaInvaderSettings) this.gameSettings).getNumRounds()) {
-        //TODO: separate spawn and move rounds (2)
-        this.currentRound += 1;
-        ArrayList<Integer> invaderPositions = getInvaderPositions();
-        for (int pos : invaderPositions) {
-            int row1 = pos / this.gameSettings.getBoardSize();
-            int col1 = pos % this.gameSettings.getBoardSize();
-            if (row1+1 < this.gameSettings.getBoardSize()) {
-                board.swapTiles(row1, col1, row1 + 1, col1);
-            } else {
-                setGameOver(true);
+//    public void makeInvadersSwim() {
+//        double scalingFactor = 100.0;
+//        long startMillis = System.currentTimeMillis(); // https://stackoverflow.com/questions/36323569/how-to-count-the-seconds-in-java
+//        while (!puzzleSolved() && !isGameOver() &&
+//                this.currentRound < ((SeaInvaderSettings) this.gameSettings).getNumRounds()) {
+//            long nowMillis = System.currentTimeMillis();
+//            double secsFromStart = (double)(((nowMillis - startMillis)*scalingFactor) / (1000 * scalingFactor));
+//            if (secsFromStart %
+//                    (((SeaInvaderSettings) this.gameSettings).getSecsBeforeMove() * scalingFactor)
+//                    == 0) {
+//                //TODO: separate spawn and move rounds (2)
+//                this.currentRound += 1;
+//                ArrayList<Integer> invaderPositions = getInvaderPositions();
+//                for (int pos : invaderPositions) {
+//                    int row1 = pos / this.gameSettings.getBoardSize();
+//                    int col1 = pos % this.gameSettings.getBoardSize();
+//                    if (row1+1 < this.gameSettings.getBoardSize()) {
+//                        board.swapTiles(row1, col1, row1 + 1, col1);
+//                    } else {
+//                        setGameOver(true);
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+    public void swim() {
+        if (!puzzleSolved() && !isGameOver() &&
+                this.currentRound < ((SeaInvaderSettings) this.gameSettings).getNumRounds()) {
+            //TODO: separate spawn and move rounds (2)
+            this.currentRound += 1;
+            ArrayList<Integer> invaderPositions = getInvaderPositions();
+            for (int pos : invaderPositions) {
+                int row1 = pos / this.gameSettings.getBoardSize();
+                int col1 = pos % this.gameSettings.getBoardSize();
+                if (row1 + 1 < this.gameSettings.getBoardSize()) {
+                    board.swapTiles(row1, col1, row1 + 1, col1, false);
+                } else {
+                    setGameOver(true);
+                }
             }
         }
-//            try {
-////                TimeUnit.SECONDS.sleep(
-////                        (long)
-////                                ((SeaInvaderSettings) this.gameSettings)
-////                                        .getSecsBeforeMove());
-//                Thread.sleep(
-//                        (long)
-//                                ((SeaInvaderSettings) this.gameSettings)
-//                                        .getSecsBeforeMove() * 1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+    }
+
+//    public void makeInvadersSwim() {
+//        //https://stackoverflow.com/questions/2258066/java-run-a-function-after-a-specific-number-of-seconds
+//        new Timer().schedule(
+//                new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        swim();
+//                        board.notifyObservers();
+//                    }
+//                },
+//            (int) ((SeaInvaderSettings) this.gameSettings).getSecsBeforeMove()
+//        );
+//    }
+
+
+//    public void makeInvadersSwim() {
+//        //https://stackoverflow.com/questions/4597690/android-timer-how-to
 //
-//        }
+//        final Handler timerHandler = new Handler();
+//        Runnable timerRunnable = new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                swim();
+//                board.notifyObservers();
+////                timerHandler.postDelayed(this, 5000);
+//                timerHandler.postDelayed(this, 50);
+//            }
+//        };
+//    }
+
+
+    public void makeInvadersSwim() {
+        //https://stackoverflow.com/questions/4597690/android-timer-how-to
+//
+//        final Handler timerHandler = new Handler();
+//        Runnable timerRunnable = new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                swim();
+//                board.notifyObservers();
+////                timerHandler.postDelayed(this, 5000);
+//                timerHandler.postDelayed(this, 50);
+//            }
+//        };
+
+//        ScheduledExecutorService service = Executors
+//                .newSingleThreadScheduledExecutor();
+//        service.scheduleAtFixedRate(timerRunnable, 0, 1, TimeUnit.SECONDS);
     }
 
     /**

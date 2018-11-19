@@ -135,6 +135,10 @@ abstract public class AbstractBoardManager implements Serializable {
         this.appCompatActivity = appCompatActivity;
     }
 
+    public AppCompatActivity getAppCompatActivity() {
+        return appCompatActivity;
+    }
+
     public double getTimePlayed() {
         long endTime = System.nanoTime();
         return (double) (endTime - this.startTime) / 1000000000.0;
