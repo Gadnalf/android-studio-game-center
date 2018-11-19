@@ -117,6 +117,19 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
+    /**
+     * update tile at pos with newTile
+     * @param pos
+     * @param newTile
+     */
+    void updateTile(int pos, Tile newTile) {
+        int row1 = pos / getBoardSize();
+        int col1 = pos % getBoardSize();
+        tiles[row1][col1] = newTile;
+        setChanged();
+        notifyObservers();
+    }
+
     @Override
     public String toString() {
         return "Board{" +

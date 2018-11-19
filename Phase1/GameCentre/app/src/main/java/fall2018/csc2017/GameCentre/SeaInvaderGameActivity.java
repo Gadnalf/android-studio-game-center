@@ -43,7 +43,6 @@ public class SeaInvaderGameActivity extends AbstractGameActivity implements Seri
                         display();
                     }
                 });
-
     }
 
     @Override

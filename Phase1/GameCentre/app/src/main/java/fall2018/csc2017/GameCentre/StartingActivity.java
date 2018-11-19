@@ -86,7 +86,7 @@ public class StartingActivity extends AppCompatActivity {
                                 user,
                                 new SlidingTileSettings(4,4)),
                         new SeaInvadersBoardManager(user,
-                                new SeaInvaderSettings(.5, .5)),
+                                new SeaInvaderSettings(10, 10)),
                         user),
                 this);
 

@@ -63,6 +63,11 @@ abstract public class AbstractBoardManager implements Serializable {
         this.board.setTiles(tiles);
     }
 
+    public void startGame() {
+        //implement if you want it
+        //will be called in movement controller
+    }
+
     /**
      * implement
      *
