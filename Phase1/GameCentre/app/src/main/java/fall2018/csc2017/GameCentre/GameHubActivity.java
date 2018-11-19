@@ -18,12 +18,7 @@ import java.io.ObjectOutputStream;
 /**
  * The game hub activity.
  */
-public class LoginActivity extends AppCompatActivity {
-
-    /**
-     * A user score board save file.
-     */
-    public static final String USER_SCORE_BOARD_FILEPREFIX =  "_user_score_board_";
+public class GameHubActivity extends AppCompatActivity {
 
     /**
      * An account manager save file.
@@ -40,20 +35,47 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_hub);
 
-        addSeaInvaderButtonListener();
+        addSeaInvadersButtonListener();
         add2048ButtonListener();
-        addSlidingTileButtonListener();
+        addSlidingTilesButtonListener();
         addChangeAccountButtonListener();
-        addUserScoreBoardButton();
     }
 
-
-    private void addSeaInvaderButton() {
-        Button saveButton = findViewById(R.id.sea_invader_button);
-        saveButton.setOnClickListener(new View.OnClickListener() {
+    /**
+     * Activates the Sea Invader button.
+     */
+    private void addSeaInvadersButtonListener() {
+        Button seaInvadersButton = findViewById(R.id.sea_invader_button);
+        seaInvadersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToSeaInvaders();
+            }
+        });
+    }
+
+    /**
+     * Activates the 2048 button.
+     */
+    private void add2048ButtonListener(){
+        Button tfeButton = findViewById(R.id.tfe_button);
+        tfeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                switchTo2048();
+            }
+        });
+    }
+
+    /**
+     * Activates the Sliding Tiles button.
+     */
+    private void addSlidingTilesButtonListener(){
+        Button tfeButton = findViewById(R.id.tfe_button);
+        tfeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                switchToSlidingTiles();
             }
         });
     }
@@ -71,14 +93,29 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void addUserScoreBoardButton() {
-        Button saveButton = findViewById(R.id.UserScoreBoardButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToUserScoreBoard();
-            }
-        });
+    /**
+     * Switch to the SeaInvadersStartingActivity view to start a Sea Invaders game.
+     */
+    private void switchToSeaInvaders() {
+        Intent tmp = new Intent(this, SlidingTileStartingActivity.class);
+        startActivity(tmp);
+    }
+
+    /**
+     * Switch to the 2048StartingActivity view to start a 2048 game.
+     */
+    private void switchTo2048() {
+        Intent tmp = new Intent(this, SlidingTileStartingActivity.class);
+        //TODO: update to go where it's supposed to
+        startActivity(tmp);
+    }
+
+    /**
+     * Switch to SlidingTileActivity view to start a 2048 game.
+     */
+    private void switchToSlidingTiles() {
+        Intent tmp = new Intent(this, SlidingTileStartingActivity.class);
+        startActivity(tmp);
     }
 
     /**
@@ -87,18 +124,6 @@ public class LoginActivity extends AppCompatActivity {
     private void switchToAccounts() {
         Intent tmp = new Intent(this, LoginActivity.class);
         saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
-        startActivity(tmp);
-    }
-
-    /**
-     * Switch to the UserScoreBoard view
-     */
-    private void switchToUserScoreBoard() {
-        Intent tmp = new Intent(this, UserScoreBoardActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
-//        saveToFile(TEMP_SAVE_FILENAME);
-//        TODO: user proper file paths
         startActivity(tmp);
     }
 

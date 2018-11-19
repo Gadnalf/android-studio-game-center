@@ -99,56 +99,56 @@ public class SaveAndLoad extends AppCompatActivity {
      * @param appCompatActivity
      * @return
      */
-    public static GameHub loadGameHubPermanent(
+    public static GameSaves loadGameHubPermanent(
             String userName,
             AppCompatActivity appCompatActivity) {
 
-        GameHub gameHub;
+        GameSaves gameSaves;
 
         //if permanent file not there load the temp
         try{
             String fileName = userName + "_" + SlidingTileStartingActivity.SAVE_FILENAME;
-            gameHub = (GameHub) loadFromFile(
+            gameSaves = (GameSaves) loadFromFile(
                     fileName, appCompatActivity);
         } catch (RuntimeException e) {
-            gameHub = loadGameHubTemp(appCompatActivity);
+            gameSaves = loadGameHubTemp(appCompatActivity);
         }
-        return gameHub;
+        return gameSaves;
     }
 
     /**
      * @param appCompatActivity
      * @return
      */
-    public static GameHub loadGameHubTemp(
+    public static GameSaves loadGameHubTemp(
             AppCompatActivity appCompatActivity) {
         String fileName = SlidingTileStartingActivity.TEMP_SAVE_FILENAME;
-        GameHub gameHub = (GameHub) loadFromFile(
+        GameSaves gameSaves = (GameSaves) loadFromFile(
                 fileName, appCompatActivity);
-        return gameHub;
+        return gameSaves;
     }
 
 
 
     /**
-     * @param gameHub
+     * @param gameSaves
      * @param appCompatActivity
      */
-    public static void saveGameHubTemp(GameHub gameHub,
+    public static void saveGameHubTemp(GameSaves gameSaves,
                                        AppCompatActivity appCompatActivity) {
         String fileName = SlidingTileStartingActivity.TEMP_SAVE_FILENAME;
-        saveToFile(gameHub, fileName, appCompatActivity);
+        saveToFile(gameSaves, fileName, appCompatActivity);
     }
 
     /**
      * For temporary saves, save without user_id, for permanant ones use user id
-     * @param gameHub
+     * @param gameSaves
      * @param appCompatActivity
      */
-    public static void saveGameHubPermanent(GameHub gameHub,
+    public static void saveGameHubPermanent(GameSaves gameSaves,
                                             AppCompatActivity appCompatActivity) {
-        String fileName = gameHub.getUser().getUserName() + "_" + SlidingTileStartingActivity.SAVE_FILENAME;
-        saveToFile(gameHub,
+        String fileName = gameSaves.getUser().getUserName() + "_" + SlidingTileStartingActivity.SAVE_FILENAME;
+        saveToFile(gameSaves,
                 fileName,
                 appCompatActivity);
     }
@@ -259,9 +259,9 @@ public class SaveAndLoad extends AppCompatActivity {
 
     //----------------------------groupings of saves / loads
 
-    public static void saveAllTemp(GameHub gameHub, AppCompatActivity appCompatActivity) {
+    public static void saveAllTemp(GameSaves gameSaves, AppCompatActivity appCompatActivity) {
         saveTempScoreboard(appCompatActivity);
-        saveGameHubTemp(gameHub, appCompatActivity);
+        saveGameHubTemp(gameSaves, appCompatActivity);
     }
 
 }

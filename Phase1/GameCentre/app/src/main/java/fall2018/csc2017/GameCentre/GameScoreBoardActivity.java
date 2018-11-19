@@ -11,11 +11,11 @@ public class GameScoreBoardActivity extends ScoreBoardAbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
          TestingHelpers.testSavingAndLoading(this);
-        GameHub tmpGameHub = SaveAndLoad.loadGameHubTemp(
+        GameSaves tmpGameSaves = SaveAndLoad.loadGameHubTemp(
                 this);
         setContentView(R.layout.activity_game_score_board);
         super.addRowsToScoreBoard(R.id.activity_game_score_board,
-                tmpGameHub.getUser().getUserName(),
+                tmpGameSaves.getUser().getUserName(),
                 this);
     }
 

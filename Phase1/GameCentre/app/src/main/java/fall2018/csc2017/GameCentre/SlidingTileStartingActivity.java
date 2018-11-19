@@ -3,16 +3,9 @@ package fall2018.csc2017.GameCentre;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -31,7 +24,12 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private GameHub gameHub;
+    private SlidingTilesBoardManager boardManager;
+
+    /**
+     * A user score board save file.
+     */
+    public static final String USER_SCORE_BOARD_FILEPREFIX =  "_user_score_board_";
 
     /**
      * A game score board save file.
@@ -89,17 +87,26 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveAndLoad.saveGameHubPermanent(
-                        gameHub,
-                        appCompatActivity);
-//                saveToFile(SAVE_FILENAME);
-                SaveAndLoad.saveGameHubTemp(
-                        gameHub, appCompatActivity);
-//                saveToFile(TEMP_SAVE_FILENAME);
+                saveToFile(SAVE_FILENAME);
+                saveToFile(TEMP_SAVE_FILENAME);
                 makeToastSavedText();
             }
             });
     }
+
+    /**
+     * Activate the game-specific scoreboard button.
+     */
+    private void addGameScoreBoardButton() {
+        Button saveButton = findViewById(R.id.GameScoreBoardButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToGameScoreBoard();
+            }
+        });
+    }
+}
 
     /**
      * Display that a game was saved successfully.
@@ -121,9 +128,7 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, SlidingTilesGameActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
-//        saveToFile(TEMP_SAVE_FILENAME);
+        saveToFile(TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }
 
@@ -132,36 +137,26 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
      */
     private void switchToSetting() {
         Intent tmp = new Intent(this, SlidingTileSettingsActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
+        saveToFile(TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }
 
+
+    /**
+     * Switch to the UserScoreBoard view
+     */
+    private void switchToUserScoreBoard() {
+        Intent tmp = new Intent(this, UserScoreBoardActivity.class);
+        saveToFile(TEMP_SAVE_FILENAME);
+        startActivity(tmp);
+    }
+
+    /**
+     * Switch to the GameScoreBoard view
+     */
     private void switchToGameScoreBoard() {
         Intent tmp = new Intent(this, GameScoreBoardActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        saveToFile(TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }
-
-    private void addGameScoreBoardButton() {
-        Button saveButton = findViewById(R.id.GameScoreBoardButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                gameHub = new GameLaunchCentre().getBoardManager();
-                switchToGameScoreBoard();
-            }
-        });
-    }
-
-    private void switchToSeaInvaders() {
-        Intent tmp = new Intent(this, SeaInvaderGameActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
-        startActivity(tmp);
-    }
-
 }

@@ -1,6 +1,5 @@
 package fall2018.csc2017.GameCentre;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 
@@ -48,9 +47,9 @@ public class SeaInvaderGameActivity extends AbstractGameActivity implements Seri
 
     @Override
     protected void autoSave() {
-        GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
-        gameHub.setSeaInvadersBoardManager(seaInvadersBoardManager);
-        SaveAndLoad.saveGameHubPermanent(gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        GameSaves gameSaves = SaveAndLoad.loadGameHubTemp(this);
+        gameSaves.setSeaInvadersBoardManager(seaInvadersBoardManager);
+        SaveAndLoad.saveGameHubPermanent(gameSaves, this);
+        SaveAndLoad.saveGameHubTemp(gameSaves, this);
     }
 }

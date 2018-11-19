@@ -91,7 +91,7 @@ abstract public class AbstractGameActivity extends AppCompatActivity implements 
      * Auto-save the game
      */
     abstract protected void autoSave();
-//        GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
+//        GameSaves gameHub = SaveAndLoad.loadGameHubTemp(this);
 //        gameHub.setAbstractBoardManager();
 //        SaveAndLoad.saveGameHubPermanent(abstractBoardManager, this);
 //        SaveAndLoad.saveGameHubTemp(abstractBoardManager, this);

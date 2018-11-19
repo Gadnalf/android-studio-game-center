@@ -53,9 +53,9 @@ public class SlidingTilesGameActivity extends AbstractGameActivity implements Se
 
     @Override
     protected void autoSave() {
-        GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
-        gameHub.setSlidingTilesBoardManager(slidingTilesBoardManager);
-        SaveAndLoad.saveGameHubPermanent(gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        GameSaves gameSaves = SaveAndLoad.loadGameHubTemp(this);
+        gameSaves.setSlidingTilesBoardManager(slidingTilesBoardManager);
+        SaveAndLoad.saveGameHubPermanent(gameSaves, this);
+        SaveAndLoad.saveGameHubTemp(gameSaves, this);
     }
 }
