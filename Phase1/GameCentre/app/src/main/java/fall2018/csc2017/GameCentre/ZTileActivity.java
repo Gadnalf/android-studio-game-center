@@ -2,21 +2,9 @@ package fall2018.csc2017.GameCentre;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import java.io.Serializable;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 
-public class Game2048Activity extends AbstractGameActivity implements Serializable{
+public class Z_TileActivity extends AbstractGameActivity implements Serializable{
     SlidingTilesBoardManager slidingTilesBoardManager;
 
     @Override
@@ -28,7 +16,7 @@ public class Game2048Activity extends AbstractGameActivity implements Serializab
 
 
         createTileButtons(this);
-        setContentView(R.layout.activity_2048);
+        setContentView(R.layout.activity_z_tile);
 
         // Add View to activity
 
@@ -36,10 +24,10 @@ public class Game2048Activity extends AbstractGameActivity implements Serializab
         gridView = findViewById(R.id.something);
         gridView.setAbstractBoardManager(slidingTilesBoardManager);
         slidingTilesBoardManager.getBoard().addObserver(this);
-        gridView.setNumColumns(4);
+        gridView.setNumColumns(5);
 
-        final int COL_FINAL = 4;
-        final int ROW_FINAL = 4;
+        final int COL_FINAL = 5;
+        final int ROW_FINAL = 5;
 
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
