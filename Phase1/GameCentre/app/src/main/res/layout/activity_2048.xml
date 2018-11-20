@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Z tile"
+            android:textStyle="bold"
             android:textColor="#776e65"
             android:textSize="45dp" />
 
@@ -48,6 +49,7 @@
             android:layout_height="match_parent"
             android:fontFamily="casual"
             android:text="Overlap the tiles to obtain Z tile!!"
+            android:textSize="18sp"
             android:textColor="#776e65" />
 
     </LinearLayout>
@@ -60,16 +62,15 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <fall2018.csc2017.GameCentre.GestureDetectGridView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:background="#bbada0"
         android:orientation="vertical"
-        android:layout_marginBottom="25dp">
-
-
-
-    </LinearLayout>
+        android:layout_marginBottom="25dp"
+        android:id="@+id/something"/>
 
 </LinearLayout>
