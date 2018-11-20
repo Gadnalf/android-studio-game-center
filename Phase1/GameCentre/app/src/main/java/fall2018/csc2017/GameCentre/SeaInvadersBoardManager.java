@@ -1,24 +1,17 @@
 package fall2018.csc2017.GameCentre;
 
-import android.os.Handler;
-import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 
 public class SeaInvadersBoardManager extends AbstractBoardManager implements Serializable {
 
 
-    int lastOccupiedColumn = -1; //TODO: make sure he starts here
+    int lastOccupiedColumn; //TODO: make sure he starts here
     int currentRound = 0;
     ArrayList<Integer> invaderPositions = new ArrayList<Integer>();
     boolean gameOver = false;
@@ -101,6 +94,25 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     }
 
     /**
+     * we loop over the enemy positions until we find one in this row
+     * then we return this
+     * we know this is the closest bc we sort in descending order
+     * when we get invader positions
+     * @param position
+     * @return
+     */
+    public int getClosestEnemyPosInThisCol(int position) {
+        int shooterCol = position % this.getGameSettings().getBoardSize();
+        for (int pos : (ArrayList<Integer>) getInvaderPositions()) {
+            int enemyCol = pos % this.getGameSettings().getBoardSize();
+            if (shooterCol == enemyCol) {
+                return pos;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * return true if there's an enemy to shoot at
      *
      * @param position
@@ -108,8 +120,15 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     @Override
     boolean isValidShoot(int position) {
-        //TODO implement (1)
-        return super.isValidShoot(position);
+        int row = position / this.getGameSettings().getBoardSize();
+        int col = position % this.getGameSettings().getBoardSize();
+        if (row+1 == this.getGameSettings().getBoardSize() &&
+                col == this.lastOccupiedColumn &&
+                getClosestEnemyPosInThisCol(position) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -121,8 +140,8 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     @Override
     public void fireAndUpdate(int position) {
-        //TODO implement (1)
-        super.fireAndUpdate(position);
+        int closestEnemy = getClosestEnemyPosInThisCol(position);
+        board.updateTile(closestEnemy, new EmptyTile());
     }
 
 
