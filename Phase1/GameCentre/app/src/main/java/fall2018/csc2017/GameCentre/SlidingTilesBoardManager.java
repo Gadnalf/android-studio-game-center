@@ -28,8 +28,15 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     }
 
 
+    /**
+     * manage a new board
+     * @param user
+     * @param slidingTileSettings
+     */
     SlidingTilesBoardManager(User user, SlidingTileSettings slidingTileSettings) {
         super(user, slidingTileSettings, new SlidingTilesTileFactory());
+        board.shuffleTiles();
+
     }
 
     /**
@@ -161,7 +168,11 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
 
     }
 
-
+    @Override
+    public void setBoardSize(int boardSize) {
+        super.setBoardSize(boardSize);
+        board.shuffleTiles();
+    }
 
     /**
      * notice higher a/b => lower score

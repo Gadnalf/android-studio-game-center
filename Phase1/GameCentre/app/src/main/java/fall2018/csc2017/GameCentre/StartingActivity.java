@@ -80,14 +80,14 @@ public class StartingActivity extends AppCompatActivity {
 
         //make a temp file just in case there is none yet
         User user = new User(accountManager.getName());
-        SaveAndLoad.saveAllTemp(
-                new GameHub(
-                        new SlidingTilesBoardManager(
-                                user,
-                                new SlidingTileSettings(4,4)),
-                        new SeaInvadersBoardManager(user,
-                                new SeaInvaderSettings(10, 10)),
-                        user),
+        GameHub tmpGameHub = new GameHub(
+                new SlidingTilesBoardManager(
+                        user,
+                        new SlidingTileSettings(4,4)),
+                new SeaInvadersBoardManager(user,
+                        new SeaInvaderSettings(10, 10)),
+                user);
+        SaveAndLoad.saveAllTemp(tmpGameHub,
                 this);
 
         //load the board manager if it exists if not load the temp file
