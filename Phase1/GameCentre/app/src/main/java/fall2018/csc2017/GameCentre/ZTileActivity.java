@@ -4,14 +4,14 @@ import android.view.ViewTreeObserver;
 import java.io.Serializable;
 
 
-public class Z_TileActivity extends AbstractGameActivity implements Serializable{
-    SlidingTilesBoardManager slidingTilesBoardManager;
+public class ZTileActivity extends AbstractGameActivity implements Serializable{
+    ZTileBoardManager zTileBoardManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        slidingTilesBoardManager = SaveAndLoad.loadGameHubTemp(this).getSlidingTilesBoardManager();
-        setAbstractBoardManager(slidingTilesBoardManager);
+        zTileBoardManager = SaveAndLoad.loadGameHubTemp(this).getZTileBoardManager();
+        setAbstractBoardManager(zTileBoardManager);
         super.onCreate(savedInstanceState);
 
 
@@ -22,12 +22,12 @@ public class Z_TileActivity extends AbstractGameActivity implements Serializable
 
 
         gridView = findViewById(R.id.something);
-        gridView.setAbstractBoardManager(slidingTilesBoardManager);
-        slidingTilesBoardManager.getBoard().addObserver(this);
-        gridView.setNumColumns(5);
+        gridView.setAbstractBoardManager(zTileBoardManager);
+        zTileBoardManager.getBoard().addObserver(this);
+        gridView.setNumColumns(4);
 
-        final int COL_FINAL = 5;
-        final int ROW_FINAL = 5;
+        final int COL_FINAL = 4;
+        final int ROW_FINAL = 4;
 
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {

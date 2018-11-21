@@ -68,6 +68,7 @@ public class StartingActivity extends AppCompatActivity {
         addGameScoreBoardButton();
         addUserScoreBoardButton();
         addSeaInvaderButton();
+        addZTileButton();
     }
 
     private void setupStartingActivity() {
@@ -87,6 +88,8 @@ public class StartingActivity extends AppCompatActivity {
                                 new SlidingTileSettings(4,4)),
                         new SeaInvadersBoardManager(user,
                                 new SeaInvaderSettings(.5, .5)),
+                        new ZTileBoardManager( user,
+                                new ZTileSettings(4 ,4)),
                         user),
                 this);
 
@@ -277,6 +280,24 @@ public class StartingActivity extends AppCompatActivity {
                 switchToSeaInvaders();
             }
         });
+    }
+
+    private void switchToZTile() {
+        Intent tmp = new Intent(this, ZTileActivity.class);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
+        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        startActivity(tmp);
+    }
+
+    private void addZTileButton() {
+        Button saveButton = findViewById(R.id.z_tile_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToZTile();
+            }
+        }) ;
     }
 
 
