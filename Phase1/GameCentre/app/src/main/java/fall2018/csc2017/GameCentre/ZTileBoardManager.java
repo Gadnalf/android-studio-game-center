@@ -77,18 +77,28 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         return false;
     }
 
+    /**
+     * Process a swipe by the direction, pushing all tiles to one side and merge as appropriate
+     *
+     * @param direction the direction (0 is up, 1 is down, 2 is left, 3 is right)
+     */
     @Override
     void swipeTo(int direction) {
+        if (direction == 3) {
+            swipeRight();
+        }
     }
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
      *
      * @param position the position
      */
+
     @Override
     void touchMove(int position) {
+    }
 
-
+    private void swipeRight() {
         for (int i = board.numTiles() - 1; i >= 0; i-- ){
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
