@@ -80,6 +80,14 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 || (right != null && right.getId() == blankId);
     }
 
+    @Override
+    boolean isValidSwipe(int direction) {
+        return false;
+    }
+
+    @Override
+    void swipeTo(int direction) {
+    }
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
      *

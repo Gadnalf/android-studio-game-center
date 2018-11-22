@@ -70,6 +70,17 @@ abstract public class AbstractBoardManager implements Serializable {
      */
     abstract boolean puzzleSolved();
 
+    /**
+     * Check if the swiping motion is valid
+     */
+    abstract boolean isValidSwipe(int direction);
+
+    /**
+     * Procecss a swipe by direction, swiping tiles to the direction as appropriate
+     *
+     * @param direction the direction (0 is up, 1 is down, 2 is left, 3 is right)
+     */
+    abstract void swipeTo(int direction);
 
     abstract boolean isValidTap(int position);
 

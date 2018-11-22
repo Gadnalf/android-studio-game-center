@@ -73,6 +73,11 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     }
 
+    @Override
+    boolean isValidSwipe(int direction) {
+        return false;
+    }
+
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
      *
@@ -93,6 +98,11 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
             this.lastOccupiedColumn = col;
         }
     }
+
+    @Override
+    void swipeTo(int direction) {
+    }
+
 
     /**
      * return true if there's an enemy to shoot at
