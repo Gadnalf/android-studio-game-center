@@ -1,5 +1,6 @@
 package fall2018.csc2017.GameCentre;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
@@ -9,6 +10,22 @@ import java.io.Serializable;
 public class SeaInvaderGameActivity extends AbstractGameActivity implements Serializable {
 
     SeaInvadersBoardManager seaInvadersBoardManager;
+
+    //https://stackoverflow.com/questions/4597690/android-timer-how-to
+
+    final Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            seaInvadersBoardManager.swim();
+            seaInvadersBoardManager.spawnTheInvaders();
+            seaInvadersBoardManager.board.notifyObservers();
+//                timerHandler.postDelayed(this, 5000);
+            timerHandler.postDelayed(this,
+                    1000 * (int) ((SeaInvaderSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +41,8 @@ public class SeaInvaderGameActivity extends AbstractGameActivity implements Seri
         gridView.setNumColumns(seaInvadersBoardManager.getGameSettings().getBoardSize());
         gridView.setAbstractBoardManager(seaInvadersBoardManager);
         seaInvadersBoardManager.getBoard().addObserver(this);
+//        seaInvadersBoardManager.startGame();
+        timerHandler.postDelayed(timerRunnable, 0);
         // Observer sets up desired dimensions as well as calls our display function
         final int COL_FINAL = seaInvadersBoardManager.getGameSettings().getBoardSize();
         final int ROW_FINAL = seaInvadersBoardManager.getGameSettings().getBoardSize();
@@ -43,7 +62,6 @@ public class SeaInvaderGameActivity extends AbstractGameActivity implements Seri
                         display();
                     }
                 });
-
     }
 
     @Override

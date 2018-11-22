@@ -1,6 +1,8 @@
 package fall2018.csc2017.GameCentre;
 
 import android.support.v7.app.AppCompatActivity;
+import java.util.Random;
+
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -24,8 +26,10 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     ZTileBoardManager(Board board, User user, ZTileSettings zTileSettings,
                              AppCompatActivity appCompatActivity) {
+
         super(board, user, zTileSettings,
                 appCompatActivity);
+
     }
 
 
@@ -65,19 +69,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     boolean isValidTap(int position) {
-
-        int row = position / getGameSettings().getBoardSize();
-        int col = position % getGameSettings().getBoardSize();
-        int blankId = board.numTiles();
-        // Are any of the 4 the blank tile?
-        Tile above = row == 0 ? null : board.getTile(row - 1, col);
-        Tile below = row == getGameSettings().getBoardSize() - 1 ? null : board.getTile(row + 1, col);
-        Tile left = col == 0 ? null : board.getTile(row, col - 1);
-        Tile right = col == getGameSettings().getBoardSize()- 1 ? null : board.getTile(row, col + 1);
-        return (below != null && below.getId() == blankId)
-                || (above != null && above.getId() == blankId)
-                || (left != null && left.getId() == blankId)
-                || (right != null && right.getId() == blankId);
+        return true;
     }
 
     @Override
@@ -96,40 +88,54 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     @Override
     void touchMove(int position) {
 
-        int row = position / this.getGameSettings().getBoardSize();
-        int col = position % this.getGameSettings().getBoardSize();
-        int blankId = board.numTiles();
-        if(isValidTap(position)){
-            Tile above = row == 0 ? null : board.getTile(row - 1, col);
-            Tile below = row == this.getGameSettings().getBoardSize() - 1 ? null : board.getTile(row + 1, col);
-            Tile left = col == 0 ? null : board.getTile(row, col - 1);
-            Tile right = col == this.getGameSettings().getBoardSize() - 1 ? null : board.getTile(row, col + 1);
-            if(below != null && below.getId() == blankId){
-                board.swapTiles(row,col,row+1,col);
-                int[] move = {row, col, row + 1, col};
-                moves.push(move);
-                moveCount += 1;
+
+        for (int i = board.numTiles() - 1; i >= 0; i-- ){
+            int row = i / board.getBoardSize();
+            int col = i % board.getBoardSize();
+            if (board.getTile(row,col).getId() == 2 || board.getTile(row,col).getId() == 4) {
+
+                for (int j = col + 1; j < board.getBoardSize(); j ++) {
+                    if ((j == 4)){
+                        break;
+                    } else if ((board.getTile(row, j).getId() == 2) && (board.getTile(row, col).getId() == 2)) {
+                        int p = row * board.getBoardSize() + j;
+                        board.updateTile(i, new TileAlpha(0));
+                        board.updateTile(p, new TileAlpha(3));
+                        System.out.println(j);
+                    } else if ((((board.getTile(row, j).getId()) == 4 && (board.getTile(row, col)).getId() == 2)) ||
+                            ((board.getTile(row, j).getId() == 2) && board.getTile(row, col).getId() == 4)) {
+                        int new_position = (row * board.getBoardSize() + j) - 1;
+                        if (new_position == i) {
+                            break;
+                        }
+                        board.updateTile(new_position, board.getTile(row, col));
+                        board.updateTile(i, new TileAlpha(0));
+                    }
+
+                }
+                if ((board.getTile(row, 3).getId() != 2) && (board.getTile(row, 3).getId() != 4)) {
+                    board.swapTiles(row, col, row, 3);
+                    System.out.println("Testing checking 2 and 4");
+                }
+
 
             }
-            if(above != null && above.getId() == blankId){
-                board.swapTiles(row,col,row-1,col);
-                int[] move = {row, col, row - 1, col};
-                moves.push(move);
-                moveCount += 1;
-            }
-            if(left != null && left.getId() == blankId){
-                board.swapTiles(row,col,row,col-1);
-                int[] move = {row, col, row, col - 1};
-                moves.push(move);
-                moveCount += 1;
-            }
-            if(right != null && right.getId() == blankId){
-                board.swapTiles(row,col,row,col+1);
-                int[] move = {row, col, row, col + 1};
-                moves.push(move);
-                moveCount += 1;
-            }
         }
+
+        Random rand = new Random();
+        int n = rand.nextInt(board.numTiles());
+        int row = n / this.getGameSettings().getBoardSize();
+        int col = n % this.getGameSettings().getBoardSize();
+        while (board.getTile(row,col).getId() == 2 || board.getTile(row, col).getId() == 4) {
+            n = rand.nextInt(board.numTiles());
+            row = n / this.getGameSettings().getBoardSize();
+            col = n % this.getGameSettings().getBoardSize();
+        }
+        System.out.print("This is the random number: ");
+        System.out.println(n);
+        board.updateTile(n, new TileAlpha(1));
+
+
     }
 
     /**
@@ -155,7 +161,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     @Override
     void tapUndo(int position) {
         if(isValidUndo(position)){
-            int numUndoes = ((SlidingTileSettings) gameSettings).getNumUndoes();
+            int numUndoes = ((ZTileSettings) gameSettings).getNumUndoes();
             int[] lastMove = moves.pop();
             int row1 = lastMove[0];
             int col1 = lastMove[1];
@@ -186,14 +192,14 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     public double getScore() {
         double a = (double) getMoveCount();
         double timeWeight = (getTimePlayed()/1000);
-        double numUndosWeight = getSlidingTileSettings().getNumUndoes();
+        double numUndosWeight = getZTileSettings().getNumUndoes();
         double b = (double) (timeWeight + numUndosWeight);
         return 10-(a/b); //want to maximize this
     }
 
 
-    public SlidingTileSettings getSlidingTileSettings() {
-        return (SlidingTileSettings) getGameSettings();
+    public ZTileSettings getZTileSettings() {
+        return (ZTileSettings) getGameSettings();
     }
 
 }

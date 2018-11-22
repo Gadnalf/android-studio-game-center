@@ -36,7 +36,7 @@ public class MovementController {
             } else {
                 Toast.makeText(context, "No more Undoes left", Toast.LENGTH_SHORT).show();
             }
-        } else if (abstractBoardManager.isValidShoot(position)) {
+        } if (abstractBoardManager.isValidShoot(position)) {
             abstractBoardManager.fireAndUpdate(position);
         } else {
             Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();

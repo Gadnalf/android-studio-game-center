@@ -3,6 +3,7 @@ package fall2018.csc2017.GameCentre;
 import android.support.v7.app.AppCompatActivity;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -60,8 +61,15 @@ abstract public class AbstractBoardManager implements Serializable {
     public void setBoardSize(int boardSize) {
         List<Tile> tiles = this.tilesFactory.getTiles(boardSize);
         this.gameSettings.setBoardSize(boardSize);
+        Collections.shuffle(tiles);
         this.board.setTiles(tiles);
+
     }
+
+//    public void startGame() {
+//        //implement if you want it
+//        //will be called in movement controller
+//    }
 
     /**
      * implement
@@ -139,6 +147,10 @@ abstract public class AbstractBoardManager implements Serializable {
 
     public void setAppCompatActivity(AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
+    }
+
+    public AppCompatActivity getAppCompatActivity() {
+        return appCompatActivity;
     }
 
     public double getTimePlayed() {

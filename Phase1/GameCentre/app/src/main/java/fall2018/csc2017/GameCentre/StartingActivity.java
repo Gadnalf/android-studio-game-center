@@ -90,6 +90,7 @@ public class StartingActivity extends AppCompatActivity {
                                 new SeaInvaderSettings(.5, .5)),
                         new ZTileBoardManager( user,
                                 new ZTileSettings(4 ,4)),
+
                         user),
                 this);
 

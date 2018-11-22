@@ -11,6 +11,7 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
     public void onCreate(Bundle savedInstanceState) {
 
         zTileBoardManager = SaveAndLoad.loadGameHubTemp(this).getZTileBoardManager();
+        zTileBoardManager.setBoardSize(zTileBoardManager.getZTileSettings().getBoardSize());
         setAbstractBoardManager(zTileBoardManager);
         super.onCreate(savedInstanceState);
 

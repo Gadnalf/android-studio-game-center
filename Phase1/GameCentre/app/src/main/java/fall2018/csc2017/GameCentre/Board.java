@@ -2,6 +2,7 @@ package fall2018.csc2017.GameCentre;
 
 import android.support.annotation.NonNull;
 
+import java.util.Collections;
 import java.util.Observable;
 
 import java.io.Serializable;
@@ -29,12 +30,14 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      */
     Board(List<Tile> tiles) {
         setTiles(tiles);
+
     }
 
     public void setTiles(List<Tile> tiles) {
         boardSize = (int) Math.sqrt(tiles.size());
         this.tiles = new Tile[boardSize][boardSize];
         Iterator<Tile> iter = tiles.iterator();
+
 
         for (int row = 0; row != boardSize; row++) {
             for (int col = 0; col != boardSize; col++) {
@@ -113,6 +116,29 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         Tile temp = tiles[row1][col1];
         tiles[row1][col1] = tiles[row2][col2];
         tiles[row2][col2] = temp;
+        setChanged();
+        notifyObservers();
+    }
+
+    void swapTiles(int row1, int col1, int row2, int col2, boolean notifyObservers) {
+        Tile temp = tiles[row1][col1];
+        tiles[row1][col1] = tiles[row2][col2];
+        tiles[row2][col2] = temp;
+        setChanged();
+        if (notifyObservers){
+            notifyObservers();
+        }
+    }
+
+    /**
+     * update tile at pos with newTile
+     * @param pos
+     * @param newTile
+     */
+    void updateTile(int pos, Tile newTile) {
+        int row1 = pos / getBoardSize();
+        int col1 = pos % getBoardSize();
+        tiles[row1][col1] = newTile;
         setChanged();
         notifyObservers();
     }

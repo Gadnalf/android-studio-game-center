@@ -59,6 +59,7 @@ public class GestureDetectGridView extends GridView {
 
                 mController.processTapMovement(context, position, true);
                 return true;
+
             }
 
             @Override
