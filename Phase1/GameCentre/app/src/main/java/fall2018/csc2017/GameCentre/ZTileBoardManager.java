@@ -74,7 +74,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
 
     @Override
     boolean isValidSwipe(int direction) {
-        return false;
+        return true;
     }
 
     /**
@@ -98,7 +98,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     void touchMove(int position) {
     }
 
-    private void swipeRight() {
+    void swipeRight() {
         for (int i = board.numTiles() - 1; i >= 0; i-- ){
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();

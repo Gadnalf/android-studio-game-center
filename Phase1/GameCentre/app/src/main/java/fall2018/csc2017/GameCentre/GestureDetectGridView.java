@@ -80,8 +80,10 @@ public class GestureDetectGridView extends GridView {
                     }
                     if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE) {
                         mController.processSwipeDirection(context, 0, true);
+                        return true;
                     } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE) {
                         mController.processSwipeDirection(context, 1, true);
+                        return true;
                     }
                 } else {
                     if (Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY) {
@@ -89,8 +91,10 @@ public class GestureDetectGridView extends GridView {
                     }
                     if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE) {
                         mController.processSwipeDirection(context, 2, true);
+                        return true;
                     } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE) {
                         mController.processSwipeDirection(context, 3, true);
+                        return true;
                     }
                 }
 
