@@ -36,7 +36,7 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
     /**
      * A user score board save file.
      */
-    public static final String USER_SCORE_BOARD_FILEPREFIX =  "_user_score_board_";
+    public static final String USER_SCORE_BOARD_FILEPREFIX =  "user_score_board_";
 
     /**
      * A game score board save file.
