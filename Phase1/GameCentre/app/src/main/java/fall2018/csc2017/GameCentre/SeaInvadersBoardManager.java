@@ -15,7 +15,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    SeaInvadersBoardManager(Board board, User user, SeaInvaderSettings seaInvaderSettings,
+    SeaInvadersBoardManager(Board board, String user, SeaInvaderSettings seaInvaderSettings,
                              AppCompatActivity appCompatActivity) {
         super(board, user, seaInvaderSettings,
                 appCompatActivity);
@@ -23,7 +23,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     }
 
 
-    SeaInvadersBoardManager(User user, SeaInvaderSettings seaInvaderSettings) {
+    SeaInvadersBoardManager(String user, SeaInvaderSettings seaInvaderSettings) {
         super(user, seaInvaderSettings, new SeaInvadersTileFactory());
         this.lastOccupiedColumn = seaInvaderSettings.getBoardSize()-1;
     }

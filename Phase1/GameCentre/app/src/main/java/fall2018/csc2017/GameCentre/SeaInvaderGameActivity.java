@@ -1,8 +1,14 @@
 package fall2018.csc2017.GameCentre;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ViewTreeObserver;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class SeaInvaderGameActivity extends AbstractGameActivity implements Serializable {
@@ -11,7 +17,8 @@ public class SeaInvaderGameActivity extends AbstractGameActivity implements Seri
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        seaInvadersBoardManager = SaveAndLoad.loadGameHubTemp(this).getSeaInvadersBoardManager();
+        SeaInvaderSettings seaInvadersSettings = new SeaInvaderSettings(5,5);
+        seaInvadersBoardManager = new SeaInvadersBoardManager(GameHubActivity.accountManager.getName(), seaInvadersSettings);
         setAbstractBoardManager(seaInvadersBoardManager);
         super.onCreate(savedInstanceState);
         
@@ -47,9 +54,6 @@ public class SeaInvaderGameActivity extends AbstractGameActivity implements Seri
 
     @Override
     protected void autoSave() {
-        GameSaves gameSaves = SaveAndLoad.loadGameHubTemp(this);
-        gameSaves.setSeaInvadersBoardManager(seaInvadersBoardManager);
-        SaveAndLoad.saveGameHubPermanent(gameSaves, this);
-        SaveAndLoad.saveGameHubTemp(gameSaves, this);
+        //TODO: Implement once SeaInvaderStartingActivity is done
     }
 }

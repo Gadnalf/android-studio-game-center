@@ -17,10 +17,10 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
 //    public void testIsSolved2() {
 ////        super.testIsSolved();
 //        setUpCorrect();
-//        System.out.println(slidingTilesBoardManager.puzzleSolved());
-//        assertEquals(true, slidingTilesBoardManager.puzzleSolved());
+//        System.out.println(boardManager.puzzleSolved());
+//        assertEquals(true, boardManager.puzzleSolved());
 //        swapFirstTwoTiles();
-//        assertEquals(false, slidingTilesBoardManager.puzzleSolved());
+//        assertEquals(false, boardManager.puzzleSolved());
 //    }
 
     public void setUpCorrect() {
@@ -54,7 +54,7 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
 //    public void testSavingAndLoading(){
 //        //---------add one user to scoreboard
 //        setUpCorrect();
-//        System.out.println(slidingTilesBoardManager.puzzleSolved());
+//        System.out.println(boardManager.puzzleSolved());
 //        //puzzle is solved so will add to the scoreboard
 //        //---------add another user to the scoreboard
 //        List<Tile> tiles = makeTiles();
@@ -63,9 +63,9 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
 //                new User("bill", "testing"),
 //                new SlidingTileSettings(4)
 //        );
-//        slidingTilesBoardManager = new SlidingTilesBoardManager(board, scoreBoard);
+//        boardManager = new SlidingTilesBoardManager(board, scoreBoard);
 //        //puzzle solved so we add to the scoreboard
-//        System.out.println(slidingTilesBoardManager.puzzleSolved());
+//        System.out.println(boardManager.puzzleSolved());
 //        //save this scoreboard
 //        saveToFile(saveFilename);
 //        //wipe the scoreboard

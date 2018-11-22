@@ -43,9 +43,6 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
     private int numUndoes;
 
     private SlidingTilesBoardManager boardManager;
-    private GameSaves gameSaves;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
