@@ -13,7 +13,7 @@ abstract public class AbstractBoardManager implements Serializable {
      */
     protected Board board;
     private double score;
-    private User user;
+    private String user;
     protected GameSettings gameSettings;
     protected Stack<int[]> moves = new Stack<>();
     protected int moveCount;
@@ -25,7 +25,7 @@ abstract public class AbstractBoardManager implements Serializable {
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    AbstractBoardManager(Board board, User user, GameSettings gameSettings,
+    AbstractBoardManager(Board board, String user, GameSettings gameSettings,
                  AppCompatActivity appCompatActivity) {
         this.board = board;
         this.user = user;
@@ -46,7 +46,7 @@ abstract public class AbstractBoardManager implements Serializable {
     /**
      * Manage a new board.
      */
-    AbstractBoardManager(User user, GameSettings gameSettings,  AbstractTilesFactory tilesFactory) {
+    AbstractBoardManager(String user, GameSettings gameSettings,  AbstractTilesFactory tilesFactory) {
         List<Tile> tiles;
         tiles = tilesFactory.getTiles(gameSettings.getBoardSize());
 
@@ -110,11 +110,11 @@ abstract public class AbstractBoardManager implements Serializable {
         this.board = board;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 

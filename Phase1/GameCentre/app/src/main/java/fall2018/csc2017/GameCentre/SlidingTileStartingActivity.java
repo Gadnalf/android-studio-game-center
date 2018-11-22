@@ -3,9 +3,16 @@ package fall2018.csc2017.GameCentre;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -15,11 +22,11 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
     /**
      * The main save file.
      */
-    public static final String SAVE_FILENAME = "save_file.ser";
+    public static String saveFilename = "save_file.ser";
     /**
      * A temporary save file.
      */
-    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
+    public static String tempSaveFilename = "save_file_tmp.ser";
 
     /**
      * The board manager.
@@ -41,9 +48,17 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting_slidingtiles);
         addStartButtonListener();
-        addLoadButtonListener(this);
-        addSaveButtonListener(this);
+        addLoadButtonListener();
+        addSaveButtonListener();
         addGameScoreBoardButton();
+        addUserScoreBoardButton();
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        saveFilename = GameHubActivity.accountManager.getName().concat("_save_file.ser");
+        tempSaveFilename = GameHubActivity.accountManager.getName().concat("_temp_save_file.ser");
     }
 
     /**
@@ -62,11 +77,14 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
     /**
      * Activate the load button.
      */
-    private void addLoadButtonListener(final AppCompatActivity appCompatActivity) {
+    private void addLoadButtonListener() {
         Button loadButton = findViewById(R.id.LoadButton);
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadFromFile(saveFilename);
+                saveToFile(tempSaveFilename);
+                makeToastLoadedText();
                 switchToGame();
             }
         });
@@ -82,13 +100,13 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
     /**
      * Activate the save button.
      */
-    private void addSaveButtonListener(final AppCompatActivity appCompatActivity) {
+    private void addSaveButtonListener() {
         Button saveButton = findViewById(R.id.SaveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(SAVE_FILENAME);
-                saveToFile(TEMP_SAVE_FILENAME);
+                saveToFile(saveFilename);
+                saveToFile(tempSaveFilename);
                 makeToastSavedText();
             }
             });
@@ -106,7 +124,19 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
             }
         });
     }
-}
+
+    /**
+     * Activate the game-specific scoreboard button.
+     */
+    private void addUserScoreBoardButton() {
+        Button saveButton = findViewById(R.id.UserScoreBoardButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToUserScoreBoard();
+            }
+        });
+    }
 
     /**
      * Display that a game was saved successfully.
@@ -121,6 +151,7 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        loadFromFile(tempSaveFilename);
     }
 
     /**
@@ -128,7 +159,7 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, SlidingTilesGameActivity.class);
-        saveToFile(TEMP_SAVE_FILENAME);
+        saveToFile(tempSaveFilename);
         startActivity(tmp);
     }
 
@@ -137,7 +168,7 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
      */
     private void switchToSetting() {
         Intent tmp = new Intent(this, SlidingTileSettingsActivity.class);
-        saveToFile(TEMP_SAVE_FILENAME);
+        saveToFile(tempSaveFilename);
         startActivity(tmp);
     }
 
@@ -147,7 +178,7 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
      */
     private void switchToUserScoreBoard() {
         Intent tmp = new Intent(this, UserScoreBoardActivity.class);
-        saveToFile(TEMP_SAVE_FILENAME);
+        saveToFile(tempSaveFilename);
         startActivity(tmp);
     }
 
@@ -156,7 +187,46 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
      */
     private void switchToGameScoreBoard() {
         Intent tmp = new Intent(this, GameScoreBoardActivity.class);
-        saveToFile(TEMP_SAVE_FILENAME);
+        saveToFile(tempSaveFilename);
         startActivity(tmp);
+    }
+
+    /**
+     * Load the board manager from fileName.
+     *
+     * @param fileName the name of the file
+     */
+    private void loadFromFile(String fileName) {
+
+        try {
+            InputStream inputStream = this.openFileInput(fileName);
+            if (inputStream != null) {
+                ObjectInputStream input = new ObjectInputStream(inputStream);
+                boardManager = (SlidingTilesBoardManager) input.readObject();
+                inputStream.close();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        } catch (ClassNotFoundException e) {
+            Log.e("login activity", "File contained unexpected data type: " + e.toString());
+        }
+    }
+
+    /**
+     * Save the board manager to fileName.
+     *
+     * @param fileName the name of the file
+     */
+    public void saveToFile(String fileName) {
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(
+                    this.openFileOutput(fileName, MODE_PRIVATE));
+            outputStream.writeObject(boardManager);
+            outputStream.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 }

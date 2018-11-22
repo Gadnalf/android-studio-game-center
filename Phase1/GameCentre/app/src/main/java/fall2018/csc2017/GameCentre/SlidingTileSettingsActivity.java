@@ -3,10 +3,17 @@ package fall2018.csc2017.GameCentre;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class SlidingTileSettingsActivity extends AppCompatActivity {
 
@@ -35,7 +42,7 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
      */
     private int numUndoes;
 
-    private SlidingTilesBoardManager slidingTilesBoardManager;
+    private SlidingTilesBoardManager boardManager;
     private GameSaves gameSaves;
 
 
@@ -47,8 +54,8 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
 
         boardSize = 4;
         numUndoes = 3;
-        gameSaves = SaveAndLoad.loadGameHubTemp(this);
-        slidingTilesBoardManager = gameSaves.getSlidingTilesBoardManager();
+        SlidingTileSettings slidingTileSettings = new SlidingTileSettings(boardSize, numUndoes);
+        boardManager = new SlidingTilesBoardManager(GameHubActivity.accountManager.getName(), slidingTileSettings);
         addStartButtonListener();
         addUnlimitedUndoListener();
         addConfirmButtonListener();
@@ -67,7 +74,7 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the login button.
+     * Activate the start button.
      */
     void addStartButtonListener() {
         Button loginButton = findViewById(R.id.start_game_button);
@@ -87,10 +94,7 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
 
     private void switchToGame() {
         Intent tmp = new Intent(this, SlidingTilesGameActivity.class);
-        gameSaves.setSlidingTilesBoardManager(slidingTilesBoardManager);
-        SaveAndLoad.saveGameHubTemp(
-                gameSaves, this);
-//        saveToFile(TEMP_SAVE_FILENAME);
+        saveToFile(SlidingTileStartingActivity.tempSaveFilename);
         startActivity(tmp);
     }
 
@@ -109,11 +113,13 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(numUndoes == -1) {
                     updateUndoDisplay();
-                }else {
+                }
+                else {
                     String input = undoInput.getText().toString().trim();
-                    if(input.equals("")){
+                    if(input.equals("")) {
                         updateUndoDisplay();
-                    }else{
+                    }
+                    else {
                     numUndoes = Integer.valueOf(input);
                     updateUndoDisplay();
                     }
@@ -180,13 +186,29 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
     void updateBoardSizeDisplay() {
         String tmp = "Select Board Size: " + boardSize + "x" + boardSize;
         boardSizeDisplay.setText(tmp);
-        slidingTilesBoardManager.getSlidingTileSettings().setBoardSize(boardSize);
-        slidingTilesBoardManager.setBoardSize(boardSize);
+        boardManager.getSlidingTileSettings().setBoardSize(boardSize);
+        boardManager.setBoardSize(boardSize);
     }
 
     void updateUndoDisplay() {
         String tmp = "Select Number of Undoes: " + numUndoes;
         undoDisplay.setText(tmp);
-        slidingTilesBoardManager.getSlidingTileSettings().setNumUndoes(numUndoes);
+        boardManager.getSlidingTileSettings().setNumUndoes(numUndoes);
+    }
+
+    /**
+     * Save the board manager to fileName.
+     *
+     * @param fileName the name of the file
+     */
+    public void saveToFile(String fileName) {
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(
+                    this.openFileOutput(fileName, MODE_PRIVATE));
+            outputStream.writeObject(boardManager);
+            outputStream.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 }

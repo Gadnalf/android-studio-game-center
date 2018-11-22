@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,12 +26,18 @@ public class GameHubActivity extends AppCompatActivity {
     /**
      * The account manager.
      */
-    private AccountManager accountManager;
+    protected static AccountManager accountManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_hub);
+
+        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
+        if (accountManager == null) {
+            accountManager = new AccountManager();
+        }
+        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
 
         addSeaInvadersButtonListener();
         add2048ButtonListener();
@@ -45,7 +49,7 @@ public class GameHubActivity extends AppCompatActivity {
      * Activates the Sea Invader button.
      */
     private void addSeaInvadersButtonListener() {
-        Button seaInvadersButton = findViewById(R.id.sea_invader_button);
+        Button seaInvadersButton = findViewById(R.id.sea_invaders_button);
         seaInvadersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +62,7 @@ public class GameHubActivity extends AppCompatActivity {
      * Activates the 2048 button.
      */
     private void add2048ButtonListener(){
-        Button tfeButton = findViewById(R.id.tfe_button);
+        Button tfeButton = findViewById(R.id.game_2048_button);
         tfeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -71,7 +75,7 @@ public class GameHubActivity extends AppCompatActivity {
      * Activates the Sliding Tiles button.
      */
     private void addSlidingTilesButtonListener(){
-        Button tfeButton = findViewById(R.id.tfe_button);
+        Button tfeButton = findViewById(R.id.sliding_tile_button);
         tfeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -93,11 +97,18 @@ public class GameHubActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
+    }
+
     /**
      * Switch to the SeaInvadersStartingActivity view to start a Sea Invaders game.
      */
     private void switchToSeaInvaders() {
         Intent tmp = new Intent(this, SlidingTileStartingActivity.class);
+        //TODO: update to go where it's supposed to
         startActivity(tmp);
     }
 

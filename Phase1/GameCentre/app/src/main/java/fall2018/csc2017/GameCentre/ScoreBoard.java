@@ -15,10 +15,10 @@ public class ScoreBoard implements Serializable {
     public HashMap<String, GameSettings> perGameScoreBoard;
     public HashMap<String, GameSettings> perUserScoreBoard;
 
-    private User user;
+    private String user;
     private GameSettings gameSettings;
 
-    public ScoreBoard(User user, GameSettings gameSettings) {
+    public ScoreBoard(String user, GameSettings gameSettings) {
         this.user = user;
         this.gameSettings = gameSettings;
         this.perGameScoreBoard = new HashMap<>();
@@ -47,7 +47,7 @@ public class ScoreBoard implements Serializable {
         //TODO: make sure these wont be overwritten with different users
         if (isNewGameForUser()) {
             GameSettings gameSettingsCopy = this.gameSettings.copy();
-            gameSettingsCopy.setMaxScore(newScore, getUser().getUserName());
+            gameSettingsCopy.setMaxScore(newScore, getUser());
             this.perUserScoreBoard.put(this.gameSettings.getGameId(),
                     gameSettingsCopy);
         } else {
@@ -56,7 +56,7 @@ public class ScoreBoard implements Serializable {
                     .getMaxScore()) {
                 GameSettings updatedSettings = this.perUserScoreBoard.get(
                         this.gameSettings.getGameId());
-                updatedSettings.setMaxScore(newScore, getUser().getUserName());
+                updatedSettings.setMaxScore(newScore, getUser());
                 this.perUserScoreBoard.put(this.gameSettings.getGameId(), updatedSettings);
             }
         }
@@ -64,7 +64,7 @@ public class ScoreBoard implements Serializable {
 
     public void updateGameScores(double newScore) {
         if (isNewGame()) {
-            this.gameSettings.setMaxScore(newScore, getUser().getUserName());
+            this.gameSettings.setMaxScore(newScore, getUser());
             this.perGameScoreBoard.put(this.gameSettings.getGameId(), this.gameSettings);
         } else {
             if (newScore > getPerGameScoreBoard()
@@ -72,13 +72,13 @@ public class ScoreBoard implements Serializable {
                     .getMaxScore()) {
                 GameSettings updatedSettings = this.perGameScoreBoard.get(
                         this.gameSettings.getGameId());
-                updatedSettings.setMaxScore(newScore, getUser().getUserName());
+                updatedSettings.setMaxScore(newScore, getUser());
                 this.perGameScoreBoard.put(this.gameSettings.getGameId(), updatedSettings);
             }
         }
     }
 
-    public static void addScoreToScoreboard(User user,
+    public static void addScoreToScoreboard(String user,
                                             double score,
                                             GameSettings gameSettings,
                                             AppCompatActivity appCompatActivity) {
@@ -87,12 +87,12 @@ public class ScoreBoard implements Serializable {
                 SaveAndLoad.loadPermGameScoreboard(appCompatActivity)
         );
         scoreBoard.setPerUserScoreBoard(
-                SaveAndLoad.loadPermUserScoreboard(appCompatActivity, user.getUserName())
+                SaveAndLoad.loadPermUserScoreboard(appCompatActivity, user)
         );
         scoreBoard.updateScoreBoard(score);
         SaveAndLoad.savePermScoreboard(
                 appCompatActivity,
-                user.getUserName(),
+                user,
                 scoreBoard);
     }
 
@@ -115,11 +115,11 @@ public class ScoreBoard implements Serializable {
         this.perUserScoreBoard = perUserScoreBoard;
     }
 
-    public User getUser() {
+    public String getUser() {
         return this.user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 

@@ -67,11 +67,11 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
 //        //puzzle solved so we add to the scoreboard
 //        System.out.println(slidingTilesBoardManager.puzzleSolved());
 //        //save this scoreboard
-//        saveToFile(SAVE_FILENAME);
+//        saveToFile(saveFilename);
 //        //wipe the scoreboard
 //        ScoreBoard.perGameScoreBoard = new ArrayList<>();
 //        ScoreBoard.perUserScoreBoard = new ArrayList<>();
-//        loadFromFile(SAVE_FILENAME);
+//        loadFromFile(saveFilename);
 //        //------------check that we load properly
 //        assertEquals(2, scoreBoard.perGameScoreBoard.size());
 //        assertEquals(2, scoreBoard.perUserScoreBoard.size());
