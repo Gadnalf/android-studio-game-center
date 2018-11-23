@@ -3,6 +3,8 @@ package fall2018.csc2017.GameCentre;
 import android.support.annotation.NonNull;
 
 import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 
 import java.io.Serializable;
@@ -141,6 +143,17 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         tiles[row1][col1] = newTile;
         setChanged();
         notifyObservers();
+    }
+
+
+    public void shuffleTiles() {
+        List<Tile> newTiles = new ArrayList<>();
+        Iterator<Tile> iterator = iterator();
+        while (iterator.hasNext()) {
+            newTiles.add(iterator.next());
+        }
+        Collections.shuffle(newTiles);
+        setTiles(newTiles);
     }
 
     @Override
