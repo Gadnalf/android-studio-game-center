@@ -185,7 +185,7 @@ abstract public class AbstractBoardManager implements Serializable {
     public void updateScoreboard() {
         this.score = getScore();
         if (this.appCompatActivity != null) {
-            ScoreBoard.addScoreToScoreboard(this.user,
+            ScoreBoard.addScoreToSavedScoreboard(this.user,
                     this.score,
                     this.gameSettings,
                     this.appCompatActivity);
