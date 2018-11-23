@@ -140,8 +140,9 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                             if (new_position == i) {
                                 break;
                             }
-                            board.updateTile(new_position, board.getTile(row, col));
-                            board.updateTile(i, new TileAlpha(-1));
+
+                            board.swapTiles(row, col, j + 1, col);
+
                             break;
                         }
 
@@ -184,21 +185,19 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                         if ((board.getTile(j, col).getId() == board.getTile(row, col).getId())) {
                             int p = j * board.getBoardSize() + col;
                             board.updateTile(i, new TileAlpha(-1));
-                            board.updateTile(p, new TileAlpha(board.getTile(j, col).getBackground() + 1));
+                            board.updateTile(p, new TileAlpha(board.getTile(j, col).getId()));
                             System.out.print("this spanns row (adding): ");
                             System.out.println(j);
                             break;
-                        } else if ((((board.getTile(j, col).getId()) == 4 && (board.getTile(row, col)).getId() == 2)) ||
-                                ((board.getTile(j, col).getId() == 2) && board.getTile(row, col).getId() == 4) ||
-                                ((board.getTile(j, col).getId() == 4) && board.getTile(row, col).getId() == 4)) {
+                        } else if ((board.getTile(j, col).getId() != board.getTile(row, col).getId()) &&
+                                (board.getTile(j,col).getId() != 0)) {
                             System.out.print("this spanns row (juxtapose): ");
                             System.out.println(j);
                             int new_position = ((j-1) * board.getBoardSize() + col) ;
                             if (new_position == i) {
                                 break;
                             }
-                            board.updateTile(new_position, board.getTile(row, col));
-                            board.updateTile(i, new TileAlpha(0));
+                            board.swapTiles(row, col, j - 1, col);
                             break;
                         }
 
@@ -206,7 +205,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
 
 
                 }
-                if ((board.getTile(3, col).getId() != 2) && (board.getTile(3, col).getId() != 4)) {
+                if ((board.getTile(3, col).getId() == 0)) {
                     board.swapTiles(row, col, 3, col);
                     System.out.println("Testing checking 2 and 4");
                 }
@@ -232,38 +231,33 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             int col = i % board.getBoardSize();
             System.out.print("i: ");
             System.out.println(i);
-            if (board.getTile(row, col).getId() == 2 || board.getTile(row, col).getId() == 4) {
-
+            if (board.getTile(row,col).getId() != 0) {
                 if (col != 0) {
                     for (int j = col - 1; j >= 0; j--) {
                         System.out.print("j: ");
                         System.out.println(j);
-
-                        if ((board.getTile(row, j).getId() == 2) && (board.getTile(row, col).getId() == 2)) {
+                        if ((board.getTile(row, j).getId() == board.getTile(row, col).getId())) {
                             int p = row * board.getBoardSize() + j;
-                            board.updateTile(i, new TileAlpha(0));
-                            board.updateTile(p, new TileAlpha(3));
-
+                            board.updateTile(i, new TileAlpha(-1));
+                            board.updateTile(p, new TileAlpha(board.getTile(row, j).getId()));
                             System.out.print("this spanns row (adding): ");
                             System.out.println(j);
                             break;
-                        } else if ((((board.getTile(row, j).getId()) == 4 && (board.getTile(row, col)).getId() == 2)) ||
-                                ((board.getTile(row, j).getId() == 2) && board.getTile(row, col).getId() == 4) ||
-                                (board.getTile(row, j).getId() == 4 && board.getTile(row, col).getId() == 4)) {
+                        } else if ((board.getTile(row, col).getId() != board.getTile(row, j).getId()) &&
+                                (board.getTile(row,j).getId() != 0)) {
                             System.out.print("this spanns row (juxtapose): ");
                             System.out.println(j);
                             int new_position = (row * board.getBoardSize() + j) + 1;
                             if (new_position == i) {
                                 break;
                             }
-                            board.updateTile(new_position, board.getTile(row, col));
-                            board.updateTile(i, new TileAlpha(0));
+                            board.swapTiles(row, col, row, j + 1);
                             break;
                         }
 
                     }
                 }
-                if ((board.getTile(row, 0).getId() != 2) && (board.getTile(row, 0).getId() != 4)) {
+                if ((board.getTile(row, 0).getId() == 0)) {
                     board.swapTiles(row, col, row, 0);
                     System.out.println("Testing checking 2 and 4");
                 }
@@ -291,33 +285,31 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             int col = i % board.getBoardSize();
             System.out.print("i: ");
             System.out.println(i);
-            if (board.getTile(row, col).getId() == 2 || board.getTile(row, col).getId() == 4) {
+            if (board.getTile(row,col).getId() != 0) {
                 if (col != 3) {
                     for (int j = col + 1; j < board.getBoardSize(); j++) {
                         if ((board.getTile(row, j).getId() == board.getTile(row, col).getId())) {
                             int p = row * board.getBoardSize() + j;
-                            board.updateTile(i, new TileAlpha(0));
-                            board.updateTile(p, new TileAlpha(3));
+                            board.updateTile(i, new TileAlpha(-1));
+                            board.updateTile(p, new TileAlpha(board.getTile(row, j).getId()));
                             System.out.print("this spanns row (adding): ");
                             System.out.println(j);
                             break;
-                        } else if ((((board.getTile(row, j).getId()) == 4 && (board.getTile(row, col)).getId() == 2)) ||
-                                ((board.getTile(row, j).getId() == 2) && board.getTile(row, col).getId() == 4) ||
-                                (board.getTile(row, j).getId() == 4 && board.getTile(row, j).getId() == 4)) {
+                        } else if ((board.getTile(row, col).getId() != board.getTile(row, j).getId()) &&
+                                (board.getTile(row,j).getId() != 0)) {
                             System.out.print("this spanns row (juxtapose): ");
                             System.out.println(j);
                             int new_position = (row * board.getBoardSize() + j) - 1;
                             if (new_position == i) {
                                 break;
                             }
-                            board.updateTile(new_position, board.getTile(row, col));
-                            board.updateTile(i, new TileAlpha(0));
+                            board.swapTiles(row, col, row, j - 1);
                             break;
 
                         }
 
                     }
-                    if ((board.getTile(row, 3).getId() != 2) && (board.getTile(row, 3).getId() != 4)) {
+                    if ((board.getTile(row, 3).getId() == 0)) {
                         board.swapTiles(row, col, row, 3);
                         System.out.println("Testing checking 2 and 4");
                     }
