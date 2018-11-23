@@ -9,21 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".StartingActivity">
+        <activity android:name=".GameHubActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SlidingTilesStartingActivity" />
         <activity android:name=".SlidingTilesGameActivity" />
         <activity android:name=".UserScoreBoardActivity" />
         <activity android:name=".GameScoreBoardActivity" />
         <activity android:name=".LoginActivity" />
+<<<<<<< HEAD
         <activity android:name=".SlidingTileSettingsActivity" />
         <activity android:name=".SeaInvaderGameActivity"/>
         <activity android:name=".ZTileActivity">
         </activity>
+=======
+        <activity android:name=".SlidingTilesSettingsActivity" />
+        <activity android:name=".SeaInvadersGameActivity"></activity>
+>>>>>>> master
     </application>
 
 </manifest>

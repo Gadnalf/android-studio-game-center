@@ -107,7 +107,7 @@ public class SaveAndLoad extends AppCompatActivity {
 
         //if permanent file not there load the temp
         try{
-            String fileName = userName + "_" + StartingActivity.SAVE_FILENAME;
+            String fileName = userName + "_" + SlidingTilesStartingActivity.SAVE_FILENAME;
             gameHub = (GameHub) loadFromFile(
                     fileName, appCompatActivity);
         } catch (RuntimeException e) {
@@ -122,7 +122,7 @@ public class SaveAndLoad extends AppCompatActivity {
      */
     public static GameHub loadGameHubTemp(
             AppCompatActivity appCompatActivity) {
-        String fileName = StartingActivity.TEMP_SAVE_FILENAME;
+        String fileName = SlidingTilesStartingActivity.TEMP_SAVE_FILENAME;
         GameHub gameHub = (GameHub) loadFromFile(
                 fileName, appCompatActivity);
         return gameHub;
@@ -136,7 +136,7 @@ public class SaveAndLoad extends AppCompatActivity {
      */
     public static void saveGameHubTemp(GameHub gameHub,
                                        AppCompatActivity appCompatActivity) {
-        String fileName = StartingActivity.TEMP_SAVE_FILENAME;
+        String fileName = SlidingTilesStartingActivity.TEMP_SAVE_FILENAME;
         saveToFile(gameHub, fileName, appCompatActivity);
     }
 
@@ -147,7 +147,7 @@ public class SaveAndLoad extends AppCompatActivity {
      */
     public static void saveGameHubPermanent(GameHub gameHub,
                                             AppCompatActivity appCompatActivity) {
-        String fileName = gameHub.getUser().getUserName() + "_" + StartingActivity.SAVE_FILENAME;
+        String fileName = gameHub.getUser().getUserName() + "_" + SlidingTilesStartingActivity.SAVE_FILENAME;
         saveToFile(gameHub,
                 fileName,
                 appCompatActivity);
@@ -238,22 +238,22 @@ public class SaveAndLoad extends AppCompatActivity {
 
     @NonNull
     private static String getGameScoreBoardFileName() {
-        return StartingActivity.GAME_SCORE_BOARD_FILEPREFIX + StartingActivity.SAVE_FILENAME;
+        return SlidingTilesStartingActivity.GAME_SCORE_BOARD_FILEPREFIX + SlidingTilesStartingActivity.SAVE_FILENAME;
     }
 
     @NonNull
     private static String getTempUserScoreboardFileName() {
-        return StartingActivity.USER_SCORE_BOARD_FILEPREFIX + StartingActivity.TEMP_SAVE_FILENAME;
+        return SlidingTilesStartingActivity.USER_SCORE_BOARD_FILEPREFIX + SlidingTilesStartingActivity.TEMP_SAVE_FILENAME;
     }
 
     @NonNull
     private static String getTempGameScoreboardFileName() {
-        return StartingActivity.GAME_SCORE_BOARD_FILEPREFIX + StartingActivity.TEMP_SAVE_FILENAME;
+        return SlidingTilesStartingActivity.GAME_SCORE_BOARD_FILEPREFIX + SlidingTilesStartingActivity.TEMP_SAVE_FILENAME;
     }
 
     @NonNull
     private static String getUserScoreBoardFilePath(String userName) {
-        return userName + "_" + StartingActivity.USER_SCORE_BOARD_FILEPREFIX + StartingActivity.SAVE_FILENAME;
+        return userName + "_" + SlidingTilesStartingActivity.USER_SCORE_BOARD_FILEPREFIX + SlidingTilesStartingActivity.SAVE_FILENAME;
     }
 
 
