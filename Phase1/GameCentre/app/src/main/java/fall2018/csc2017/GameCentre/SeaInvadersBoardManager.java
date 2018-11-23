@@ -24,7 +24,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     SeaInvadersBoardManager(Board board, User user, SeaInvaderSettings seaInvaderSettings,
                             AppCompatActivity appCompatActivity) {
         super(board, user, seaInvaderSettings,
-                appCompatActivity);
+                appCompatActivity, new SeaInvadersTileFactory());
         this.lastOccupiedColumn = seaInvaderSettings.getBoardSize() - 1;
     }
 

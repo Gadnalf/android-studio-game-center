@@ -24,11 +24,11 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     SlidingTilesBoardManager(Board board, User user, SlidingTileSettings slidingTileSettings,
                              AppCompatActivity appCompatActivity) {
         super(board, user, slidingTileSettings,
-                appCompatActivity);
+                appCompatActivity, new SlidingTilesTileFactory());
     }
 
     SlidingTilesBoardManager(Board board, User user, SlidingTileSettings slidingTileSettings) {
-        super(board, user, slidingTileSettings);
+        super(board, user, slidingTileSettings, new SlidingTilesTileFactory());
     }
 
 

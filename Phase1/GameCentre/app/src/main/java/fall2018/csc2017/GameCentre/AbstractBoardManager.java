@@ -24,9 +24,14 @@ abstract public class AbstractBoardManager implements Serializable {
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
+     * @param user instance of class user
+     * @param gameSettings child class of class gameSettings
+     * @param appCompatActivity from the activity you're working on
+     *                          allows us to do saving and loading to scoreboard
      */
     AbstractBoardManager(Board board, User user, GameSettings gameSettings,
-                 AppCompatActivity appCompatActivity) {
+                 AppCompatActivity appCompatActivity,
+                         AbstractTilesFactory tilesFactory) {
         this.board = board;
         this.user = user;
         this.gameSettings = gameSettings;
@@ -34,15 +39,24 @@ abstract public class AbstractBoardManager implements Serializable {
         this.moves = new Stack<>();
         this.startTime = System.nanoTime();
         this.appCompatActivity = appCompatActivity;
+        this.tilesFactory = tilesFactory;
     }
 
-    AbstractBoardManager(Board board, User user, GameSettings gameSettings) {
+    /**
+     * Manage a board that has been pre-populated.
+     * @param board the board
+     * @param user instance of class user
+     * @param gameSettings child class of class gameSettings
+     */
+    AbstractBoardManager(Board board, User user, GameSettings gameSettings,
+                         AbstractTilesFactory tilesFactory) {
         this.board = board;
         this.user = user;
         this.gameSettings = gameSettings;
         this.moveCount = 0;
         this.moves = new Stack<>();
         this.startTime = System.nanoTime();
+        this.tilesFactory = tilesFactory;
     }
 
     /**
@@ -66,16 +80,22 @@ abstract public class AbstractBoardManager implements Serializable {
     }
 
 
+//    public void setBoardSize(int boardSize) throws Exception {
+//        if (this.tilesFactory != null) {
+//            List<Tile> tiles = this.tilesFactory.getTiles(boardSize);
+//            this.gameSettings.setBoardSize(boardSize);
+//            this.board.setTiles(tiles);
+//        } else {
+//            throw new Exception("tileFactory is null");
+//        }
+//    }
+
     public void setBoardSize(int boardSize) {
         List<Tile> tiles = this.tilesFactory.getTiles(boardSize);
         this.gameSettings.setBoardSize(boardSize);
         this.board.setTiles(tiles);
     }
 
-    public void startGame() {
-        //implement if you want it
-        //will be called in movement controller
-    }
 
     /**
      * implement
@@ -159,11 +179,16 @@ abstract public class AbstractBoardManager implements Serializable {
      */
     abstract public double getScore();
 
+    /**
+     * load update and then save the scoreboard
+     */
     public void updateScoreboard() {
         this.score = getScore();
-        ScoreBoard.addScoreToScoreboard(this.user,
-                this.score,
-                this.gameSettings,
-                this.appCompatActivity);
+        if (this.appCompatActivity != null) {
+            ScoreBoard.addScoreToScoreboard(this.user,
+                    this.score,
+                    this.gameSettings,
+                    this.appCompatActivity);
+        }
     }
 }
