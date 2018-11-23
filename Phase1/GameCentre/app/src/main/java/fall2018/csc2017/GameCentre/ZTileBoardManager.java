@@ -374,7 +374,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             board.swapTiles(row1,col1,row2,col2);
             moveCount += 1;
             if(numUndoes > 0) {
-                ((SlidingTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+                ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
             }
         }
 

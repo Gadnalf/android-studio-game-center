@@ -21,15 +21,10 @@
         <activity android:name=".UserScoreBoardActivity" />
         <activity android:name=".GameScoreBoardActivity" />
         <activity android:name=".LoginActivity" />
-<<<<<<< HEAD
         <activity android:name=".SlidingTileSettingsActivity" />
         <activity android:name=".SeaInvaderGameActivity"/>
         <activity android:name=".ZTileActivity">
         </activity>
-=======
-        <activity android:name=".SlidingTilesSettingsActivity" />
-        <activity android:name=".SeaInvadersGameActivity"></activity>
->>>>>>> master
     </application>
 
 </manifest>
