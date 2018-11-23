@@ -22,7 +22,7 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
         // Add View to activity
 
 
-        gridView = findViewById(R.id.something);
+        gridView = findViewById(R.id.board);
         gridView.setAbstractBoardManager(zTileBoardManager);
         zTileBoardManager.getBoard().addObserver(this);
         gridView.setNumColumns(4);

@@ -34,6 +34,7 @@
             android:textStyle="bold|italic"
             android:textColor="#fe8205"
             android:textSize="25sp"
+            android:id="@+id/undo"
             />
 
 
@@ -71,6 +72,6 @@
         android:background="#bbada0"
         android:orientation="vertical"
         android:layout_marginBottom="25dp"
-        android:id="@+id/something"/>
+        android:id="@+id/board"/>
 
 </LinearLayout>
