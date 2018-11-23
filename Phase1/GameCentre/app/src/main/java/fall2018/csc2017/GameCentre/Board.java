@@ -143,6 +143,16 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
+    void updateTile(int pos, Tile newTile, boolean notifyObservers) {
+        int row1 = pos / getBoardSize();
+        int col1 = pos % getBoardSize();
+        tiles[row1][col1] = newTile;
+        setChanged();
+        if (notifyObservers) {
+            notifyObservers();
+        }
+    }
+
 
     public void shuffleTiles() {
         List<Tile> newTiles = new ArrayList<>();

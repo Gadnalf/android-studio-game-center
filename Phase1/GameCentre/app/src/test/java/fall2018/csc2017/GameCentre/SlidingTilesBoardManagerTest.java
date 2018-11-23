@@ -3,7 +3,6 @@ package fall2018.csc2017.GameCentre;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -22,7 +21,7 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
     @Override
     @Before
     public void setUp(){
-        List<Tile> tiles = TestingHelpers.makeTiles(boardSize);
+        List<Tile> tiles = SlidingTilesTestingHelpers.makeTiles(boardSize);
         Board board = new Board(tiles);
         User user = new User("jim");
         SlidingTileSettings slidingTileSettings =  new SlidingTileSettings(boardSize, 4);
@@ -32,8 +31,8 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
 //    public void testScoreUpating(Method updater) {
 //        updater();
 //        assertEquals((long) boardManager.getScore(), (long) 10.0);
-//        TestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
-//        TestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
+//        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
+//        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
 //        updateScoreboard();
 //        assert boardManager.getScore() < 10.0;
 //    }
@@ -42,8 +41,8 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
     public void testUpdateScoreboard() {
         boardManager.updateScoreboard();
         assertEquals((long) boardManager.getScore(), (long) 10.0);
-        TestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
-        TestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
+        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
+        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
         boardManager.updateScoreboard();
         assertTrue(boardManager.getScore() < 10.0);
     }
@@ -57,8 +56,8 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
     public void testPuzzleSolved() {
         System.out.println(boardManager.puzzleSolved());
         assertEquals((long) boardManager.getScore(), (long) 10.0);
-        TestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
-        TestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
+        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
+        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
         System.out.println(boardManager.puzzleSolved());
         assertTrue(boardManager.getScore() < 10.0);
     }

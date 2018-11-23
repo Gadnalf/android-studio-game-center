@@ -10,14 +10,17 @@ import java.io.Serializable;
 public class SeaInvaderGameActivity extends AbstractGameActivity implements Serializable {
 
     SeaInvadersBoardManager seaInvadersBoardManager;
+    AppCompatActivity appCompatActivity = this;
 
     //https://stackoverflow.com/questions/4597690/android-timer-how-to
 
-    final Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
+//    final Handler timerHandler = new Handler();
+    final HandlerSerializable timerHandler = new HandlerSerializable();
+    Runnable timerRunnable = new RunnerSerializable() {
 
         @Override
         public void run() {
+             seaInvadersBoardManager.setAppCompatActivity(appCompatActivity);
             seaInvadersBoardManager.swim();
             seaInvadersBoardManager.spawnTheInvaders();
             seaInvadersBoardManager.board.notifyObservers();
@@ -32,7 +35,8 @@ public class SeaInvaderGameActivity extends AbstractGameActivity implements Seri
         seaInvadersBoardManager = SaveAndLoad.loadGameHubTemp(this).getSeaInvadersBoardManager();
         setAbstractBoardManager(seaInvadersBoardManager);
         super.onCreate(savedInstanceState);
-        
+         seaInvadersBoardManager.setAppCompatActivity(this);
+
         createTileButtons(this);
         setContentView(R.layout.activity_sea_invader);
 

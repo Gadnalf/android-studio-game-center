@@ -189,6 +189,8 @@ abstract public class AbstractBoardManager implements Serializable {
                     this.score,
                     this.gameSettings,
                     this.appCompatActivity);
+        } else {
+            System.out.println("app compat activity not defined");
         }
     }
 }

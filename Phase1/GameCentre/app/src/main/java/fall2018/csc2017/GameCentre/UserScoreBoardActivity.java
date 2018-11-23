@@ -10,7 +10,7 @@ public class UserScoreBoardActivity extends ScoreBoardAbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         TestingHelpers.testSavingAndLoading(this);
+//         SlidingTilesTestingHelpers.testSavingAndLoading(this);
         GameHub tmpGameHub = SaveAndLoad.loadGameHubTemp(
                 this);
         setContentView(R.layout.activity_user_score_board);

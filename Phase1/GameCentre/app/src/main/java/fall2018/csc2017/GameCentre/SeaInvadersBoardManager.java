@@ -45,6 +45,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                 //TODO: when you update the rounds between spawn and move to be indep we'll need to alter this too
                 && getInvaderPositions().size() == 0
                 && isGameOver() == false) {
+            updateScoreboard();
             return true;
         } else {
             return false;
@@ -153,11 +154,16 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     public void spawnTheInvaders() {
         ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
         for (int pos : newSpawnPositions) {
-            board.updateTile(pos, new InvaderTile());
+//            board.updateTile(pos, new InvaderTile());
+//            board.swapTiles(0, 0, 1, 1, false);
+            board.updateTile(pos, new InvaderTile(), true);
         }
     }
 
 
+    /**
+     * starts the invaders swimming towards the bottom of the board
+     */
     public void swim() {
         if (!puzzleSolved() && !isGameOver() &&
                 this.currentRound < ((SeaInvaderSettings) this.gameSettings).getNumRounds()) {
@@ -168,7 +174,10 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                 int row1 = pos / this.gameSettings.getBoardSize();
                 int col1 = pos % this.gameSettings.getBoardSize();
                 if (row1 + 1 < this.gameSettings.getBoardSize()) {
-                    board.swapTiles(row1, col1, row1 + 1, col1, false);
+                    board.swapTiles(row1, col1, row1 + 1, col1, true);
+//                    board.updateTile(pos, new InvaderTile());
+//                    board.updateTile(pos, new TileSizeFour(2, 2));
+//                    board.updateTile(pos, new InvaderTile(), false);
                 } else {
                     setGameOver(true);
                 }
@@ -212,8 +221,11 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     @Override
     public double getScore() {
-        //TODO: implement (1)
-        return 1.0;
+        //TODO: improve (2)
+        int round = getCurrentRound();
+        double time = getTimePlayed() / 1000000;
+        double score = round / time;
+        return score;
     }
 
 
@@ -251,5 +263,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+        updateScoreboard();
     }
 }

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestingHelpers {
+public class SlidingTilesTestingHelpers {
     /**
      * Make a set of tiles that are in order.
      * @return a set of tiles that are in order
