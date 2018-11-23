@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadFromFile(SlidingTilesStartingActivity.ACCOUNT_SAVE_FILENAME);
+        loadFromFile(GameHubActivity.ACCOUNT_SAVE_FILENAME);
         setContentView(R.layout.activity_login);
 
         addLoginButtonListener();
@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 clearEditFields();
-                saveToFile(SlidingTilesStartingActivity.ACCOUNT_SAVE_FILENAME);
+                saveToFile(GameHubActivity.ACCOUNT_SAVE_FILENAME);
                 finish();
             }
         });
@@ -181,13 +181,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        saveToFile(SlidingTilesStartingActivity.ACCOUNT_SAVE_FILENAME);
+        saveToFile(GameHubActivity.ACCOUNT_SAVE_FILENAME);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        saveToFile(SlidingTilesStartingActivity.ACCOUNT_SAVE_FILENAME);
+        saveToFile(GameHubActivity.ACCOUNT_SAVE_FILENAME);
         updateHeader();
     }
 

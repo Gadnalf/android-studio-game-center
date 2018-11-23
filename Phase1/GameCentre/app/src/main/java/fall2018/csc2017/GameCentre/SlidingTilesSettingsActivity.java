@@ -90,7 +90,7 @@ public class SlidingTilesSettingsActivity extends AppCompatActivity {
         gameHub.setSlidingTilesBoardManager(slidingTilesBoardManager);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
-//        saveToFile(TEMP_SAVE_FILENAME);
+//        saveToFile(tempSaveFilename);
         startActivity(tmp);
     }
 
