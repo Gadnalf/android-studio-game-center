@@ -106,43 +106,49 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     /**
      * TODO: insert your code here John
      */
-    void swipeUp() {}
+    void swipeUp() {
 
-    void swipeDown() {}
-
-    void swipeLeft() {}
-
-    void swipeRight() {
-        for (int i = board.numTiles() - 1; i >= 0; i-- ){
+        for (int i = 0; i < board.numTiles(); i++ ){
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
+            System.out.print("i: ");
+            System.out.println(i);
             if (board.getTile(row,col).getId() == 2 || board.getTile(row,col).getId() == 4) {
 
-                for (int j = col + 1; j < board.getBoardSize(); j ++) {
-                    if ((j == 4)){
-                        break;
-                    } else if ((board.getTile(row, j).getId() == 2) && (board.getTile(row, col).getId() == 2)) {
-                        int p = row * board.getBoardSize() + j;
-                        board.updateTile(i, new TileAlpha(0));
-                        board.updateTile(p, new TileAlpha(3));
-                        System.out.println(j);
-                    } else if ((((board.getTile(row, j).getId()) == 4 && (board.getTile(row, col)).getId() == 2)) ||
-                            ((board.getTile(row, j).getId() == 2) && board.getTile(row, col).getId() == 4)) {
-                        int new_position = (row * board.getBoardSize() + j) - 1;
-                        if (new_position == i) {
+
+
+                for (int j = row - 1; j >= 0; j --) {
+                    System.out.print("j: ");
+                    System.out.println(j);
+
+                    if (row != 0) {
+                        if ((board.getTile(j, col).getId() == 2) && (board.getTile(row, col).getId() == 2)) {
+                            int p = j * board.getBoardSize() + col;
+                            board.updateTile(i, new TileAlpha(0));
+                            board.updateTile(p, new TileAlpha(3));
+                            System.out.print("this spanns row (adding): ");
+                            System.out.println(j);
+                            break;
+                        } else if ((((board.getTile(j, col).getId()) == 4 && (board.getTile(row, col)).getId() == 2)) ||
+                                ((board.getTile(j, col).getId() == 2) && board.getTile(row, col).getId() == 4) ||
+                                ((board.getTile(j, col).getId() == 4) && board.getTile(row,col).getId() == 4)) {
+                            System.out.print("this spanns row (juxtapose): ");
+                            System.out.println(j);
+                            int new_position = ((j+1) * board.getBoardSize() + col);
+                            if (new_position == i) {
+                                break;
+                            }
+                            board.updateTile(new_position, board.getTile(row, col));
+                            board.updateTile(i, new TileAlpha(0));
                             break;
                         }
-                        board.updateTile(new_position, board.getTile(row, col));
-                        board.updateTile(i, new TileAlpha(0));
-                    }
 
+                    }
                 }
-                if ((board.getTile(row, 3).getId() != 2) && (board.getTile(row, 3).getId() != 4)) {
-                    board.swapTiles(row, col, row, 3);
+                if ((board.getTile(0,  col).getId() != 2) && (board.getTile(0, col).getId() != 4)) {
+                    board.swapTiles(row, col, 0, col);
                     System.out.println("Testing checking 2 and 4");
                 }
-
-
             }
         }
 
@@ -150,7 +156,180 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         int n = rand.nextInt(board.numTiles());
         int row = n / this.getGameSettings().getBoardSize();
         int col = n % this.getGameSettings().getBoardSize();
-        while (board.getTile(row,col).getId() == 2 || board.getTile(row, col).getId() == 4) {
+        while (board.getTile(row, col).getId() == 2 || board.getTile(row, col).getId() == 4) {
+            n = rand.nextInt(board.numTiles());
+            row = n / this.getGameSettings().getBoardSize();
+            col = n % this.getGameSettings().getBoardSize();
+        }
+        System.out.print("This is the random number: ");
+        System.out.println(n);
+        board.updateTile(n, new TileAlpha(1));
+
+    }
+
+    void swipeDown() {
+        for (int i = board.numTiles() - 1; i >= 0; i--) {
+            int row = i / board.getBoardSize();
+            int col = i % board.getBoardSize();
+            System.out.print("i: ");
+            System.out.println(i);
+            if (board.getTile(row, col).getId() == 2 || board.getTile(row, col).getId() == 4) {
+                if (row != 3) {
+                    for (int j = row + 1; j < 4; j++) {
+                        System.out.print("j: ");
+                        System.out.println(j);
+
+                        if ((board.getTile(j, col).getId() == 2) && (board.getTile(row, col).getId() == 2)) {
+                            int p = j * board.getBoardSize() + col;
+                            board.updateTile(i, new TileAlpha(0));
+                            board.updateTile(p, new TileAlpha(3));
+                            System.out.print("this spanns row (adding): ");
+                            System.out.println(j);
+                            break;
+                        } else if ((((board.getTile(j, col).getId()) == 4 && (board.getTile(row, col)).getId() == 2)) ||
+                                ((board.getTile(j, col).getId() == 2) && board.getTile(row, col).getId() == 4) ||
+                                ((board.getTile(j, col).getId() == 4) && board.getTile(row, col).getId() == 4)) {
+                            System.out.print("this spanns row (juxtapose): ");
+                            System.out.println(j);
+                            int new_position = ((j-1) * board.getBoardSize() + col) ;
+                            if (new_position == i) {
+                                break;
+                            }
+                            board.updateTile(new_position, board.getTile(row, col));
+                            board.updateTile(i, new TileAlpha(0));
+                            break;
+                        }
+
+                    }
+
+
+                }
+                if ((board.getTile(3, col).getId() != 2) && (board.getTile(3, col).getId() != 4)) {
+                    board.swapTiles(row, col, 3, col);
+                    System.out.println("Testing checking 2 and 4");
+                }
+            }
+        }
+        Random rand = new Random();
+        int n = rand.nextInt(board.numTiles());
+        int row = n / this.getGameSettings().getBoardSize();
+        int col = n % this.getGameSettings().getBoardSize();
+        while (board.getTile(row, col).getId() == 2 || board.getTile(row, col).getId() == 4) {
+            n = rand.nextInt(board.numTiles());
+            row = n / this.getGameSettings().getBoardSize();
+            col = n % this.getGameSettings().getBoardSize();
+        }
+        System.out.print("This is the random number: ");
+        System.out.println(n);
+        board.updateTile(n, new TileAlpha(1));
+
+    }
+    void swipeLeft () {
+        for (int i = 0; i < board.numTiles(); i++) {
+            int row = i / board.getBoardSize();
+            int col = i % board.getBoardSize();
+            System.out.print("i: ");
+            System.out.println(i);
+            if (board.getTile(row, col).getId() == 2 || board.getTile(row, col).getId() == 4) {
+
+                if (col != 0) {
+                    for (int j = col - 1; j >= 0; j--) {
+                        System.out.print("j: ");
+                        System.out.println(j);
+
+                        if ((board.getTile(row, j).getId() == 2) && (board.getTile(row, col).getId() == 2)) {
+                            int p = row * board.getBoardSize() + j;
+                            board.updateTile(i, new TileAlpha(0));
+                            board.updateTile(p, new TileAlpha(3));
+
+                            System.out.print("this spanns row (adding): ");
+                            System.out.println(j);
+                            break;
+                        } else if ((((board.getTile(row, j).getId()) == 4 && (board.getTile(row, col)).getId() == 2)) ||
+                                ((board.getTile(row, j).getId() == 2) && board.getTile(row, col).getId() == 4) ||
+                                (board.getTile(row, j).getId() == 4 && board.getTile(row, col).getId() == 4)) {
+                            System.out.print("this spanns row (juxtapose): ");
+                            System.out.println(j);
+                            int new_position = (row * board.getBoardSize() + j) + 1;
+                            if (new_position == i) {
+                                break;
+                            }
+                            board.updateTile(new_position, board.getTile(row, col));
+                            board.updateTile(i, new TileAlpha(0));
+                            break;
+                        }
+
+                    }
+                }
+                if ((board.getTile(row, 0).getId() != 2) && (board.getTile(row, 0).getId() != 4)) {
+                    board.swapTiles(row, col, row, 0);
+                    System.out.println("Testing checking 2 and 4");
+                }
+            }
+        }
+
+        Random rand = new Random();
+        int n = rand.nextInt(board.numTiles());
+        int row = n / this.getGameSettings().getBoardSize();
+        int col = n % this.getGameSettings().getBoardSize();
+        while (board.getTile(row, col).getId() == 2 || board.getTile(row, col).getId() == 4) {
+            n = rand.nextInt(board.numTiles());
+            row = n / this.getGameSettings().getBoardSize();
+            col = n % this.getGameSettings().getBoardSize();
+        }
+        System.out.print("This is the random number: ");
+        System.out.println(n);
+        board.updateTile(n, new TileAlpha(1));
+
+    }
+
+    void swipeRight () {
+        for (int i = board.numTiles() - 1; i >= 0; i--) {
+            int row = i / board.getBoardSize();
+            int col = i % board.getBoardSize();
+            System.out.print("i: ");
+            System.out.println(i);
+            if (board.getTile(row, col).getId() == 2 || board.getTile(row, col).getId() == 4) {
+                if (col != 3) {
+                    for (int j = col + 1; j < board.getBoardSize(); j++) {
+                        if ((board.getTile(row, j).getId() == 2) && (board.getTile(row, col).getId() == 2)) {
+                            int p = row * board.getBoardSize() + j;
+                            board.updateTile(i, new TileAlpha(0));
+                            board.updateTile(p, new TileAlpha(3));
+                            System.out.print("this spanns row (adding): ");
+                            System.out.println(j);
+                            break;
+                        } else if ((((board.getTile(row, j).getId()) == 4 && (board.getTile(row, col)).getId() == 2)) ||
+                                ((board.getTile(row, j).getId() == 2) && board.getTile(row, col).getId() == 4) ||
+                                (board.getTile(row, j).getId() == 4 && board.getTile(row, j).getId() == 4)) {
+                            System.out.print("this spanns row (juxtapose): ");
+                            System.out.println(j);
+                            int new_position = (row * board.getBoardSize() + j) - 1;
+                            if (new_position == i) {
+                                break;
+                            }
+                            board.updateTile(new_position, board.getTile(row, col));
+                            board.updateTile(i, new TileAlpha(0));
+                            break;
+
+                        }
+
+                    }
+                    if ((board.getTile(row, 3).getId() != 2) && (board.getTile(row, 3).getId() != 4)) {
+                        board.swapTiles(row, col, row, 3);
+                        System.out.println("Testing checking 2 and 4");
+                    }
+
+
+                }
+            }
+        }
+
+        Random rand = new Random();
+        int n = rand.nextInt(board.numTiles());
+        int row = n / this.getGameSettings().getBoardSize();
+        int col = n % this.getGameSettings().getBoardSize();
+        while (board.getTile(row, col).getId() == 2 || board.getTile(row, col).getId() == 4) {
             n = rand.nextInt(board.numTiles());
             row = n / this.getGameSettings().getBoardSize();
             col = n % this.getGameSettings().getBoardSize();
@@ -161,6 +340,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
 
 
     }
+
 
     /**
      * Return whether the tile is the blank tile.
