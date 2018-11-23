@@ -88,6 +88,11 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
                 || (right != null && right.getId() == blankId);
     }
 
+    @Override
+    boolean isValidSwipe(int direction) {
+        return false;
+    }
+
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
      *
@@ -130,6 +135,10 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
                 moveCount += 1;
             }
         }
+    }
+
+    @Override
+    void swipeTo(int direction) {
     }
 
     /**
