@@ -17,7 +17,7 @@ import java.io.ObjectOutputStream;
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class StartingActivity extends AppCompatActivity {
+public class SlidingTilesStartingActivity extends AppCompatActivity {
 
     /**
      * The main save file.
