@@ -141,15 +141,17 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                                 break;
                             }
 
-                            board.swapTiles(row, col, j + 1, col);
-
+                            board.updateTile(new_position, board.getTile(row, col));
+                            board.updateTile(i, new TileAlpha(-1));
                             break;
                         }
 
                     }
                 }
+
                 if ((board.getTile(0,  col).getId() == 0)) {
-                    board.swapTiles(row, col, 0, col);
+                    board.updateTile(col, board.getTile(row, col));
+                    board.updateTile(i, new TileAlpha(-1));
                     System.out.println("Testing checking 2 and 4");
                 }
             }
@@ -197,7 +199,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                             if (new_position == i) {
                                 break;
                             }
-                            board.swapTiles(row, col, j - 1, col);
+                            board.updateTile(new_position, board.getTile(row, col));
+                            board.updateTile(i, new TileAlpha(-1));
                             break;
                         }
 
@@ -206,7 +209,9 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
 
                 }
                 if ((board.getTile(3, col).getId() == 0)) {
-                    board.swapTiles(row, col, 3, col);
+                    int to_replace = 3 * board.getBoardSize() + col;
+                    board.updateTile(to_replace, board.getTile(row, col));
+                    board.updateTile(i, new TileAlpha(-1));
                     System.out.println("Testing checking 2 and 4");
                 }
             }
@@ -251,14 +256,19 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                             if (new_position == i) {
                                 break;
                             }
-                            board.swapTiles(row, col, row, j + 1);
+                            board.updateTile(new_position, board.getTile(row, col));
+                            board.updateTile(i, new TileAlpha(-1));
                             break;
                         }
 
                     }
                 }
+
+
                 if ((board.getTile(row, 0).getId() == 0)) {
-                    board.swapTiles(row, col, row, 0);
+                    int to_replace = row * board.getBoardSize();
+                    board.updateTile(to_replace, board.getTile(row, col));
+                    board.updateTile(i, new TileAlpha(-1));
                     System.out.println("Testing checking 2 and 4");
                 }
             }
@@ -303,14 +313,18 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                             if (new_position == i) {
                                 break;
                             }
-                            board.swapTiles(row, col, row, j - 1);
+                            board.updateTile(new_position, board.getTile(row, col));
+                            board.updateTile(i, new TileAlpha(-1));
+
                             break;
 
                         }
 
                     }
                     if ((board.getTile(row, 3).getId() == 0)) {
-                        board.swapTiles(row, col, row, 3);
+                        int to_replace = row * board.getBoardSize() + 3;
+                        board.updateTile(to_replace, board.getTile(row, col));
+                        board.updateTile(i, new TileAlpha(-1));
                         System.out.println("Testing checking 2 and 4");
                     }
 
