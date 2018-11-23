@@ -58,6 +58,7 @@ abstract public class AbstractBoardManager implements Serializable {
     }
 
 
+    TODO: get rid of collections.shuffle(tiles) and replace with the method.
     public void setBoardSize(int boardSize) {
         List<Tile> tiles = this.tilesFactory.getTiles(boardSize);
         this.gameSettings.setBoardSize(boardSize);
@@ -66,10 +67,11 @@ abstract public class AbstractBoardManager implements Serializable {
 
     }
 
-//    public void startGame() {
-//        //implement if you want it
-//        //will be called in movement controller
-//    }
+
+    public void startGame() {
+        //implement if you want it
+        //will be called in movement controller
+    }
 
     /**
      * implement

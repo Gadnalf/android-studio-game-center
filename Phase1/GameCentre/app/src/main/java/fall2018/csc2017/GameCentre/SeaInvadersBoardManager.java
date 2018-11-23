@@ -123,6 +123,25 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     }
 
     /**
+     * we loop over the enemy positions until we find one in this row
+     * then we return this
+     * we know this is the closest bc we sort in descending order
+     * when we get invader positions
+     * @param position
+     * @return
+     */
+    public int getClosestEnemyPosInThisCol(int position) {
+        int shooterCol = position % this.getGameSettings().getBoardSize();
+        for (int pos : (ArrayList<Integer>) getInvaderPositions()) {
+            int enemyCol = pos % this.getGameSettings().getBoardSize();
+            if (shooterCol == enemyCol) {
+                return pos;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * return true if there's an enemy to shoot at
      *
      * @param position
