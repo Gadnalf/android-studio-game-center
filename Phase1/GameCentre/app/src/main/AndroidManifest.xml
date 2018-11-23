@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".StartingActivity">
+        <activity android:name=".SlidingTilesStartingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,8 +20,8 @@
         <activity android:name=".UserScoreBoardActivity" />
         <activity android:name=".GameScoreBoardActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SlidingTileSettingsActivity" />
-        <activity android:name=".SeaInvaderGameActivity"></activity>
+        <activity android:name=".SlidingTilesSettingsActivity" />
+        <activity android:name=".SeaInvadersGameActivity"></activity>
     </application>
 
 </manifest>

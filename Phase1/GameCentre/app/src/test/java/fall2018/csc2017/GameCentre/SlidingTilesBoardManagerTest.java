@@ -3,7 +3,6 @@ package fall2018.csc2017.GameCentre;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -25,8 +24,8 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
         List<Tile> tiles = TestingHelpers.makeTiles(boardSize);
         Board board = new Board(tiles);
         User user = new User("jim");
-        SlidingTileSettings slidingTileSettings =  new SlidingTileSettings(boardSize, 4);
-        boardManager = new SlidingTilesBoardManager(board, user, slidingTileSettings);
+        SlidingTilesSettings slidingTilesSettings =  new SlidingTilesSettings(boardSize, 4);
+        boardManager = new SlidingTilesBoardManager(board, user, slidingTilesSettings);
     }
 
 //    public void testScoreUpating(Method updater) {

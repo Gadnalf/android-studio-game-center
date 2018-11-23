@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class ScoreBoardTesting extends TestingSlidingTiles {
 
-    SlidingTileSettings slidingTileSettings;
+    SlidingTilesSettings slidingTilesSettings;
     User user;
     ScoreBoard scoreBoard;
 
@@ -27,8 +27,8 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
         List<Tile> tiles = makeTiles();
         Board board = new Board(tiles);
         user = new User("jim");
-        slidingTileSettings =  new SlidingTileSettings(3, 4);
-        slidingTilesBoardManager = new SlidingTilesBoardManager(board, user, slidingTileSettings);
+        slidingTilesSettings =  new SlidingTilesSettings(3, 4);
+        slidingTilesBoardManager = new SlidingTilesBoardManager(board, user, slidingTilesSettings);
         scoreBoard = slidingTilesBoardManager.getScoreBoard();
         System.out.println(slidingTilesBoardManager.puzzleSolved());
     }
@@ -45,8 +45,8 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
     @Test
     public void testSizesCorrect() {
         setUpCorrect();
-        System.out.println(scoreBoard.perGameScoreBoard.get(slidingTileSettings.getGameId()).getMaxScore());
-        assertEquals(10, (int) scoreBoard.perGameScoreBoard.get(slidingTileSettings.getGameId()).getMaxScore());
+        System.out.println(scoreBoard.perGameScoreBoard.get(slidingTilesSettings.getGameId()).getMaxScore());
+        assertEquals(10, (int) scoreBoard.perGameScoreBoard.get(slidingTilesSettings.getGameId()).getMaxScore());
         System.out.println(scoreBoard.perUserScoreBoard.get(user.getUserName()).getMaxScore());
         assertEquals(10, (int) scoreBoard.perUserScoreBoard.get(user.getUserName()).getMaxScore());
     }
@@ -62,7 +62,7 @@ public class ScoreBoardTesting extends TestingSlidingTiles {
 //        Board board = new Board(tiles);
 //        scoreBoard = new ScoreBoard(
 //                new User("bill", "testing"),
-//                new SlidingTileSettings(4)
+//                new SlidingTilesSettings(4)
 //        );
 //        slidingTilesBoardManager = new SlidingTilesBoardManager(board, scoreBoard);
 //        //puzzle solved so we add to the scoreboard

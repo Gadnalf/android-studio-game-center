@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class SlidingTileSettingsActivity extends AppCompatActivity {
+public class SlidingTilesSettingsActivity extends AppCompatActivity {
 
     /**
      * The board size display.
