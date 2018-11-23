@@ -83,9 +83,9 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
         GameHub tmpGameHub = new GameHub(
                 new SlidingTilesBoardManager(
                         user,
-                        new SlidingTileSettings(4,4)),
+                        new SlidingTilesSettings(4,4)),
                 new SeaInvadersBoardManager(user,
-                        new SeaInvaderSettings(10, 10)),
+                        new SeaInvadersSettings(10, 10)),
                 user);
         SaveAndLoad.saveAllTemp(tmpGameHub,
                 this);
@@ -138,7 +138,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
      * Display that a game was loaded successfully.
      */
     private void makeToastLoadedText() {
-        Toast.makeText(this, "Loaded SlidingTileSettings", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Loaded SlidingTilesSettings", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -178,7 +178,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
      * Display that a game was saved successfully.
      */
     private void makeToastSavedText() {
-        Toast.makeText(this, "SlidingTileSettings Saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "SlidingTilesSettings Saved", Toast.LENGTH_SHORT).show();
     }
     /**
      * Read the temporary board from disk.
@@ -205,7 +205,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
      * Switch to the SlidingTileSetting to change the setting.
      */
     private void switchToSetting() {
-        Intent tmp = new Intent(this, SlidingTileSettingsActivity.class);
+        Intent tmp = new Intent(this, SlidingTilesSettingsActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         startActivity(tmp);
@@ -262,7 +262,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
     }
 
     private void switchToSeaInvaders() {
-        Intent tmp = new Intent(this, SeaInvaderGameActivity.class);
+        Intent tmp = new Intent(this, SeaInvadersGameActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         SaveAndLoad.saveGameHubTemp(gameHub, this);
