@@ -21,6 +21,7 @@ public class GestureDetectGridView extends GridView {
     public static final int SWIPE_THRESHOLD_VELOCITY = 100;
     private GestureDetector gDetector;
     private MovementController mController;
+    private AlphabetMovementController amController;
     private boolean mFlingConfirmed = false;
     private float mTouchX;
     private float mTouchY;
@@ -49,6 +50,7 @@ public class GestureDetectGridView extends GridView {
     }
 
     private void init(final Context context) {
+        amController = new AlphabetMovementController();
         mController = new MovementController();
         gDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
 
@@ -70,8 +72,6 @@ public class GestureDetectGridView extends GridView {
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                    float velocityY) {
-                final int position = GestureDetectGridView.this.pointToPosition
-                        (Math.round(e1.getX()), Math.round(e1.getY()));
 
                 if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
                     if (Math.abs(e1.getX() - e2.getX()) > SWIPE_MAX_OFF_PATH
@@ -79,10 +79,10 @@ public class GestureDetectGridView extends GridView {
                         return false;
                     }
                     if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE) {
-                        mController.processSwipeDirection(context, 0, true);
+                        amController.processSwipeDirection(context, 0, true);
                         return true;
                     } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE) {
-                        mController.processSwipeDirection(context, 1, true);
+                        amController.processSwipeDirection(context, 1, true);
                         return true;
                     }
                 } else {
@@ -90,10 +90,10 @@ public class GestureDetectGridView extends GridView {
                         return false;
                     }
                     if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE) {
-                        mController.processSwipeDirection(context, 2, true);
+                        amController.processSwipeDirection(context, 2, true);
                         return true;
                     } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE) {
-                        mController.processSwipeDirection(context, 3, true);
+                        amController.processSwipeDirection(context, 3, true);
                         return true;
                     }
                 }
