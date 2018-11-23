@@ -36,6 +36,15 @@ abstract public class AbstractBoardManager implements Serializable {
         this.appCompatActivity = appCompatActivity;
     }
 
+    AbstractBoardManager(Board board, User user, GameSettings gameSettings) {
+        this.board = board;
+        this.user = user;
+        this.gameSettings = gameSettings;
+        this.moveCount = 0;
+        this.moves = new Stack<>();
+        this.startTime = System.nanoTime();
+    }
+
     /**
      * Return the current board.
      */

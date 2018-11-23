@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -15,6 +17,7 @@ public class TestingSlidingTiles {
     /** The board manager for testing. */
     SlidingTilesBoardManager slidingTilesBoardManager;
     ScoreBoard scoreBoard;
+    static int boardSize = 4;
 
 
     /**
@@ -23,9 +26,9 @@ public class TestingSlidingTiles {
      */
     public List<Tile> makeTiles() {
         List<Tile> tiles = new ArrayList<>();
-        final int numTiles = Board.NUM_ROWS * Board.NUM_COLS;
+        final int numTiles = boardSize * boardSize;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new Tile(tileNum + 1, tileNum));
+            tiles.add(new TileSizeFour(tileNum + 1, tileNum));
         }
 
         return tiles;
@@ -38,7 +41,7 @@ public class TestingSlidingTiles {
         List<Tile> tiles = makeTiles();
         Board board = new Board(tiles);
         User user = new User("jim");
-        SlidingTileSettings slidingTileSettings =  new SlidingTileSettings(3, 4);
+        SlidingTileSettings slidingTileSettings =  new SlidingTileSettings(boardSize, 4);
         slidingTilesBoardManager = new SlidingTilesBoardManager(board, user, slidingTileSettings);
     }
 

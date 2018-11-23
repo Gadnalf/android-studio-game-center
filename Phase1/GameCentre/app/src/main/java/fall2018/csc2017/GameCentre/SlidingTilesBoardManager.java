@@ -27,6 +27,10 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
                 appCompatActivity);
     }
 
+    SlidingTilesBoardManager(Board board, User user, SlidingTileSettings slidingTileSettings) {
+        super(board, user, slidingTileSettings);
+    }
+
 
     /**
      * manage a new board
@@ -58,7 +62,9 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
             }
         }
         if (solved) {
-            updateScoreboard();
+            if (getAppCompatActivity() != null) {
+                updateScoreboard();
+            }
         }
         return solved;
     }
