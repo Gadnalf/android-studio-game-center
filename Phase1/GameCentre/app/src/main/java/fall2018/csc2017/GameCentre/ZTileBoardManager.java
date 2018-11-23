@@ -84,9 +84,14 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     void swipeTo(int direction) {
-        if (direction == 3) {
-            swipeRight();
-        }
+        if(direction == 0) {
+            swipeUp();
+        } else if (direction == 1) {
+            swipeDown();
+        } else if (direction == 2) {
+            swipeLeft();
+        } else if (direction == 3) {
+            swipeRight();}
     }
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
@@ -97,6 +102,15 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     @Override
     void touchMove(int position) {
     }
+
+    /**
+     * TODO: insert your code here John
+     */
+    void swipeUp() {}
+
+    void swipeDown() {}
+
+    void swipeLeft() {}
 
     void swipeRight() {
         for (int i = board.numTiles() - 1; i >= 0; i-- ){
