@@ -163,7 +163,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         }
         System.out.print("This is the random number: ");
         System.out.println(n);
-        board.updateTile(n, new TileAlpha(1));
+        board.updateTile(n, new TileAlpha(-1));
 
     }
 
@@ -221,7 +221,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         }
         System.out.print("This is the random number: ");
         System.out.println(n);
-        board.updateTile(n, new TileAlpha(1));
+        board.updateTile(n, new TileAlpha(-1));
 
     }
     void swipeLeft () {
@@ -279,7 +279,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         }
         System.out.print("This is the random number: ");
         System.out.println(n);
-        board.updateTile(n, new TileAlpha(1));
+        board.updateTile(n, new TileAlpha(-1));
 
     }
 
@@ -336,7 +336,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         }
         System.out.print("This is the random number: ");
         System.out.println(n);
-        board.updateTile(n, new TileAlpha(1));
+        board.updateTile(n, new TileAlpha(-1));
 
 
     }
