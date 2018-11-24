@@ -71,6 +71,8 @@ public class GameHubActivity extends AppCompatActivity{
         add2048ButtonListener();
         addSlidingTilesButtonListener();
         addChangeAccountButtonListener();
+        addUserScoreBoardButton();
+        addGameScoreBoardButton();
     }
 
     /**
@@ -94,7 +96,7 @@ public class GameHubActivity extends AppCompatActivity{
         tfeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                switchTo2048();
+                switchToZTile();
             }
         });
     }
@@ -132,21 +134,37 @@ public class GameHubActivity extends AppCompatActivity{
         setupStartingActivity();
     }
 
-    /**
-     * Switch to the SeaInvadersStartingActivity view to start a Sea Invaders game.
-     */
-    private void switchToSeaInvaders() {
-        Intent tmp = new Intent(this, SlidingTilesStartingActivity.class);
-        //TODO: update to go where it's supposed to
+//    /**
+//     * Switch to the SeaInvadersStartingActivity view to start a Sea Invaders game.
+//     */
+//    private void switchToSeaInvaders() {
+//        Intent tmp = new Intent(this, SlidingTilesStartingActivity.class);
+//        //TODO: update to go where it's supposed to
+//        startActivity(tmp);
+//    }
+//
+//    /**
+//     * Switch to the 2048StartingActivity view to start a 2048 game.
+//     */
+//    private void switchTo2048() {
+//        Intent tmp = new Intent(this, SlidingTilesStartingActivity.class);
+//        //TODO: update to go where it's supposed to
+//        startActivity(tmp);
+//    }
+
+    private void switchToZTile() {
+        Intent tmp = new Intent(this, ZTileActivity.class);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
+        SaveAndLoad.saveGameHubTemp(gameHub, this);
         startActivity(tmp);
     }
 
-    /**
-     * Switch to the 2048StartingActivity view to start a 2048 game.
-     */
-    private void switchTo2048() {
-        Intent tmp = new Intent(this, SlidingTilesStartingActivity.class);
-        //TODO: update to go where it's supposed to
+    private void switchToSeaInvaders() {
+        Intent tmp = new Intent(this, SeaInvadersGameActivity.class);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
+        SaveAndLoad.saveGameHubTemp(gameHub, this);
         startActivity(tmp);
     }
 
@@ -158,6 +176,48 @@ public class GameHubActivity extends AppCompatActivity{
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         startActivity(tmp);
+    }
+
+    /**
+     * Switch to the UserScoreBoard view
+     */
+    private void switchToUserScoreBoard() {
+        Intent tmp = new Intent(this, UserScoreBoardActivity.class);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
+//        saveToFile(TEMP_SAVE_FILENAME);
+//        TODO: user proper file paths
+        startActivity(tmp);
+    }
+
+    private void switchToGameScoreBoard() {
+        Intent tmp = new Intent(this, GameScoreBoardActivity.class);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
+        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        startActivity(tmp);
+    }
+
+    private void addUserScoreBoardButton() {
+        Button saveButton = findViewById(R.id.UserScoreBoardButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                gameHub = new GameLaunchCentre().getBoardManager();
+                switchToUserScoreBoard();
+            }
+        });
+    }
+
+    private void addGameScoreBoardButton() {
+        Button saveButton = findViewById(R.id.GameScoreBoardButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                gameHub = new GameLaunchCentre().getBoardManager();
+                switchToGameScoreBoard();
+            }
+        });
     }
 
     /**

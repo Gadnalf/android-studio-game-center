@@ -43,50 +43,50 @@
         android:layout_toEndOf="@+id/StartButton"
         android:text="Save Game" />
 
-    <Button
-        android:id="@+id/UserScoreBoardButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/LoadButton"
-        android:layout_marginStart="-30dp"
-        android:layout_marginTop="29dp"
-        android:layout_toEndOf="@+id/StartButton"
-        android:text="User Score Board" />
+    <!--<Button-->
+        <!--android:id="@+id/UserScoreBoardButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/LoadButton"-->
+        <!--android:layout_marginStart="-30dp"-->
+        <!--android:layout_marginTop="29dp"-->
+        <!--android:layout_toEndOf="@+id/StartButton"-->
+        <!--android:text="User Score Board" />-->
 
-    <Button
-        android:id="@+id/GameScoreBoardButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/LoadButton"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="-26dp"
-        android:layout_toStartOf="@+id/StartButton"
-        android:text="Game Score Board" />
+    <!--<Button-->
+        <!--android:id="@+id/GameScoreBoardButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/LoadButton"-->
+        <!--android:layout_marginTop="28dp"-->
+        <!--android:layout_marginEnd="-26dp"-->
+        <!--android:layout_toStartOf="@+id/StartButton"-->
+        <!--android:text="Game Score Board" />-->
 
-    <Button
-        android:id="@+id/account_change_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/StartButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-22dp"
-        android:layout_marginBottom="31dp"
-        android:text="Account Settings" />
+    <!--<Button-->
+        <!--android:id="@+id/account_change_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignEnd="@+id/StartButton"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginEnd="-22dp"-->
+        <!--android:layout_marginBottom="31dp"-->
+        <!--android:text="Account Settings" />-->
 
-    <Button
-        android:id="@+id/sea_invader_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/StartButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-6dp"
-        android:layout_marginBottom="413dp"
-        android:text="Sea Invaders" />
+    <!--<Button-->
+        <!--android:id="@+id/sea_invader_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignEnd="@+id/StartButton"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginEnd="-6dp"-->
+        <!--android:layout_marginBottom="413dp"-->
+        <!--android:text="Sea Invaders" />-->
 
-    <Button
-        android:id="@+id/z_tile_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Z Tile"/>
+    <!--<Button-->
+        <!--android:id="@+id/z_tile_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Z Tile"/>-->
 
 </RelativeLayout>
