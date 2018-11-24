@@ -180,8 +180,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             System.out.print("i: ");
             System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
-                if (row != 3) {
-                    for (int j = row + 1; j < 4; j++) {
+                if (row != board.getBoardSize() - 1) {
+                    for (int j = row + 1; j < board.getBoardSize(); j++) {
                         System.out.print("j: ");
                         System.out.println(j);
 
@@ -209,8 +209,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
 
 
                 }
-                if ((board.getTile(3, col).getId() == 0)) {
-                    int to_replace = 3 * board.getBoardSize() + col;
+                if ((board.getTile(board.getBoardSize() - 1, col).getId() == 0)) {
+                    int to_replace = (board.getBoardSize() - 1) * board.getBoardSize() + col;
                     board.updateTile(to_replace, board.getTile(row, col));
                     board.updateTile(i, new TileAlpha(-1));
                     System.out.println("Testing checking 2 and 4");
@@ -270,7 +270,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             System.out.print("i: ");
             System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
-                if (col != 3) {
+                if (col != board.getBoardSize() - 1) {
                     for (int j = col + 1; j < board.getBoardSize(); j++) {
                         if ((board.getTile(row, j).getId() == board.getTile(row, col).getId())) {
                             int p = row * board.getBoardSize() + j;
@@ -295,8 +295,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                         }
 
                     }
-                    if ((board.getTile(row, 3).getId() == 0)) {
-                        int to_replace = row * board.getBoardSize() + 3;
+                    if ((board.getTile(row, board.getBoardSize() - 1).getId() == 0)) {
+                        int to_replace = row * board.getBoardSize() + (board.getBoardSize() - 1);
                         board.updateTile(to_replace, board.getTile(row, col));
                         board.updateTile(i, new TileAlpha(-1));
                         System.out.println("Testing checking 2 and 4");

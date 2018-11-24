@@ -9,15 +9,7 @@ public class ZTileFactory extends AbstractTilesFactory{
         List<Tile> tiles = new ArrayList<>();
         int numTiles = boardSize * boardSize;
 
-        if (boardSize == 3) {
-            for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                if (tileNum == 1 || tileNum == 2) {
-                    tiles.add(new TileAlpha(0));
-                } else {
-                    tiles.add(new TileAlpha(-1));
-                }
-            }
-        } else if (boardSize == 4) {
+        if (boardSize == 4) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
                 if (tileNum == 1 || tileNum == 2) {
                     tiles.add(new TileAlpha(0));
@@ -26,6 +18,14 @@ public class ZTileFactory extends AbstractTilesFactory{
                 }
             }
         } else if (boardSize == 5) {
+            for (int tileNum = 0; tileNum != numTiles; tileNum++) {
+                if (tileNum == 1 || tileNum == 2) {
+                    tiles.add(new TileAlpha(0));
+                } else {
+                    tiles.add(new TileAlpha(-1));
+                }
+            }
+        } else if (boardSize == 6) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
                 if (tileNum == 1 || tileNum == 2) {
                     tiles.add(new TileAlpha(0));

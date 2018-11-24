@@ -22,6 +22,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SlidingTileSettingsActivity" />
         <activity android:name=".SeaInvaderGameActivity"/>
+        <activity android:name=".AlphaSettingsActivity"/>
         <activity android:name=".ZTileActivity">
         </activity>
     </application>

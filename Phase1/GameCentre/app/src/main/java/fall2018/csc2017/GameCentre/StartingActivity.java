@@ -283,8 +283,8 @@ public class StartingActivity extends AppCompatActivity {
         });
     }
 
-    private void switchToZTile() {
-        Intent tmp = new Intent(this, ZTileActivity.class);
+    private void switchToAlphaSetting() {
+        Intent tmp = new Intent(this, AlphaSettingsActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         SaveAndLoad.saveGameHubTemp(gameHub, this);
@@ -296,7 +296,7 @@ public class StartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToZTile();
+                switchToAlphaSetting();
             }
         }) ;
     }
