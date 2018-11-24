@@ -59,6 +59,7 @@ public class GestureDetectGridView extends GridView {
 
                 mController.processTapMovement(context, position, true);
                 return true;
+
             }
 
             @Override
@@ -66,6 +67,37 @@ public class GestureDetectGridView extends GridView {
                 return true;
             }
 
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+                                   float velocityY) {
+
+                if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
+                    if (Math.abs(e1.getX() - e2.getX()) > SWIPE_MAX_OFF_PATH
+                            || Math.abs(velocityY) < SWIPE_THRESHOLD_VELOCITY) {
+                        return false;
+                    }
+                    if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE) {
+                        mController.processSwipeDirection(context, 0, true);
+                        return true;
+                    } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE) {
+                        mController.processSwipeDirection(context, 1, true);
+                        return true;
+                    }
+                } else {
+                    if (Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY) {
+                        return false;
+                    }
+                    if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE) {
+                        mController.processSwipeDirection(context, 2, true);
+                        return true;
+                    } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE) {
+                        mController.processSwipeDirection(context, 3, true);
+                        return true;
+                    }
+                }
+
+                return super.onFling(e1, e2, velocityX, velocityY);
+            }
         });
     }
 

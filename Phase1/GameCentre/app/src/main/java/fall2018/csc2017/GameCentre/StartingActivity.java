@@ -60,7 +60,7 @@ public class StartingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupStartingActivity();
-        setContentView(R.layout.activity_starting_);
+        setContentView(R.layout.activity_starting_slidingtiles);
         addStartButtonListener();
         addLoadButtonListener(this);
         addSaveButtonListener(this);
@@ -68,6 +68,7 @@ public class StartingActivity extends AppCompatActivity {
         addGameScoreBoardButton();
         addUserScoreBoardButton();
         addSeaInvaderButton();
+        addZTileButton();
     }
 
     private void setupStartingActivity() {
@@ -80,14 +81,17 @@ public class StartingActivity extends AppCompatActivity {
 
         //make a temp file just in case there is none yet
         User user = new User(accountManager.getName());
-        GameHub tmpGameHub = new GameHub(
-                new SlidingTilesBoardManager(
-                        user,
-                        new SlidingTileSettings(4,4)),
-                new SeaInvadersBoardManager(user,
-                        new SeaInvaderSettings(10, 10)),
-                user);
-        SaveAndLoad.saveAllTemp(tmpGameHub,
+        SaveAndLoad.saveAllTemp(
+                new GameHub(
+                        new SlidingTilesBoardManager(
+                                user,
+                                new SlidingTilesSettings(4,4)),
+                        new SeaInvadersBoardManager(user,
+                                new SeaInvadersSettings(.5, .5)),
+                        new ZTileBoardManager( user,
+                                new ZTileSettings(4 ,4)),
+
+                        user),
                 this);
 
         //load the board manager if it exists if not load the temp file
@@ -205,7 +209,7 @@ public class StartingActivity extends AppCompatActivity {
      * Switch to the SlidingTileSetting to change the setting.
      */
     private void switchToSetting() {
-        Intent tmp = new Intent(this, SlidingTileSettingsActivity.class);
+        Intent tmp = new Intent(this, SlidingTilesSettingsActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         startActivity(tmp);
@@ -262,7 +266,7 @@ public class StartingActivity extends AppCompatActivity {
     }
 
     private void switchToSeaInvaders() {
-        Intent tmp = new Intent(this, SeaInvaderGameActivity.class);
+        Intent tmp = new Intent(this, SeaInvadersGameActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         SaveAndLoad.saveGameHubTemp(gameHub, this);
@@ -277,6 +281,24 @@ public class StartingActivity extends AppCompatActivity {
                 switchToSeaInvaders();
             }
         });
+    }
+
+    private void switchToZTile() {
+        Intent tmp = new Intent(this, ZTileActivity.class);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
+        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        startActivity(tmp);
+    }
+
+    private void addZTileButton() {
+        Button saveButton = findViewById(R.id.z_tile_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToZTile();
+            }
+        }) ;
     }
 
 

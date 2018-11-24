@@ -32,12 +32,14 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      */
     Board(List<Tile> tiles) {
         setTiles(tiles);
+
     }
 
     public void setTiles(List<Tile> tiles) {
         boardSize = (int) Math.sqrt(tiles.size());
         this.tiles = new Tile[boardSize][boardSize];
         Iterator<Tile> iter = tiles.iterator();
+
 
         for (int row = 0; row != boardSize; row++) {
             for (int col = 0; col != boardSize; col++) {

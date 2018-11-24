@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fall2018.csc2017.GameCentre.StartingActivity">
+    tools:context="fall2018.csc2017.GameCentre.SlidingTilesStartingActivity">
 
     <TextView
         android:id="@+id/GameText"
@@ -69,8 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/StartButton"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-26dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginEnd="-22dp"
+        android:layout_marginBottom="31dp"
         android:text="Account Settings" />
 
     <Button
@@ -82,5 +82,11 @@
         android:layout_marginEnd="-6dp"
         android:layout_marginBottom="413dp"
         android:text="Sea Invaders" />
+
+    <Button
+        android:id="@+id/z_tile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Z Tile"/>
 
 </RelativeLayout>

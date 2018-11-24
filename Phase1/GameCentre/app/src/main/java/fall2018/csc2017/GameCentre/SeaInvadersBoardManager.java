@@ -21,17 +21,17 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      *
      * @param board the board
      */
-    SeaInvadersBoardManager(Board board, User user, SeaInvaderSettings seaInvaderSettings,
+    SeaInvadersBoardManager(Board board, User user, SeaInvadersSettings seaInvadersSettings,
                             AppCompatActivity appCompatActivity) {
-        super(board, user, seaInvaderSettings,
+        super(board, user, seaInvadersSettings,
                 appCompatActivity, new SeaInvadersTileFactory());
-        this.lastOccupiedColumn = seaInvaderSettings.getBoardSize() - 1;
+        this.lastOccupiedColumn = seaInvadersSettings.getBoardSize() - 1;
     }
 
 
-    SeaInvadersBoardManager(User user, SeaInvaderSettings seaInvaderSettings) {
-        super(user, seaInvaderSettings, new SeaInvadersTileFactory());
-        this.lastOccupiedColumn = seaInvaderSettings.getBoardSize() - 1;
+    SeaInvadersBoardManager(User user, SeaInvadersSettings seaInvadersSettings) {
+        super(user, seaInvadersSettings, new SeaInvadersTileFactory());
+        this.lastOccupiedColumn = seaInvadersSettings.getBoardSize() - 1;
     }
 
     /**
@@ -76,6 +76,11 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     }
 
+    @Override
+    boolean isValidSwipe(int direction) {
+        return false;
+    }
+
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
      *
@@ -97,6 +102,11 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         }
     }
 
+    @Override
+    void swipeTo(int direction) {
+    }
+
+
     /**
      * we loop over the enemy positions until we find one in this row
      * then we return this
@@ -115,6 +125,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         }
         return -1;
     }
+
 
     /**
      * return true if there's an enemy to shoot at
@@ -152,7 +163,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     /**
      * start the invaders moving towards the bottom of the board
      * - for every invader on the board we need to move them down 1 at a time
-     * based on the time inverval specified in SeaInvaderSettings
+     * based on the time inverval specified in SeaInvadersSettings
      */
     public void spawnTheInvaders() {
         ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
@@ -169,7 +180,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     public void swim() {
         if (!puzzleSolved() && !isGameOver() &&
-                this.currentRound < ((SeaInvaderSettings) this.gameSettings).getNumRounds()) {
+                this.currentRound < ((SeaInvadersSettings) this.gameSettings).getNumRounds()) {
             //TODO: separate spawn and move rounds (2)
             this.currentRound += 1;
             ArrayList<Integer> invaderPositions = getInvaderPositions();
@@ -232,8 +243,8 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     }
 
 
-    public SeaInvaderSettings getSeaInvaderSettings() {
-        return (SeaInvaderSettings) getGameSettings();
+    public SeaInvadersSettings getSeaInvaderSettings() {
+        return (SeaInvadersSettings) getGameSettings();
     }
 
     public void setLastOccupiedColumnToStart() {

@@ -1,13 +1,12 @@
 package fall2018.csc2017.GameCentre;
 
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 
 import java.io.Serializable;
 
-public class SeaInvaderGameActivity extends AbstractGameActivity implements Serializable {
+public class SeaInvadersGameActivity extends AbstractGameActivity implements Serializable {
 
     SeaInvadersBoardManager seaInvadersBoardManager;
     AppCompatActivity appCompatActivity = this;
@@ -26,7 +25,7 @@ public class SeaInvaderGameActivity extends AbstractGameActivity implements Seri
             seaInvadersBoardManager.board.notifyObservers();
 //                timerHandler.postDelayed(this, 5000);
             timerHandler.postDelayed(this,
-                    1000 * (int) ((SeaInvaderSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
+                    1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
         }
     };
 

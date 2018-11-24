@@ -3,6 +3,7 @@ package fall2018.csc2017.GameCentre;
 import android.support.v7.app.AppCompatActivity;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -80,6 +81,7 @@ abstract public class AbstractBoardManager implements Serializable {
     }
 
 
+//    TODO: get rid of collections.shuffle(tiles) and replace with the method.
 //    public void setBoardSize(int boardSize) throws Exception {
 //        if (this.tilesFactory != null) {
 //            List<Tile> tiles = this.tilesFactory.getTiles(boardSize);
@@ -94,6 +96,7 @@ abstract public class AbstractBoardManager implements Serializable {
         List<Tile> tiles = this.tilesFactory.getTiles(boardSize);
         this.gameSettings.setBoardSize(boardSize);
         this.board.setTiles(tiles);
+
     }
 
 
@@ -104,6 +107,17 @@ abstract public class AbstractBoardManager implements Serializable {
      */
     abstract boolean puzzleSolved();
 
+    /**
+     * Check if the swiping motion is valid
+     */
+    abstract boolean isValidSwipe(int direction);
+
+    /**
+     * Procecss a swipe by direction, swiping tiles to the direction as appropriate
+     *
+     * @param direction the direction (0 is up, 1 is down, 2 is left, 3 is right)
+     */
+    abstract void swipeTo(int direction);
 
     abstract boolean isValidTap(int position);
 
