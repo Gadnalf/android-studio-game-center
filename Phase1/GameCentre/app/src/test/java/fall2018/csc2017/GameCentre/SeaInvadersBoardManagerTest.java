@@ -14,7 +14,6 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
     @Override
     @Before
     public void setUp() {
-
         User user = new User("phil");
         SeaInvaderSettings seaInvaderSettings = new SeaInvaderSettings(1, 1);
         boardManager = new SeaInvadersBoardManager(user, seaInvaderSettings);
@@ -61,14 +60,24 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
 
     @Test
     public void isValidTap() {
+        assertFalse(boardManager.isValidTap(0));
+        assertEquals(boardManager.lastOccupiedColumn, 4); //starting in right spot
+        assertFalse(boardManager.isValidTap(24)); // starting spot not a valid tap
+        assertTrue(boardManager.isValidTap(21));
     }
 
     @Test
     public void getClosestEnemyPosInThisCol() {
+        int enemyPos = boardManager.getClosestEnemyPosInThisCol(20);
+        assertEquals(enemyPos, 0); //1st col 2nd row
+        boardManager.board.updateTile(5, new InvaderTile()); //remove this one
+        int enemyPos2 = boardManager.getClosestEnemyPosInThisCol(20);
+        assertEquals(enemyPos2, 5); //1st col 2nd row
     }
 
     @Test
     public void isValidShoot() {
+        
     }
 
     @Test
