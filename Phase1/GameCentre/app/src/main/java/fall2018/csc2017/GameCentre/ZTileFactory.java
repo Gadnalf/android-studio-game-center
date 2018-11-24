@@ -11,26 +11,26 @@ public class ZTileFactory extends AbstractTilesFactory{
 
         if (boardSize == 3) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                if (tileNum == 1 || tileNum == 3) {
-                    tiles.add(new TileAlpha(tileNum));
-                } else {
+                if (tileNum == 1 || tileNum == 2) {
                     tiles.add(new TileAlpha(0));
+                } else {
+                    tiles.add(new TileAlpha(-1));
                 }
             }
         } else if (boardSize == 4) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                if (tileNum == 1 || tileNum == 3) {
-                    tiles.add(new TileAlpha(tileNum));
-                } else {
+                if (tileNum == 1 || tileNum == 2) {
                     tiles.add(new TileAlpha(0));
+                } else {
+                    tiles.add(new TileAlpha(-1));
                 }
             }
         } else if (boardSize == 5) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                if (tileNum == 1 || tileNum == 3) {
-                    tiles.add(new TileAlpha(tileNum));
-                } else {
+                if (tileNum == 1 || tileNum == 2) {
                     tiles.add(new TileAlpha(0));
+                } else {
+                    tiles.add(new TileAlpha(-1));
                 }
             }
         }
