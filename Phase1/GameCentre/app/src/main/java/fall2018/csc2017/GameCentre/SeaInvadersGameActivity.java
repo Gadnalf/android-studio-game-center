@@ -2,6 +2,7 @@ package fall2018.csc2017.GameCentre;
 
 import android.os.Handler;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewTreeObserver;
 
 import java.io.Serializable;

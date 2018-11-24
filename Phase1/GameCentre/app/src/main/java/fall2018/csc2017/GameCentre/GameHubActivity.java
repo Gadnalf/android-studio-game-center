@@ -12,16 +12,43 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * The game hub activity.
  */
-public class GameHubActivity extends AppCompatActivity {
+public class GameHubActivity extends AppCompatActivity{
 
+    /**
+     * The main save file.
+     */
+    public static final String SAVE_FILENAME = "save_file.ser";
+    /**
+     * A temporary save file.
+     */
+    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
+    /**
+     * where we store the scoreboards
+     */
+//    public final String APP_DATA_DIR = this.getExternalCacheDir().toString();
+//    public final String APP_DATA_DIR = this.getFilesDir().toString();
+    /**
+     * A game score board save file.
+     */
+    public static final String GAME_SCORE_BOARD_FILEPREFIX =   "game_score_board_";
+    /**
+     * A user score board save file.
+     */
+    public static final String USER_SCORE_BOARD_FILEPREFIX =  "_user_score_board_";
     /**
      * An account manager save file.
      */
     public static final String ACCOUNT_SAVE_FILENAME = "save_file_accounts.ser";
+
+    /**
+     * The board manager.
+     */
+    private GameHub gameHub;
 
     /**
      * The account manager.
@@ -32,12 +59,13 @@ public class GameHubActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_hub);
-
-        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
-        if (accountManager == null) {
-            accountManager = new AccountManager();
-        }
-        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
+//
+//        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
+//        if (accountManager == null) {
+//            accountManager = new AccountManager();
+//        }
+//        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
+        setupStartingActivity();
 
         addSeaInvadersButtonListener();
         add2048ButtonListener();
@@ -100,7 +128,8 @@ public class GameHubActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
+//        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
+        setupStartingActivity();
     }
 
     /**
@@ -126,6 +155,8 @@ public class GameHubActivity extends AppCompatActivity {
      */
     private void switchToSlidingTiles() {
         Intent tmp = new Intent(this, SlidingTilesStartingActivity.class);
+        SaveAndLoad.saveGameHubTemp(
+                gameHub, this);
         startActivity(tmp);
     }
 
@@ -136,6 +167,39 @@ public class GameHubActivity extends AppCompatActivity {
         Intent tmp = new Intent(this, LoginActivity.class);
         saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
         startActivity(tmp);
+    }
+
+    private void setupStartingActivity() {
+        //load in the accounts
+        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
+        if (accountManager == null) {
+            accountManager = new AccountManager();
+        }
+        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
+
+        //make a temp file just in case there is none yet
+        User user = new User(accountManager.getName());
+        SaveAndLoad.saveAllTemp(
+                new GameHub(
+                        new SlidingTilesBoardManager(
+                                user,
+                                new SlidingTilesSettings(4,4)),
+                        new SeaInvadersBoardManager(user,
+                                new SeaInvadersSettings(.5, .5)),
+                        new ZTileBoardManager( user,
+                                new ZTileSettings(4 ,4)),
+
+                        user),
+                this);
+
+        //load the board manager if it exists if not load the temp file
+        gameHub = SaveAndLoad.loadGameHubPermanent(
+                accountManager.getName(),
+                this);
+        //save the new board manager as temp if its been loaded
+        SaveAndLoad.saveGameHubTemp(
+                gameHub,
+                this); //this will save the loaded board manager to tmp to be used in the other activities
     }
 
     /**

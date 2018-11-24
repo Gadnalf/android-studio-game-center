@@ -1,10 +1,11 @@
 package fall2018.csc2017.GameCentre;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ZTileFactory extends AbstractTilesFactory{
+public class ZTileFactory extends AbstractTilesFactory implements Serializable {
     public List<Tile> getTiles(int boardSize) {
         List<Tile> tiles = new ArrayList<>();
         int numTiles = boardSize * boardSize;

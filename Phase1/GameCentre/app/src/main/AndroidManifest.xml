@@ -21,8 +21,8 @@
         <activity android:name=".UserScoreBoardActivity" />
         <activity android:name=".GameScoreBoardActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SlidingTileSettingsActivity" />
-        <activity android:name=".SeaInvaderGameActivity"/>
+        <activity android:name=".SlidingTilesSettingsActivity" />
+        <activity android:name=".SeaInvadersGameActivity"/>
         <activity android:name=".ZTileActivity">
         </activity>
     </application>
