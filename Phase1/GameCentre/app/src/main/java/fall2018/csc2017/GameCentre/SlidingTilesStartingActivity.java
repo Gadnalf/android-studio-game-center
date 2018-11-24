@@ -20,14 +20,6 @@ import java.io.ObjectOutputStream;
 public class SlidingTilesStartingActivity extends AppCompatActivity {
 
     /**
-     * The main save file.
-     */
-    public static final String SAVE_FILENAME = "save_file.ser";
-    /**
-     * A temporary save file.
-     */
-    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
-    /**
      * where we store the scoreboards
      */
 //    public final String APP_DATA_DIR = this.getExternalCacheDir().toString();

@@ -35,7 +35,7 @@ public class GameHubActivity extends AppCompatActivity{
     /**
      * A game score board save file.
      */
-    public static final String GAME_SCORE_BOARD_FILEPREFIX =   "game_score_board_";
+    public static final String GAME_SCORE_BOARD_FILEPREFIX =   "game_score_board2_";
     /**
      * A user score board save file.
      */
