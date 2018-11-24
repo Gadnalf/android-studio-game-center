@@ -9,9 +9,9 @@ public class ScoreBoardTest {
 
     User user1 = new User("bill");
     User user2 = new User("bob");
-    GameSettings gameSettings1 = new SlidingTileSettings(4,4);
-    GameSettings gameSettings2 = new SeaInvaderSettings(4,4);
-    GameSettings gameSettings3 = new SlidingTileSettings(3,3);
+    GameSettings gameSettings1 = new SlidingTilesSettings(4,4);
+    GameSettings gameSettings2 = new SeaInvadersSettings(4,4);
+    GameSettings gameSettings3 = new SlidingTilesSettings(3,3);
     ScoreBoard scoreBoard;
 
     @Before
