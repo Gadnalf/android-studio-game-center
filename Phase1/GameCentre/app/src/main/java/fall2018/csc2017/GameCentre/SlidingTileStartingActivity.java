@@ -151,6 +151,8 @@ public class SlidingTileStartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        saveFilename = GameHubActivity.accountManager.getName().concat("_save_file.ser");
+        tempSaveFilename = GameHubActivity.accountManager.getName().concat("_temp_save_file.ser");
         loadFromFile(tempSaveFilename);
     }
 

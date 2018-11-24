@@ -71,7 +71,7 @@ public class SlidingTilesGameActivity extends AbstractGameActivity implements Se
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(this);
+            outputStream.writeObject(boardManager);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
