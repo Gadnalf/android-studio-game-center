@@ -77,15 +77,41 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
 
     @Test
     public void isValidShoot() {
-        
+        //not on the bottom row:
+        assertFalse(boardManager.isValidShoot(0));
+        //on bottom but not shooter
+        assertFalse(boardManager.isValidShoot(23));
+        //valid shooter
+        assertTrue(boardManager.isValidShoot(24));
+        //valid shooter after moving
+        boardManager.touchMove(23);
+        assertFalse(boardManager.isValidShoot(24));
+        assertTrue(boardManager.isValidShoot(23));
     }
 
     @Test
     public void fireAndUpdate() {
+        //make sure we can delete all the invaders
+        assertEquals(boardManager.getInvaderPositions().size(), 5);
+        for (int i=24; i > 19; i--) {
+            boardManager.fireAndUpdate(i);
+            assertEquals(boardManager.getClosestEnemyPosInThisCol(i), -1); //-1 => no enemy
+        }
+        assertEquals(boardManager.getInvaderPositions().size(), 0);
+
+        //ensure we can delete stacks of invaders
+        boardManager.board.updateTile(0, new InvaderTile());
+        boardManager.board.updateTile(5, new InvaderTile());
+        assertEquals(boardManager.getInvaderPositions().size(), 2);
+        boardManager.fireAndUpdate(20);
+        boardManager.fireAndUpdate(20);
+        assertEquals(boardManager.getClosestEnemyPosInThisCol(20), -1);
+        assertEquals(boardManager.getInvaderPositions().size(), 0);
     }
 
     @Test
     public void spawnTheInvaders() {
+        
     }
 
     @Test
