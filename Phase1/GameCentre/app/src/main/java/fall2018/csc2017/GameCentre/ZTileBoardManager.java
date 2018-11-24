@@ -91,7 +91,26 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             swipeLeft();
         } else if (direction == 3) {
             swipeRight();}
+        randomSpawn();
     }
+
+    void randomSpawn(){
+
+        Random rand = new Random();
+        int n = rand.nextInt(board.numTiles());
+        int row = n / this.getGameSettings().getBoardSize();
+        int col = n % this.getGameSettings().getBoardSize();
+        while (board.getTile(row, col).getId() != 0) {
+            n = rand.nextInt(board.numTiles());
+            row = n / this.getGameSettings().getBoardSize();
+            col = n % this.getGameSettings().getBoardSize();
+        }
+        System.out.print("This is the random number: ");
+        System.out.println(n);
+        int k = rand.nextInt(2);
+        board.updateTile(n, new TileAlpha(k));
+    }
+
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
      *
@@ -102,9 +121,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     void touchMove(int position) {
     }
 
-    /**
-     * TODO: insert your code here John
-     */
     void swipeUp() {
 
         for (int i = 0; i < board.numTiles(); i++ ){
@@ -155,20 +171,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
-
-        Random rand = new Random();
-        int n = rand.nextInt(board.numTiles());
-        int row = n / this.getGameSettings().getBoardSize();
-        int col = n % this.getGameSettings().getBoardSize();
-        while (board.getTile(row, col).getId() != 0) {
-            n = rand.nextInt(board.numTiles());
-            row = n / this.getGameSettings().getBoardSize();
-            col = n % this.getGameSettings().getBoardSize();
-        }
-        System.out.print("This is the random number: ");
-        System.out.println(n);
-        board.updateTile(n, new TileAlpha(0));
-
     }
 
     void swipeDown() {
@@ -215,19 +217,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
-        Random rand = new Random();
-        int n = rand.nextInt(board.numTiles());
-        int row = n / this.getGameSettings().getBoardSize();
-        int col = n % this.getGameSettings().getBoardSize();
-        while (board.getTile(row, col).getId() != 0) {
-            n = rand.nextInt(board.numTiles());
-            row = n / this.getGameSettings().getBoardSize();
-            col = n % this.getGameSettings().getBoardSize();
-        }
-        System.out.print("This is the random number: ");
-        System.out.println(n);
-        board.updateTile(n, new TileAlpha(0));
-
     }
     void swipeLeft () {
         for (int i = 0; i < board.numTiles(); i++) {
@@ -272,20 +261,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
-
-        Random rand = new Random();
-        int n = rand.nextInt(board.numTiles());
-        int row = n / this.getGameSettings().getBoardSize();
-        int col = n % this.getGameSettings().getBoardSize();
-        while (board.getTile(row, col).getId() != 0) {
-            n = rand.nextInt(board.numTiles());
-            row = n / this.getGameSettings().getBoardSize();
-            col = n % this.getGameSettings().getBoardSize();
-        }
-        System.out.print("This is the random number: ");
-        System.out.println(n);
-        board.updateTile(n, new TileAlpha(0));
-
     }
 
     void swipeRight () {
@@ -332,35 +307,15 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             }
         }
 
-        Random rand = new Random();
-        int n = rand.nextInt(board.numTiles());
-        int row = n / this.getGameSettings().getBoardSize();
-        int col = n % this.getGameSettings().getBoardSize();
-        while (board.getTile(row, col).getId() != 0) {
-            n = rand.nextInt(board.numTiles());
-            row = n / this.getGameSettings().getBoardSize();
-            col = n % this.getGameSettings().getBoardSize();
-        }
-        System.out.print("This is the random number: ");
-        System.out.println(n);
-        board.updateTile(n, new TileAlpha(0));
 
 
     }
 
     /**
-     * Return whether the tile is the blank tile.
-     *
-     * @param position the tile to check
-     * @return whether the tile at position is the blank tile
+     * Return whether the undo button was clicked
      */
-    @Override
-    boolean isValidUndo(int position) {
-        int row = position / getGameSettings().getBoardSize();
-        int col = position % getGameSettings().getBoardSize();
-        int blankId = getBoard().numTiles();
-        Tile current = getBoard().getTile(row, col);
-        return (current.getId() == blankId);
+    boolean undoClicked() {
+        return false;
     }
 
     /**
@@ -370,14 +325,9 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     void tapUndo(int position) {
-        if(isValidUndo(position)){
+        if(undoClicked()){
             int numUndoes = ((ZTileSettings) gameSettings).getNumUndoes();
             int[] lastMove = moves.pop();
-            int row1 = lastMove[0];
-            int col1 = lastMove[1];
-            int row2 = lastMove[2];
-            int col2 = lastMove[3];
-            board.swapTiles(row1,col1,row2,col2);
             moveCount += 1;
             if(numUndoes > 0) {
                 ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
