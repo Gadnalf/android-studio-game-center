@@ -164,7 +164,6 @@ public class GameHubActivity extends AppCompatActivity{
         Intent tmp = new Intent(this, SeaInvadersGameActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
         startActivity(tmp);
     }
 
@@ -239,18 +238,16 @@ public class GameHubActivity extends AppCompatActivity{
 
         //make a temp file just in case there is none yet
         User user = new User(accountManager.getName());
-        SaveAndLoad.saveAllTemp(
-                new GameHub(
-                        new SlidingTilesBoardManager(
-                                user,
-                                new SlidingTilesSettings(4,4)),
-                        new SeaInvadersBoardManager(user,
-                                new SeaInvadersSettings(.5, .5)),
-                        new ZTileBoardManager( user,
-                                new ZTileSettings(4 ,4)),
-
-                        user),
-                this);
+        GameHub gameHubTmp = new GameHub(
+                new SlidingTilesBoardManager(
+                        user,
+                        new SlidingTilesSettings(4,4)),
+                new SeaInvadersBoardManager(user,
+                        new SeaInvadersSettings(5, 5)),
+                new ZTileBoardManager( user,
+                        new ZTileSettings(4 ,4)),
+                user);
+        SaveAndLoad.saveAllTemp(gameHubTmp, this);
 
         //load the board manager if it exists if not load the temp file
         gameHub = SaveAndLoad.loadGameHubPermanent(
