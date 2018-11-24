@@ -13,7 +13,16 @@ https://markus.teach.cs.toronto.edu/git/csc207-2018-09-reg/group_0684
 
 ### Testing the application
 - run all the tests in the test folder
-- uncomment lines 13 and 14 from UserScoreBoardActivity and GameScoreBoardActivity
+    - right click on testing folder, select run all tests with coverage
+- to evaluate coverage: 
+    - order by class% in coverage
+    - double click on fall2018, and continue clicking through to get the coverage in each of our classes
+        - fall2018 -> csc2017 -> GameCentre
+
+#### scoreboard activity tests
+- uncomment lines 13 and 14 from GameScoreBoardActivity
+    - and check it populates with sliding tiles scores
+    - start off sea invaders, wait for the board to fill, check that user and game score board populates
 
 **note: if the application does not lift, please alarm the rest of the group immediately**
 

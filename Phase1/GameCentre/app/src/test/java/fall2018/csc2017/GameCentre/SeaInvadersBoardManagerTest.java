@@ -26,7 +26,10 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
 
     @Test
     public void testGameOver() {
-
+        assertFalse(boardManager.isGameOver());
+        boardManager.board.swapTiles(4, 0, 0, 0);
+        boardManager.swim();
+        assertTrue(boardManager.isGameOver());
     }
 
     public void removeAllInvaders(SeaInvadersBoardManager seaInvadersBoardManager) {
@@ -137,21 +140,5 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
         assertArrayEquals(
                 boardManager.getInvaderPositions().toArray(new Integer[4]),
                 new Integer[]{13,12,11,10});
-    }
-
-    @Test
-    public void getInvaderPositions() {
-    }
-
-    @Test
-    public void getInvaderSpawnPositions() {
-    }
-
-    @Test
-    public void getScore() {
-    }
-
-    @Test
-    public void isGameOver() {
     }
 }
