@@ -60,7 +60,7 @@ public class StartingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupStartingActivity();
-        setContentView(R.layout.activity_starting_);
+        setContentView(R.layout.activity_starting_slidingtiles);
         addStartButtonListener();
         addLoadButtonListener(this);
         addSaveButtonListener(this);
@@ -85,9 +85,9 @@ public class StartingActivity extends AppCompatActivity {
                 new GameHub(
                         new SlidingTilesBoardManager(
                                 user,
-                                new SlidingTileSettings(4,4)),
+                                new SlidingTilesSettings(4,4)),
                         new SeaInvadersBoardManager(user,
-                                new SeaInvaderSettings(.5, .5)),
+                                new SeaInvadersSettings(.5, .5)),
                         new ZTileBoardManager( user,
                                 new ZTileSettings(4 ,4)),
 
@@ -209,7 +209,7 @@ public class StartingActivity extends AppCompatActivity {
      * Switch to the SlidingTileSetting to change the setting.
      */
     private void switchToSetting() {
-        Intent tmp = new Intent(this, SlidingTileSettingsActivity.class);
+        Intent tmp = new Intent(this, SlidingTilesSettingsActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         startActivity(tmp);
@@ -266,7 +266,7 @@ public class StartingActivity extends AppCompatActivity {
     }
 
     private void switchToSeaInvaders() {
-        Intent tmp = new Intent(this, SeaInvaderGameActivity.class);
+        Intent tmp = new Intent(this, SeaInvadersGameActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         SaveAndLoad.saveGameHubTemp(gameHub, this);
