@@ -28,7 +28,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                              AppCompatActivity appCompatActivity) {
 
         super(board, user, zTileSettings,
-                appCompatActivity);
+                appCompatActivity, new ZTileFactory());
 
     }
 
