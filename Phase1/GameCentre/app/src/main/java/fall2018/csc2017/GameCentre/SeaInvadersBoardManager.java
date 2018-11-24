@@ -192,7 +192,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * loop over the board and identify all the invaders
      * @return
      */
-    public ArrayList getInvaderPositions() {
+    public ArrayList<Integer> getInvaderPositions() {
         //TODO: make more efficient (3)
         ArrayList<Integer> invaderPositions = new ArrayList<Integer>();
         Iterator boardIterator = board.iterator();

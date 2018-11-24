@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -52,7 +53,7 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
         assertEquals(boardManager.puzzleSolved(), true);
         assertTrue(boardManager.score > scoreMove5);
         boardManager.board.updateTile(
-                5*5-1,
+                5 * 5 - 1,
                 new InvaderTile()
         );
         assertFalse(boardManager.puzzleSolved()); //invader at end => puzzle not solved
@@ -93,7 +94,7 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
     public void fireAndUpdate() {
         //make sure we can delete all the invaders
         assertEquals(boardManager.getInvaderPositions().size(), 5);
-        for (int i=24; i > 19; i--) {
+        for (int i = 24; i > 19; i--) {
             boardManager.fireAndUpdate(i);
             assertEquals(boardManager.getClosestEnemyPosInThisCol(i), -1); //-1 => no enemy
         }
@@ -111,11 +112,31 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
 
     @Test
     public void spawnTheInvaders() {
-        
+        removeAllInvaders(boardManager);
+        assertEquals(boardManager.getInvaderPositions().size(), 0);
+        boardManager.spawnTheInvaders();
+        assertEquals(boardManager.getInvaderPositions().size(), 5);
     }
 
     @Test
     public void swim() {
+        //starting right
+        ArrayList invaders = boardManager.getInvaderPositions();
+        Integer[] invaderArray = ((List<Integer>) invaders).toArray(new Integer[5]);
+        assertArrayEquals(
+                invaderArray,
+                new Integer[]{4,3,2,1,0});
+        //simple swim
+        boardManager.swim();
+        assertArrayEquals(
+                boardManager.getInvaderPositions().toArray(new Integer[5]),
+                new Integer[]{9,8,7,6,5});
+        //swim again after removing one
+        boardManager.fireAndUpdate(24);
+        boardManager.swim();
+        assertArrayEquals(
+                boardManager.getInvaderPositions().toArray(new Integer[4]),
+                new Integer[]{13,12,11,10});
     }
 
     @Test
