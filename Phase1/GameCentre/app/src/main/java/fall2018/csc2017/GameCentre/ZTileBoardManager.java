@@ -40,19 +40,20 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      * Return whether the tiles are in row-major order.
      *
      * @return whether the tiles are in row-major order
+     *
+     * TODO: Need to test this out.
      */
     @Override
     boolean puzzleSolved() {
-        boolean solved = true;
+        boolean solved = false;
         Iterator<Tile> selected = getBoard().iterator();
-        Tile last_tile;
         Tile current_tile = selected.next();
         while(selected.hasNext()){
-            last_tile = current_tile;
-            current_tile = selected.next();
-            if (last_tile.compareTo(current_tile)<0){
-                solved = false;
+            if (current_tile.getId() == 11){
+                solved = true;
             }
+            current_tile = selected.next();
+
         }
         if (solved) {
             updateScoreboard();
@@ -126,31 +127,16 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         for (int i = 0; i < board.numTiles(); i++ ){
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
-            System.out.print("i: ");
-            System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
                 for (int j = row - 1; j >= 0; j --) {
-                    System.out.print("j: ");
-                    System.out.println(j);
-
                     if (row != 0) {
-                        System.out.print("for j position: ");
-                        System.out.println((board.getTile(j, col).getId()));
-                        System.out.print("for i position: ");
-                        System.out.println(board.getTile(row, col).getId());
                         if ((board.getTile(j, col).getId() == board.getTile(row, col).getId())) {
                             int p = j * board.getBoardSize() + col;
                             board.updateTile(i, new TileAlpha(-1));
-                            System.out.print("board backgroundId n : ");
-                            System.out.println(board.getTile(j, col).getId());
                             board.updateTile(p, new TileAlpha(board.getTile(j, col).getId()));
-                            System.out.print("this spanns row (adding): ");
-                            System.out.println(j);
                             break;
                         } else if ((board.getTile(j, col).getId() != board.getTile(row, col).getId()) &&
                                 (board.getTile(j,col).getId() != 0)) {
-                            System.out.print("this spanns row (juxtapose): ");
-                            System.out.println(j);
                             int new_position = ((j+1) * board.getBoardSize() + col);
                             if (new_position == i) {
                                 break;
