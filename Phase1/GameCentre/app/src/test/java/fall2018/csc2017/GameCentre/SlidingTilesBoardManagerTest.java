@@ -23,7 +23,7 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
     public void setUp(){
         List<Tile> tiles = SlidingTilesTestingHelpers.makeTiles(boardSize);
         Board board = new Board(tiles);
-        User user = new User("jim");
+        User user = new User("phil");
         SlidingTileSettings slidingTileSettings =  new SlidingTileSettings(boardSize, 4);
         boardManager = new SlidingTilesBoardManager(board, user, slidingTileSettings);
     }

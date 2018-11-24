@@ -12,7 +12,7 @@ abstract public class AbstractBoardManager implements Serializable {
      * The board being managed.
      */
     protected Board board;
-    private double score;
+    public double score;
     private User user;
     protected GameSettings gameSettings;
     protected Stack<int[]> moves = new Stack<>();
