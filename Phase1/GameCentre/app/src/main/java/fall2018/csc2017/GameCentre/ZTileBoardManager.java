@@ -24,7 +24,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    ZTileBoardManager(Board board, User user, ZTileSettings zTileSettings,
+    ZTileBoardManager(Board board, String user, ZTileSettings zTileSettings,
                       AppCompatActivity appCompatActivity) {
 
         super(board, user, zTileSettings,
@@ -33,7 +33,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     }
 
 
-    ZTileBoardManager(User user, ZTileSettings zTileSettings) {
+    ZTileBoardManager(String user, ZTileSettings zTileSettings) {
         super(user, zTileSettings, new ZTileFactory());
     }
 

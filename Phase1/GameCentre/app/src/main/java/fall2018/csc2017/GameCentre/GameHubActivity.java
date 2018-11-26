@@ -237,7 +237,7 @@ public class GameHubActivity extends AppCompatActivity{
         saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
 
         //make a temp file just in case there is none yet
-        User user = new User(accountManager.getName());
+        String user = accountManager.getName();
         GameHub gameHubTmp = new GameHub(
                 new SlidingTilesBoardManager(
                         user,
