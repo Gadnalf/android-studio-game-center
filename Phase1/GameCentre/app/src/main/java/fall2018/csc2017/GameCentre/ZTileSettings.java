@@ -13,7 +13,7 @@ public class ZTileSettings extends GameSettings {
     }
 
     public int getNumUndoes() {
-        return numUndoles;
+        return numUndoes;
     }
 
     public void setNumUndoes(int numUndoes) {
