@@ -46,17 +46,18 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     @Override
     boolean puzzleSolved() {
         boolean solved = false;
-        Iterator<Tile> selected = getBoard().iterator();
-        Tile current_tile = selected.next();
-        while(selected.hasNext()){
-            if (current_tile.getId() == 11){
-                solved = true;
+        int boardSize = board.getBoardSize();
+        for(int i = 0; i < boardSize; i ++) {
+            for(int j = 0; j < boardSize; j ++){
+                if(board.getTile(i , j).getId() == 11){
+                    solved = true;
+                }
             }
-            current_tile = selected.next();
-
         }
         if (solved) {
-            updateScoreboard();
+            if (getAppCompatActivity() != null) {
+                updateScoreboard();
+            }
         }
         return solved;
     }
