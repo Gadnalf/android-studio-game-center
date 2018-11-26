@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fall2018.csc2017.GameCentre.GameHubActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+    <TextView
+        android:id="@+id/game_hub_title_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="122dp"
+        android:text="Game Hub"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/sliding_tile_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/game_select_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="14dp"
+        android:text="Select a Game:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/sliding_tile_button"
+        app:layout_constraintEnd_toEndOf="@+id/sliding_tile_button" />
+
+    <Button
+        android:id="@+id/sea_invaders_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="8dp"
+        android:text="Sea Invaders"
+        app:layout_constraintStart_toStartOf="@+id/sliding_tile_button"
+        app:layout_constraintTop_toBottomOf="@+id/sliding_tile_button" />
+
+    <Button
+        android:id="@+id/game_2048_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="2048"
+        app:layout_constraintStart_toStartOf="@+id/sea_invaders_button"
+        app:layout_constraintTop_toBottomOf="@+id/sea_invaders_button" />
+
+    <Button
+        android:id="@+id/sliding_tile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="288dp"
+        android:text="Sliding Tile Puzzle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/UserScoreBoardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sliding_tile_button"
+        android:text="User Score Board"
+        tools:layout_editor_absoluteX="214dp"
+        tools:layout_editor_absoluteY="59dp"
+        app:layout_constraintStart_toStartOf="@+id/game_2048_button"
+        app:layout_constraintTop_toBottomOf="@+id/game_2048_button"
+        />
+        <!--android:layout_toEndOf="@+id/"-->
+
+
+    <Button
+        android:id="@+id/GameScoreBoardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/UserScoreBoardButton"
+        android:text="Game Score Board"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="59dp"
+        app:layout_constraintStart_toStartOf="@+id/UserScoreBoardButton"
+        app:layout_constraintTop_toBottomOf="@+id/UserScoreBoardButton"
+        />
+        <!--android:layout_toStartOf="@+id/StartButton"-->
+
+    <Button
+        android:id="@+id/account_change_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Change Account"
+        android:layout_below="@+id/GameScoreBoardButton"
+
+        />
+        <!--app:layout_constraintBottom_toTopOf="@+id/scoreboard_view_button"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/scoreboard_view_button"-->
+
+    <!--<Button-->
+        <!--android:id="@+id/scoreboard_view_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="51dp"-->
+        <!--android:text="View Scoreboard"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent" -->
+        <!--/>-->
+
+
+
+</android.support.constraint.ConstraintLayout>

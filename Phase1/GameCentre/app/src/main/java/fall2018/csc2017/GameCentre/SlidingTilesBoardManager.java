@@ -3,11 +3,7 @@ package fall2018.csc2017.GameCentre;
 import android.support.v7.app.AppCompatActivity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Stack;
 
 
 /**
@@ -21,15 +17,26 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    SlidingTilesBoardManager(Board board, User user, SlidingTileSettings slidingTileSettings,
+    SlidingTilesBoardManager(Board board, User user, SlidingTilesSettings slidingTilesSettings,
                              AppCompatActivity appCompatActivity) {
-        super(board, user, slidingTileSettings,
-                appCompatActivity);
+        super(board, user, slidingTilesSettings,
+                appCompatActivity, new SlidingTilesTileFactory());
+    }
+
+    SlidingTilesBoardManager(Board board, User user, SlidingTilesSettings slidingTilesSettings) {
+        super(board, user, slidingTilesSettings, new SlidingTilesTileFactory());
     }
 
 
-    SlidingTilesBoardManager(User user, SlidingTileSettings slidingTileSettings) {
-        super(user, slidingTileSettings, new SlidingTilesTileFactory());
+    /**
+     * manage a new board
+     * @param user
+     * @param slidingTilesSettings
+     */
+    SlidingTilesBoardManager(User user, SlidingTilesSettings slidingTilesSettings) {
+        super(user, slidingTilesSettings, new SlidingTilesTileFactory());
+        board.shuffleTiles();
+
     }
 
     /**
@@ -51,7 +58,9 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
             }
         }
         if (solved) {
-            updateScoreboard();
+            if (getAppCompatActivity() != null) {
+                updateScoreboard();
+            }
         }
         return solved;
     }
@@ -155,7 +164,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     @Override
     void tapUndo(int position) {
         if(isValidUndo(position)){
-            int numUndoes = ((SlidingTileSettings) gameSettings).getNumUndoes();
+            int numUndoes = ((SlidingTilesSettings) gameSettings).getNumUndoes();
             int[] lastMove = moves.pop();
             int row1 = lastMove[0];
             int col1 = lastMove[1];
@@ -164,13 +173,17 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
             board.swapTiles(row1,col1,row2,col2);
             moveCount += 1;
             if(numUndoes > 0) {
-                ((SlidingTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+                ((SlidingTilesSettings) gameSettings).setNumUndoes(numUndoes - 1);
             }
         }
 
     }
 
-
+    @Override
+    public void setBoardSize(int boardSize) {
+        super.setBoardSize(boardSize);
+        board.shuffleTiles();
+    }
 
     /**
      * notice higher a/b => lower score
@@ -192,8 +205,8 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     }
 
 
-    public SlidingTileSettings getSlidingTileSettings() {
-        return (SlidingTileSettings) getGameSettings();
+    public SlidingTilesSettings getSlidingTileSettings() {
+        return (SlidingTilesSettings) getGameSettings();
     }
 
 }

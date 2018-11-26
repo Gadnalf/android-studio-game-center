@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class SlidingTileSettingsActivity extends AppCompatActivity {
+public class SlidingTilesSettingsActivity extends AppCompatActivity {
 
     /**
      * The board size display.
@@ -90,7 +90,7 @@ public class SlidingTileSettingsActivity extends AppCompatActivity {
         gameHub.setSlidingTilesBoardManager(slidingTilesBoardManager);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
-//        saveToFile(TEMP_SAVE_FILENAME);
+//        saveToFile(tempSaveFilename);
         startActivity(tmp);
     }
 

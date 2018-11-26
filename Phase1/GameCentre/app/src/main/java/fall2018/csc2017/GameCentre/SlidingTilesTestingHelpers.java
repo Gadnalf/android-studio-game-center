@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestingHelpers {
+public class SlidingTilesTestingHelpers {
     /**
      * Make a set of tiles that are in order.
      * @return a set of tiles that are in order
@@ -16,23 +16,27 @@ public class TestingHelpers {
 
         if (boardSize == 3) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                tiles.add(new TileSizeThree(tileNum+1)); //this is how they had it before (+1)
+                tiles.add(new TileSizeThree(tileNum)); //this is how they had it before (+1)
                 //may not matter though
             }
         } else if (boardSize == 4) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                tiles.add(new TileSizeFour(tileNum+1));
+                tiles.add(new TileSizeFour(tileNum));
             }
         } else if (boardSize == 5) {
             for (int tileNum = 0; tileNum != numTiles; tileNum ++) {
-                tiles.add(new TileSizeFive(tileNum+1));
+                tiles.add(new TileSizeFive(tileNum));
             }
         }
         return tiles;
     }
 
     /**
-     * Make a solved Board.
+     * Make a game hub w winnning scoreboard
+     * @param userName
+     * @param appCompatActivity
+     * @param swapTiles
+     * @return
      */
     public static GameHub makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
                                                                    boolean swapTiles) {
@@ -60,9 +64,19 @@ public class TestingHelpers {
      */
     public static void swapFirstTwoTiles(SlidingTilesBoardManager slidingTilesBoardManager) {
         slidingTilesBoardManager.getBoard().swapTiles(0, 0, 0, 1);
+        slidingTilesBoardManager.moveCount += 1;
+//        int numTiles = slidingTilesBoardManager.getBoard().getBoardSize() * slidingTilesBoardManager.getBoard().getBoardSize();
+//        slidingTilesBoardManager.touchMove(numTiles);
+//        slidingTilesBoardManager.touchMove(numTiles-1);
+        //TODO: implement like above if time
+
     }
 
-
+    /**
+     * test the saving and loading for scoreboard
+     * - after calling this you can look at the scoreboard activities and ensure they update
+     * @param appCompatActivity
+     */
     public static void testSavingAndLoading(AppCompatActivity appCompatActivity){
         //---------add one user to scoreboard
         GameHub tmpGameHub = SaveAndLoad.loadGameHubTemp(appCompatActivity);

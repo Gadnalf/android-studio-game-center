@@ -2,11 +2,11 @@ package fall2018.csc2017.GameCentre;
 
 import java.io.Serializable;
 
-//public class SlidingTileSettings implements Serializable, GameSettings {
-public class SlidingTileSettings extends GameSettings implements Serializable {
+//public class SlidingTilesSettings implements Serializable, GameSettings {
+public class SlidingTilesSettings extends GameSettings implements Serializable {
     private int numUndoes;
 
-    public SlidingTileSettings(int boardSize, int numUndoes) {
+    public SlidingTilesSettings(int boardSize, int numUndoes) {
         super(boardSize, numUndoes);
     }
 
@@ -25,6 +25,6 @@ public class SlidingTileSettings extends GameSettings implements Serializable {
 
     @Override
     public GameSettings copy() {
-        return new SlidingTileSettings(getBoardSize(), numUndoes);
+        return new SlidingTilesSettings(getBoardSize(), numUndoes);
     }
 }

@@ -24,10 +24,10 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      * @param board the board
      */
     ZTileBoardManager(Board board, User user, ZTileSettings zTileSettings,
-                             AppCompatActivity appCompatActivity) {
+                      AppCompatActivity appCompatActivity) {
 
         super(board, user, zTileSettings,
-                appCompatActivity);
+                appCompatActivity, new ZTileFactory());
 
     }
 
@@ -329,6 +329,4 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     }
 
 }
-
-
 

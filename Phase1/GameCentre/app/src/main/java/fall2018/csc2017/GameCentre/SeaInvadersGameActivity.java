@@ -1,29 +1,32 @@
 package fall2018.csc2017.GameCentre;
 
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewTreeObserver;
 
 import java.io.Serializable;
 
-public class SeaInvaderGameActivity extends AbstractGameActivity implements Serializable {
+public class SeaInvadersGameActivity extends AbstractGameActivity implements Serializable {
 
     SeaInvadersBoardManager seaInvadersBoardManager;
+    AppCompatActivity appCompatActivity = this;
 
     //https://stackoverflow.com/questions/4597690/android-timer-how-to
 
-    final Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
+//    final Handler timerHandler = new Handler();
+    final HandlerSerializable timerHandler = new HandlerSerializable();
+    Runnable timerRunnable = new RunnerSerializable() {
 
         @Override
         public void run() {
+             seaInvadersBoardManager.setAppCompatActivity(appCompatActivity);
             seaInvadersBoardManager.swim();
             seaInvadersBoardManager.spawnTheInvaders();
             seaInvadersBoardManager.board.notifyObservers();
 //                timerHandler.postDelayed(this, 5000);
             timerHandler.postDelayed(this,
-                    1000 * (int) ((SeaInvaderSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
+                    1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
         }
     };
 
@@ -32,7 +35,8 @@ public class SeaInvaderGameActivity extends AbstractGameActivity implements Seri
         seaInvadersBoardManager = SaveAndLoad.loadGameHubTemp(this).getSeaInvadersBoardManager();
         setAbstractBoardManager(seaInvadersBoardManager);
         super.onCreate(savedInstanceState);
-        
+         seaInvadersBoardManager.setAppCompatActivity(this);
+
         createTileButtons(this);
         setContentView(R.layout.activity_sea_invader);
 

@@ -2,17 +2,17 @@ package fall2018.csc2017.GameCentre;
 
 import java.io.Serializable;
 
-public class SeaInvaderSettings extends GameSettings implements Serializable {
+public class SeaInvadersSettings extends GameSettings implements Serializable {
     private double secsBeforeSpawn;
     private double secsBeforeMove;
     private int numRounds;
     private int numSpawn; //TODO: actually implement this with the SeaInvadersTileFactory
 
-    public SeaInvaderSettings(double startingScore, int boardSize,
-                              int numUndoes, double secsBeforeSpawn,
-                              double secsBeforeMove,
-                              int numRounds,
-                              int numSpawn) {
+    public SeaInvadersSettings(double startingScore, int boardSize,
+                               int numUndoes, double secsBeforeSpawn,
+                               double secsBeforeMove,
+                               int numRounds,
+                               int numSpawn) {
         super(startingScore, boardSize, numUndoes);
         this.secsBeforeSpawn = secsBeforeSpawn;
         this.secsBeforeMove = secsBeforeMove;
@@ -20,10 +20,10 @@ public class SeaInvaderSettings extends GameSettings implements Serializable {
         this.numSpawn = numSpawn;
     }
 
-    public SeaInvaderSettings(double secsBeforeSpawn,
-                              double secsBeforeMove,
-                              int numRounds,
-                              int numSpawn) {
+    public SeaInvadersSettings(double secsBeforeSpawn,
+                               double secsBeforeMove,
+                               int numRounds,
+                               int numSpawn) {
         super(0, 5, 0);
         this.secsBeforeSpawn = secsBeforeSpawn;
         this.secsBeforeMove = secsBeforeMove;
@@ -31,8 +31,8 @@ public class SeaInvaderSettings extends GameSettings implements Serializable {
         this.numSpawn = numSpawn;
     }
 
-    public SeaInvaderSettings(double secsBeforeSpawn,
-                              double secsBeforeMove) {
+    public SeaInvadersSettings(double secsBeforeSpawn,
+                               double secsBeforeMove) {
         super(0, 5, 0);
         this.secsBeforeSpawn = secsBeforeSpawn;
         this.secsBeforeMove = secsBeforeMove;
@@ -53,7 +53,7 @@ public class SeaInvaderSettings extends GameSettings implements Serializable {
 
     @Override
     public GameSettings copy() {
-        return new SeaInvaderSettings(
+        return new SeaInvadersSettings(
                 getMaxScore(),
                 getBoardSize(),
                 getNumUndoes(),

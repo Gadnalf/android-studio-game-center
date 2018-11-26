@@ -70,8 +70,6 @@ public class GestureDetectGridView extends GridView {
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                    float velocityY) {
-                final int position = GestureDetectGridView.this.pointToPosition
-                        (Math.round(e1.getX()), Math.round(e1.getY()));
 
                 if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
                     if (Math.abs(e1.getX() - e2.getX()) > SWIPE_MAX_OFF_PATH

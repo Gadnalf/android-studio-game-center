@@ -27,8 +27,8 @@ public class ScoreBoard implements Serializable {
 
 
     public double updateScoreBoard(double newScore) {
-        updateGameScores(newScore);
-        updateUserScore(newScore);
+        updateGameScoreBoard(newScore);
+        updateUserScoreBoard(newScore);
         return newScore;
     }
 
@@ -42,7 +42,7 @@ public class ScoreBoard implements Serializable {
         return this.perUserScoreBoard.containsKey(this.gameSettings.getGameId()) == false;
     }
 
-    public void updateUserScore(double newScore) {
+    public void updateUserScoreBoard(double newScore) {
         //TODO: make sure the user will be updated after user changes
         //TODO: make sure these wont be overwritten with different users
         if (isNewGameForUser()) {
@@ -62,7 +62,7 @@ public class ScoreBoard implements Serializable {
         }
     }
 
-    public void updateGameScores(double newScore) {
+    public void updateGameScoreBoard(double newScore) {
         if (isNewGame()) {
             this.gameSettings.setMaxScore(newScore, getUser().getUserName());
             this.perGameScoreBoard.put(this.gameSettings.getGameId(), this.gameSettings);
@@ -78,10 +78,10 @@ public class ScoreBoard implements Serializable {
         }
     }
 
-    public static void addScoreToScoreboard(User user,
-                                            double score,
-                                            GameSettings gameSettings,
-                                            AppCompatActivity appCompatActivity) {
+    public static void addScoreToSavedScoreboard(User user,
+                                                 double score,
+                                                 GameSettings gameSettings,
+                                                 AppCompatActivity appCompatActivity) {
         ScoreBoard scoreBoard = new ScoreBoard(user, gameSettings);
         scoreBoard.setPerGameScoreBoard(
                 SaveAndLoad.loadPermGameScoreboard(appCompatActivity)
@@ -120,7 +120,9 @@ public class ScoreBoard implements Serializable {
     }
 
     public void setUser(User user) {
+
         this.user = user;
+        this.perUserScoreBoard = new HashMap<>();
     }
 
     public GameSettings getGameSettings() {
