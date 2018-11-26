@@ -48,7 +48,7 @@ public class SlidingTilesTestingHelpers {
         List<Tile> tiles = makeTiles(slidingTilesBoardManager.getBoard().getBoardSize());
         Board board = new Board(tiles);
         slidingTilesBoardManager.setBoard(board);
-        slidingTilesBoardManager.setUser(new User(userName));
+        slidingTilesBoardManager.setUser(userName);
         if (swapTiles) {
             swapFirstTwoTiles(slidingTilesBoardManager);
             swapFirstTwoTiles(slidingTilesBoardManager);
@@ -80,7 +80,7 @@ public class SlidingTilesTestingHelpers {
     public static void testSavingAndLoading(AppCompatActivity appCompatActivity){
         //---------add one user to scoreboard
         GameHub tmpGameHub = SaveAndLoad.loadGameHubTemp(appCompatActivity);
-        String userId = tmpGameHub.getUser().getUserName();
+        String userId = tmpGameHub.getUser();
         GameHub gameHub = makeWinningBoardManager(userId, appCompatActivity, true);
         SaveAndLoad.saveGameHubPermanent(gameHub, appCompatActivity);
 //        SlidingTilesBoardManager boardManager3 = makeWinningBoardManager(userId, appCompatActivity, false);

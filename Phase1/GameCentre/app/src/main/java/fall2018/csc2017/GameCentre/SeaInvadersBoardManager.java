@@ -21,7 +21,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      *
      * @param board the board
      */
-    SeaInvadersBoardManager(Board board, User user, SeaInvadersSettings seaInvadersSettings,
+    SeaInvadersBoardManager(Board board, String user, SeaInvadersSettings seaInvadersSettings,
                             AppCompatActivity appCompatActivity) {
         super(board, user, seaInvadersSettings,
                 appCompatActivity, new SeaInvadersTileFactory());
@@ -29,7 +29,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     }
 
 
-    SeaInvadersBoardManager(User user, SeaInvadersSettings seaInvadersSettings) {
+    SeaInvadersBoardManager(String user, SeaInvadersSettings seaInvadersSettings) {
         super(user, seaInvadersSettings, new SeaInvadersTileFactory());
         this.lastOccupiedColumn = seaInvadersSettings.getBoardSize() - 1;
     }
@@ -224,10 +224,16 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     public ArrayList getInvaderSpawnPositions() {
         //TODO: improve this, want to be more random (2)
         ArrayList positions = new ArrayList();
+
         for (int i = 0; i < this.gameSettings.getBoardSize(); i++) {
             positions.add(i);
         }
-        return positions;
+        Collections.shuffle(positions);
+//        ArrayList randomPositions = (ArrayList) positions.subList(0,
+        ArrayList randomPositions = new ArrayList(
+                positions.subList(0,
+                ((SeaInvadersSettings)  this.gameSettings).getNumSpawn()));
+        return randomPositions;
     }
 
     /**

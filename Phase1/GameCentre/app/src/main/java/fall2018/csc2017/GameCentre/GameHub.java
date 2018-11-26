@@ -6,12 +6,11 @@ public class GameHub implements Serializable {
     SlidingTilesBoardManager slidingTilesBoardManager;
     SeaInvadersBoardManager seaInvadersBoardManager;
     ZTileBoardManager zTileBoardManager;
-    User user;
-
+    String user;
     GameHub(SlidingTilesBoardManager slidingTilesBoardManager,
             SeaInvadersBoardManager seaInvadersBoardManager,
             ZTileBoardManager zTileBoardManager,
-            User user) {
+            String user) {
         this.slidingTilesBoardManager = slidingTilesBoardManager;
         this.seaInvadersBoardManager = seaInvadersBoardManager;
         this.zTileBoardManager = zTileBoardManager;
@@ -35,11 +34,11 @@ public class GameHub implements Serializable {
         return zTileBoardManager;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
