@@ -224,10 +224,16 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     public ArrayList getInvaderSpawnPositions() {
         //TODO: improve this, want to be more random (2)
         ArrayList positions = new ArrayList();
+
         for (int i = 0; i < this.gameSettings.getBoardSize(); i++) {
             positions.add(i);
         }
-        return positions;
+        Collections.shuffle(positions);
+//        ArrayList randomPositions = (ArrayList) positions.subList(0,
+        ArrayList randomPositions = new ArrayList(
+                positions.subList(0,
+                ((SeaInvadersSettings)  this.gameSettings).getNumSpawn()));
+        return randomPositions;
     }
 
     /**
