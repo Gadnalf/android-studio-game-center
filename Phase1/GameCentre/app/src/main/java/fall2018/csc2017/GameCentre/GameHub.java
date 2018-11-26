@@ -46,4 +46,8 @@ public class GameHub implements Serializable {
     public void setSeaInvadersBoardManager(SeaInvadersBoardManager seaInvadersBoardManager) {
         this.seaInvadersBoardManager = seaInvadersBoardManager;
     }
+
+    public void setZTileBoardManager(ZTileBoardManager zTileBoardManager) {
+        this.zTileBoardManager = zTileBoardManager;
+    }
 }
