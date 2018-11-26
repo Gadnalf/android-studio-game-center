@@ -101,7 +101,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         int [] state = new int[board.numTiles()];
         int boardsize = board.getBoardSize();
         for(int i = 0; i < boardsize; i++){
-            for(int j = 0; j <= boardsize; j++){
+            for(int j = 0; j < boardsize; j++){
                 state[i * boardsize + j] = board.getTile(i, j).getId();
             }
         }
