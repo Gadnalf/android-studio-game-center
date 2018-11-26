@@ -250,15 +250,13 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                             board.updateTile(i, new TileAlpha(-1));
                             break;
                         }
-
-                    }
-                    if ((board.getTile(row, board.getBoardSize() - 1).getId() == 0)) {
-                        int to_replace = row * board.getBoardSize() + (board.getBoardSize() - 1);
-                        board.updateTile(to_replace, board.getTile(row, col));
-                        board.updateTile(i, new TileAlpha(-1));
                     }
 
-
+                }
+                if ((board.getTile(row, board.getBoardSize() - 1).getId() == 0)) {
+                    int to_replace = row * board.getBoardSize() + (board.getBoardSize() - 1);
+                    board.updateTile(to_replace, board.getTile(row, col));
+                    board.updateTile(i, new TileAlpha(-1));
                 }
             }
         }
