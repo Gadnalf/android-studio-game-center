@@ -8,12 +8,12 @@ public class ZTileSettings extends GameSettings {
     }
 
     public String getGameId() {
-        String gameId = "SlidingTiles\n" + "num_tiles_" + Integer.toString(getBoardSize()) + "\nnum_undoes_" + Integer.toString(numUndoes);
+        String gameId = "Alphabet\n" + "num_tiles_" + Integer.toString(getBoardSize()) + "\nnum_undoes_" + Integer.toString(numUndoes);
         return gameId;
     }
 
     public int getNumUndoes() {
-        return numUndoes;
+        return numUndoles;
     }
 
     public void setNumUndoes(int numUndoes) {
