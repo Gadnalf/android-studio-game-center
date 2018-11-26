@@ -95,7 +95,7 @@ public class GameHubActivity extends AppCompatActivity{
         tfeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                switchToZTile();
+                switchToAlphabet();
             }
         });
     }
@@ -151,7 +151,7 @@ public class GameHubActivity extends AppCompatActivity{
 //        startActivity(tmp);
 //    }
 
-    private void switchToZTile() {
+    private void switchToAlphabet() {
         Intent tmp = new Intent(this, AlphaSettingsActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
