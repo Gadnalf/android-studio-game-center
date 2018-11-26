@@ -106,8 +106,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             row = n / this.getGameSettings().getBoardSize();
             col = n % this.getGameSettings().getBoardSize();
         }
-        System.out.print("This is the random number: ");
-        System.out.println(n);
         int k = rand.nextInt(2);
         board.updateTile(n, new TileAlpha(k));
     }
@@ -153,7 +151,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 if ((board.getTile(0,  col).getId() == 0)) {
                     board.updateTile(col, board.getTile(row, col));
                     board.updateTile(i, new TileAlpha(-1));
-                    System.out.println("Testing checking 2 and 4");
                 }
             }
         }
@@ -163,25 +160,17 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         for (int i = board.numTiles() - 1; i >= 0; i--) {
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
-            System.out.print("i: ");
-            System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
                 if (row != board.getBoardSize() - 1) {
                     for (int j = row + 1; j < board.getBoardSize(); j++) {
-                        System.out.print("j: ");
-                        System.out.println(j);
 
                         if ((board.getTile(j, col).getId() == board.getTile(row, col).getId())) {
                             int p = j * board.getBoardSize() + col;
                             board.updateTile(i, new TileAlpha(-1));
                             board.updateTile(p, new TileAlpha(board.getTile(j, col).getId()));
-                            System.out.print("this spanns row (adding): ");
-                            System.out.println(j);
                             break;
                         } else if ((board.getTile(j, col).getId() != board.getTile(row, col).getId()) &&
                                 (board.getTile(j,col).getId() != 0)) {
-                            System.out.print("this spanns row (juxtapose): ");
-                            System.out.println(j);
                             int new_position = ((j-1) * board.getBoardSize() + col) ;
                             if (new_position == i) {
                                 break;
@@ -199,7 +188,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                     int to_replace = (board.getBoardSize() - 1) * board.getBoardSize() + col;
                     board.updateTile(to_replace, board.getTile(row, col));
                     board.updateTile(i, new TileAlpha(-1));
-                    System.out.println("Testing checking 2 and 4");
                 }
             }
         }
@@ -208,24 +196,16 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         for (int i = 0; i < board.numTiles(); i++) {
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
-            System.out.print("i: ");
-            System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
                 if (col != 0) {
                     for (int j = col - 1; j >= 0; j--) {
-                        System.out.print("j: ");
-                        System.out.println(j);
                         if ((board.getTile(row, j).getId() == board.getTile(row, col).getId())) {
                             int p = row * board.getBoardSize() + j;
                             board.updateTile(i, new TileAlpha(-1));
                             board.updateTile(p, new TileAlpha(board.getTile(row, j).getId()));
-                            System.out.print("this spanns row (adding): ");
-                            System.out.println(j);
                             break;
                         } else if ((board.getTile(row, col).getId() != board.getTile(row, j).getId()) &&
                                 (board.getTile(row,j).getId() != 0)) {
-                            System.out.print("this spanns row (juxtapose): ");
-                            System.out.println(j);
                             int new_position = (row * board.getBoardSize() + j) + 1;
                             if (new_position == i) {
                                 break;
@@ -243,7 +223,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                     int to_replace = row * board.getBoardSize();
                     board.updateTile(to_replace, board.getTile(row, col));
                     board.updateTile(i, new TileAlpha(-1));
-                    System.out.println("Testing checking 2 and 4");
                 }
             }
         }
@@ -253,8 +232,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         for (int i = board.numTiles() - 1; i >= 0; i--) {
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
-            System.out.print("i: ");
-            System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
                 if (col != board.getBoardSize() - 1) {
                     for (int j = col + 1; j < board.getBoardSize(); j++) {
@@ -262,22 +239,16 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                             int p = row * board.getBoardSize() + j;
                             board.updateTile(i, new TileAlpha(-1));
                             board.updateTile(p, new TileAlpha(board.getTile(row, j).getId()));
-                            System.out.print("this spanns row (adding): ");
-                            System.out.println(j);
                             break;
                         } else if ((board.getTile(row, col).getId() != board.getTile(row, j).getId()) &&
                                 (board.getTile(row,j).getId() != 0)) {
-                            System.out.print("this spanns row (juxtapose): ");
-                            System.out.println(j);
                             int new_position = (row * board.getBoardSize() + j) - 1;
                             if (new_position == i) {
                                 break;
                             }
                             board.updateTile(new_position, board.getTile(row, col));
                             board.updateTile(i, new TileAlpha(-1));
-
                             break;
-
                         }
 
                     }
@@ -285,7 +256,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                         int to_replace = row * board.getBoardSize() + (board.getBoardSize() - 1);
                         board.updateTile(to_replace, board.getTile(row, col));
                         board.updateTile(i, new TileAlpha(-1));
-                        System.out.println("Testing checking 2 and 4");
                     }
 
 
