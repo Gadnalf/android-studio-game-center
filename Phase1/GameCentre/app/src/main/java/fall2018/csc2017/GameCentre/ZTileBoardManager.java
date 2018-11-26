@@ -9,7 +9,6 @@ import java.util.Iterator;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import java.util.List;
 import java.util.Stack;
@@ -41,19 +40,20 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      * Return whether the tiles are in row-major order.
      *
      * @return whether the tiles are in row-major order
+     *
+     * TODO: Need to test this out.
      */
     @Override
     boolean puzzleSolved() {
-        boolean solved = true;
+        boolean solved = false;
         Iterator<Tile> selected = getBoard().iterator();
-        Tile last_tile;
         Tile current_tile = selected.next();
         while(selected.hasNext()){
-            last_tile = current_tile;
-            current_tile = selected.next();
-            if (last_tile.compareTo(current_tile)<0){
-                solved = false;
+            if (current_tile.getId() == 11){
+                solved = true;
             }
+            current_tile = selected.next();
+
         }
         if (solved) {
             updateScoreboard();
@@ -84,6 +84,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     void swipeTo(int direction) {
+        saveState();
+        moveCount += 1;
         if(direction == 0) {
             swipeUp();
         } else if (direction == 1) {
@@ -92,7 +94,36 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             swipeLeft();
         } else if (direction == 3) {
             swipeRight();}
+        randomSpawn();
     }
+
+    void saveState(){
+        int [] state = new int[board.numTiles()];
+        int boardsize = board.getBoardSize();
+        for(int i = 0; i < boardsize; i++){
+            for(int j = 0; j < boardsize; j++){
+                state[i * boardsize + j] = board.getTile(i, j).getId();
+            }
+        }
+        moves.push(state);
+        moveCount +=1;
+    }
+
+    void randomSpawn(){
+
+        Random rand = new Random();
+        int n = rand.nextInt(board.numTiles());
+        int row = n / this.getGameSettings().getBoardSize();
+        int col = n % this.getGameSettings().getBoardSize();
+        while (board.getTile(row, col).getId() != 0) {
+            n = rand.nextInt(board.numTiles());
+            row = n / this.getGameSettings().getBoardSize();
+            col = n % this.getGameSettings().getBoardSize();
+        }
+        int k = rand.nextInt(2);
+        board.updateTile(n, new TileAlpha(k));
+    }
+
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
      *
@@ -103,39 +134,21 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     void touchMove(int position) {
     }
 
-    /**
-     * TODO: insert your code here John
-     */
     void swipeUp() {
 
         for (int i = 0; i < board.numTiles(); i++ ){
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
-            System.out.print("i: ");
-            System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
                 for (int j = row - 1; j >= 0; j --) {
-                    System.out.print("j: ");
-                    System.out.println(j);
-
                     if (row != 0) {
-                        System.out.print("for j position: ");
-                        System.out.println((board.getTile(j, col).getId()));
-                        System.out.print("for i position: ");
-                        System.out.println(board.getTile(row, col).getId());
                         if ((board.getTile(j, col).getId() == board.getTile(row, col).getId())) {
                             int p = j * board.getBoardSize() + col;
                             board.updateTile(i, new TileAlpha(-1));
-                            System.out.print("board backgroundId n : ");
-                            System.out.println(board.getTile(j, col).getId());
                             board.updateTile(p, new TileAlpha(board.getTile(j, col).getId()));
-                            System.out.print("this spanns row (adding): ");
-                            System.out.println(j);
                             break;
                         } else if ((board.getTile(j, col).getId() != board.getTile(row, col).getId()) &&
                                 (board.getTile(j,col).getId() != 0)) {
-                            System.out.print("this spanns row (juxtapose): ");
-                            System.out.println(j);
                             int new_position = ((j+1) * board.getBoardSize() + col);
                             if (new_position == i) {
                                 break;
@@ -152,49 +165,26 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 if ((board.getTile(0,  col).getId() == 0)) {
                     board.updateTile(col, board.getTile(row, col));
                     board.updateTile(i, new TileAlpha(-1));
-                    System.out.println("Testing checking 2 and 4");
                 }
             }
         }
-
-        Random rand = new Random();
-        int n = rand.nextInt(board.numTiles());
-        int row = n / this.getGameSettings().getBoardSize();
-        int col = n % this.getGameSettings().getBoardSize();
-        while (board.getTile(row, col).getId() != 0) {
-            n = rand.nextInt(board.numTiles());
-            row = n / this.getGameSettings().getBoardSize();
-            col = n % this.getGameSettings().getBoardSize();
-        }
-        System.out.print("This is the random number: ");
-        System.out.println(n);
-        board.updateTile(n, new TileAlpha(0));
-
     }
 
     void swipeDown() {
         for (int i = board.numTiles() - 1; i >= 0; i--) {
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
-            System.out.print("i: ");
-            System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
-                if (row != 3) {
-                    for (int j = row + 1; j < 4; j++) {
-                        System.out.print("j: ");
-                        System.out.println(j);
+                if (row != board.getBoardSize() - 1) {
+                    for (int j = row + 1; j < board.getBoardSize(); j++) {
 
                         if ((board.getTile(j, col).getId() == board.getTile(row, col).getId())) {
                             int p = j * board.getBoardSize() + col;
                             board.updateTile(i, new TileAlpha(-1));
                             board.updateTile(p, new TileAlpha(board.getTile(j, col).getId()));
-                            System.out.print("this spanns row (adding): ");
-                            System.out.println(j);
                             break;
                         } else if ((board.getTile(j, col).getId() != board.getTile(row, col).getId()) &&
                                 (board.getTile(j,col).getId() != 0)) {
-                            System.out.print("this spanns row (juxtapose): ");
-                            System.out.println(j);
                             int new_position = ((j-1) * board.getBoardSize() + col) ;
                             if (new_position == i) {
                                 break;
@@ -208,50 +198,28 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
 
 
                 }
-                if ((board.getTile(3, col).getId() == 0)) {
-                    int to_replace = 3 * board.getBoardSize() + col;
+                if ((board.getTile(board.getBoardSize() - 1, col).getId() == 0)) {
+                    int to_replace = (board.getBoardSize() - 1) * board.getBoardSize() + col;
                     board.updateTile(to_replace, board.getTile(row, col));
                     board.updateTile(i, new TileAlpha(-1));
-                    System.out.println("Testing checking 2 and 4");
                 }
             }
         }
-        Random rand = new Random();
-        int n = rand.nextInt(board.numTiles());
-        int row = n / this.getGameSettings().getBoardSize();
-        int col = n % this.getGameSettings().getBoardSize();
-        while (board.getTile(row, col).getId() != 0) {
-            n = rand.nextInt(board.numTiles());
-            row = n / this.getGameSettings().getBoardSize();
-            col = n % this.getGameSettings().getBoardSize();
-        }
-        System.out.print("This is the random number: ");
-        System.out.println(n);
-        board.updateTile(n, new TileAlpha(0));
-
     }
     void swipeLeft () {
         for (int i = 0; i < board.numTiles(); i++) {
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
-            System.out.print("i: ");
-            System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
                 if (col != 0) {
                     for (int j = col - 1; j >= 0; j--) {
-                        System.out.print("j: ");
-                        System.out.println(j);
                         if ((board.getTile(row, j).getId() == board.getTile(row, col).getId())) {
                             int p = row * board.getBoardSize() + j;
                             board.updateTile(i, new TileAlpha(-1));
                             board.updateTile(p, new TileAlpha(board.getTile(row, j).getId()));
-                            System.out.print("this spanns row (adding): ");
-                            System.out.println(j);
                             break;
                         } else if ((board.getTile(row, col).getId() != board.getTile(row, j).getId()) &&
                                 (board.getTile(row,j).getId() != 0)) {
-                            System.out.print("this spanns row (juxtapose): ");
-                            System.out.println(j);
                             int new_position = (row * board.getBoardSize() + j) + 1;
                             if (new_position == i) {
                                 break;
@@ -269,99 +237,46 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                     int to_replace = row * board.getBoardSize();
                     board.updateTile(to_replace, board.getTile(row, col));
                     board.updateTile(i, new TileAlpha(-1));
-                    System.out.println("Testing checking 2 and 4");
                 }
             }
         }
-
-        Random rand = new Random();
-        int n = rand.nextInt(board.numTiles());
-        int row = n / this.getGameSettings().getBoardSize();
-        int col = n % this.getGameSettings().getBoardSize();
-        while (board.getTile(row, col).getId() != 0) {
-            n = rand.nextInt(board.numTiles());
-            row = n / this.getGameSettings().getBoardSize();
-            col = n % this.getGameSettings().getBoardSize();
-        }
-        System.out.print("This is the random number: ");
-        System.out.println(n);
-        board.updateTile(n, new TileAlpha(0));
-
     }
 
     void swipeRight () {
         for (int i = board.numTiles() - 1; i >= 0; i--) {
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
-            System.out.print("i: ");
-            System.out.println(i);
             if (board.getTile(row,col).getId() != 0) {
-                if (col != 3) {
+                if (col != board.getBoardSize() - 1) {
                     for (int j = col + 1; j < board.getBoardSize(); j++) {
                         if ((board.getTile(row, j).getId() == board.getTile(row, col).getId())) {
                             int p = row * board.getBoardSize() + j;
                             board.updateTile(i, new TileAlpha(-1));
                             board.updateTile(p, new TileAlpha(board.getTile(row, j).getId()));
-                            System.out.print("this spanns row (adding): ");
-                            System.out.println(j);
                             break;
                         } else if ((board.getTile(row, col).getId() != board.getTile(row, j).getId()) &&
                                 (board.getTile(row,j).getId() != 0)) {
-                            System.out.print("this spanns row (juxtapose): ");
-                            System.out.println(j);
                             int new_position = (row * board.getBoardSize() + j) - 1;
                             if (new_position == i) {
                                 break;
                             }
                             board.updateTile(new_position, board.getTile(row, col));
                             board.updateTile(i, new TileAlpha(-1));
-
                             break;
-
                         }
-
-                    }
-                    if ((board.getTile(row, 3).getId() == 0)) {
-                        int to_replace = row * board.getBoardSize() + 3;
-                        board.updateTile(to_replace, board.getTile(row, col));
-                        board.updateTile(i, new TileAlpha(-1));
-                        System.out.println("Testing checking 2 and 4");
                     }
 
-
+                }
+                if ((board.getTile(row, board.getBoardSize() - 1).getId() == 0)) {
+                    int to_replace = row * board.getBoardSize() + (board.getBoardSize() - 1);
+                    board.updateTile(to_replace, board.getTile(row, col));
+                    board.updateTile(i, new TileAlpha(-1));
                 }
             }
         }
 
-        Random rand = new Random();
-        int n = rand.nextInt(board.numTiles());
-        int row = n / this.getGameSettings().getBoardSize();
-        int col = n % this.getGameSettings().getBoardSize();
-        while (board.getTile(row, col).getId() != 0) {
-            n = rand.nextInt(board.numTiles());
-            row = n / this.getGameSettings().getBoardSize();
-            col = n % this.getGameSettings().getBoardSize();
-        }
-        System.out.print("This is the random number: ");
-        System.out.println(n);
-        board.updateTile(n, new TileAlpha(0));
 
 
-    }
-
-    /**
-     * Return whether the tile is the blank tile.
-     *
-     * @param position the tile to check
-     * @return whether the tile at position is the blank tile
-     */
-    @Override
-    boolean isValidUndo(int position) {
-        int row = position / getGameSettings().getBoardSize();
-        int col = position % getGameSettings().getBoardSize();
-        int blankId = getBoard().numTiles();
-        Tile current = getBoard().getTile(row, col);
-        return (current.getId() == blankId);
     }
 
     /**
@@ -371,20 +286,20 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     void tapUndo(int position) {
-        if(isValidUndo(position)){
-            int numUndoes = ((ZTileSettings) gameSettings).getNumUndoes();
-            int[] lastMove = moves.pop();
-            int row1 = lastMove[0];
-            int col1 = lastMove[1];
-            int row2 = lastMove[2];
-            int col2 = lastMove[3];
-            board.swapTiles(row1,col1,row2,col2);
-            moveCount += 1;
-            if(numUndoes > 0) {
-                ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+        int numUndoes = ((ZTileSettings) gameSettings).getNumUndoes();
+        int[] lastMove = moves.pop();
+        moveCount += 1;
+        if (numUndoes > 0) {
+            ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+            int boardsize = board.getBoardSize();
+            for (int i = 0; i <= boardsize; i++) {
+                for (int j = 0; j <= boardsize; j++) {
+                    board.updateTile(i * boardsize + j,
+                            new TileAlpha(lastMove[i * boardsize + j]));
+                }
             }
+            moveCount += 1;
         }
-
     }
 
 

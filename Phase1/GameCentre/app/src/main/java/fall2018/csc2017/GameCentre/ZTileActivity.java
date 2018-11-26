@@ -11,9 +11,9 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
     public void onCreate(Bundle savedInstanceState) {
 
         zTileBoardManager = SaveAndLoad.loadGameHubTemp(this).getZTileBoardManager();
-        zTileBoardManager.setBoardSize(zTileBoardManager.getZTileSettings().getBoardSize());
         setAbstractBoardManager(zTileBoardManager);
         super.onCreate(savedInstanceState);
+        zTileBoardManager.setAppCompatActivity(this);
 
 
         createTileButtons(this);
@@ -22,13 +22,14 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
         // Add View to activity
 
 
-        gridView = findViewById(R.id.something);
+        gridView = findViewById(R.id.board);
+        gridView.setNumColumns(zTileBoardManager.getZTileSettings().getBoardSize());
         gridView.setAbstractBoardManager(zTileBoardManager);
         zTileBoardManager.getBoard().addObserver(this);
-        gridView.setNumColumns(4);
 
-        final int COL_FINAL = 4;
-        final int ROW_FINAL = 4;
+
+        final int COL_FINAL = zTileBoardManager.getZTileSettings().getBoardSize();
+        final int ROW_FINAL = zTileBoardManager.getZTileSettings().getBoardSize();
 
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -49,7 +50,7 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
     @Override
     protected void autoSave() {
         GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
-
+        gameHub.setZTileBoardManager(zTileBoardManager);
         SaveAndLoad.saveGameHubPermanent(gameHub, this);
         SaveAndLoad.saveGameHubTemp(gameHub, this);
     }

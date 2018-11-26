@@ -9,7 +9,6 @@ import java.io.Serializable;
  * The game activity.
  */
 public class SlidingTilesGameActivity extends AbstractGameActivity implements Serializable {
-
     SlidingTilesBoardManager slidingTilesBoardManager;
 
 
