@@ -147,7 +147,7 @@ public class SaveAndLoad extends AppCompatActivity {
      */
     public static void saveGameHubPermanent(GameHub gameHub,
                                             AppCompatActivity appCompatActivity) {
-        String fileName = gameHub.getUser().getUserName() + "_" + GameHubActivity.SAVE_FILENAME;
+        String fileName = gameHub.getUser() + "_" + GameHubActivity.SAVE_FILENAME;
         saveToFile(gameHub,
                 fileName,
                 appCompatActivity);

@@ -23,7 +23,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    ZTileBoardManager(Board board, User user, ZTileSettings zTileSettings,
+    ZTileBoardManager(Board board, String user, ZTileSettings zTileSettings,
                       AppCompatActivity appCompatActivity) {
 
         super(board, user, zTileSettings,
@@ -32,7 +32,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     }
 
 
-    ZTileBoardManager(User user, ZTileSettings zTileSettings) {
+    ZTileBoardManager(String user, ZTileSettings zTileSettings) {
         super(user, zTileSettings, new ZTileFactory());
     }
 
@@ -46,17 +46,18 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     @Override
     boolean puzzleSolved() {
         boolean solved = false;
-        Iterator<Tile> selected = getBoard().iterator();
-        Tile current_tile = selected.next();
-        while(selected.hasNext()){
-            if (current_tile.getId() == 11){
-                solved = true;
+        int boardSize = board.getBoardSize();
+        for(int i = 0; i < boardSize; i ++) {
+            for(int j = 0; j < boardSize; j ++){
+                if(board.getTile(i , j).getId() == 11){
+                    solved = true;
+                }
             }
-            current_tile = selected.next();
-
         }
         if (solved) {
-            updateScoreboard();
+            if (getAppCompatActivity() != null) {
+                updateScoreboard();
+            }
         }
         return solved;
     }

@@ -15,7 +15,7 @@ public class GameScoreBoardActivity extends ScoreBoardAbstractActivity {
                 this);
         setContentView(R.layout.activity_game_score_board);
         super.addRowsToScoreBoard(R.id.activity_game_score_board,
-                tmpGameHub.getUser().getUserName(),
+                tmpGameHub.getUser(),
                 this);
     }
 

@@ -17,13 +17,13 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    SlidingTilesBoardManager(Board board, User user, SlidingTilesSettings slidingTilesSettings,
+    SlidingTilesBoardManager(Board board, String user, SlidingTilesSettings slidingTilesSettings,
                              AppCompatActivity appCompatActivity) {
         super(board, user, slidingTilesSettings,
                 appCompatActivity, new SlidingTilesTileFactory());
     }
 
-    SlidingTilesBoardManager(Board board, User user, SlidingTilesSettings slidingTilesSettings) {
+    SlidingTilesBoardManager(Board board, String user, SlidingTilesSettings slidingTilesSettings) {
         super(board, user, slidingTilesSettings, new SlidingTilesTileFactory());
     }
 
@@ -33,7 +33,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
      * @param user
      * @param slidingTilesSettings
      */
-    SlidingTilesBoardManager(User user, SlidingTilesSettings slidingTilesSettings) {
+    SlidingTilesBoardManager(String user, SlidingTilesSettings slidingTilesSettings) {
         super(user, slidingTilesSettings, new SlidingTilesTileFactory());
         board.shuffleTiles();
 
