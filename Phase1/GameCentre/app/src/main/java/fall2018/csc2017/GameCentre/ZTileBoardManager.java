@@ -84,6 +84,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     void swipeTo(int direction) {
+        saveState();
+        moveCount += 1;
         if(direction == 0) {
             swipeUp();
         } else if (direction == 1) {
@@ -93,6 +95,18 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         } else if (direction == 3) {
             swipeRight();}
         randomSpawn();
+    }
+
+    void saveState(){
+        int [] state = new int[board.numTiles()];
+        int boardsize = board.getBoardSize();
+        for(int i = 0; i < boardsize; i++){
+            for(int j = 0; j <= boardsize; j++){
+                state[i * boardsize + j] = board.getTile(i, j).getId();
+            }
+        }
+        moves.push(state);
+        moveCount +=1;
     }
 
     void randomSpawn(){
@@ -266,28 +280,26 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     }
 
     /**
-     * Return whether the undo button was clicked
-     */
-    boolean undoClicked() {
-        return false;
-    }
-
-    /**
      * Process a touch at position in the board, redo last move if appropriate.
      *
      * @param position the position
      */
     @Override
     void tapUndo(int position) {
-        if(undoClicked()){
-            int numUndoes = ((ZTileSettings) gameSettings).getNumUndoes();
-            int[] lastMove = moves.pop();
-            moveCount += 1;
-            if(numUndoes > 0) {
-                ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+        int numUndoes = ((ZTileSettings) gameSettings).getNumUndoes();
+        int[] lastMove = moves.pop();
+        moveCount += 1;
+        if (numUndoes > 0) {
+            ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+            int boardsize = board.getBoardSize();
+            for (int i = 0; i <= boardsize; i++) {
+                for (int j = 0; j <= boardsize; j++) {
+                    board.updateTile(i * boardsize + j,
+                            new TileAlpha(lastMove[i * boardsize + j]));
+                }
             }
+            moveCount += 1;
         }
-
     }
 
 
