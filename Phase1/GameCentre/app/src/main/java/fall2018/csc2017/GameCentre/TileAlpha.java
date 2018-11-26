@@ -40,6 +40,9 @@ public class TileAlpha extends Tile{
             case 8:
                 background = R.drawable.tile_h;
                 break;
+            case 9:
+                background = R.drawable.tile_k;
+                break;
             default:
                 background = R.drawable.tile_empty;
 

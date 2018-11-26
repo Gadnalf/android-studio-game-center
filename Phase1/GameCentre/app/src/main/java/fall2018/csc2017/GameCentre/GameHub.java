@@ -26,6 +26,10 @@ public class GameHub implements Serializable {
         this.slidingTilesBoardManager = slidingTilesBoardManager;
     }
 
+    public void setZTileBoardManager(ZTileBoardManager zTileBoardManager) {
+        this.zTileBoardManager = zTileBoardManager;
+    }
+
     public ZTileBoardManager getZTileBoardManager() {
         return zTileBoardManager;
     }
@@ -45,4 +49,5 @@ public class GameHub implements Serializable {
     public void setSeaInvadersBoardManager(SeaInvadersBoardManager seaInvadersBoardManager) {
         this.seaInvadersBoardManager = seaInvadersBoardManager;
     }
+
 }

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 /**
  * The game hub activity.
@@ -68,7 +67,7 @@ public class GameHubActivity extends AppCompatActivity{
         setupStartingActivity();
 
         addSeaInvadersButtonListener();
-        add2048ButtonListener();
+        addAlphabetButtonListener();
         addSlidingTilesButtonListener();
         addChangeAccountButtonListener();
         addUserScoreBoardButton();
@@ -91,8 +90,8 @@ public class GameHubActivity extends AppCompatActivity{
     /**
      * Activates the 2048 button.
      */
-    private void add2048ButtonListener(){
-        Button tfeButton = findViewById(R.id.game_2048_button);
+    private void addAlphabetButtonListener(){
+        Button tfeButton = findViewById(R.id.game_alphabet_button);
         tfeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -153,7 +152,7 @@ public class GameHubActivity extends AppCompatActivity{
 //    }
 
     private void switchToZTile() {
-        Intent tmp = new Intent(this, ZTileActivity.class);
+        Intent tmp = new Intent(this, AlphaSettingsActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         SaveAndLoad.saveGameHubTemp(gameHub, this);
@@ -243,7 +242,8 @@ public class GameHubActivity extends AppCompatActivity{
                         user,
                         new SlidingTilesSettings(4,4)),
                 new SeaInvadersBoardManager(user,
-                        new SeaInvadersSettings(5, 5)),
+                        // new SeaInvadersSettings(5, 5, 10, 4)),
+                       new SeaInvadersSettings(5, 5, 10, 5)),
                 new ZTileBoardManager( user,
                         new ZTileSettings(4 ,4)),
                 user);
