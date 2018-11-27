@@ -172,6 +172,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+        updateScoreboard();
     }
 
     void swipeDown() {
@@ -209,6 +210,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+        updateScoreboard();
     }
     void swipeLeft () {
         for (int i = 0; i < board.numTiles(); i++) {
@@ -244,6 +246,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+        updateScoreboard();
     }
 
     void swipeRight () {
@@ -278,6 +281,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+
+        updateScoreboard();
 
 
 
@@ -324,7 +329,11 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         int boardSize = board.getBoardSize();
         for(int i = 0; i < boardSize; i ++) {
             for(int j = 0; j < boardSize; j ++){
-                total_score += Math.pow(2, board.getTile(i, j).getId());
+                if (board.getTile(i, j).getId() == 0) {
+                    total_score += 0;
+                } else {
+                    total_score += Math.pow(2, board.getTile(i, j).getId());
+                }
             }
         }
         return total_score;
