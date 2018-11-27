@@ -295,20 +295,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     void tapUndo(int position) {
-        int numUndoes = ((ZTileSettings) gameSettings).getNumUndoes();
-        int[] lastMove = moves.pop();
-        moveCount += 1;
-        if (numUndoes > 0) {
-            ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
-            int boardsize = board.getBoardSize();
-            for (int i = 0; i <= boardsize; i++) {
-                for (int j = 0; j <= boardsize; j++) {
-                    board.updateTile(i * boardsize + j,
-                            new TileAlpha(lastMove[i * boardsize + j]));
-                }
-            }
-            moveCount += 1;
-        }
     }
 
 
@@ -346,9 +332,20 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     }
 
     public void undo() {
-        swipeUp();
+        int numUndoes = (gameSettings).getNumUndoes();
+        if (numUndoes > 0) {
+            int[] lastMove = moves.pop();
+            int boardSize = board.getBoardSize();
+            for (int i = 0; i < boardSize; i++) {
+                for (int j = 0; j < boardSize; j++) {
+                    int pos = i * boardSize + j;
+                    int old = lastMove[pos];
+                    TileAlpha oldTile = new TileAlpha(old - 1);
+                    board.updateTile(pos, oldTile);
+                }
+            }
+            ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+        }
     }
-
-
 }
 
