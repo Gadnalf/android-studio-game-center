@@ -320,11 +320,15 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     public double getScore() {
-        double a = (double) getMoveCount();
-        double timeWeight = (getTimePlayed()/1000);
-        double numUndosWeight = getZTileSettings().getNumUndoes();
-        double b = (double) (timeWeight + numUndosWeight);
-        return 10-(a/b); //want to maximize this
+        double total_score = 0;
+        int boardSize = board.getBoardSize();
+        for(int i = 0; i < boardSize; i ++) {
+            for(int j = 0; j < boardSize; j ++){
+                total_score += Math.pow(2, board.getTile(i, j).getId());
+            }
+        }
+        return total_score;
+
     }
 
 
