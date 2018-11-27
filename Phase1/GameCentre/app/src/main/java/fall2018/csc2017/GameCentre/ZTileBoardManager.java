@@ -1,11 +1,14 @@
 package fall2018.csc2017.GameCentre;
 
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+
 import java.util.Random;
 
 
 import java.io.Serializable;
 import java.util.Iterator;
+import android.content.Context;
 
 
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ import java.util.Stack;
  * Need Comment
  */
 public class ZTileBoardManager extends  AbstractBoardManager implements Serializable{
-
+    boolean UNDO_CLICKED = false;
 
     /**
      * Manage a board that has been pre-populated.
@@ -328,6 +331,11 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     public ZTileSettings getZTileSettings() {
         return (ZTileSettings) getGameSettings();
     }
+
+    public void undo() {
+        swipeUp();
+    }
+
 
 }
 
