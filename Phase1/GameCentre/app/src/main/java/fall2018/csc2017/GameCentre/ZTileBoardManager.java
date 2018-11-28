@@ -300,14 +300,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
 
 
     /**
-     * notice higher a/b => lower score
-     * higher b => lower score
-     * lower a => lower score
-     * min a and max b => higher score
-     * we go with 10 bc I forget :)
-     * TODO: add why I went with 10
-     * - something to do with easier implementation
-     * @return
+     * Function used to calculate score
      */
     @Override
     public double getScore() {
@@ -333,17 +326,17 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
 
     public void undo() {
         int numUndoes = (gameSettings).getNumUndoes();
-        if (numUndoes > 0) {
-            int[] lastMove = moves.pop();
-            int boardSize = board.getBoardSize();
-            for (int i = 0; i < boardSize; i++) {
-                for (int j = 0; j < boardSize; j++) {
-                    int pos = i * boardSize + j;
-                    int old = lastMove[pos];
-                    TileAlpha oldTile = new TileAlpha(old - 1);
-                    board.updateTile(pos, oldTile);
-                }
+        int[] lastMove = moves.pop();
+        int boardSize = board.getBoardSize();
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                int pos = i * boardSize + j;
+                int old = lastMove[pos];
+                TileAlpha oldTile = new TileAlpha(old - 1);
+                board.updateTile(pos, oldTile);
             }
+        }
+        if (numUndoes > 0) {
             ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
         }
     }

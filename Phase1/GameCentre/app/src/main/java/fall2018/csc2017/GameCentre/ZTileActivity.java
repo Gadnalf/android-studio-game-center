@@ -77,7 +77,12 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
         Button undo = findViewById(R.id.undo);
         undo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                zTileBoardManager.undo();
+                if(zTileBoardManager.getZTileSettings().getNumUndoes() == -1){
+                    zTileBoardManager.undo();
+                }else{zTileBoardManager.undo();
+                    Toast.makeText(getBaseContext(), "You have " +
+                            String.valueOf(zTileBoardManager.getZTileSettings().getNumUndoes())+
+                            " undoes left", Toast.LENGTH_SHORT).show();}
             }
         });
     }

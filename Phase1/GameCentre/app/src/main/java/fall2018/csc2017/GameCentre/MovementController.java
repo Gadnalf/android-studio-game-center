@@ -49,7 +49,6 @@ public class MovementController {
     public void processSwipeDirection(Context context, int direction, boolean display) {
         if (abstractBoardManager.isValidSwipe(direction)) {
             abstractBoardManager.swipeTo(direction);
-            Toast.makeText(context, "You swiped!", Toast.LENGTH_SHORT).show();
             if (abstractBoardManager.puzzleSolved()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
             }
