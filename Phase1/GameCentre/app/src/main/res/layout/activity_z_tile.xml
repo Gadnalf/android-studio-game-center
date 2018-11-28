@@ -29,7 +29,7 @@
         <Button
             android:id="@+id/score"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|top"
             android:background="#fbf8ef"
             android:layout_marginLeft="10dp"
@@ -42,7 +42,7 @@
         <Button
             android:id="@+id/undo"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|top"
             android:layout_marginRight="1dp"
             android:text="Undo"
