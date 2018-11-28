@@ -7,23 +7,26 @@
     tools:layout_editor_absoluteY="25dp">
 
     <Button
-        android:id="@+id/load_button"
+        android:id="@+id/load_game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="66dp"
-        android:text="Load File"
-        app:layout_constraintBaseline_toBaselineOf="@+id/save_button"
-        app:layout_constraintStart_toStartOf="@+id/user_scoreboard_button" />
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="8dp"
+        android:text="load game"
+        app:layout_constraintEnd_toStartOf="@+id/new_game_button"
+        app:layout_constraintStart_toEndOf="@+id/save_game_button"
+        app:layout_constraintTop_toBottomOf="@+id/user_greeting" />
 
     <Button
-        android:id="@+id/save_button"
+        android:id="@+id/save_game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="24dp"
-        android:text="Save File"
-        app:layout_constraintBottom_toTopOf="@+id/user_scoreboard_button"
-        app:layout_constraintEnd_toStartOf="@+id/load_button" />
+        android:layout_marginEnd="8dp"
+        android:text="Save game"
+        app:layout_constraintBaseline_toBaselineOf="@+id/load_game_button"
+        app:layout_constraintEnd_toStartOf="@+id/load_game_button"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/user_greeting"
@@ -44,7 +47,7 @@
         android:id="@+id/return_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="86dp"
+        android:layout_marginBottom="67dp"
         android:text="Return to Game Hub"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginBottom="16dp"
         android:text="User Scores"
         app:layout_constraintBottom_toTopOf="@+id/game_scoreboard_button"
         app:layout_constraintStart_toStartOf="@+id/game_scoreboard_button" />
@@ -64,7 +67,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="206dp"
+        android:layout_marginStart="207dp"
         android:layout_marginBottom="48dp"
         android:text="Welcome To Sliding Tiles \n A Puzzle Game where you must arrange the numbers in the correct order."
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,8 +78,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="27dp"
-        android:layout_marginBottom="53dp"
+        android:layout_marginBottom="62dp"
         android:text="Game Scores"
         app:layout_constraintBottom_toTopOf="@+id/return_button"
         app:layout_constraintEnd_toEndOf="@+id/return_button" />
+
+    <Button
+        android:id="@+id/new_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="New Game"
+        app:layout_constraintBaseline_toBaselineOf="@+id/load_game_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/load_game_button" />
 </android.support.constraint.ConstraintLayout>
