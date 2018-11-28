@@ -100,7 +100,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
 //    }
 
     /**
-     * Activate the start button.
+     * Activate the new game button.
      */
     private void addStartButtonListener() {
         Button startButton = findViewById(R.id.start_game_button);
@@ -144,7 +144,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
                 loadFromFile(saveFilename);
                 saveToFile(tempSaveFilename);
                 makeToastLoadedText();
-                switchToGame();
+                switchToSetting();
             }
         });
     }
@@ -230,7 +230,6 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setupStartingActivity();
     }
 
 //    /**
