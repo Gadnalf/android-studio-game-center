@@ -21,12 +21,11 @@
         <activity android:name=".UserScoreBoardActivity" />
         <activity android:name=".GameScoreBoardActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".AlphaSettingsActivity"/>
+        <activity android:name=".AlphabetTilesSettingsActivity"/>
         <activity android:name=".SlidingTilesSettingsActivity" />
         <activity android:name=".SeaInvadersGameActivity"/>
-        <activity android:name=".ZTileActivity">
-        </activity>
-        <activity android:name=".AlphabetTilesStartingActivity" />
+        <activity android:name=".AlphabetTilesStartingActivity"/>
+        <activity android:name=".AlphabetTilesGameActivity"></activity>
     </application>
 
 </manifest>
