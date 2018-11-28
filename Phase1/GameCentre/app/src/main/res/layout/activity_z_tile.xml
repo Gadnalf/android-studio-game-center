@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="bottom|top"
+            android:background="#fbf8ef"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Show\nScore"
@@ -43,8 +44,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="bottom|top"
+            android:layout_marginRight="1dp"
             android:text="Undo"
             android:textColor="#f96a0b"
+            android:background="#fbf8ef"
             android:textSize="20sp"
             android:textStyle="bold|italic" />
 
