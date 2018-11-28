@@ -242,8 +242,7 @@ public class GameHubActivity extends AppCompatActivity{
                         user,
                         new SlidingTilesSettings(4,4)),
                 new SeaInvadersBoardManager(user,
-                        // new SeaInvadersSettings(5, 5, 10, 4)),
-                       new SeaInvadersSettings(5, 5, 10, 5)),
+                         new SeaInvadersSettings(5, 5, 10, 4)),
                 new ZTileBoardManager( user,
                         new ZTileSettings(4 ,4)),
                 user);

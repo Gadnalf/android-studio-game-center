@@ -14,3 +14,6 @@
 - app crashes when trying to load a game from a new user
     - seems to be working now?
 - crashes from scoreboard tests now
+
+### invaders
+- the game doesnt pause at all
