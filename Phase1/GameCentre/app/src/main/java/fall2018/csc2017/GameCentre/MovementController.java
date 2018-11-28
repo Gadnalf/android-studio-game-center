@@ -50,9 +50,7 @@ public class MovementController {
             abstractBoardManager.swipeTo(direction);
             Toast.makeText(context, "You swiped!", Toast.LENGTH_SHORT).show();
             if (abstractBoardManager.puzzleSolved()) {
-                double newScore = abstractBoardManager.getScore();
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "you scored=" + newScore, Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -13,29 +13,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="2"
             android:text="Alphabet"
             android:textStyle="bold"
             android:textColor="#776e65"
-            android:textSize="45dp" />
+            android:textSize="38sp"
+            />
 
         <Button
+            android:id="@+id/score"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#fbf8ef"
-            android:text="Undo"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom|top"
-            android:textStyle="bold|italic"
-            android:textColor="#fe8205"
-            android:textSize="25sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Show\nScore"
+            android:textColor="#f96a0b"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
             android:id="@+id/undo"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|top"
+            android:text="Undo"
+            android:textColor="#f96a0b"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
 
     </LinearLayout>

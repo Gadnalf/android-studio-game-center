@@ -311,7 +311,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     public double getScore() {
-        double total_score = 0;
+        int total_score = 0;
         int boardSize = board.getBoardSize();
         for(int i = 0; i < boardSize; i ++) {
             for(int j = 0; j < boardSize; j ++){

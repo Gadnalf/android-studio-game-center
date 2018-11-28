@@ -1,9 +1,12 @@
 package fall2018.csc2017.GameCentre;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.ViewTreeObserver;
 import java.io.Serializable;
 import android.widget.Button;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ZTileActivity extends AbstractGameActivity implements Serializable{
     ZTileBoardManager zTileBoardManager;
@@ -16,6 +19,7 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
         setAbstractBoardManager(zTileBoardManager);
         super.onCreate(savedInstanceState);
         zTileBoardManager.setAppCompatActivity(this);
+
 
 
         createTileButtons(this);
@@ -52,6 +56,8 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
                 });
 
         addUndoListener();
+        showScore();
+
 
 
     }
@@ -75,4 +81,18 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
             }
         });
     }
+
+    protected void showScore() {
+        Button score = findViewById(R.id.score);
+        score.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getBaseContext(), "Score: " +
+                        String.valueOf(zTileBoardManager.getScore()), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
+
 }
