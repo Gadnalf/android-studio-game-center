@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:fontFamily="casual"
-            android:text="Overlap the tiles to obtain Z tile!!"
+            android:text="Overlap the tiles to obtain K tile!!"
             android:textSize="18sp"
             android:textColor="#776e65" />
 
