@@ -95,7 +95,7 @@ public class GameHubActivity extends AppCompatActivity{
         tfeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                switchToZTile();
+                switchToAlphabet();
             }
         });
     }
@@ -151,7 +151,7 @@ public class GameHubActivity extends AppCompatActivity{
 //        startActivity(tmp);
 //    }
 
-    private void switchToZTile() {
+    private void switchToAlphabet() {
         Intent tmp = new Intent(this, AlphaSettingsActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
@@ -242,8 +242,7 @@ public class GameHubActivity extends AppCompatActivity{
                         user,
                         new SlidingTilesSettings(4,4)),
                 new SeaInvadersBoardManager(user,
-                        // new SeaInvadersSettings(5, 5, 10, 4)),
-                       new SeaInvadersSettings(5, 5, 10, 5)),
+                         new SeaInvadersSettings(5, 5, 10, 4)),
                 new ZTileBoardManager( user,
                         new ZTileSettings(4 ,4)),
                 user);

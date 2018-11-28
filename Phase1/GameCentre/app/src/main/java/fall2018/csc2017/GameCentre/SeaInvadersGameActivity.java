@@ -23,7 +23,10 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
              seaInvadersBoardManager.setAppCompatActivity(appCompatActivity);
             seaInvadersBoardManager.swim();
             seaInvadersBoardManager.spawnTheInvaders();
-            seaInvadersBoardManager.board.notifyObservers();
+             if (seaInvadersBoardManager.isGameOver()) {
+                 seaInvadersBoardManager.resetGame();
+             }
+//            seaInvadersBoardManager.board.notifyObservers();
 //                timerHandler.postDelayed(this, 5000);
             timerHandler.postDelayed(this,
                     1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());

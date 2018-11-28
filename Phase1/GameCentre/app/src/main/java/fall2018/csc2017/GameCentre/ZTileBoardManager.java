@@ -1,23 +1,18 @@
 package fall2018.csc2017.GameCentre;
 
 import android.support.v7.app.AppCompatActivity;
+
+
 import java.util.Random;
 
 
 import java.io.Serializable;
-import java.util.Iterator;
 
-
-import java.util.ArrayList;
-
-import java.util.List;
-import java.util.Stack;
 
 /**
  * Need Comment
  */
 public class ZTileBoardManager extends  AbstractBoardManager implements Serializable{
-
 
     /**
      * Manage a board that has been pre-populated.
@@ -46,17 +41,18 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     @Override
     boolean puzzleSolved() {
         boolean solved = false;
-        Iterator<Tile> selected = getBoard().iterator();
-        Tile current_tile = selected.next();
-        while(selected.hasNext()){
-            if (current_tile.getId() == 11){
-                solved = true;
+        int boardSize = board.getBoardSize();
+        for(int i = 0; i < boardSize; i ++) {
+            for(int j = 0; j < boardSize; j ++){
+                if(board.getTile(i , j).getId() == 11){
+                    solved = true;
+                }
             }
-            current_tile = selected.next();
-
         }
         if (solved) {
-            updateScoreboard();
+            if (getAppCompatActivity() != null) {
+                updateScoreboard();
+            }
         }
         return solved;
     }
@@ -168,6 +164,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+        updateScoreboard();
     }
 
     void swipeDown() {
@@ -205,6 +202,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+        updateScoreboard();
     }
     void swipeLeft () {
         for (int i = 0; i < board.numTiles(); i++) {
@@ -240,6 +238,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+        updateScoreboard();
     }
 
     void swipeRight () {
@@ -275,6 +274,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             }
         }
 
+        updateScoreboard();
+
 
 
     }
@@ -286,47 +287,53 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     void tapUndo(int position) {
-        int numUndoes = ((ZTileSettings) gameSettings).getNumUndoes();
-        int[] lastMove = moves.pop();
-        moveCount += 1;
-        if (numUndoes > 0) {
-            ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
-            int boardsize = board.getBoardSize();
-            for (int i = 0; i <= boardsize; i++) {
-                for (int j = 0; j <= boardsize; j++) {
-                    board.updateTile(i * boardsize + j,
-                            new TileAlpha(lastMove[i * boardsize + j]));
-                }
-            }
-            moveCount += 1;
-        }
     }
 
 
 
     /**
-     * notice higher a/b => lower score
-     * higher b => lower score
-     * lower a => lower score
-     * min a and max b => higher score
-     * we go with 10 bc I forget :)
-     * TODO: add why I went with 10
-     * - something to do with easier implementation
-     * @return
+     * Function used to calculate score
      */
     @Override
     public double getScore() {
-        double a = (double) getMoveCount();
-        double timeWeight = (getTimePlayed()/1000);
-        double numUndosWeight = getZTileSettings().getNumUndoes();
-        double b = (double) (timeWeight + numUndosWeight);
-        return 10-(a/b); //want to maximize this
-    }
+        int total_score = 0;
+        int boardSize = board.getBoardSize();
+        for(int i = 0; i < boardSize; i ++) {
+            for(int j = 0; j < boardSize; j ++){
+                if (board.getTile(i, j).getId() == 0) {
+                    total_score += 0;
+                } else {
+                    total_score += Math.pow(2, board.getTile(i, j).getId());
+                }
+            }
+        }
+        return total_score;
 
+    }
+    @Override
+    public boolean moveIsEmpty() {
+        return moves.empty();
+    }
 
     public ZTileSettings getZTileSettings() {
         return (ZTileSettings) getGameSettings();
     }
 
+    public void undo() {
+        int numUndoes = (gameSettings).getNumUndoes();
+        int[] lastMove = moves.pop();
+        int boardSize = board.getBoardSize();
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                int pos = i * boardSize + j;
+                int old = lastMove[pos];
+                TileAlpha oldTile = new TileAlpha(old - 1);
+                board.updateTile(pos, oldTile);
+            }
+        }
+        if (numUndoes > 0) {
+            ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+        }
+    }
 }
 

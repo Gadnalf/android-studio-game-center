@@ -46,6 +46,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
                 this.tiles[row][col] = iter.next();
             }
         }
+        notifyObservers();
 
     }
 

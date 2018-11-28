@@ -42,7 +42,7 @@ public class AlphaSettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tiles_setting);
+        setContentView(R.layout.activity_alpha_settings);
 
         boardSize = 4;
         numUndoes = 3;
@@ -53,7 +53,7 @@ public class AlphaSettingsActivity extends AppCompatActivity {
         addConfirmButtonListener();
         addFiveByFiveButtonListener();
         addFourByFourButtonListener();
-        addThreeByThreeButtonListener();
+        addSixBySixButtonListener();
 
     }
 
@@ -135,14 +135,14 @@ public class AlphaSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the 5x5 button.
+     * Activate the 4 by 4 button
      */
-    void addFiveByFiveButtonListener() {
-        Button button_5x5 = findViewById(R.id.five_by_five);
-        button_5x5.setOnClickListener(new View.OnClickListener() {
+    void addFourByFourButtonListener() {
+        Button button_4x4 = findViewById(R.id.four_by_four);
+        button_4x4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                boardSize = 6;
+            public void onClick(View view) {
+                boardSize = 4;
                 zTileBoardManager.setBoardSize(boardSize);
                 updateBoardSizeDisplay();
             }
@@ -150,13 +150,13 @@ public class AlphaSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the 4x4 button.
+     * Activate the 5 by 5 button
      */
-    void addFourByFourButtonListener() {
-        Button button_4x4 = findViewById(R.id.four_by_four);
-        button_4x4.setOnClickListener(new View.OnClickListener() {
+    void addFiveByFiveButtonListener() {
+        Button button_5x5 = findViewById(R.id.five_by_five);
+        button_5x5.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 boardSize = 5;
                 zTileBoardManager.setBoardSize(boardSize);
                 updateBoardSizeDisplay();
@@ -165,14 +165,14 @@ public class AlphaSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the 3x3 button.
+     * Activate the 6 by 6 button
      */
-    void addThreeByThreeButtonListener() {
-        Button button_3x3 = findViewById(R.id.three_by_three);
-        button_3x3.setOnClickListener(new View.OnClickListener() {
+    void addSixBySixButtonListener() {
+        Button button_6x6 = findViewById(R.id.six_by_six);
+        button_6x6.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                boardSize = 4;
+            public void onClick(View view) {
+                boardSize = 6;
                 zTileBoardManager.setBoardSize(boardSize);
                 updateBoardSizeDisplay();
             }
