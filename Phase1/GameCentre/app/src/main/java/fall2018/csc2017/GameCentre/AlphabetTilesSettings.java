@@ -2,10 +2,10 @@ package fall2018.csc2017.GameCentre;
 
 import java.io.Serializable;
 
-public class ZTileSettings extends GameSettings implements Serializable {
+public class AlphabetTilesSettings extends GameSettings implements Serializable {
     private int numUndoes;
 
-    public ZTileSettings(int boardSize, int numUndoes) {
+    public AlphabetTilesSettings(int boardSize, int numUndoes) {
         super(boardSize, numUndoes);
     }
 
@@ -24,6 +24,6 @@ public class ZTileSettings extends GameSettings implements Serializable {
 
     @Override
     public GameSettings copy() {
-        return new ZTileSettings(getBoardSize(), numUndoes);
+        return new AlphabetTilesSettings(getBoardSize(), numUndoes);
     }
 }

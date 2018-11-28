@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class GameHub implements Serializable {
     SlidingTilesBoardManager slidingTilesBoardManager;
     SeaInvadersBoardManager seaInvadersBoardManager;
-    ZTileBoardManager zTileBoardManager;
+    AlphabetTilesBoardManager alphabetTilesBoardManager;
     String user;
     GameHub(SlidingTilesBoardManager slidingTilesBoardManager,
             SeaInvadersBoardManager seaInvadersBoardManager,
-            ZTileBoardManager zTileBoardManager,
+            AlphabetTilesBoardManager alphabetTilesBoardManager,
             String user) {
         this.slidingTilesBoardManager = slidingTilesBoardManager;
         this.seaInvadersBoardManager = seaInvadersBoardManager;
-        this.zTileBoardManager = zTileBoardManager;
+        this.alphabetTilesBoardManager = alphabetTilesBoardManager;
         this.user = user;
     }
 
@@ -26,12 +26,12 @@ public class GameHub implements Serializable {
         this.slidingTilesBoardManager = slidingTilesBoardManager;
     }
 
-    public void setZTileBoardManager(ZTileBoardManager zTileBoardManager) {
-        this.zTileBoardManager = zTileBoardManager;
+    public void setZTileBoardManager(AlphabetTilesBoardManager alphabetTilesBoardManager) {
+        this.alphabetTilesBoardManager = alphabetTilesBoardManager;
     }
 
-    public ZTileBoardManager getZTileBoardManager() {
-        return zTileBoardManager;
+    public AlphabetTilesBoardManager getZTileBoardManager() {
+        return alphabetTilesBoardManager;
     }
 
     public String getUser() {

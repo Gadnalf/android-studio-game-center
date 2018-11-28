@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ZTileFactory extends AbstractTilesFactory{
+public class AlphabetTileFactory extends AbstractTilesFactory{
     public List<Tile> getTiles(int boardSize) {
         List<Tile> tiles = new ArrayList<>();
         int numTiles = boardSize * boardSize;

@@ -12,23 +12,23 @@ import java.io.Serializable;
 /**
  * Need Comment
  */
-public class ZTileBoardManager extends  AbstractBoardManager implements Serializable{
+public class AlphabetTilesBoardManager extends  AbstractBoardManager implements Serializable{
 
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    ZTileBoardManager(Board board, String user, ZTileSettings zTileSettings,
-                      AppCompatActivity appCompatActivity) {
+    AlphabetTilesBoardManager(Board board, String user, AlphabetTilesSettings alphabetTilesSettings,
+                              AppCompatActivity appCompatActivity) {
 
-        super(board, user, zTileSettings,
-                appCompatActivity, new ZTileFactory());
+        super(board, user, alphabetTilesSettings,
+                appCompatActivity, new AlphabetTileFactory());
 
     }
 
 
-    ZTileBoardManager(String user, ZTileSettings zTileSettings) {
-        super(user, zTileSettings, new ZTileFactory());
+    AlphabetTilesBoardManager(String user, AlphabetTilesSettings alphabetTilesSettings) {
+        super(user, alphabetTilesSettings, new AlphabetTileFactory());
     }
 
     /**
@@ -315,8 +315,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         return moves.empty();
     }
 
-    public ZTileSettings getZTileSettings() {
-        return (ZTileSettings) getGameSettings();
+    public AlphabetTilesSettings getZTileSettings() {
+        return (AlphabetTilesSettings) getGameSettings();
     }
 
     public void undo() {
@@ -332,7 +332,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             }
         }
         if (numUndoes > 0) {
-            ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+            ((AlphabetTilesSettings) gameSettings).setNumUndoes(numUndoes - 1);
         }
     }
 }

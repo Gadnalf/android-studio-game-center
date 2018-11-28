@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class AlphaSettingsActivity extends AppCompatActivity {
+public class AlphabetTilesSettingsActivity extends AppCompatActivity {
     /**
      * The board size display.
      */
@@ -34,7 +34,7 @@ public class AlphaSettingsActivity extends AppCompatActivity {
      */
     private int numUndoes;
 
-    private ZTileBoardManager zTileBoardManager;
+    private AlphabetTilesBoardManager alphabetTilesBoardManager;
     private GameHub gameHub;
 
 
@@ -47,7 +47,7 @@ public class AlphaSettingsActivity extends AppCompatActivity {
         boardSize = 4;
         numUndoes = 3;
         gameHub = SaveAndLoad.loadGameHubTemp(this);
-        zTileBoardManager = gameHub.getZTileBoardManager();
+        alphabetTilesBoardManager = gameHub.getZTileBoardManager();
         addStartButtonListener();
         addUnlimitedUndoListener();
         addConfirmButtonListener();
@@ -85,8 +85,8 @@ public class AlphaSettingsActivity extends AppCompatActivity {
     }
 
     private void switchToGame() {
-        Intent tmp = new Intent(this, ZTileActivity.class);
-        gameHub.setZTileBoardManager(zTileBoardManager);
+        Intent tmp = new Intent(this, AlphabetTilesGameActivity.class);
+        gameHub.setZTileBoardManager(alphabetTilesBoardManager);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
 //        saveToFile(TEMP_SAVE_FILENAME);
@@ -143,7 +143,7 @@ public class AlphaSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boardSize = 4;
-                zTileBoardManager.setBoardSize(boardSize);
+                alphabetTilesBoardManager.setBoardSize(boardSize);
                 updateBoardSizeDisplay();
             }
         });
@@ -158,7 +158,7 @@ public class AlphaSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boardSize = 5;
-                zTileBoardManager.setBoardSize(boardSize);
+                alphabetTilesBoardManager.setBoardSize(boardSize);
                 updateBoardSizeDisplay();
             }
         });
@@ -173,7 +173,7 @@ public class AlphaSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boardSize = 6;
-                zTileBoardManager.setBoardSize(boardSize);
+                alphabetTilesBoardManager.setBoardSize(boardSize);
                 updateBoardSizeDisplay();
             }
         });
@@ -182,14 +182,14 @@ public class AlphaSettingsActivity extends AppCompatActivity {
     void updateBoardSizeDisplay() {
         String tmp = "Select Board Size: " + boardSize + "x" + boardSize;
         boardSizeDisplay.setText(tmp);
-        zTileBoardManager.getZTileSettings().setBoardSize(boardSize);
+        alphabetTilesBoardManager.getZTileSettings().setBoardSize(boardSize);
 
     }
 
     void updateUndoDisplay() {
         String tmp = "Select Number of Undoes: " + numUndoes;
         undoDisplay.setText(tmp);
-        zTileBoardManager.getZTileSettings().setNumUndoes(numUndoes);
+        alphabetTilesBoardManager.getZTileSettings().setNumUndoes(numUndoes);
     }
 }
 
