@@ -51,7 +51,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                 && finishedFinalRound
                 && gameAintOver) {
             updateScoreboard();
-            resetGame(); //TODO: test this works
             return true;
         } else {
             return false;
@@ -258,6 +257,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         return score;
     }
 
+    @Override
     public void resetGame() {
         Toast.makeText(getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored" + getScore(),
                 Toast.LENGTH_SHORT).show();

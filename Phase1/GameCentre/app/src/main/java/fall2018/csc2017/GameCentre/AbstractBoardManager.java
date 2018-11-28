@@ -215,4 +215,6 @@ abstract public class AbstractBoardManager implements Serializable {
     public AbstractTilesFactory getTilesFactory() {
         return tilesFactory;
     }
+
+    public void resetGame() {}
 }

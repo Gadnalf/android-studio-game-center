@@ -24,6 +24,7 @@ public class MovementController {
                 double newScore = abstractBoardManager.getScore();
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "you scored=" + newScore, Toast.LENGTH_SHORT).show();
+                abstractBoardManager.resetGame();
             }
         } else if (abstractBoardManager.isValidUndo(position)) {
             if (abstractBoardManager.moveIsEmpty()) {
