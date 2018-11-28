@@ -207,4 +207,12 @@ abstract public class AbstractBoardManager implements Serializable {
             System.out.println("app compat activity not defined");
         }
     }
+
+    public void recomputeStartTime() {
+        this.startTime = System.nanoTime();
+    }
+
+    public AbstractTilesFactory getTilesFactory() {
+        return tilesFactory;
+    }
 }
