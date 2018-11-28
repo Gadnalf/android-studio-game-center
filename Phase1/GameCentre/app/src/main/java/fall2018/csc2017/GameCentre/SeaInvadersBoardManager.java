@@ -21,7 +21,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      *
      * @param board the board
      */
-    SeaInvadersBoardManager(Board board, User user, SeaInvadersSettings seaInvadersSettings,
+    SeaInvadersBoardManager(Board board, String user, SeaInvadersSettings seaInvadersSettings,
                             AppCompatActivity appCompatActivity) {
         super(board, user, seaInvadersSettings,
                 appCompatActivity, new SeaInvadersTileFactory());
@@ -29,7 +29,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     }
 
 
-    SeaInvadersBoardManager(User user, SeaInvadersSettings seaInvadersSettings) {
+    SeaInvadersBoardManager(String user, SeaInvadersSettings seaInvadersSettings) {
         super(user, seaInvadersSettings, new SeaInvadersTileFactory());
         this.lastOccupiedColumn = seaInvadersSettings.getBoardSize() - 1;
     }

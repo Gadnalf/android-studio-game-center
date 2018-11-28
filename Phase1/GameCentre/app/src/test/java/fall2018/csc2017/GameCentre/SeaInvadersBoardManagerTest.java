@@ -15,7 +15,7 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
     @Override
     @Before
     public void setUp() {
-        User user = new User("phil");
+        String user = "phil";
         SeaInvadersSettings seaInvaderSettings = new SeaInvadersSettings(1, 1);
         boardManager = new SeaInvadersBoardManager(user, seaInvaderSettings);
     }

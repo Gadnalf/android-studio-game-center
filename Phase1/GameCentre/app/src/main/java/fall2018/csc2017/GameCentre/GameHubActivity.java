@@ -95,7 +95,7 @@ public class GameHubActivity extends AppCompatActivity{
         tfeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                switchToZTile();
+                switchToAlphabet();
             }
         });
     }
@@ -151,7 +151,7 @@ public class GameHubActivity extends AppCompatActivity{
 //        startActivity(tmp);
 //    }
 
-    private void switchToZTile() {
+    private void switchToAlphabet() {
         Intent tmp = new Intent(this, AlphaSettingsActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
@@ -236,7 +236,7 @@ public class GameHubActivity extends AppCompatActivity{
         saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
 
         //make a temp file just in case there is none yet
-        User user = new User(accountManager.getName());
+        String user = accountManager.getName();
         GameHub gameHubTmp = new GameHub(
                 new SlidingTilesBoardManager(
                         user,

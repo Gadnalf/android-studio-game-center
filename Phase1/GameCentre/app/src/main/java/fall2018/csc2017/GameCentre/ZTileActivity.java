@@ -2,10 +2,12 @@ package fall2018.csc2017.GameCentre;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import java.io.Serializable;
-
+import android.widget.Button;
+import android.view.View;
 
 public class ZTileActivity extends AbstractGameActivity implements Serializable{
     ZTileBoardManager zTileBoardManager;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
         final int COL_FINAL = zTileBoardManager.getZTileSettings().getBoardSize();
         final int ROW_FINAL = zTileBoardManager.getZTileSettings().getBoardSize();
 
+
+
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
@@ -46,6 +50,10 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
                         display();
                     }
                 });
+
+        addUndoListener();
+
+
     }
     @Override
     protected void autoSave() {
@@ -53,5 +61,18 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
         gameHub.setZTileBoardManager(zTileBoardManager);
         SaveAndLoad.saveGameHubPermanent(gameHub, this);
         SaveAndLoad.saveGameHubTemp(gameHub, this);
+    }
+
+    /**
+     * comment needed
+     */
+
+    protected void addUndoListener() {
+        Button undo = findViewById(R.id.undo);
+        undo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                zTileBoardManager.undo();
+            }
+        });
     }
 }

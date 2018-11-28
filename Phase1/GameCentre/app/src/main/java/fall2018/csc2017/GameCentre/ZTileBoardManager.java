@@ -1,11 +1,14 @@
 package fall2018.csc2017.GameCentre;
 
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+
 import java.util.Random;
 
 
 import java.io.Serializable;
 import java.util.Iterator;
+import android.content.Context;
 
 
 import java.util.ArrayList;
@@ -17,13 +20,13 @@ import java.util.Stack;
  * Need Comment
  */
 public class ZTileBoardManager extends  AbstractBoardManager implements Serializable{
-
+    boolean UNDO_CLICKED = false;
 
     /**
      * Manage a board that has been pre-populated.
      * @param board the board
      */
-    ZTileBoardManager(Board board, User user, ZTileSettings zTileSettings,
+    ZTileBoardManager(Board board, String user, ZTileSettings zTileSettings,
                       AppCompatActivity appCompatActivity) {
 
         super(board, user, zTileSettings,
@@ -32,7 +35,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     }
 
 
-    ZTileBoardManager(User user, ZTileSettings zTileSettings) {
+    ZTileBoardManager(String user, ZTileSettings zTileSettings) {
         super(user, zTileSettings, new ZTileFactory());
     }
 
@@ -46,17 +49,18 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
     @Override
     boolean puzzleSolved() {
         boolean solved = false;
-        Iterator<Tile> selected = getBoard().iterator();
-        Tile current_tile = selected.next();
-        while(selected.hasNext()){
-            if (current_tile.getId() == 11){
-                solved = true;
+        int boardSize = board.getBoardSize();
+        for(int i = 0; i < boardSize; i ++) {
+            for(int j = 0; j < boardSize; j ++){
+                if(board.getTile(i , j).getId() == 11){
+                    solved = true;
+                }
             }
-            current_tile = selected.next();
-
         }
         if (solved) {
-            updateScoreboard();
+            if (getAppCompatActivity() != null) {
+                updateScoreboard();
+            }
         }
         return solved;
     }
@@ -168,6 +172,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+        updateScoreboard();
     }
 
     void swipeDown() {
@@ -205,6 +210,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+        updateScoreboard();
     }
     void swipeLeft () {
         for (int i = 0; i < board.numTiles(); i++) {
@@ -240,6 +246,7 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
                 }
             }
         }
+        updateScoreboard();
     }
 
     void swipeRight () {
@@ -275,6 +282,8 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
             }
         }
 
+        updateScoreboard();
+
 
 
     }
@@ -286,20 +295,6 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     void tapUndo(int position) {
-        int numUndoes = ((ZTileSettings) gameSettings).getNumUndoes();
-        int[] lastMove = moves.pop();
-        moveCount += 1;
-        if (numUndoes > 0) {
-            ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
-            int boardsize = board.getBoardSize();
-            for (int i = 0; i <= boardsize; i++) {
-                for (int j = 0; j <= boardsize; j++) {
-                    board.updateTile(i * boardsize + j,
-                            new TileAlpha(lastMove[i * boardsize + j]));
-                }
-            }
-            moveCount += 1;
-        }
     }
 
 
@@ -316,11 +311,19 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
      */
     @Override
     public double getScore() {
-        double a = (double) getMoveCount();
-        double timeWeight = (getTimePlayed()/1000);
-        double numUndosWeight = getZTileSettings().getNumUndoes();
-        double b = (double) (timeWeight + numUndosWeight);
-        return 10-(a/b); //want to maximize this
+        double total_score = 0;
+        int boardSize = board.getBoardSize();
+        for(int i = 0; i < boardSize; i ++) {
+            for(int j = 0; j < boardSize; j ++){
+                if (board.getTile(i, j).getId() == 0) {
+                    total_score += 0;
+                } else {
+                    total_score += Math.pow(2, board.getTile(i, j).getId());
+                }
+            }
+        }
+        return total_score;
+
     }
 
 
@@ -328,5 +331,21 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         return (ZTileSettings) getGameSettings();
     }
 
+    public void undo() {
+        int numUndoes = (gameSettings).getNumUndoes();
+        if (numUndoes > 0) {
+            int[] lastMove = moves.pop();
+            int boardSize = board.getBoardSize();
+            for (int i = 0; i < boardSize; i++) {
+                for (int j = 0; j < boardSize; j++) {
+                    int pos = i * boardSize + j;
+                    int old = lastMove[pos];
+                    TileAlpha oldTile = new TileAlpha(old - 1);
+                    board.updateTile(pos, oldTile);
+                }
+            }
+            ((ZTileSettings) gameSettings).setNumUndoes(numUndoes - 1);
+        }
+    }
 }
 

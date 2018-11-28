@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 
 public class ScoreBoardTest {
 
-    User user1 = new User("bill");
-    User user2 = new User("bob");
+    String user1 = "bill";
+    String user2 = "bob";
     GameSettings gameSettings1 = new SlidingTilesSettings(4,4);
     GameSettings gameSettings2 = new SeaInvadersSettings(4,4);
     GameSettings gameSettings3 = new SlidingTilesSettings(3,3);
