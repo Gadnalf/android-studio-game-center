@@ -129,7 +129,7 @@ public class GameHubActivity extends AppCompatActivity{
     }
 
     private void switchToAlphabet() {
-        Intent tmp = new Intent(this, AlphaSettingsActivity.class);
+        Intent tmp = new Intent(this, AlphabetTilesStartingActivity.class);
         tmp.putExtra("user", accountManager.getName());
         startActivity(tmp);
     }
