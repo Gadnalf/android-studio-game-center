@@ -92,7 +92,7 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
         score.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Score: " +
-                        String.valueOf(zTileBoardManager.getScore()), Toast.LENGTH_SHORT).show();
+                        String.valueOf((int) zTileBoardManager.getScore()), Toast.LENGTH_SHORT).show();
             }
         });
     }
