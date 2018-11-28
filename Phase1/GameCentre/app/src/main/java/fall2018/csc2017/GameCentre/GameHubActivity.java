@@ -58,20 +58,17 @@ public class GameHubActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_hub);
-//
-//        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
-//        if (accountManager == null) {
-//            accountManager = new AccountManager();
-//        }
-//        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
-        setupStartingActivity();
+
+        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
+        if (accountManager == null) {
+            accountManager = new AccountManager();
+        }
+        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
 
         addSeaInvadersButtonListener();
         addAlphabetButtonListener();
         addSlidingTilesButtonListener();
         addChangeAccountButtonListener();
-        addUserScoreBoardButton();
-        addGameScoreBoardButton();
     }
 
     /**
@@ -129,40 +126,22 @@ public class GameHubActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-//        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
-        setupStartingActivity();
+        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
+        if (accountManager == null) {
+            accountManager = new AccountManager();
+        }
+        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
     }
-
-//    /**
-//     * Switch to the SeaInvadersStartingActivity view to start a Sea Invaders game.
-//     */
-//    private void switchToSeaInvaders() {
-//        Intent tmp = new Intent(this, SlidingTilesStartingActivity.class);
-//        //TODO: update to go where it's supposed to
-//        startActivity(tmp);
-//    }
-//
-//    /**
-//     * Switch to the 2048StartingActivity view to start a 2048 game.
-//     */
-//    private void switchTo2048() {
-//        Intent tmp = new Intent(this, SlidingTilesStartingActivity.class);
-//        //TODO: update to go where it's supposed to
-//        startActivity(tmp);
-//    }
 
     private void switchToAlphabet() {
         Intent tmp = new Intent(this, AlphaSettingsActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        tmp.putExtra("user", accountManager.getName());
         startActivity(tmp);
     }
 
     private void switchToSeaInvaders() {
         Intent tmp = new Intent(this, SeaInvadersGameActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
+        tmp.putExtra("user", accountManager.getName());
         startActivity(tmp);
     }
 
@@ -171,51 +150,8 @@ public class GameHubActivity extends AppCompatActivity{
      */
     private void switchToSlidingTiles() {
         Intent tmp = new Intent(this, SlidingTilesStartingActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
+        tmp.putExtra("user", accountManager.getName());
         startActivity(tmp);
-    }
-
-    /**
-     * Switch to the UserScoreBoard view
-     */
-    private void switchToUserScoreBoard() {
-        Intent tmp = new Intent(this, UserScoreBoardActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
-//        saveToFile(TEMP_SAVE_FILENAME);
-//        TODO: user proper file paths
-        startActivity(tmp);
-    }
-
-    private void switchToGameScoreBoard() {
-        Intent tmp = new Intent(this, GameScoreBoardActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
-        startActivity(tmp);
-    }
-
-    private void addUserScoreBoardButton() {
-        Button saveButton = findViewById(R.id.UserScoreBoardButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                gameHub = new GameLaunchCentre().getBoardManager();
-                switchToUserScoreBoard();
-            }
-        });
-    }
-
-    private void addGameScoreBoardButton() {
-        Button saveButton = findViewById(R.id.GameScoreBoardButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                gameHub = new GameLaunchCentre().getBoardManager();
-                switchToGameScoreBoard();
-            }
-        });
     }
 
     /**
@@ -225,37 +161,6 @@ public class GameHubActivity extends AppCompatActivity{
         Intent tmp = new Intent(this, LoginActivity.class);
         saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
         startActivity(tmp);
-    }
-
-    private void setupStartingActivity() {
-        //load in the accounts
-        loadAccountsFromFile(ACCOUNT_SAVE_FILENAME);
-        if (accountManager == null) {
-            accountManager = new AccountManager();
-        }
-        saveAccountsToFile(ACCOUNT_SAVE_FILENAME);
-
-        //make a temp file just in case there is none yet
-        String user = accountManager.getName();
-        GameHub gameHubTmp = new GameHub(
-                new SlidingTilesBoardManager(
-                        user,
-                        new SlidingTilesSettings(4,4)),
-                new SeaInvadersBoardManager(user,
-                         new SeaInvadersSettings(5, 5, 10, 4)),
-                new ZTileBoardManager( user,
-                        new ZTileSettings(4 ,4)),
-                user);
-        SaveAndLoad.saveAllTemp(gameHubTmp, this);
-
-        //load the board manager if it exists if not load the temp file
-        gameHub = SaveAndLoad.loadGameHubPermanent(
-                accountManager.getName(),
-                this);
-        //save the new board manager as temp if its been loaded
-        SaveAndLoad.saveGameHubTemp(
-                gameHub,
-                this); //this will save the loaded board manager to tmp to be used in the other activities
     }
 
     /**
