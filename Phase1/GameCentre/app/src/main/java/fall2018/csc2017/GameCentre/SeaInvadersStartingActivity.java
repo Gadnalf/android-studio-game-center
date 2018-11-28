@@ -25,7 +25,7 @@ public class SeaInvadersStartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starting_alphabet);
+        setContentView(R.layout.activity_starting_seainvaders);
         addNewGameButtonListener();
         addLoadButtonListener(this);
         addSaveButtonListener(this);
