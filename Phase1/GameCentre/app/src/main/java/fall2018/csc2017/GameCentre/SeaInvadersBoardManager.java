@@ -1,11 +1,13 @@
 package fall2018.csc2017.GameCentre;
 
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 
 public class SeaInvadersBoardManager extends AbstractBoardManager implements Serializable {
@@ -49,6 +51,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                 && finishedFinalRound
                 && gameAintOver) {
             updateScoreboard();
+            resetGame(); //TODO: test this works
             return true;
         } else {
             return false;
@@ -176,7 +179,8 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
 
     /**
-     * starts the invaders swimming towards the bottom of the board
+     * starts all the invaders swimming towards the bottom of the board
+     * one row at a time
      */
     public void swim() {
         if (!puzzleSolved() && !isGameOver() &&
@@ -221,6 +225,10 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         return invaderPositions;
     }
 
+    /**
+     * return new positions for invader spawning
+     * @return ArrayList of new spawn positions
+     */
     public ArrayList getInvaderSpawnPositions() {
         //TODO: improve this, want to be more random (2)
         ArrayList positions = new ArrayList();
@@ -237,10 +245,12 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     }
 
     /**
-     * @return
+     * get a score for this point in the game
+     * @return double = score
      */
     @Override
     public double getScore() {
+
         //TODO: improve (2)
         int round = getCurrentRound();
         double time = getTimePlayed() / 1000000;
@@ -248,6 +258,23 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         return score;
     }
 
+    public void resetGame() {
+        Toast.makeText(getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored" + getScore(),
+                Toast.LENGTH_SHORT).show();
+        setCurrentRound(0);
+        recomputeStartTime();
+        List<Tile> tiles;
+        tiles = (getTilesFactory()).getTiles(gameSettings.getBoardSize());
+        setLastOccupiedColumnToStart();
+        this.board.setTiles(tiles);
+        setGameOver(false);
+//        setBoard(new Board(tiles));
+//        this.board = new Board(tiles);
+//        this = new SeaInvadersBoardManager(
+//                getUser(),
+//                (SeaInvadersSettings) getGameSettings());
+
+    }
 
     public SeaInvadersSettings getSeaInvaderSettings() {
         return (SeaInvadersSettings) getGameSettings();
@@ -281,8 +308,12 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         return gameOver;
     }
 
+
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
         updateScoreboard();
+//        if (isGameOver()) {
+//            resetGame();
+//        }
     }
 }
