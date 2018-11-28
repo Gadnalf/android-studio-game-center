@@ -29,7 +29,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
         addNewGameButtonListener();
         addLoadButtonListener(this);
         addSaveButtonListener(this);
-        user = savedInstanceState.getString("user");
+        user = getIntent().getStringExtra("user");
         setupStartingActivity();
         addGameScoreBoardButton();
         addUserScoreBoardButton();
