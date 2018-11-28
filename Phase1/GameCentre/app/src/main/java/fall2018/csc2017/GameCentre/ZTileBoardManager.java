@@ -318,7 +318,10 @@ public class ZTileBoardManager extends  AbstractBoardManager implements Serializ
         return total_score;
 
     }
-
+    @Override
+    public boolean moveIsEmpty() {
+        return moves.empty();
+    }
 
     public ZTileSettings getZTileSettings() {
         return (ZTileSettings) getGameSettings();

@@ -77,7 +77,10 @@ public class ZTileActivity extends AbstractGameActivity implements Serializable{
         Button undo = findViewById(R.id.undo);
         undo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(zTileBoardManager.getZTileSettings().getNumUndoes() == -1){
+                if(zTileBoardManager.moveIsEmpty()){
+                    Toast.makeText(getBaseContext(), "You have no moves to undo",
+                            Toast.LENGTH_SHORT).show();
+                }else if(zTileBoardManager.getZTileSettings().getNumUndoes() == -1){
                     zTileBoardManager.undo();
                 }else{zTileBoardManager.undo();
                     Toast.makeText(getBaseContext(), "You have " +
