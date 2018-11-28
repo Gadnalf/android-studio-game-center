@@ -135,7 +135,7 @@ public class GameHubActivity extends AppCompatActivity{
     }
 
     private void switchToSeaInvaders() {
-        Intent tmp = new Intent(this, SeaInvadersGameActivity.class);
+        Intent tmp = new Intent(this, SeaInvadersStartingActivity.class);
         tmp.putExtra("user", accountManager.getName());
         startActivity(tmp);
     }
