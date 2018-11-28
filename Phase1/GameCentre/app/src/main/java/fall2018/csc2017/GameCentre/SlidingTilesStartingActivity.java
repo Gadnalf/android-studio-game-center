@@ -33,6 +33,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
         setupStartingActivity();
         addGameScoreBoardButton();
         addUserScoreBoardButton();
+        addReturnButtonListener();
     }
 
     private void setupStartingActivity() {
@@ -82,7 +83,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gameHub = SaveAndLoad.loadGameHubPermanent(
-                        gameHub.getUser(),
+                        user,
                         appCompatActivity);
 //                loadFromFile(SAVE_FILENAME);
                 SaveAndLoad.saveGameHubTemp(
@@ -95,10 +96,23 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
     }
 
     /**
+     * Activates the return button.
+     */
+    private void addReturnButtonListener() {
+        Button returnButton = findViewById(R.id.return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                finish();
+            }
+        });
+    }
+
+    /**
      * Display that a game was loaded successfully.
      */
     private void makeToastLoadedText() {
-        Toast.makeText(this, "Loaded SlidingTileSettings", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -151,7 +165,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
      * Display that a game was saved successfully.
      */
     private void makeToastSavedText() {
-        Toast.makeText(this, "SlidingTileSettings Saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
     }
 
     /**

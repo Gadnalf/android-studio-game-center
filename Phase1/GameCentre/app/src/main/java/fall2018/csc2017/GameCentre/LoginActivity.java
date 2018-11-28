@@ -120,11 +120,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Activates the logout button.
+     * Activates the return button.
      */
     private void addReturnButtonListener() {
-        Button newAccount = findViewById(R.id.return_button);
-        newAccount.setOnClickListener(new View.OnClickListener() {
+        Button returnButton = findViewById(R.id.return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 clearEditFields();
