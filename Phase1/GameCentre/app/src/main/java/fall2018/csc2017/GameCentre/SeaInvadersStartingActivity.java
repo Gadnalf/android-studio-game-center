@@ -10,7 +10,7 @@ import android.widget.Toast;
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class AlphabetTilesStartingActivity extends AppCompatActivity {
+public class SeaInvadersStartingActivity extends AppCompatActivity {
 
     /**
      * The board manager.
@@ -25,7 +25,7 @@ public class AlphabetTilesStartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starting_alphabet);
+        setContentView(R.layout.activity_starting_seainvaders);
         addNewGameButtonListener();
         addLoadButtonListener(this);
         addSaveButtonListener(this);
@@ -167,17 +167,17 @@ public class AlphabetTilesStartingActivity extends AppCompatActivity {
      * Switch to the settings view.
      */
     private void switchToSetting() {
-        Intent tmp = new Intent(this,AlphabetTilesSettingsActivity.class);
-        SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
-        startActivity(tmp);
+//        Intent tmp = new Intent(this,SeaInvadersSettingsActivity.class);
+//        SaveAndLoad.saveGameHubTemp(
+//                gameHub, this);
+//        startActivity(tmp);
     }
 
     /**
      * Switch to the game view.
      */
     private void switchToGame() {
-        Intent tmp = new Intent(this, AlphabetTilesGameActivity.class);
+        Intent tmp = new Intent(this, SeaInvadersGameActivity.class);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         startActivity(tmp);
