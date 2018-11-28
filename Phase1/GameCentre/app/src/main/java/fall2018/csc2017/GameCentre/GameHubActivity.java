@@ -45,14 +45,9 @@ public class GameHubActivity extends AppCompatActivity{
     public static final String ACCOUNT_SAVE_FILENAME = "save_file_accounts.ser";
 
     /**
-     * The board manager.
-     */
-    private GameHub gameHub;
-
-    /**
      * The account manager.
      */
-    protected static AccountManager accountManager;
+    private AccountManager accountManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
