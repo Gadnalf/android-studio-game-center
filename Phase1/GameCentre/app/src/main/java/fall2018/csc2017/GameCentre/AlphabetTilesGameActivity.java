@@ -13,7 +13,7 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        alphabetTilesBoardManager = SaveAndLoad.loadGameHubTemp(this).getZTileBoardManager();
+        alphabetTilesBoardManager = SaveAndLoad.loadGameHubTemp(this).getAlphabetTilesBoardManager();
         setAbstractBoardManager(alphabetTilesBoardManager);
         super.onCreate(savedInstanceState);
         alphabetTilesBoardManager.setAppCompatActivity(this);
@@ -62,7 +62,7 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
     @Override
     protected void autoSave() {
         GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
-        gameHub.setZTileBoardManager(alphabetTilesBoardManager);
+        gameHub.setAlphabetTilesBoardManager(alphabetTilesBoardManager);
         SaveAndLoad.saveGameHubPermanent(gameHub, this);
         SaveAndLoad.saveGameHubTemp(gameHub, this);
     }
