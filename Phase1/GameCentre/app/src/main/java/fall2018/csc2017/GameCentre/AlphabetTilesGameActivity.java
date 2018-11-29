@@ -21,7 +21,7 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
 
 
         createTileButtons(this);
-        setContentView(R.layout.activity_z_tile);
+        setContentView(R.layout.activity_alphabet_tile);
 
         // Add View to activity
 
