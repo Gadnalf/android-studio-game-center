@@ -80,6 +80,9 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
                             Toast.LENGTH_SHORT).show();
                 }else if(alphabetTilesBoardManager.getZTileSettings().getNumUndoes() == -1){
                     alphabetTilesBoardManager.undo();
+                }else if(alphabetTilesBoardManager.getZTileSettings().getNumUndoes() == 0){
+                    Toast.makeText(getBaseContext(), "You have no undoes left",
+                            Toast.LENGTH_SHORT).show();
                 }else{
                     alphabetTilesBoardManager.undo();
                     Toast.makeText(getBaseContext(), "You have " +
