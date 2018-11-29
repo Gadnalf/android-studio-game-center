@@ -182,14 +182,14 @@ public class AlphabetTilesSettingsActivity extends AppCompatActivity {
     void updateBoardSizeDisplay() {
         String tmp = "Select Board Size: " + boardSize + "x" + boardSize;
         boardSizeDisplay.setText(tmp);
-        alphabetTilesBoardManager.getZTileSettings().setBoardSize(boardSize);
+        alphabetTilesBoardManager.getAlphabetTilesSettings().setBoardSize(boardSize);
 
     }
 
     void updateUndoDisplay() {
         String tmp = "Select Number of Undoes: " + numUndoes;
         undoDisplay.setText(tmp);
-        alphabetTilesBoardManager.getZTileSettings().setNumUndoes(numUndoes);
+        alphabetTilesBoardManager.getAlphabetTilesSettings().setNumUndoes(numUndoes);
     }
 }
 

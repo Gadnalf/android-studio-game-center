@@ -92,6 +92,7 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
             swipeRight();}
         updateScoreboard();
         randomSpawn();
+        updateScoreboard();
     }
 
     void saveState(){
@@ -106,7 +107,11 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
         moveCount +=1;
     }
 
-    void randomSpawn(){
+
+    /**
+     * Randomly spawns A or B tile to the board.
+     */
+    private void randomSpawn(){
 
         Random rand = new Random();
         int n = rand.nextInt(board.numTiles());
@@ -131,7 +136,12 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
     void touchMove(int position) {
     }
 
-    void swipeUp() {
+    /**
+     * Updates the board when swiped up. If there are same tiles adjacent to each other in vertical
+     * directions, stacks the tile together and push all the tiles up. Also updates the
+     *
+     */
+    private void swipeUp() {
 
         for (int i = 0; i < board.numTiles(); i++ ){
             int row = i / board.getBoardSize();
@@ -167,7 +177,13 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
         }
     }
 
-    void swipeDown() {
+
+    /**
+     * Updates the board when swiped down. If there are same tiles adjacent to each other in vertical
+     * directions, stacks the tile together and push all the tiles down.
+     *
+     */
+    private void swipeDown() {
         for (int i = board.numTiles() - 1; i >= 0; i--) {
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
@@ -203,7 +219,13 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
             }
         }
     }
-    void swipeLeft () {
+
+    /**
+     * Updates the board when swiped left. If there are same tiles adjacent to each other in horizontal
+     * directions, stacks the tile together and push all the tiles left.
+     *
+     */
+    private void swipeLeft () {
         for (int i = 0; i < board.numTiles(); i++) {
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
@@ -228,8 +250,6 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
 
                     }
                 }
-
-
                 if ((board.getTile(row, 0).getId() == 0)) {
                     int to_replace = row * board.getBoardSize();
                     board.updateTile(to_replace, board.getTile(row, col));
@@ -239,7 +259,13 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
         }
     }
 
-    void swipeRight () {
+
+    /**
+     * Updates the board when swiped right. If there are same tiles adjacent to each other in horizontal
+     * directions, stacks the tile together and push all the tiles right.
+     *
+     */
+    private void swipeRight () {
         for (int i = board.numTiles() - 1; i >= 0; i--) {
             int row = i / board.getBoardSize();
             int col = i % board.getBoardSize();
@@ -308,10 +334,19 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
         return moves.empty();
     }
 
-    public AlphabetTilesSettings getZTileSettings() {
+    /**
+     * This method returns the AlphabetTilesSettings which was set up before the start of the game
+     *
+     * @return settings class initiated before the start of the game.
+     */
+    public AlphabetTilesSettings getAlphabetTilesSettings() {
         return (AlphabetTilesSettings) getGameSettings();
     }
 
+
+    /**
+     * Processes undo. Updates the board to the state prior to the most recent move.
+     */
     public void undo() {
         int numUndoes = (gameSettings).getNumUndoes();
         int[] lastMove = moves.pop();

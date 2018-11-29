@@ -27,13 +27,13 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
 
 
         gridView = findViewById(R.id.board);
-        gridView.setNumColumns(alphabetTilesBoardManager.getZTileSettings().getBoardSize());
+        gridView.setNumColumns(alphabetTilesBoardManager.getAlphabetTilesSettings().getBoardSize());
         gridView.setAbstractBoardManager(alphabetTilesBoardManager);
         alphabetTilesBoardManager.getBoard().addObserver(this);
 
 
-        final int COL_FINAL = alphabetTilesBoardManager.getZTileSettings().getBoardSize();
-        final int ROW_FINAL = alphabetTilesBoardManager.getZTileSettings().getBoardSize();
+        final int COL_FINAL = alphabetTilesBoardManager.getAlphabetTilesSettings().getBoardSize();
+        final int ROW_FINAL = alphabetTilesBoardManager.getAlphabetTilesSettings().getBoardSize();
 
 
 
@@ -78,7 +78,7 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
                 if(alphabetTilesBoardManager.moveIsEmpty()){
                     Toast.makeText(getBaseContext(), "You have no moves to undo",
                             Toast.LENGTH_SHORT).show();
-                }else if(alphabetTilesBoardManager.getZTileSettings().getNumUndoes() == -1){
+                }else if(alphabetTilesBoardManager.getAlphabetTilesSettings().getNumUndoes() == -1){
                     alphabetTilesBoardManager.undo();
                 }else if(alphabetTilesBoardManager.getZTileSettings().getNumUndoes() == 0){
                     Toast.makeText(getBaseContext(), "You have no undoes left",
@@ -86,7 +86,7 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
                 }else{
                     alphabetTilesBoardManager.undo();
                     Toast.makeText(getBaseContext(), "You have " +
-                            String.valueOf(alphabetTilesBoardManager.getZTileSettings().getNumUndoes())+
+                            String.valueOf(alphabetTilesBoardManager.getAlphabetTilesSettings().getNumUndoes())+
                             " undoes left", Toast.LENGTH_SHORT).show();}
             }
         });
