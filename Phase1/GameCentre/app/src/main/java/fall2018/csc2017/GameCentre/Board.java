@@ -135,8 +135,9 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
 
     /**
      * update tile at pos with newTile
-     * @param pos
-     * @param newTile
+     *
+     * @param pos position of the tile
+     * @param newTile the tile to replace at the position.
      */
     void updateTile(int pos, Tile newTile) {
         int row1 = pos / getBoardSize();
@@ -146,6 +147,13 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
+    /**
+     * update tile at pos with newTile.
+     *
+     * @param pos position of the tile.
+     * @param newTile the tile to replace at the position.
+     * @param notifyObservers notifies the observer.
+     */
     void updateTile(int pos, Tile newTile, boolean notifyObservers) {
         int row1 = pos / getBoardSize();
         int col1 = pos % getBoardSize();
@@ -156,8 +164,11 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         }
     }
 
-
-    public void shuffleTiles() {
+    /**
+     * Shuffles the board the tiles are placed randomly on the board.
+     *
+     */
+    void shuffleTiles() {
         List<Tile> newTiles = new ArrayList<>();
         Iterator<Tile> iterator = iterator();
         while (iterator.hasNext()) {
@@ -167,6 +178,11 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         setTiles(newTiles);
     }
 
+    /**
+     * Returns the information about the board in the string form.
+     *
+     * @return string representation of the board.
+     */
     @Override
     public String toString() {
         return "Board{" +
