@@ -21,8 +21,8 @@ public class ScoreBoard implements Serializable {
     public ScoreBoard(String user, GameSettings gameSettings) {
         this.user = user;
         this.gameSettings = gameSettings;
-        this.perGameScoreBoard = new HashMap<>();
-        this.perUserScoreBoard = new HashMap<>();
+        perGameScoreBoard = new HashMap<>();
+        perUserScoreBoard = new HashMap<>();
     }
 
 
