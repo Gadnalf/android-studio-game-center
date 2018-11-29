@@ -90,6 +90,7 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
             swipeLeft();
         } else if (direction == 3) {
             swipeRight();}
+        updateScoreboard();
         randomSpawn();
     }
 
@@ -164,7 +165,6 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
                 }
             }
         }
-        updateScoreboard();
     }
 
     void swipeDown() {
@@ -202,7 +202,6 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
                 }
             }
         }
-        updateScoreboard();
     }
     void swipeLeft () {
         for (int i = 0; i < board.numTiles(); i++) {
@@ -238,7 +237,6 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
                 }
             }
         }
-        updateScoreboard();
     }
 
     void swipeRight () {
@@ -273,11 +271,6 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
                 }
             }
         }
-
-        updateScoreboard();
-
-
-
     }
 
     /**

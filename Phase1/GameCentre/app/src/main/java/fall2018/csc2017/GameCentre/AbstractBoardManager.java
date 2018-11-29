@@ -188,7 +188,7 @@ abstract public class AbstractBoardManager implements Serializable {
     }
 
     /**
-     * your scoring fucntion
+     * your scoring function
      * @return
      */
     abstract public double getScore();
