@@ -46,18 +46,11 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         return this.puzzleSolved;
     }
 
-    public void checkIfPuzzleIsSolved() {
+    void checkIfPuzzleIsSolved() {
         boolean noMoreInvaders = getInvaderPositions().size() == 0;
         boolean finishedFinalRound = this.currentRound == ((SeaInvadersSettings) this.gameSettings).getNumRounds();
-        boolean gameAintOver = gameOver() == false;
-        if (noMoreInvaders
-                //TODO: when you update the rounds between spawn and move to be indep we'll need to alter this too
-                && finishedFinalRound
-                && gameAintOver) {
-            this.puzzleSolved = true;
-        } else {
-            this.puzzleSolved = false;
-        }
+        boolean gameAintOver = !gameOver();
+        puzzleSolved = (noMoreInvaders && finishedFinalRound && gameAintOver);
     }
 
     /**
