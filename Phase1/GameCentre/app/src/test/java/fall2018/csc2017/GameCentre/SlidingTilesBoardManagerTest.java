@@ -55,11 +55,10 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
     @Test
     public void testPuzzleSolved() {
         System.out.println(boardManager.puzzleSolved());
-        assertEquals((long) boardManager.getScore(), (long) 10.0);
         SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
         SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
         System.out.println(boardManager.puzzleSolved());
-        assertTrue(boardManager.getScore() < 10.0);
+        assertTrue(boardManager.getScore() > 0);
     }
 
 

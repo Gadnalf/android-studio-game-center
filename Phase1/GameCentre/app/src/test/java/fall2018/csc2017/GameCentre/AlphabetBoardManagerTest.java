@@ -100,8 +100,11 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
     }
 }
 
+//
 //    public void testStackTiles() {
-//        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles()
+//        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles();
+//        boardManager.getBoard().setTiles(emptyTiles);
+//        boardManager.getBoard().update(0, new TileAlpha )
 //    }
 //}
 
