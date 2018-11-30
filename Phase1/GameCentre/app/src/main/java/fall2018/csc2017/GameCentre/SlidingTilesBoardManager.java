@@ -210,11 +210,11 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
      */
     @Override
     public double getScore() {
-        double a = (double) getMoveCount();
+        double moveCount = (double) getMoveCount();
         double timeWeight = (getTimePlayed()/1000);
         double numUndoesWeight = getSlidingTileSettings().getNumUndoes();
-        double b = (timeWeight + numUndoesWeight);
-        return 10-(a/b); //want to maximize this
+        double score = 1/(timeWeight * (moveCount + numUndoesWeight));
+        return score*1000000; //want to maximize this
     }
 
     /**
