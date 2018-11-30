@@ -107,5 +107,42 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
         assertEquals("Expected Tile and the Actual Tile differs", tile.getId(),
                 boardManager.getBoard().getTile(0, 4).getId());
     }
+
+    @Test
+    public void testUndo() {
+        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
+        boardManager.getBoard().setTiles(emptyTiles);
+        boardManager.getBoard().updateTile(0, new TileAlpha(0));
+        boardManager.getBoard().updateTile(1, new TileAlpha(1));
+        Tile tile1 = new TileAlpha(0);
+        Tile tile2 = new TileAlpha(1);
+        boardManager.swipeTo(0);
+        boardManager.undo();
+        assertEquals("Expected Tile and the Actual Tile differs", tile1.getId(),
+                boardManager.getBoard().getTile(0,0).getId());
+        assertEquals("Expected Tile and the Actual Tile differs", tile2.getId(),
+                boardManager.getBoard().getTile(0,1).getId());
+        boardManager.swipeTo(1);
+        boardManager.undo();
+        assertEquals("Expected Tile and the Actual Tile differs", tile1.getId(),
+                boardManager.getBoard().getTile(0,0).getId());
+        assertEquals("Expected Tile and the Actual Tile differs", tile2.getId(),
+                boardManager.getBoard().getTile(0,1).getId());
+        boardManager.swipeTo(2);
+        boardManager.undo();
+        assertEquals("Expected Tile and the Actual Tile differs", tile1.getId(),
+                boardManager.getBoard().getTile(0,0).getId());
+        assertEquals("Expected Tile and the Actual Tile differs", tile2.getId(),
+                boardManager.getBoard().getTile(0,1).getId());
+        boardManager.swipeTo(3);
+        boardManager.undo();
+        assertEquals("Expected Tile and the Actual Tile differs", tile1.getId(),
+                boardManager.getBoard().getTile(0,0).getId());
+        assertEquals("Expected Tile and the Actual Tile differs", tile2.getId(),
+                boardManager.getBoard().getTile(0,1).getId());
+    }
+
+
+
 }
 
