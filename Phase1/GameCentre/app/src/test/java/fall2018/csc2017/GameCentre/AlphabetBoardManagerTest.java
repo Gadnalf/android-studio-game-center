@@ -49,6 +49,20 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
         Tile tile = new TileAlpha(0);
         assertEquals("Expected Tile and the Actual Tile differs", tile.getId(),
                 boardManager.getBoard().getTile(0, 0).getId());
+        boardManager.getBoard().updateTile(20, new TileAlpha(3));
+        boardManager.swipeTo(0);
+        assertEquals("Expected Tile and the Actual Tile differs", tile.getId(),
+                boardManager.getBoard().getTile(0, 0).getId());
+        assertEquals("Expected Tile and the Actual Tile differs", 4,
+                boardManager.getBoard().getTile(1, 0).getId());
+        boardManager.getBoard().updateTile(10, new TileAlpha(5));
+        boardManager.swipeTo(0);
+        assertEquals("Expected Tile and the Actual Tile differs", tile.getId(),
+                boardManager.getBoard().getTile(0, 0).getId());
+        assertEquals("Expected Tile and the Actual Tile differs", 4,
+                boardManager.getBoard().getTile(1, 0).getId());
+        assertEquals("Expected Tile and the Actual Tile differs", 6,
+                boardManager.getBoard().getTile(2,0).getId());
 
     }
 
@@ -61,6 +75,7 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
         Tile tile = new TileAlpha(0);
         assertEquals("Expected Tile and the Actual Tile differs", tile.getId(),
                 boardManager.getBoard().getTile(4, 0).getId());
+        
     }
 
     @Test
