@@ -27,8 +27,9 @@ public class MovementController {
                 abstractBoardManager.resetGame();
             }
         } else if (abstractBoardManager.isValidUndo(position)) {
-            if (abstractBoardManager.moveIsEmpty()) {
-                Toast.makeText(context, "No moves to Undo!", Toast.LENGTH_SHORT).show();
+            if(abstractBoardManager.moveIsEmpty()){
+                Toast.makeText(context, "You have no moves to undo",
+                        Toast.LENGTH_SHORT).show();
             } else if (abstractBoardManager.getGameSettings().getNumUndoes() > 0) {
                 abstractBoardManager.tapUndo(position);
                 Toast.makeText(context, "You have " +
