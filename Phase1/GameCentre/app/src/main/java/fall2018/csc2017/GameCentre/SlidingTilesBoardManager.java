@@ -1,6 +1,5 @@
 package fall2018.csc2017.GameCentre;
 
-import android.support.v7.app.AppCompatActivity;
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -10,17 +9,6 @@ import java.util.Iterator;
  */
 class SlidingTilesBoardManager extends AbstractBoardManager implements Serializable {
 
-
-
-    /**
-     * Manage a board that has been pre-populated.
-     * @param board the board
-     */
-    SlidingTilesBoardManager(Board board, String user, SlidingTilesSettings slidingTilesSettings,
-                             AppCompatActivity appCompatActivity) {
-        super(board, user, slidingTilesSettings,
-                appCompatActivity, new SlidingTilesTileFactory());
-    }
 
     /**
      * Manage a board that has been pre-populated.
