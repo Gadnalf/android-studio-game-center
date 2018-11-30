@@ -1,15 +1,15 @@
 package fall2018.csc2017.GameCentre;
 
-public class TileNum extends Tile {
-    public TileNum(int id, int background) {
-        super(id, background);
-    }
+/**
+ * The number Tiles used for the sliding tiles.
+ */
+class TileNum extends Tile {
 
     /**
      * A tile with a background id; look up and set the id.
      *
      */
-    public TileNum(int backgroundId) {
+    TileNum(int backgroundId) {
         super(backgroundId);
         // This looks so ugly.
         switch (backgroundId + 1) {
