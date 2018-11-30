@@ -50,7 +50,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     private void checkIfPuzzleIsSolved() {
         boolean noMoreInvaders = getInvaderPositions().size() == 0;
         boolean finishedFinalRound = this.currentRound == ((SeaInvadersSettings) this.gameSettings).getNumRounds();
-        boolean gameAintOver = isGameOver() == false;
+        boolean gameAintOver = gameOver() == false;
         if (noMoreInvaders
                 //TODO: when you update the rounds between spawn and move to be indep we'll need to alter this too
                 && finishedFinalRound
@@ -175,7 +175,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     public void spawnTheInvaders() {
         checkIfPuzzleIsSolved();
-        if (!puzzleSolved() && !isGameOver() &&
+        if (!puzzleSolved() && !gameOver() &&
                 this.currentRound < ((SeaInvadersSettings) this.gameSettings).getNumRounds()) {
             ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
             this.currentRound += 1;
@@ -194,7 +194,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     public void swim() {
         checkIfPuzzleIsSolved();
-        if (!puzzleSolved() && !isGameOver()) {
+        if (!puzzleSolved() && !gameOver()) {
             //TODO: separate spawn and move rounds (2)
             ArrayList<Integer> invaderPositions = getInvaderPositions();
             for (int pos : invaderPositions) {
@@ -271,7 +271,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     @Override
     public void resetGame() {
-        if (isGameOver()) {
+        if (gameOver()) {
             Toast.makeText(getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored: " + getScore(),
                     Toast.LENGTH_SHORT).show();
         }
@@ -296,10 +296,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     }
 
-    @Override
-    boolean gameOver(){
-        return false;
-    }
 
     public SeaInvadersSettings getSeaInvaderSettings() {
         return (SeaInvadersSettings) getGameSettings();
@@ -329,7 +325,8 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         this.invaderPositions = invaderPositions;
     }
 
-    public boolean isGameOver() {
+    @Override
+    public boolean gameOver() {
         return gameOver;
     }
 
@@ -337,7 +334,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
         updateScoreboard();
-        if (isGameOver()) {
+        if (gameOver()) {
             resetGame();
         }
     }

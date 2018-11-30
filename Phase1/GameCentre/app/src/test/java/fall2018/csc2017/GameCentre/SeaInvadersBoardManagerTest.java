@@ -26,10 +26,10 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
 
     @Test
     public void testGameOver() {
-        assertFalse(boardManager.isGameOver());
+        assertFalse(boardManager.gameOver());
         boardManager.board.swapTiles(4, 0, 0, 0);
         boardManager.swim();
-        assertTrue(boardManager.isGameOver());
+        assertTrue(boardManager.gameOver());
     }
 
     public void removeAllInvaders(SeaInvadersBoardManager seaInvadersBoardManager) {
