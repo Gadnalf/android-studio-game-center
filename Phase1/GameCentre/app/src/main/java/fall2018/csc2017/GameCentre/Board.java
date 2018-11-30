@@ -5,13 +5,11 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
-import java.util.TooManyListenersException;
+
 
 /**
  * The sliding tiles board.
@@ -207,12 +205,12 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     }
 
     /**
-     * Checks whether the board state is not solvable.
+     * Checks whether the board state is not solvable. Leave as package private for the unit test.
      *
      * @param newTiles a list of tiles of numbers.
      * @return true if it is impossible to solve else false.
      */
-    private boolean isImpossible(List<Tile> newTiles){
+    boolean isImpossible(List<Tile> newTiles){
         int inversions = 0;
         int blank = 24;
         for(int i=0; i<newTiles.size(); i++) {
