@@ -194,27 +194,27 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         for(int i = 0; i < random.size(); i++){
             int move = random.get(i);
             for(int j = 0; j < tiles.size(); j ++){
-                if(tiles.get(j).getId() == numTiles()){
+                if(tiles.get(j).getId() == 25){
                     if(move == 1){
-                        if(0 <= j - 4){
+                        if(0 <= j - boardSize){
                          Tile saveTile = tiles.get(j);
-                         tiles.set(j , tiles.get(j - 4));
-                         tiles.set(j - 4, saveTile);
+                         tiles.set(j , tiles.get(j - boardSize));
+                         tiles.set(j - boardSize, saveTile);
                         }
                     }else if(move == 2){
-                        if( j + 4 < tiles.size()){
+                        if( j + boardSize < tiles.size()){
                             Tile saveTile = tiles.get(j);
-                            tiles.set(j , tiles.get(j + 4));
-                            tiles.set(j + 4, saveTile);
+                            tiles.set(j , tiles.get(j + boardSize));
+                            tiles.set(j + boardSize, saveTile);
                         }
                     }else if(move == 3){
-                        if(0 <= j - 1){
+                        if(0 <= j - 1 && j % boardSize != 0){
                             Tile saveTile = tiles.get(j);
                             tiles.set(j , tiles.get(j - 1));
                             tiles.set(j - 1, saveTile);
                         }
                     }else{
-                        if( j + 1 < tiles.size()){
+                        if( j + 1 < tiles.size() && j % boardSize != 3){
                             Tile saveTile = tiles.get(j);
                             tiles.set(j , tiles.get(j + 1));
                             tiles.set(j + 1, saveTile);
