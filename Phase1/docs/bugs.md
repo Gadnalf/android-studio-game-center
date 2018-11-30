@@ -8,7 +8,7 @@
 - also we cant seem to fire after moving to the further LHS of the board
 
 ### scoreboard
-- doesnt seem to sync up with the invaders
+- need to make sure were copying new settings in
 
 ### fixed bugs
 - app crashes when trying to load a game from a new user
@@ -17,3 +17,6 @@
 
 ### invaders
 - the game doesnt pause at all
+- user score board not being updated after winning game
+- game seems to keep going in the background after changing settings?
+    - maybe try to reset it?

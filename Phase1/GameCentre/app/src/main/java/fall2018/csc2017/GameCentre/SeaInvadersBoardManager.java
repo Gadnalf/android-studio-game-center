@@ -17,6 +17,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     int currentRound = 0;
     ArrayList<Integer> invaderPositions = new ArrayList<Integer>();
     boolean gameOver = false;
+    boolean puzzleSolved = false;
 
     /**
      * Manage a board that has been pre-populated.
@@ -43,6 +44,10 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     @Override
     boolean puzzleSolved() {
+        return this.puzzleSolved;
+    }
+
+    private void checkIfPuzzleIsSolved() {
         boolean noMoreInvaders = getInvaderPositions().size() == 0;
         boolean finishedFinalRound = this.currentRound == ((SeaInvadersSettings) this.gameSettings).getNumRounds();
         boolean gameAintOver = isGameOver() == false;
@@ -51,9 +56,10 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                 && finishedFinalRound
                 && gameAintOver) {
             updateScoreboard();
-            return true;
+            resetGame();
+            this.puzzleSolved = true;
         } else {
-            return false;
+            this.puzzleSolved = false;
         }
     }
 
@@ -168,11 +174,16 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * based on the time inverval specified in SeaInvadersSettings
      */
     public void spawnTheInvaders() {
-        ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
-        for (int pos : newSpawnPositions) {
-//            board.updateTile(pos, new InvaderTile());
-//            board.swapTiles(0, 0, 1, 1, false);
-            board.updateTile(pos, new InvaderTile(), true);
+        checkIfPuzzleIsSolved();
+        if (!puzzleSolved() && !isGameOver() &&
+                this.currentRound < ((SeaInvadersSettings) this.gameSettings).getNumRounds()) {
+            ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
+            this.currentRound += 1;
+            for (int pos : newSpawnPositions) {
+                //            board.updateTile(pos, new InvaderTile());
+                //            board.swapTiles(0, 0, 1, 1, false);
+                board.updateTile(pos, new InvaderTile(), true);
+            }
         }
     }
 
@@ -182,10 +193,9 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * one row at a time
      */
     public void swim() {
-        if (!puzzleSolved() && !isGameOver() &&
-                this.currentRound < ((SeaInvadersSettings) this.gameSettings).getNumRounds()) {
+        checkIfPuzzleIsSolved();
+        if (!puzzleSolved() && !isGameOver()) {
             //TODO: separate spawn and move rounds (2)
-            this.currentRound += 1;
             ArrayList<Integer> invaderPositions = getInvaderPositions();
             for (int pos : invaderPositions) {
                 int row1 = pos / this.gameSettings.getBoardSize();
@@ -199,6 +209,8 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                     setGameOver(true);
                 }
             }
+        } else {
+            resetGame();
         }
     }
 
@@ -259,8 +271,15 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     @Override
     public void resetGame() {
-        Toast.makeText(getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored" + getScore(),
-                Toast.LENGTH_SHORT).show();
+        if (isGameOver()) {
+            Toast.makeText(getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored: " + getScore(),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        if (puzzleSolved()) {
+            Toast.makeText(getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + getScore(),
+                    Toast.LENGTH_SHORT).show();
+        }
         setCurrentRound(0);
         recomputeStartTime();
         List<Tile> tiles;
@@ -268,6 +287,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         setLastOccupiedColumnToStart();
         this.board.setTiles(tiles);
         setGameOver(false);
+        this.puzzleSolved = false;
 //        setBoard(new Board(tiles));
 //        this.board = new Board(tiles);
 //        this = new SeaInvadersBoardManager(
@@ -317,8 +337,8 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
         updateScoreboard();
-//        if (isGameOver()) {
-//            resetGame();
-//        }
+        if (isGameOver()) {
+            resetGame();
+        }
     }
 }
