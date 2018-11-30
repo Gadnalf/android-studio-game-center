@@ -100,7 +100,7 @@ public class SeaInvaderSettingActivity extends AppCompatActivity {
                         new SlidingTilesSettings(4,4)),
                 new SeaInvadersBoardManager(user,
                         new SeaInvadersSettings(4, 4,
-                                12, 4)),
+                                12, 3)),
                 new AlphabetTilesBoardManager(user,
                         new AlphabetTilesSettings(4 ,4)),
 
