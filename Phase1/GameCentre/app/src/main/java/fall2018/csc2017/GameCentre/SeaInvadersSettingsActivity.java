@@ -54,8 +54,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sea_invader_setting);
         secSpawnAndMove = 4;
         numRoundses = 12;
-        user = getIntent().getStringExtra("user");
-        setupStartingActivity();
+        gameHub = SaveAndLoad.loadGameHubTemp(this);
         seaInvadersBoardManager = gameHub.getSeaInvadersBoardManager();
         addStartButtonListener();
         addConfirmButtonListener();

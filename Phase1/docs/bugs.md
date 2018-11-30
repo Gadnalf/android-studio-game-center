@@ -17,6 +17,5 @@
 
 ### invaders
 - the game doesnt pause at all
-- user score board not being updated after winning game
 - game seems to keep going in the background after changing settings?
     - maybe try to reset it?
