@@ -40,11 +40,10 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
     @Override
     public void testUpdateScoreboard() {
         boardManager.updateScoreboard();
-        assertEquals((long) boardManager.getScore(), (long) 10.0);
-        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
-        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
+        SlidingTilesTestingHelpers.swapFirstTwoTiles(boardManager);
+        SlidingTilesTestingHelpers.swapFirstTwoTiles(boardManager);
         boardManager.updateScoreboard();
-        assertTrue(boardManager.getScore() < 10.0);
+        assertTrue(boardManager.getScore() > 0);
     }
 
     @Test
