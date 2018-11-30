@@ -15,9 +15,9 @@ abstract public class AbstractBoardManager implements Serializable {
     protected Board board;
     public double score;
     private String user;
-    protected GameSettings gameSettings;
-    protected Stack<int[]> moves = new Stack<>();
-    protected int moveCount;
+    GameSettings gameSettings;
+    Stack<int[]> moves = new Stack<>();
+    int moveCount;
     private long startTime;
     private AppCompatActivity appCompatActivity;
     private AbstractTilesFactory tilesFactory;
@@ -92,6 +92,11 @@ abstract public class AbstractBoardManager implements Serializable {
 //        }
 //    }
 
+    /**
+     * Sets the board size and generates and sets a new copy of list of tiles for the board.
+     *
+     * @param boardSize size of the board indicated by integer.
+     */
     public void setBoardSize(int boardSize) {
         List<Tile> tiles = this.tilesFactory.getTiles(boardSize);
         this.gameSettings.setBoardSize(boardSize);
@@ -111,11 +116,6 @@ abstract public class AbstractBoardManager implements Serializable {
      * Check if end-game condition is met
      */
     abstract boolean gameOver();
-
-    /**
-     * Check if the swiping motion is valid
-     */
-    abstract boolean isValidSwipe(int direction);
 
     /**
      * Procecss a swipe by direction, swiping tiles to the direction as appropriate
@@ -149,7 +149,7 @@ abstract public class AbstractBoardManager implements Serializable {
     }
 
 
-    public int getMoveCount() {
+    int getMoveCount() {
         return this.moveCount;
     }
 
@@ -171,7 +171,7 @@ abstract public class AbstractBoardManager implements Serializable {
         this.user = user;
     }
 
-    public GameSettings getGameSettings() {
+    GameSettings getGameSettings() {
         return gameSettings;
     }
 
@@ -187,21 +187,21 @@ abstract public class AbstractBoardManager implements Serializable {
         return appCompatActivity;
     }
 
-    public double getTimePlayed() {
+    double getTimePlayed() {
         long endTime = System.nanoTime();
         return (double) (endTime - this.startTime) / 1000000000.0;
     }
 
     /**
      * your scoring function
-     * @return
+     * @return score in the form of double.
      */
     abstract public double getScore();
 
     /**
      * load update and then save the scoreboard
      */
-    public void updateScoreboard() {
+    void updateScoreboard() {
         this.score = getScore();
         if (this.appCompatActivity != null) {
             ScoreBoard.addScoreToSavedScoreboard(this.user,
@@ -213,11 +213,11 @@ abstract public class AbstractBoardManager implements Serializable {
         }
     }
 
-    public void recomputeStartTime() {
+    void recomputeStartTime() {
         this.startTime = System.nanoTime();
     }
 
-    public AbstractTilesFactory getTilesFactory() {
+    AbstractTilesFactory getTilesFactory() {
         return tilesFactory;
     }
 

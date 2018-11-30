@@ -1,11 +1,9 @@
 package fall2018.csc2017.GameCentre;
 
-import android.support.v7.app.AppCompatActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlphabetTilesTestingHelpers {
+class AlphabetTilesTestingHelpers {
     /**
      * Make a set of tiles that are in order.
      *
@@ -20,6 +18,12 @@ public class AlphabetTilesTestingHelpers {
         return tiles;
     }
 
+    /**
+     * Generates the winning board for the Alphabet Tiles game.
+     *
+     * @param boardSize integer indicating the size of the board.
+     * @return List of Tiles to be utilized for the test cases.
+     */
     static List<Tile> makeGameOverTiles(int boardSize) {
         List<Tile> tiles = new ArrayList<>();
         int numTiles = boardSize * boardSize;
@@ -30,31 +34,3 @@ public class AlphabetTilesTestingHelpers {
 
     }
 }
-
-//    /**
-//     * Make a game hub w winnning scoreboard
-//     * @param userName
-//     * @param appCompatActivity
-//     * @param swapTiles
-//     * @return
-//     */
-//    public static GameData makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
-//                                                  boolean swapTiles) {
-//        GameData gameHub = SaveAndLoad.loadGameHubPermanent(
-//                userName, appCompatActivity
-//        );
-//        SlidingTilesBoardManager slidingTilesBoardManager = gameHub.getSlidingTilesBoardManager();
-//        slidingTilesBoardManager.setAppCompatActivity(appCompatActivity);
-//        List<Tile> tiles = makeTiles(slidingTilesBoardManager.getBoard().getBoardSize());
-//        Board board = new Board(tiles);
-//        slidingTilesBoardManager.setBoard(board);
-//        slidingTilesBoardManager.setUser(userName);
-//        if (swapTiles) {
-//            swapFirstTwoTiles(slidingTilesBoardManager);
-//            swapFirstTwoTiles(slidingTilesBoardManager);
-//        }
-//        System.out.println(slidingTilesBoardManager.puzzleSolved());
-//        gameHub.setSlidingTilesBoardManager(slidingTilesBoardManager);
-//        return gameHub;
-//    }
-//}

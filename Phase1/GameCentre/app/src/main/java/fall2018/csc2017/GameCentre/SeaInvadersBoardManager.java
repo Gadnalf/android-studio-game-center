@@ -82,10 +82,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     }
 
-    @Override
-    boolean isValidSwipe(int direction) {
-        return false;
-    }
 
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.

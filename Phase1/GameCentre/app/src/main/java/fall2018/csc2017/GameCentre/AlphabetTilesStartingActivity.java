@@ -185,7 +185,7 @@ public class AlphabetTilesStartingActivity extends AppCompatActivity {
     }
 
     /**
-     * Switch to the SlidingTileSetting to change the setting.
+     * Switch to the Game Scoreboard window.
      */
     private void switchToGameScoreBoard() {
         Intent tmp = new Intent(this, GameScoreBoardActivity.class);
@@ -195,7 +195,7 @@ public class AlphabetTilesStartingActivity extends AppCompatActivity {
     }
 
     /**
-     * Switch to the SlidingTileSetting to change the setting.
+     * Switch to the User Scoreboard window.
      */
     private void switchToUserScoreBoard() {
         Intent tmp = new Intent(this, UserScoreBoardActivity.class);
