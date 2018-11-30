@@ -57,6 +57,27 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
         return solved;
     }
 
+    boolean gameOver() {
+        boolean over = false;
+        int boardSize = board.getBoardSize();
+        for(int i = 0; i < boardSize; i ++) {
+            for(int j = 0; j < boardSize; j ++){
+                if(board.getTile(i , j).getId() == 0){
+                    return false;
+                } else if (board.getTile(i , j).getId() == 26) {
+                    return true;
+                } else {
+                    over = allDifferentTiles();
+                }
+            }
+        }
+        return over;
+    }
+
+    boolean allDifferentTiles() {
+        return false;
+    }
+
     /**
      * Return whether any of the four surrounding tiles is the blank tile.
      *
