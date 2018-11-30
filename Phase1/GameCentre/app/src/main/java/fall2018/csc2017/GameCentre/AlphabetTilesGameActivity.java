@@ -61,10 +61,10 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
     }
     @Override
     protected void autoSave() {
-        GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
-        gameHub.setAlphabetTilesBoardManager(alphabetTilesBoardManager);
-        SaveAndLoad.saveGameHubPermanent(gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        GameData gameData = SaveAndLoad.loadGameHubTemp(this);
+        gameData.setAlphabetTilesBoardManager(alphabetTilesBoardManager);
+        SaveAndLoad.saveGameHubPermanent(gameData, this);
+        SaveAndLoad.saveGameHubTemp(gameData, this);
     }
 
     /**

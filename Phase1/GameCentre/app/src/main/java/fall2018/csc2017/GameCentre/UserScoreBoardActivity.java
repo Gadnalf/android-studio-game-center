@@ -11,11 +11,11 @@ public class UserScoreBoardActivity extends ScoreBoardAbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //         SlidingTilesTestingHelpers.testSavingAndLoading(this);
-        GameHub tmpGameHub = SaveAndLoad.loadGameHubTemp(
+        GameData tmpGameData = SaveAndLoad.loadGameHubTemp(
                 this);
         setContentView(R.layout.activity_user_score_board);
         super.addRowsToScoreBoard(R.id.activity_user_score_board,
-                tmpGameHub.getUser(),
+                tmpGameData.getUser(),
                 this);
     }
 

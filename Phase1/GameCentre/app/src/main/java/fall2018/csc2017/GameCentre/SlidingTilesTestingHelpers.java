@@ -49,12 +49,12 @@ public class SlidingTilesTestingHelpers {
      * @param swapTiles
      * @return
      */
-    public static GameHub makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
-                                                                   boolean swapTiles) {
-        GameHub gameHub = SaveAndLoad.loadGameHubPermanent(
+    public static GameData makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
+                                                   boolean swapTiles) {
+        GameData gameData = SaveAndLoad.loadGameHubPermanent(
                 userName, appCompatActivity
         );
-        SlidingTilesBoardManager slidingTilesBoardManager = gameHub.getSlidingTilesBoardManager();
+        SlidingTilesBoardManager slidingTilesBoardManager = gameData.getSlidingTilesBoardManager();
         slidingTilesBoardManager.setAppCompatActivity(appCompatActivity);
         List<Tile> tiles = makeTiles(slidingTilesBoardManager.getBoard().getBoardSize());
         Board board = new Board(tiles);
@@ -65,8 +65,8 @@ public class SlidingTilesTestingHelpers {
             swapFirstTwoTiles(slidingTilesBoardManager);
         }
         System.out.println(slidingTilesBoardManager.puzzleSolved());
-        gameHub.setSlidingTilesBoardManager(slidingTilesBoardManager);
-        return gameHub;
+        gameData.setSlidingTilesBoardManager(slidingTilesBoardManager);
+        return gameData;
     }
 
 
@@ -90,10 +90,10 @@ public class SlidingTilesTestingHelpers {
      */
     public static void testSavingAndLoading(AppCompatActivity appCompatActivity){
         //---------add one user to scoreboard
-        GameHub tmpGameHub = SaveAndLoad.loadGameHubTemp(appCompatActivity);
-        String userId = tmpGameHub.getUser();
-        GameHub gameHub = makeWinningBoardManager(userId, appCompatActivity, true);
-        SaveAndLoad.saveGameHubPermanent(gameHub, appCompatActivity);
+        GameData tmpGameData = SaveAndLoad.loadGameHubTemp(appCompatActivity);
+        String userId = tmpGameData.getUser();
+        GameData gameData = makeWinningBoardManager(userId, appCompatActivity, true);
+        SaveAndLoad.saveGameHubPermanent(gameData, appCompatActivity);
 //        SlidingTilesBoardManager boardManager3 = makeWinningBoardManager(userId, appCompatActivity, false);
 //        SaveAndLoad.saveGameHubPermanent(boardManager3, appCompatActivity);
     }

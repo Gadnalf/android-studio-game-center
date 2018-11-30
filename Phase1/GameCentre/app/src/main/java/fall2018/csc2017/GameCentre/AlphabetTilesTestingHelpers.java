@@ -38,9 +38,9 @@ public class AlphabetTilesTestingHelpers {
 //     * @param swapTiles
 //     * @return
 //     */
-//    public static GameHub makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
+//    public static GameData makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
 //                                                  boolean swapTiles) {
-//        GameHub gameHub = SaveAndLoad.loadGameHubPermanent(
+//        GameData gameHub = SaveAndLoad.loadGameHubPermanent(
 //                userName, appCompatActivity
 //        );
 //        SlidingTilesBoardManager slidingTilesBoardManager = gameHub.getSlidingTilesBoardManager();
