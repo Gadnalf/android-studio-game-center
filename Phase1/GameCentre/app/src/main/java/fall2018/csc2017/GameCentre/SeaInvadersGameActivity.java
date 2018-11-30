@@ -16,7 +16,7 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
     //https://stackoverflow.com/questions/4597690/android-timer-how-to
 
 //    final Handler timerHandler = new Handler();
-    final HandlerSerializable timerHandler = new HandlerSerializable();
+    HandlerSerializable timerHandler = new HandlerSerializable();
     Runnable timerRunnable = new RunnerSerializable() {
 
         @Override
@@ -27,20 +27,24 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
             if (seaInvadersBoardManager.gameOver()) {
                 Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored: " + seaInvadersBoardManager.getScore(),
                         Toast.LENGTH_SHORT).show();
-                seaInvadersBoardManager.resetGame();
-                seaInvadersBoardManager.updateScoreboard();
-                timerHandler.removeCallbacks(timerRunnable);
-            }
-            if (seaInvadersBoardManager.puzzleSolved()) {
-                Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + seaInvadersBoardManager.getScore(),
-                        Toast.LENGTH_SHORT).show();
                 seaInvadersBoardManager.updateScoreboard();
                 seaInvadersBoardManager.resetGame();
                 timerHandler.removeCallbacks(timerRunnable);
+                timerHandler = null;
             }
-            else{
-                timerHandler.postDelayed(this,
-                    1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
+            else {
+                if (seaInvadersBoardManager.puzzleSolved()) {
+                    Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + seaInvadersBoardManager.getScore(),
+                            Toast.LENGTH_SHORT).show();
+                    seaInvadersBoardManager.updateScoreboard();
+                    seaInvadersBoardManager.resetGame();
+                    timerHandler.removeCallbacks(timerRunnable);
+                    timerHandler = null;
+                }
+                else {
+                    timerHandler.postDelayed(this,
+                            1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
+                }
             }
         }
     };
