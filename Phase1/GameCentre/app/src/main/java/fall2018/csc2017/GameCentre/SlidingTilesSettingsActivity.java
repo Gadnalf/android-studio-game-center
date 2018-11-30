@@ -36,7 +36,7 @@ public class SlidingTilesSettingsActivity extends AppCompatActivity {
     private int numUndoes;
 
     private SlidingTilesBoardManager slidingTilesBoardManager;
-    private GameHub gameHub;
+    private GameData gameData;
 
 
 
@@ -47,8 +47,8 @@ public class SlidingTilesSettingsActivity extends AppCompatActivity {
 
         boardSize = 4;
         numUndoes = 3;
-        gameHub = SaveAndLoad.loadGameHubTemp(this);
-        slidingTilesBoardManager = gameHub.getSlidingTilesBoardManager();
+        gameData = SaveAndLoad.loadGameHubTemp(this);
+        slidingTilesBoardManager = gameData.getSlidingTilesBoardManager();
         addStartButtonListener();
         addUnlimitedUndoListener();
         addConfirmButtonListener();
@@ -87,9 +87,9 @@ public class SlidingTilesSettingsActivity extends AppCompatActivity {
 
     private void switchToGame() {
         Intent tmp = new Intent(this, SlidingTilesGameActivity.class);
-        gameHub.setSlidingTilesBoardManager(slidingTilesBoardManager);
+        gameData.setSlidingTilesBoardManager(slidingTilesBoardManager);
         SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
+                gameData, this);
         startActivity(tmp);
     }
 

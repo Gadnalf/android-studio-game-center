@@ -175,7 +175,10 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         while (iterator.hasNext()) {
             newTiles.add(iterator.next());
         }
-        fixedShuffle(newTiles);
+        Collections.shuffle(newTiles);
+        while(this.isImpossible(newTiles)){
+            Collections.shuffle(newTiles);
+        }
         setTiles(newTiles);
     }
 
@@ -222,6 +225,34 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         }
     }
 
+    private boolean isImpossible(List<Tile> newTiles){
+        int inversions = 0;
+        int blank = 24;
+        for(int i=0; i<newTiles.size(); i++) {
+            if(newTiles.get(i).getId() != 25){
+                for (int j = i + 1; j < newTiles.size(); j++) {
+                    if(newTiles.get(j).getId() < newTiles.get(i).getId()) {
+                        inversions++;
+                    }
+                }
+            }
+            else{
+                blank = i;
+            }
+        }
+        if(boardSize % 2 == 0){
+            if((boardSize-(blank/boardSize))%2==0 & inversions%2 == 1){
+                return false;
+            }
+            if((boardSize-(blank/boardSize))%2==1 & inversions%2 == 0){
+                return false;
+            }
+        }
+        if(boardSize % 2 == 1 & inversions%2 == 0){
+                return false;
+        }
+        return true;
+    }
 
     /**
      * Returns the information about the board in the string form.

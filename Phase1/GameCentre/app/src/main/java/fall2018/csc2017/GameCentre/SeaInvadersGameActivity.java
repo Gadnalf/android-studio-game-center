@@ -1,6 +1,5 @@
 package fall2018.csc2017.GameCentre;
 
-import android.os.Handler;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewTreeObserver;
@@ -15,7 +14,7 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
 
     //https://stackoverflow.com/questions/4597690/android-timer-how-to
 
-//    final Handler timerHandler = new Handler();
+//    Handler timerHandler = new Handler();
     HandlerSerializable timerHandler = new HandlerSerializable();
     Runnable timerRunnable = new RunnerSerializable() {
 
@@ -89,9 +88,9 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
 
     @Override
     protected void autoSave() {
-        GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
-        gameHub.setSeaInvadersBoardManager(seaInvadersBoardManager);
-        SaveAndLoad.saveGameHubPermanent(gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        GameData gameData = SaveAndLoad.loadGameHubTemp(this);
+        gameData.setSeaInvadersBoardManager(seaInvadersBoardManager);
+        SaveAndLoad.saveGameHubPermanent(gameData, this);
+        SaveAndLoad.saveGameHubTemp(gameData, this);
     }
 }
