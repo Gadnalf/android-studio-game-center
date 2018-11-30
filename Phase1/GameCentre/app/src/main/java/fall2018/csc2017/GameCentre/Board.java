@@ -54,20 +54,10 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
 
     }
 
-    /**
-     * Sets size of the board.
-     *
-     * @param boardSize Integer representing size of the board.
-     */
     public void setBoardSize (int boardSize) {
         this.boardSize = boardSize;
     }
 
-    /**
-     * Returns the size of the board.
-     *
-     * @return Integer representing size of the board.
-     */
     public int getBoardSize () {
         return this.boardSize;
     }
