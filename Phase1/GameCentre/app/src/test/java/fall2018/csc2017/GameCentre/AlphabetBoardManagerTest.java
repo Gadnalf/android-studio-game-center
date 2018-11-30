@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
 
-    AlphabetTilesBoardManager boardManager;
+    private AlphabetTilesBoardManager boardManager;
 
     @Override
     @Before
@@ -49,7 +49,7 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
         boardManager.swipeTo(0);
         Tile tile = new TileAlpha(0);
         assertEquals("Expected Tile and the Actual Tile differs",
-                boardManager.getBoard().getTile(0,0).getId(), tile.getId());
+                boardManager.getBoard().getTile(0, 0).getId(), tile.getId());
         assertEquals(boardManager.getBoard().getTile(4, 0).getId(), 0);
 
     }
@@ -65,7 +65,6 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
                 boardManager.getBoard().getTile(4, 0).getId(), tile.getId());
         assertEquals(boardManager.getBoard().getTile(0, 0).getId(), 0);
     }
-
 
     @Test
     public void testSwipeLeft() {
@@ -88,7 +87,7 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
         boardManager.swipeTo(3);
         Tile tile = new TileAlpha(0);
         assertEquals("Expected Tile and the Actual Tile differs",
-                boardManager.getBoard().getTile(0,4).getId(), tile.getId());
+                boardManager.getBoard().getTile(0, 4).getId(), tile.getId());
         assertEquals(boardManager.getBoard().getTile(0, 0).getId(), 0);
     }
 
@@ -100,3 +99,9 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
         assertEquals("The score is not correct.", 32, boardManager.getScore(), 0);
     }
 }
+
+//    public void testStackTiles() {
+//        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles()
+//    }
+//}
+

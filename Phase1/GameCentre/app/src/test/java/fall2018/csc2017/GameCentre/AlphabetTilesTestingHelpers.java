@@ -3,7 +3,7 @@ package fall2018.csc2017.GameCentre;
 import java.util.ArrayList;
 import java.util.List;
 
-class AlphabetTilesTestingHelpers {
+public class AlphabetTilesTestingHelpers {
     /**
      * Make a set of tiles that are in order.
      *
@@ -34,3 +34,4 @@ class AlphabetTilesTestingHelpers {
 
     }
 }
+
