@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.TooManyListenersException;
 
 /**
@@ -174,9 +175,53 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         while (iterator.hasNext()) {
             newTiles.add(iterator.next());
         }
-        Collections.shuffle(newTiles);
+        fixedShuffle(newTiles);
         setTiles(newTiles);
     }
+
+    void fixedShuffle(List<Tile> tiles){
+        List<Integer> random = new ArrayList<>();
+        for (int i = 0; i < 200; i++){
+            random.add(1);
+            random.add(2);
+            random.add(3);
+            random.add(4);
+        }
+        Collections.shuffle(random);
+        for(int i = 0; i < random.size(); i++){
+            int move = random.get(i);
+            for(int j = 0; j < tiles.size(); j ++){
+                if(tiles.get(j).getId() == numTiles()){
+                    if(move == 1){
+                        if(0 <= j - 4){
+                         Tile saveTile = tiles.get(j);
+                         tiles.set(j , tiles.get(j - 4));
+                         tiles.set(j - 4, saveTile);
+                        }
+                    }else if(move == 2){
+                        if( j + 4 < tiles.size()){
+                            Tile saveTile = tiles.get(j);
+                            tiles.set(j , tiles.get(j + 4));
+                            tiles.set(j + 4, saveTile);
+                        }
+                    }else if(move == 3){
+                        if(0 <= j - 1){
+                            Tile saveTile = tiles.get(j);
+                            tiles.set(j , tiles.get(j - 1));
+                            tiles.set(j - 1, saveTile);
+                        }
+                    }else{
+                        if( j + 1 < tiles.size()){
+                            Tile saveTile = tiles.get(j);
+                            tiles.set(j , tiles.get(j + 1));
+                            tiles.set(j + 1, saveTile);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     /**
      * Returns the information about the board in the string form.
