@@ -39,6 +39,10 @@ https://markus.teach.cs.toronto.edu/git/csc207-2018-09-reg/group_0684
 5. Gradle sync
 6. hit play
 
+### Accounts
+- GameCentre starts with the user logged in as a Guest.
+- In order to access username/password protected saves, navigate through GameHub to the Change Account screen.
+
 ### Possible null point error
 - If the null point exception error occur, wipe out the data from AVD manager.
 - How to wipe out:
