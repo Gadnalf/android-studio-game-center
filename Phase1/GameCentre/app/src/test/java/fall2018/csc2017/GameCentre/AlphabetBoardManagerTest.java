@@ -87,7 +87,7 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
     }
 
     @Test
-    public void testGetScore() {
+    public void testComputeScore() {
         List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
         boardManager.getBoard().setTiles(emptyTiles);
         boardManager.getBoard().updateTile(0, new TileAlpha(4));

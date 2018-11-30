@@ -5,26 +5,26 @@ Team Member 1:
 Name: Xiu Yan(Sam) Lu
 Email: xiuyan.lu@mail.utoronto.ca 
 Phone: 1-647-895-0528
-Git log Username: luxiu <xiuyan.lu@mail.utoronto.ca>
+Git log Username: luxiu
 
 Team Member 2:
 Name: Philip Borui Cai
 Email: philip.cai@mail.utoronto.ca
 Phone: 1-416-271-6939
-Git log Username: Philip <philip.cai@mail.utoronto.ca>
-Git log Username: caiphili <at0micDerp!>
+Git log Username: Philip 
+Git log Username: caiphili 
 
 Team Member 3:
 Name: Brydon Parker
 Email: brydon.parker@mail.utoronto.ca
 Phone: 1-647-526-9746
-Git log Username: bryparker <brydon.parker@mail.utoronto.ca>
+Git log Username: bryparker
 
 Team Member 4:
 Name: Hokyun Park
 Email: hokyun.park@mail.utoronto.ca
 Phone: 1-647-771-8100
-Git log Username: Hokyun <hokyun.park@mail.utoronto.ca>
+Git log Username: Hokyun
 
 
 
