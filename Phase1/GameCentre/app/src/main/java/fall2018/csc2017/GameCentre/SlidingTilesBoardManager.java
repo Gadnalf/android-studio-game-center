@@ -37,7 +37,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     /**
      * manage a new board
      * @param user user
-     * @param slidingTilesSettings the setting of the sliding tiles games. 
+     * @param slidingTilesSettings the setting of the sliding tiles games.
      */
     SlidingTilesBoardManager(String user, SlidingTilesSettings slidingTilesSettings) {
         super(user, slidingTilesSettings, new SlidingTilesTileFactory());
