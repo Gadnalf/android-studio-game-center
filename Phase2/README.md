@@ -7,7 +7,7 @@ https://markus.teach.cs.toronto.edu/git/csc207-2018-09-reg/group_0684
 - The available board sizes are 3x3, 4x4, and 5x5 which are freely chosen by an user.
 - The exchange of the blank tiles with adjacent tiles are done by tapping onto the adjacent tiles (to be swapped) to the blank tiles.
 - Scores are updated based on the time and the number of moves made. Lesser moves made and lesser times spent to solve the puzzle will earn the user a better score.
-- Only the higheset scored game will be recorded on the scoreboard. 
+- The game with the highest score will be recorded on the scoreboard. 
 
 ### GAME #2: Sea Invaders
 - The goal of this game is to shoot the invaders (squid) to prevent them from reaching the bottom of the screen. 
@@ -16,7 +16,7 @@ https://markus.teach.cs.toronto.edu/git/csc207-2018-09-reg/group_0684
 - The shooting can be done by tapping onto the ship.
 - The user will notice that, in the column where the ship is placed, an invader will disappear (shot and dead) from the bottom every time the ship is tapped.
 - The user obtains a higher score by resisting and fending off the invaders for a longer duration.
-- Only the higheset scored game will be recorded on the scoreboard. 
+- The game with the highest score will be recorded on the scoreboard. 
 
 ### GAME #3: Alphabet Tiles 
 - The goal of this game is to stack the alphabet tiles to reach the K tile. Yet, if the player wishes to continue on with the game, he/she may do so upto the Z tile. 
