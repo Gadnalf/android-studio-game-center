@@ -76,7 +76,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
 
         int row = position / getGameSettings().getBoardSize();
         int col = position % getGameSettings().getBoardSize();
-        int blankId = board.numTiles();
+        int blankId = 25;
         // Are any of the 4 the blank tile?
         Tile above = row == 0 ? null : board.getTile(row - 1, col);
         Tile below = row == getGameSettings().getBoardSize() - 1 ? null : board.getTile(row + 1, col);
@@ -103,7 +103,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
 
         int row = position / this.getGameSettings().getBoardSize();
         int col = position % this.getGameSettings().getBoardSize();
-        int blankId = board.numTiles();
+        int blankId = 25;
         if(isValidTap(position)){
             Tile above = row == 0 ? null : board.getTile(row - 1, col);
             Tile below = row == this.getGameSettings().getBoardSize() - 1 ? null : board.getTile(row + 1, col);

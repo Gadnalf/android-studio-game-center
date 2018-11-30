@@ -10,15 +10,27 @@ public class SlidingTilesTileFactory extends AbstractTilesFactory {
 
         if (boardSize == 3) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                tiles.add(new TileSizeThree(tileNum));
+                if (tileNum == numTiles - 1) {
+                    tiles.add(new TileNum(24));
+                } else {
+                    tiles.add(new TileNum(tileNum));
+                }
             }
         } else if (boardSize == 4) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                tiles.add(new TileSizeFour(tileNum));
+                if (tileNum == numTiles - 1) {
+                    tiles.add(new TileNum(24));
+                } else {
+                    tiles.add(new TileNum(tileNum));
+                }
             }
         } else if (boardSize == 5) {
             for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                tiles.add(new TileSizeFive(tileNum));
+                if (tileNum == numTiles - 1){
+                    tiles.add(new TileNum(24));
+                } else {
+                    tiles.add(new TileNum(tileNum));
+                }
             }
         }
         return tiles;
