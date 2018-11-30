@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
-
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
