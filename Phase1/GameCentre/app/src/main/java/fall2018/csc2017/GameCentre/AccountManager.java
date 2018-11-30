@@ -63,6 +63,13 @@ class AccountManager implements Serializable {
     }
 
     /**
+     * Returns the account name.
+     */
+    String getName(){
+        return current.getName();
+    }
+
+    /**
      * Logs out of the current account.
      */
     void logout(){
