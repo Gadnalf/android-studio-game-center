@@ -1,8 +1,6 @@
 package fall2018.csc2017.GameCentre;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Stores a username, password, personal high scores, and corresponding save files.

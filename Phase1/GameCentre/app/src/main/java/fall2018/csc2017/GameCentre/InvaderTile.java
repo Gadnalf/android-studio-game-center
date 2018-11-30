@@ -6,7 +6,7 @@ public class InvaderTile extends TileSeaInvader implements Serializable {
 
 //    public InvaderTile(int id) {
 //        super(id);
-//        background = background = R.drawable.tile_5x5_1;
+//        background = background = R.drawable.tile_1;
 //    }
 
     public InvaderTile() {

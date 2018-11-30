@@ -1,17 +1,16 @@
 package fall2018.csc2017.GameCentre;
 
-public class TileAlpha extends Tile{
-    public TileAlpha(int id, int background) {
-        super(id, background);
-    }
+/**
+ * Tiles used for Alphabet Tiles game.
+ */
+class TileAlpha extends Tile{
 
     /**
-     * A tile with a background id; look up and set the id.
+     * A Alphabet tile with a background id; look up and set the id.
      *
      */
-    public TileAlpha(int backgroundId) {
+    TileAlpha(int backgroundId) {
         super(backgroundId);
-        // This looks so ugly.
         switch (backgroundId + 1) {
             case 0:
                 background = R.drawable.tile_empty;
