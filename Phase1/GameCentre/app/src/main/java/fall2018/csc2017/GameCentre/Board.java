@@ -225,7 +225,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         }
     }
 
-    private boolean isImpossible(List<Tile> newTiles){
+    boolean isImpossible(List<Tile> newTiles){
         int inversions = 0;
         int blank = 24;
         for(int i=0; i<newTiles.size(); i++) {
