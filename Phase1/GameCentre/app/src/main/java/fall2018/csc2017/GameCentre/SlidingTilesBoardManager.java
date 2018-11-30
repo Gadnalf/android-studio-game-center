@@ -1,7 +1,5 @@
 package fall2018.csc2017.GameCentre;
 
-import android.support.v7.app.AppCompatActivity;
-
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -12,17 +10,13 @@ import java.util.Iterator;
 class SlidingTilesBoardManager extends AbstractBoardManager implements Serializable {
 
 
-
     /**
      * Manage a board that has been pre-populated.
+     *
      * @param board the board
+     * @param user the user
+     * @param slidingTilesSettings the setting of the sliding tile games.
      */
-    SlidingTilesBoardManager(Board board, String user, SlidingTilesSettings slidingTilesSettings,
-                             AppCompatActivity appCompatActivity) {
-        super(board, user, slidingTilesSettings,
-                appCompatActivity, new SlidingTilesTileFactory());
-    }
-
     SlidingTilesBoardManager(Board board, String user, SlidingTilesSettings slidingTilesSettings) {
         super(board, user, slidingTilesSettings, new SlidingTilesTileFactory());
     }
@@ -30,8 +24,8 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
 
     /**
      * manage a new board
-     * @param user
-     * @param slidingTilesSettings
+     * @param user user
+     * @param slidingTilesSettings the setting of the sliding tiles games.
      */
     SlidingTilesBoardManager(String user, SlidingTilesSettings slidingTilesSettings) {
         super(user, slidingTilesSettings, new SlidingTilesTileFactory());
@@ -76,7 +70,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
 
         int row = position / getGameSettings().getBoardSize();
         int col = position % getGameSettings().getBoardSize();
-        int blankId = board.numTiles();
+        int blankId = 25;
         // Are any of the 4 the blank tile?
         Tile above = row == 0 ? null : board.getTile(row - 1, col);
         Tile below = row == getGameSettings().getBoardSize() - 1 ? null : board.getTile(row + 1, col);
@@ -88,10 +82,6 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
                 || (right != null && right.getId() == blankId);
     }
 
-    @Override
-    boolean isValidSwipe(int direction) {
-        return false;
-    }
 
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
@@ -103,7 +93,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
 
         int row = position / this.getGameSettings().getBoardSize();
         int col = position % this.getGameSettings().getBoardSize();
-        int blankId = board.numTiles();
+        int blankId = 25;
         if(isValidTap(position)){
             Tile above = row == 0 ? null : board.getTile(row - 1, col);
             Tile below = row == this.getGameSettings().getBoardSize() - 1 ? null : board.getTile(row + 1, col);
@@ -137,6 +127,14 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
         }
     }
 
+    /**
+     * Check if there was any moves made
+     *
+     * @return false if no moves are made from the current state, true otherwise
+     */
+    @Override
+    public boolean moveIsEmpty(){return  moves.empty();}
+
     @Override
     boolean gameOver(){
         return false;
@@ -156,7 +154,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     boolean isValidUndo(int position) {
         int row = position / getGameSettings().getBoardSize();
         int col = position % getGameSettings().getBoardSize();
-        int blankId = getBoard().numTiles();
+        int blankId = 25;
         Tile current = getBoard().getTile(row, col);
         return (current.getId() == blankId);
     }
@@ -169,7 +167,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     @Override
     void tapUndo(int position) {
         if(isValidUndo(position)){
-            int numUndoes = ((SlidingTilesSettings) gameSettings).getNumUndoes();
+            int numUndoes = (gameSettings).getNumUndoes();
             int[] lastMove = moves.pop();
             int row1 = lastMove[0];
             int col1 = lastMove[1];
@@ -184,6 +182,11 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
 
     }
 
+    /**
+     * Sets the board size and generates a new board for the sliding tiles game.
+     *
+     * @param boardSize size of the board indicated by integer.
+     */
     @Override
     public void setBoardSize(int boardSize) {
         super.setBoardSize(boardSize);
@@ -198,19 +201,25 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
      * we go with 10 bc I forget :)
      * TODO: add why I went with 10
      * - something to do with easier implementation
-     * @return
+     *
+     * @return double that represent score of the game
      */
     @Override
     public double getScore() {
-        double a = (double) getMoveCount();
+        double moveCount = (double) getMoveCount();
         double timeWeight = (getTimePlayed()/1000);
-        double numUndosWeight = getSlidingTileSettings().getNumUndoes();
-        double b = (double) (timeWeight + numUndosWeight);
-        return 10-(a/b); //want to maximize this
+        double numUndoesWeight = getSlidingTileSettings().getNumUndoes();
+        double score = 1/(timeWeight * (moveCount + numUndoesWeight)) * 1000000;
+        return Math.round(score);
     }
 
+    /**
+     * Returns the settings of the sliding tiles game currently being played
+     *
+     * @return SlidingTileSettings class
+     */
 
-    public SlidingTilesSettings getSlidingTileSettings() {
+    SlidingTilesSettings getSlidingTileSettings() {
         return (SlidingTilesSettings) getGameSettings();
     }
 

@@ -15,7 +15,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private GameHub gameHub;
+    private GameData gameData;
 
     /**
      * User name.
@@ -39,7 +39,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
     private void setupStartingActivity() {
 //        make a temp file just in case there is none yet
         SaveAndLoad.saveAllTemp(
-                new GameHub(
+                new GameData(
                         new SlidingTilesBoardManager(
                                 user,
                                 new SlidingTilesSettings(4,4)),
@@ -52,12 +52,12 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
                 this);
 
 //        load the board manager if it exists if not load the temp file
-        gameHub = SaveAndLoad.loadGameHubPermanent(
+        gameData = SaveAndLoad.loadGameHubPermanent(
                 user,
                 this);
         //save the new board manager as temp if its been loaded
         SaveAndLoad.saveGameHubTemp(
-                gameHub,
+                gameData,
                 this); //this will save the loaded board manager to tmp to be used in the other activities
     }
 
@@ -82,12 +82,12 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gameHub = SaveAndLoad.loadGameHubPermanent(
+                gameData = SaveAndLoad.loadGameHubPermanent(
                         user,
                         appCompatActivity);
 //                loadFromFile(SAVE_FILENAME);
                 SaveAndLoad.saveGameHubTemp(
-                        gameHub, appCompatActivity);
+                        gameData, appCompatActivity);
 //                saveToFile(TEMP_SAVE_FILENAME);
                 makeToastLoadedText();
                 switchToGame();
@@ -124,11 +124,11 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SaveAndLoad.saveGameHubPermanent(
-                        gameHub,
+                        gameData,
                         appCompatActivity);
 //                saveToFile(SAVE_FILENAME);
                 SaveAndLoad.saveGameHubTemp(
-                        gameHub, appCompatActivity);
+                        gameData, appCompatActivity);
 //                saveToFile(TEMP_SAVE_FILENAME);
                 makeToastSavedText();
             }
@@ -183,7 +183,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
     private void switchToSetting() {
         Intent tmp = new Intent(this, SlidingTilesSettingsActivity.class);
         SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
+                gameData, this);
         startActivity(tmp);
     }
 
@@ -193,7 +193,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
     private void switchToGame() {
         Intent tmp = new Intent(this, SlidingTilesGameActivity.class);
         SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
+                gameData, this);
         startActivity(tmp);
     }
 
@@ -203,7 +203,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
     private void switchToGameScoreBoard() {
         Intent tmp = new Intent(this, GameScoreBoardActivity.class);
         SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
+                gameData, this);
         startActivity(tmp);
     }
 
@@ -213,7 +213,7 @@ public class SlidingTilesStartingActivity extends AppCompatActivity {
     private void switchToUserScoreBoard() {
         Intent tmp = new Intent(this, UserScoreBoardActivity.class);
         SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
+                gameData, this);
         startActivity(tmp);
     }
 }

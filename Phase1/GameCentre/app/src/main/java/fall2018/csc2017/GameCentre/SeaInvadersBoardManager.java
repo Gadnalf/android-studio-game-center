@@ -1,7 +1,6 @@
 package fall2018.csc2017.GameCentre;
 
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -82,10 +81,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     }
 
-    @Override
-    boolean isValidSwipe(int direction) {
-        return false;
-    }
 
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
@@ -162,7 +157,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     @Override
     public void fireAndUpdate(int position) {
         int closestEnemy = getClosestEnemyPosInThisCol(position);
-        board.updateTile(closestEnemy, new EmptyTile());
+        board.updateTile(closestEnemy, new TileSeaInvader(- 1));
     }
 
 

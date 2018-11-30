@@ -2,15 +2,15 @@ package fall2018.csc2017.GameCentre;
 
 import java.io.Serializable;
 
-public class GameHub implements Serializable {
+public class GameData implements Serializable {
     SlidingTilesBoardManager slidingTilesBoardManager;
     SeaInvadersBoardManager seaInvadersBoardManager;
     AlphabetTilesBoardManager alphabetTilesBoardManager;
     String user;
-    GameHub(SlidingTilesBoardManager slidingTilesBoardManager,
-            SeaInvadersBoardManager seaInvadersBoardManager,
-            AlphabetTilesBoardManager alphabetTilesBoardManager,
-            String user) {
+    GameData(SlidingTilesBoardManager slidingTilesBoardManager,
+             SeaInvadersBoardManager seaInvadersBoardManager,
+             AlphabetTilesBoardManager alphabetTilesBoardManager,
+             String user) {
         this.slidingTilesBoardManager = slidingTilesBoardManager;
         this.seaInvadersBoardManager = seaInvadersBoardManager;
         this.alphabetTilesBoardManager = alphabetTilesBoardManager;

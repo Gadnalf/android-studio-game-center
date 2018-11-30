@@ -1,6 +1,5 @@
 package fall2018.csc2017.GameCentre;
 
-import android.os.Handler;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewTreeObserver;
@@ -15,8 +14,8 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
 
     //https://stackoverflow.com/questions/4597690/android-timer-how-to
 
-//    final Handler timerHandler = new Handler();
-    final HandlerSerializable timerHandler = new HandlerSerializable();
+//    Handler timerHandler = new Handler();
+    HandlerSerializable timerHandler = new HandlerSerializable();
     Runnable timerRunnable = new RunnerSerializable() {
 
         @Override
@@ -27,20 +26,25 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
             if (seaInvadersBoardManager.gameOver()) {
                 Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored: " + seaInvadersBoardManager.getScore(),
                         Toast.LENGTH_SHORT).show();
-                seaInvadersBoardManager.resetGame();
-                seaInvadersBoardManager.updateScoreboard();
-                timerHandler.removeCallbacks(timerRunnable);
-            }
-
-            if (seaInvadersBoardManager.puzzleSolved()) {
-                Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + seaInvadersBoardManager.getScore(),
-                        Toast.LENGTH_SHORT).show();
                 seaInvadersBoardManager.updateScoreboard();
                 seaInvadersBoardManager.resetGame();
                 timerHandler.removeCallbacks(timerRunnable);
+                timerHandler = null;
             }
-            timerHandler.postDelayed(this,
-                    1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
+            else {
+                if (seaInvadersBoardManager.puzzleSolved()) {
+                    Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + seaInvadersBoardManager.getScore(),
+                            Toast.LENGTH_SHORT).show();
+                    seaInvadersBoardManager.updateScoreboard();
+                    seaInvadersBoardManager.resetGame();
+                    timerHandler.removeCallbacks(timerRunnable);
+                    timerHandler = null;
+                }
+                else {
+                    timerHandler.postDelayed(this,
+                            1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
+                }
+            }
         }
     };
 
@@ -84,9 +88,9 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
 
     @Override
     protected void autoSave() {
-        GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
-        gameHub.setSeaInvadersBoardManager(seaInvadersBoardManager);
-        SaveAndLoad.saveGameHubPermanent(gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        GameData gameData = SaveAndLoad.loadGameHubTemp(this);
+        gameData.setSeaInvadersBoardManager(seaInvadersBoardManager);
+        SaveAndLoad.saveGameHubPermanent(gameData, this);
+        SaveAndLoad.saveGameHubTemp(gameData, this);
     }
 }

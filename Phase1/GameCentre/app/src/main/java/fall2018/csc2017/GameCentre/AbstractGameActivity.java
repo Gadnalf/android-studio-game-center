@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
-
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -91,7 +90,7 @@ abstract public class AbstractGameActivity extends AppCompatActivity implements 
      * Auto-save the game
      */
     abstract protected void autoSave();
-//        GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
+//        GameData gameHub = SaveAndLoad.loadGameHubTemp(this);
 //        gameHub.setAbstractBoardManager();
 //        SaveAndLoad.saveGameHubPermanent(abstractBoardManager, this);
 //        SaveAndLoad.saveGameHubTemp(abstractBoardManager, this);
@@ -111,6 +110,11 @@ abstract public class AbstractGameActivity extends AppCompatActivity implements 
         display();
     }
 
+    /**
+     * Sets the Board Manager into the one that is inputted.
+     *
+     * @param abstractBoardManager the board manager to replace the existing or non-existing one.
+     */
     public void setAbstractBoardManager(AbstractBoardManager abstractBoardManager) {
         this.abstractBoardManager = abstractBoardManager;
     }

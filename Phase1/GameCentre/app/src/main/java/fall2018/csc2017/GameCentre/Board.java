@@ -5,12 +5,11 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.TooManyListenersException;
+
 
 /**
  * The sliding tiles board.
@@ -35,6 +34,11 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
 
     }
 
+    /**
+     * Sets the current list of the tiles into the given tiles inputted
+     *
+     * @param tiles list of tiles
+     */
     public void setTiles(List<Tile> tiles) {
         boardSize = (int) Math.sqrt(tiles.size());
         this.tiles = new Tile[boardSize][boardSize];
@@ -110,10 +114,10 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     /**
      * Swap the tiles at (row1, col1) and (row2, col2)
      *
-     * @param row1 the first tile row
-     * @param col1 the first tile col
-     * @param row2 the second tile row
-     * @param col2 the second tile col
+     * @param row1 the first tile row.
+     * @param col1 the first tile col.
+     * @param row2 the second tile row.
+     * @param col2 the second tile col.
      */
     void swapTiles(int row1, int col1, int row2, int col2) {
         Tile temp = tiles[row1][col1];
@@ -123,6 +127,15 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
+    /**
+     * Swap the tiles at (row1, col1) and (row2, col2)
+     *
+     * @param row1 the first tile row.
+     * @param col1 the first tile col.
+     * @param row2 the second tile row.
+     * @param col2 the second tile col.
+     * @param notifyObservers for the Sea invaders returns boolean.
+     */
     void swapTiles(int row1, int col1, int row2, int col2, boolean notifyObservers) {
         Tile temp = tiles[row1][col1];
         tiles[row1][col1] = tiles[row2][col2];
@@ -175,7 +188,42 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
             newTiles.add(iterator.next());
         }
         Collections.shuffle(newTiles);
+        while(this.isImpossible(newTiles)){
+            Collections.shuffle(newTiles);
+        }
         setTiles(newTiles);
+    }
+
+    /**
+     * Checks whether the board state is not solvable. Leave as package private for the unit test.
+     *
+     * @param newTiles a list of tiles of numbers.
+     * @return true if it is impossible to solve else false.
+     */
+    boolean isImpossible(List<Tile> newTiles){
+        int inversions = 0;
+        int blank = 24;
+        for(int i=0; i<newTiles.size(); i++) {
+            if(newTiles.get(i).getId() != 25){
+                for (int j = i + 1; j < newTiles.size(); j++) {
+                    if(newTiles.get(j).getId() < newTiles.get(i).getId()) {
+                        inversions++;
+                    }
+                }
+            }
+            else{
+                blank = i;
+            }
+        }
+        if(boardSize % 2 == 0){
+            if((boardSize-(blank/boardSize))%2==0 & inversions%2 == 1){
+                return false;
+            }
+            if((boardSize-(blank/boardSize))%2==1 & inversions%2 == 0){
+                return false;
+            }
+        }
+        return !(boardSize % 2 == 1 & inversions%2 == 0);
     }
 
     /**

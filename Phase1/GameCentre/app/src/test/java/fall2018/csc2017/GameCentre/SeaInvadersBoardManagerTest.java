@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
 
-    SeaInvadersBoardManager boardManager;
+    private SeaInvadersBoardManager boardManager;
 
     @Override
     @Before
@@ -32,10 +32,10 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
         assertTrue(boardManager.gameOver());
     }
 
-    public void removeAllInvaders(SeaInvadersBoardManager seaInvadersBoardManager) {
+    private void removeAllInvaders(SeaInvadersBoardManager seaInvadersBoardManager) {
         ArrayList<Integer> invaders = seaInvadersBoardManager.getInvaderPositions();
         for (int pos : invaders) {
-            seaInvadersBoardManager.board.updateTile(pos, new EmptyTile());
+            seaInvadersBoardManager.board.updateTile(pos, new TileSeaInvader(-1));
         }
     }
 
@@ -45,26 +45,26 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
         boardManager.setGameOver(true);
         assertEquals((long) boardManager.score, (long) 0.0); // start w 0
         boardManager.setCurrentRound(5);
-        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
-        assertEquals(boardManager.puzzleSolved(), false); // 5 moves => not finished
+        (boardManager).checkIfPuzzleIsSolved();
+        assertFalse(boardManager.puzzleSolved()); // 5 moves => not finished
         double scoreMove5 = boardManager.getScore();
         assertTrue(scoreMove5 > 0);
         boardManager.setCurrentRound(10);
-        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
-        assertEquals(boardManager.puzzleSolved(), false);
+        (boardManager).checkIfPuzzleIsSolved();
+        assertFalse(boardManager.puzzleSolved());
         boardManager.setGameOver(false); // puzzle isnt solved if the game is over
-        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
+        (boardManager).checkIfPuzzleIsSolved();
         boolean puzzleSolved = boardManager.puzzleSolved();
-        assertEquals(puzzleSolved, false); // still inavders in there
+        assertFalse(puzzleSolved); // still invaders in there
         removeAllInvaders(boardManager);
-        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
-        assertEquals(boardManager.puzzleSolved(), true);
+        (boardManager).checkIfPuzzleIsSolved();
+        assertTrue(boardManager.puzzleSolved());
         assertTrue(boardManager.getScore() > scoreMove5);
         boardManager.board.updateTile(
                 5 * 5 - 1,
                 new InvaderTile()
         );
-        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
+        (boardManager).checkIfPuzzleIsSolved();
         assertFalse(boardManager.puzzleSolved()); //invader at end => puzzle not solved
     }
 
@@ -130,8 +130,8 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
     @Test
     public void swim() {
         //starting right
-        ArrayList invaders = boardManager.getInvaderPositions();
-        Integer[] invaderArray = ((List<Integer>) invaders).toArray(new Integer[5]);
+        List<Integer> invaders = boardManager.getInvaderPositions();
+        Integer[] invaderArray = (invaders).toArray(new Integer[5]);
         assertArrayEquals(
                 invaderArray,
                 new Integer[]{4,3,2,1,0});

@@ -119,9 +119,9 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
     @Test
     public void testSwapLastTwo() {
         assertEquals(15, boardManager.getBoard().getTile(3, 2).getId());
-        assertEquals(16, boardManager.getBoard().getTile(3, 3).getId());
+        assertEquals(25, boardManager.getBoard().getTile(3, 3).getId());
         boardManager.getBoard().swapTiles(3, 3, 3, 2);
-        assertEquals(16, boardManager.getBoard().getTile(3, 2).getId());
+        assertEquals(25, boardManager.getBoard().getTile(3, 2).getId());
         assertEquals(15, boardManager.getBoard().getTile(3, 3).getId());
     }
 

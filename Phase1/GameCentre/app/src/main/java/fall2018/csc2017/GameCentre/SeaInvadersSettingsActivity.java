@@ -40,7 +40,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private GameHub gameHub;
+    private GameData gameData;
 
     /**
      * User name.
@@ -54,8 +54,8 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sea_invader_setting);
         secSpawnAndMove = 4;
         numRounds = 12;
-        gameHub = SaveAndLoad.loadGameHubTemp(this);
-        seaInvadersBoardManager = gameHub.getSeaInvadersBoardManager();
+        gameData = SaveAndLoad.loadGameHubTemp(this);
+        seaInvadersBoardManager = gameData.getSeaInvadersBoardManager();
         addStartButtonListener();
         addConfirmButtonListener();
         addFiveSecSpawnAndMoveButtonListener();
@@ -93,7 +93,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
 
     private void setupStartingActivity() {
 //        make a temp file just in case there is none yet
-        GameHub tmpGameHib = new GameHub(
+        GameData tmpGameHib = new GameData(
                 new SlidingTilesBoardManager(
                         user,
                         new SlidingTilesSettings(4,4)),
@@ -108,20 +108,20 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
                 this);
 
 //        load the board manager if it exists if not load the temp file
-        gameHub = SaveAndLoad.loadGameHubPermanent(
+        gameData = SaveAndLoad.loadGameHubPermanent(
                 user,
                 this);
         //save the new board manager as temp if its been loaded
         SaveAndLoad.saveGameHubTemp(
-                gameHub,
+                gameData,
                 this); //this will save the loaded board manager to tmp to be used in the other activities
     }
 
     private void switchToGame() {
         Intent tmp = new Intent(this, SeaInvadersGameActivity.class);
-        gameHub.setSeaInvadersBoardManager(seaInvadersBoardManager);
+        gameData.setSeaInvadersBoardManager(seaInvadersBoardManager);
         SaveAndLoad.saveGameHubTemp(
-                gameHub, this);
+                gameData, this);
         startActivity(tmp);
     }
 
@@ -192,7 +192,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     }
 
     void updateSecSpawnAndMoveDisplay() {
-        String tmp = "Select : Seconds between spawning and swimming in game: " + secSpawnAndMove;
+        String tmp = "Select Seconds Between Spawning And Swimming in Game: " + secSpawnAndMove;
         secSpawnAndMoveDisplay.setText(tmp);
         ((SeaInvadersSettings) seaInvadersBoardManager.getGameSettings()).setSecsBeforeMove(secSpawnAndMove);
         ((SeaInvadersSettings) seaInvadersBoardManager.getGameSettings()).setSecsBeforeSpawn(secSpawnAndMove);

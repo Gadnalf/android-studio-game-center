@@ -39,6 +39,11 @@ https://markus.teach.cs.toronto.edu/git/csc207-2018-09-reg/group_0684
 5. Gradle sync
 6. hit play
 
+### Possible null point error
+- If the null point exception error occur, wipe out the data from AVD manager.
+- How to wipe out:
+    - Tools -> AVD Manager -> Downward Arrow on the right side -> Wipe Data
+
 ### Testing the application
 - run all the tests in the test folder
     - right click on testing folder, select run all tests with coverage

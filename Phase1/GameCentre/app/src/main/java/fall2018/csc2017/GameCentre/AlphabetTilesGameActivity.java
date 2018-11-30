@@ -61,16 +61,16 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
     }
     @Override
     protected void autoSave() {
-        GameHub gameHub = SaveAndLoad.loadGameHubTemp(this);
-        gameHub.setAlphabetTilesBoardManager(alphabetTilesBoardManager);
-        SaveAndLoad.saveGameHubPermanent(gameHub, this);
-        SaveAndLoad.saveGameHubTemp(gameHub, this);
+        GameData gameData = SaveAndLoad.loadGameHubTemp(this);
+        gameData.setAlphabetTilesBoardManager(alphabetTilesBoardManager);
+        SaveAndLoad.saveGameHubPermanent(gameData, this);
+        SaveAndLoad.saveGameHubTemp(gameData, this);
     }
 
     /**
-     * comment needed
+     * Adds the undo button to the game activity. Executes undo method of the AlphabetTilesBoardManager
+     * when it is tapped.
      */
-
     protected void addUndoListener() {
         Button undo = findViewById(R.id.undo);
         undo.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +92,9 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
         });
     }
 
+    /**
+     * Shows the current score of the game in toast.
+     */
     protected void showScore() {
         Button score = findViewById(R.id.score);
         score.setOnClickListener(new View.OnClickListener() {

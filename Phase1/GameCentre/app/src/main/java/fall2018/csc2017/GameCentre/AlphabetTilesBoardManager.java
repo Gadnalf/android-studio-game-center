@@ -1,32 +1,20 @@
 package fall2018.csc2017.GameCentre;
 
-import android.support.v7.app.AppCompatActivity;
-
-
 import java.util.Random;
-
-
 import java.io.Serializable;
 
 
 /**
- * Need Comment
+ * Manages the board of the Alphabet Tiles game.
  */
 public class AlphabetTilesBoardManager extends  AbstractBoardManager implements Serializable{
 
     /**
-     * Manage a board that has been pre-populated.
-     * @param board the board
+     * Manage a board that has been pre-populated for the Alphabet Tiles game.
+     *
+     * @param user User of the game.
+     * @param alphabetTilesSettings Settings for the game.
      */
-    AlphabetTilesBoardManager(Board board, String user, AlphabetTilesSettings alphabetTilesSettings,
-                              AppCompatActivity appCompatActivity) {
-
-        super(board, user, alphabetTilesSettings,
-                appCompatActivity, new AlphabetTileFactory());
-
-    }
-
-
     AlphabetTilesBoardManager(String user, AlphabetTilesSettings alphabetTilesSettings) {
         super(user, alphabetTilesSettings, new AlphabetTileFactory());
     }
@@ -36,7 +24,6 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
      *
      * @return whether the tiles are in row-major order
      *
-     * TODO: Need to test this out.
      */
     @Override
     boolean puzzleSolved() {
@@ -57,6 +44,12 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
         return solved;
     }
 
+    /**
+     * Informs whether the game is over or not. The game is over if the board contains a Z tile or
+     * any move will not change the board
+     *
+     * @return True if the game is over false otherwise.
+     */
     boolean gameOver() {
         boolean over = true;
         int boardSize = board.getBoardSize();
@@ -89,20 +82,16 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
     }
 
     /**
-     * Return whether any of the four surrounding tiles is the blank tile.
+     * Place holder for the method from the AbstractBoardManager.
      *
      * @param position the tile to check
-     * @return whether the tile at position is surrounded by a blank tile
+     * @return True only.
      */
     @Override
     boolean isValidTap(int position) {
         return true;
     }
 
-    @Override
-    boolean isValidSwipe(int direction) {
-        return true;
-    }
 
     /**
      * Process a swipe by the direction, pushing all tiles to one side and merge as appropriate
@@ -121,17 +110,19 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
             swipeLeft();
         } else if (direction == 3) {
             swipeRight();}
-        updateScoreboard();
         randomSpawn();
         updateScoreboard();
     }
 
-    void saveState(){
+    /**
+     * Saves each state of the game upon each move.
+     */
+    private void saveState(){
         int [] state = new int[board.numTiles()];
-        int boardsize = board.getBoardSize();
-        for(int i = 0; i < boardsize; i++){
-            for(int j = 0; j < boardsize; j++){
-                state[i * boardsize + j] = board.getTile(i, j).getId();
+        int boardSize = board.getBoardSize();
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                state[i * boardSize + j] = board.getTile(i, j).getId();
             }
         }
         moves.push(state);
@@ -343,6 +334,8 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
 
     /**
      * Function used to calculate score
+     *
+     *
      */
     @Override
     public double getScore() {
@@ -370,7 +363,7 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
      *
      * @return settings class initiated before the start of the game.
      */
-    public AlphabetTilesSettings getAlphabetTilesSettings() {
+    AlphabetTilesSettings getAlphabetTilesSettings() {
         return (AlphabetTilesSettings) getGameSettings();
     }
 
