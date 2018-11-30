@@ -15,9 +15,9 @@ public class SeaInvadersTileFactory extends AbstractTilesFactory {
 
             }
             for (int tileNum = boardSize; tileNum < numTiles - 1; tileNum++) {
-                tiles.add(new TileSizeFive(0));
+                tiles.add(new EmptyTile());
             }
-            tiles.add(new TileSizeFive(5));
+            tiles.add(new TileSeaInvader(1));
 
         }
         return tiles;
