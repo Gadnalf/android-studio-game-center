@@ -108,6 +108,11 @@ abstract public class AbstractBoardManager implements Serializable {
     abstract boolean puzzleSolved();
 
     /**
+     * Check if end-game condition is met
+     */
+    abstract boolean gameOver();
+
+    /**
      * Check if the swiping motion is valid
      */
     abstract boolean isValidSwipe(int direction);

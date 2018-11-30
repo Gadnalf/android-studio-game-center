@@ -192,7 +192,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     }
 
     void updateSecSpawnAndMoveDisplay() {
-        String tmp = "Select : Seconds between spawning and swimming in game" + secSpawnAndMove;
+        String tmp = "Select : Seconds between spawning and swimming in game: " + secSpawnAndMove;
         secSpawnAndMoveDisplay.setText(tmp);
         ((SeaInvadersSettings) seaInvadersBoardManager.getGameSettings()).setSecsBeforeMove(secSpawnAndMove);
         ((SeaInvadersSettings) seaInvadersBoardManager.getGameSettings()).setSecsBeforeSpawn(secSpawnAndMove);
@@ -200,7 +200,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     }
 
     void updateRoundsDisplay() {
-        String tmp = "Select Number of Roundses: " + numRoundses;
+        String tmp = "Select Number of Rounds: " + numRoundses;
         numRoundsDisply.setText(tmp);
         ((SeaInvadersSettings)
                 seaInvadersBoardManager.getGameSettings()).setNumRounds(numRoundses);

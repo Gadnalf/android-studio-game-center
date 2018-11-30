@@ -52,6 +52,9 @@ public class MovementController {
             abstractBoardManager.swipeTo(direction);
             if (abstractBoardManager.puzzleSolved()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
+            }else if(abstractBoardManager.gameOver()){
+                Toast.makeText(context, "GAME OVER!", Toast.LENGTH_SHORT).show();
+                abstractBoardManager.resetGame();
             }
         }
     }
