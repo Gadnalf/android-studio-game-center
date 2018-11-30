@@ -31,7 +31,7 @@ class AccountManager implements Serializable {
         if (accounts.contains(username)) {
             return false;
         }
-        if(username.equals("") || password.equals("")){
+        if(username.equals("") || username.equalsIgnoreCase("Guest") || password.equals("")){
             return false;
         }
         else{
@@ -45,17 +45,6 @@ class AccountManager implements Serializable {
             }
         }
 
-    }
-
-    /**
-     * Removes the account with the specified username and returns true. If the account doesn't exist, returns false.
-     */
-    boolean removeAccount(String username) {
-        if (accounts.contains(username)) {
-            accounts.remove(username);
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -78,30 +67,6 @@ class AccountManager implements Serializable {
      */
     void logout(){
         current = null;
-    }
-
-    /**
-     * Adds the given filename under the specified game under the current account.
-     */
-    void getSaves(String game, String filename){
-        current.addSave(game, filename);
-    }
-
-    /**
-     * Returns a list of saves for the specified game under the current account.
-     */
-    ArrayList<String> getSaves(String game){
-        return current.getSaves(game);
-    }
-
-    /**
-     * Gets the current account's username. Returns "Guest" if there is no current user.
-     */
-    public String getName(){
-        if(current == null){
-            return "Guest";
-        }
-        return current.getName();
     }
 
 }
