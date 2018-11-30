@@ -1,11 +1,9 @@
 package fall2018.csc2017.GameCentre;
 
-import android.support.v7.app.AppCompatActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlphabetTilesTestingHelpers {
+class AlphabetTilesTestingHelpers {
     /**
      * Make a set of tiles that are in order.
      *

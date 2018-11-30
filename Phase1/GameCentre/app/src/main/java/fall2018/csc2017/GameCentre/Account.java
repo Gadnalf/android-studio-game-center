@@ -19,6 +19,12 @@ public class Account implements Serializable {
      */
     private String password;
 
+    /**
+     * An account object.
+     *
+     * @param name username of the account.
+     * @param pass password of the account.
+     */
     Account(String name, String pass){
         username = name;
         password = pass;
@@ -38,6 +44,12 @@ public class Account implements Serializable {
         return username;
     }
 
+    /**
+     * Returns whether inputted object and this account is equal.
+     *
+     * @param other any object but expect account object.
+     * @return True if other is same as this class else false.
+     */
     @Override
     public boolean equals(Object other){
         if(other instanceof Account){

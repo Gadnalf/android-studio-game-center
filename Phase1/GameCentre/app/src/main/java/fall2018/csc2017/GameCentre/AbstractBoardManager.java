@@ -92,6 +92,11 @@ abstract public class AbstractBoardManager implements Serializable {
 //        }
 //    }
 
+    /**
+     * Sets the board size and generates and sets a new copy of list of tiles for the board.
+     *
+     * @param boardSize size of the board indicated by integer.
+     */
     public void setBoardSize(int boardSize) {
         List<Tile> tiles = this.tilesFactory.getTiles(boardSize);
         this.gameSettings.setBoardSize(boardSize);
@@ -111,11 +116,6 @@ abstract public class AbstractBoardManager implements Serializable {
      * Check if end-game condition is met
      */
     abstract boolean gameOver();
-
-    /**
-     * Check if the swiping motion is valid
-     */
-    abstract boolean isValidSwipe(int direction);
 
     /**
      * Procecss a swipe by direction, swiping tiles to the direction as appropriate

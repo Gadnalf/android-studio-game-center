@@ -111,6 +111,11 @@ abstract public class AbstractGameActivity extends AppCompatActivity implements 
         display();
     }
 
+    /**
+     * Sets the Board Manager into the one that is inputted.
+     *
+     * @param abstractBoardManager the board manager to replace the existing or non-existing one.
+     */
     public void setAbstractBoardManager(AbstractBoardManager abstractBoardManager) {
         this.abstractBoardManager = abstractBoardManager;
     }

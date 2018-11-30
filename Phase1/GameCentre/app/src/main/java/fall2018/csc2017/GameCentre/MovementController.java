@@ -2,22 +2,21 @@ package fall2018.csc2017.GameCentre;
 
 import android.content.Context;
 import android.widget.Toast;
-import android.widget.Button;
 
 
-public class MovementController {
+class MovementController {
 
     private AbstractBoardManager abstractBoardManager = null;
 
 
-    public MovementController() {
+    MovementController() {
     }
 
-    public void setAbstractBoardManager(AbstractBoardManager abstractBoardManager) {
+    void setAbstractBoardManager(AbstractBoardManager abstractBoardManager) {
         this.abstractBoardManager = abstractBoardManager;
     }
 
-    public void processTapMovement(Context context, int position, boolean display) {
+    void processTapMovement(Context context, int position, boolean display) {
         if (abstractBoardManager.isValidTap(position)) {
             abstractBoardManager.touchMove(position);
             if (abstractBoardManager.puzzleSolved()) {
@@ -47,15 +46,14 @@ public class MovementController {
         }
     }
 
-    public void processSwipeDirection(Context context, int direction, boolean display) {
-        if (abstractBoardManager.isValidSwipe(direction)) {
-            abstractBoardManager.swipeTo(direction);
-            if (abstractBoardManager.puzzleSolved()) {
-                Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
-            }else if(abstractBoardManager.gameOver()){
-                Toast.makeText(context, "GAME OVER!", Toast.LENGTH_SHORT).show();
-                abstractBoardManager.resetGame();
-            }
+    void processSwipeDirection(Context context, int direction, boolean display) {
+        abstractBoardManager.swipeTo(direction);
+        if (abstractBoardManager.puzzleSolved()) {
+            Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
+        } else if(abstractBoardManager.gameOver()){
+            Toast.makeText(context, "GAME OVER!", Toast.LENGTH_SHORT).show();
+            abstractBoardManager.resetGame();
         }
     }
+
 }

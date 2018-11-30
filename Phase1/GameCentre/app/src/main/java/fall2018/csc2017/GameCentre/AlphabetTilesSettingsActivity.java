@@ -84,6 +84,9 @@ public class AlphabetTilesSettingsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Switches to gaming state and returns the most recently closed game.
+     */
     private void switchToGame() {
         Intent tmp = new Intent(this, AlphabetTilesGameActivity.class);
         gameHub.setAlphabetTilesBoardManager(alphabetTilesBoardManager);
@@ -135,7 +138,7 @@ public class AlphabetTilesSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the 4 by 4 button
+     * Activate the 4 by 4 button.
      */
     void addFourByFourButtonListener() {
         Button button_4x4 = findViewById(R.id.four_by_four);
@@ -150,7 +153,7 @@ public class AlphabetTilesSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the 5 by 5 button
+     * Activate the 5 by 5 button.
      */
     void addFiveByFiveButtonListener() {
         Button button_5x5 = findViewById(R.id.five_by_five);
@@ -165,7 +168,7 @@ public class AlphabetTilesSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the 6 by 6 button
+     * Activate the 6 by 6 button.
      */
     void addSixBySixButtonListener() {
         Button button_6x6 = findViewById(R.id.six_by_six);
@@ -179,6 +182,9 @@ public class AlphabetTilesSettingsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates the text for the size of the board that will be utilized.
+     */
     void updateBoardSizeDisplay() {
         String tmp = "Select Board Size: " + boardSize + "x" + boardSize;
         boardSizeDisplay.setText(tmp);
@@ -186,6 +192,9 @@ public class AlphabetTilesSettingsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Updates the number of the undoes that will be capable to apply in the game.
+     */
     void updateUndoDisplay() {
         String tmp = "Select Number of Undoes: " + numUndoes;
         undoDisplay.setText(tmp);

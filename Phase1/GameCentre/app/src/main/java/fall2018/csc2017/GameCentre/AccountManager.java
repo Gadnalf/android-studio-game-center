@@ -19,6 +19,9 @@ class AccountManager implements Serializable {
      */
     private Account current;
 
+    /**
+     * Stores list of users in the form of array list.
+     */
     AccountManager(){
         accounts = new ArrayList<>();
         current = null;
