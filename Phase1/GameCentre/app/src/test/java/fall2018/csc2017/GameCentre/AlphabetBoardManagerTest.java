@@ -3,12 +3,9 @@ package fall2018.csc2017.GameCentre;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
@@ -25,10 +22,6 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
 
     @Override
     public void testUpdateScoreboard() {
-        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
-        boardManager.getBoard().setTiles(emptyTiles);
-        boardManager.getBoard().updateTile(0, new TileAlpha(4));
-        assertEquals("The score is not correct.", 32, boardManager.getScore(), 0);
     }
 
     @Test
@@ -50,20 +43,60 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
 
     @Test
     public void testSwipeUp() {
+        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
+        boardManager.getBoard().setTiles(emptyTiles);
+        boardManager.getBoard().updateTile(20, new TileAlpha(0));
+        boardManager.swipeTo(0);
+        Tile tile = new TileAlpha(0);
+        assertEquals("Expected Tile and the Actual Tile differs",
+                boardManager.getBoard().getTile(0,0).getId(), tile.getId());
+        assertEquals(boardManager.getBoard().getTile(4, 0).getId(), 0);
 
     }
 
     @Test
-    public void testSwipeDown() {}
+    public void testSwipeDown() {
+        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
+        boardManager.getBoard().setTiles(emptyTiles);
+        boardManager.getBoard().updateTile(0, new TileAlpha(0));
+        boardManager.swipeTo(1);
+        Tile tile = new TileAlpha(0);
+        assertEquals("Expected Tile and the Actual Tile differs",
+                boardManager.getBoard().getTile(4, 0).getId(), tile.getId());
+        assertEquals(boardManager.getBoard().getTile(0, 0).getId(), 0);
+    }
 
 
     @Test
     public void testSwipeLeft() {
+        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
+        boardManager.getBoard().setTiles(emptyTiles);
+        boardManager.getBoard().updateTile(4, new TileAlpha(0));
+        boardManager.swipeTo(2);
+        Tile tile = new TileAlpha(0);
+        assertEquals("Expected Tile and the Actual Tile differs",
+                boardManager.getBoard().getTile(0, 0).getId(), tile.getId());
+        assertEquals(boardManager.getBoard().getTile(0, 4).getId(), 0);
 
     }
-    
+
     @Test
     public void testSwipeRight() {
+        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
+        boardManager.getBoard().setTiles(emptyTiles);
+        boardManager.getBoard().updateTile(0, new TileAlpha(0));
+        boardManager.swipeTo(3);
+        Tile tile = new TileAlpha(0);
+        assertEquals("Expected Tile and the Actual Tile differs",
+                boardManager.getBoard().getTile(0,4).getId(), tile.getId());
+        assertEquals(boardManager.getBoard().getTile(0, 0).getId(), 0);
+    }
 
+    @Test
+    public void testGetScore() {
+        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
+        boardManager.getBoard().setTiles(emptyTiles);
+        boardManager.getBoard().updateTile(0, new TileAlpha(4));
+        assertEquals("The score is not correct.", 32, boardManager.getScore(), 0);
     }
 }
