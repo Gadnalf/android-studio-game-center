@@ -24,12 +24,15 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
             seaInvadersBoardManager.swim();
             seaInvadersBoardManager.spawnTheInvaders();
              if (seaInvadersBoardManager.isGameOver()) {
+                 timerHandler.removeCallbacks(timerRunnable);
                  seaInvadersBoardManager.resetGame();
+             }
+             else{
+                 timerHandler.postDelayed(this,
+                         1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
              }
 //            seaInvadersBoardManager.board.notifyObservers();
 //                timerHandler.postDelayed(this, 5000);
-            timerHandler.postDelayed(this,
-                    1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
         }
     };
 
