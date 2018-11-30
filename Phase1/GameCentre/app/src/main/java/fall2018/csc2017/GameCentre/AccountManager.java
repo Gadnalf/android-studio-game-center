@@ -66,7 +66,7 @@ class AccountManager implements Serializable {
      * Returns the account name.
      */
     String getName(){
-        if (current != null){
+        if (current == null){
             return "Guest";
         }
         return current.getName();
