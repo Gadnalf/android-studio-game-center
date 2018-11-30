@@ -7,10 +7,172 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef8969c9-83e5-4a30-adaf-665e79cd7505" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/FEEDBACK.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/.settings/org.eclipse.buildship.core.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/.settings/org.eclipse.buildship.core.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AbstractBoardManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AbstractGameActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AbstractTilesFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AccountManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AlphabetTileFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AlphabetTilesBoardManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AlphabetTilesGameActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AlphabetTilesSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AlphabetTilesSettingsActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AlphabetTilesStartingActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/AlphabetTilesTestingHelpers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/Board.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/CustomAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/GameData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/GameHubActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/GameScoreBoardActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/GameSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/GestureDetectGridView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/HandlerSerializable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/InvaderTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/LoginActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/MovementController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/RunnerSerializable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SaveAndLoad.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/ScoreBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/ScoreBoardAbstractActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SeaInvadersBoardManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SeaInvadersGameActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SeaInvadersSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SeaInvadersSettingsActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SeaInvadersStartingActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SeaInvadersTileFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SlidingTilesBoardManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SlidingTilesGameActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SlidingTilesSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SlidingTilesSettingsActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SlidingTilesStartingActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SlidingTilesTestingHelpers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/SlidingTilesTileFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/Tile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/TileAlpha.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/TileNum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/TileSeaInvader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/java/fall2018/csc2017/GameCentre/UserScoreBoardActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_e.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_g.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_i.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_j.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_k.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_l.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_m.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_o.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_q.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_r.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_s.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_sea_inv_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_sea_inv_kraken.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_sea_inv_ship.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_u.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_v.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_w.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_y.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/drawable/tile_z.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_alpha_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_alphabet_tile.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_game_hub.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_game_score_board.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_sea_invader.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_sea_invader_setting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_starting_alphabet.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_starting_seainvaders.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_starting_slidingtiles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_tiles_setting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/layout/activity_user_score_board.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/test/java/fall2018/csc2017/GameCentre/AbstractBoardManagerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/test/java/fall2018/csc2017/GameCentre/AccountManagerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/test/java/fall2018/csc2017/GameCentre/AlphabetBoardManagerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/test/java/fall2018/csc2017/GameCentre/BoardTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/test/java/fall2018/csc2017/GameCentre/ScoreBoardTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/test/java/fall2018/csc2017/GameCentre/SeaInvadersBoardManagerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/app/src/test/java/fall2018/csc2017/GameCentre/SlidingTilesBoardManagerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/GameCentre/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/TEAM.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/docs/Qs_4_TA.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/docs/bugs.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/docs/game_reqs_for_scoreboard.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/docs/how_to_add_a_new_game.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/docs/sea_invaders.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phase1/docs/test_run.md" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,22 +185,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="27" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Phase1/GameCentre" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -99,6 +264,9 @@
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
     </configuration>
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ef8969c9-83e5-4a30-adaf-665e79cd7505" name="Default" comment="" />
@@ -110,36 +278,39 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-1" width="1922" height="1060" extended-state="6" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
     <layout>
-      <window_info anchor="bottom" id="Android Profiler" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info id="Image Layers" />
-      <window_info id="Build Variants" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Logcat" />
-      <window_info id="Captures" order="2" weight="0.25" />
-      <window_info id="Capture Tool" />
-      <window_info id="Designer" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
-      <window_info active="true" anchor="right" id="Assistant" visible="true" weight="0.23801917" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24954791" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Device File Explorer" side_tool="true" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Logcat" order="7" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Captures" order="2" weight="0.25" />
+      <window_info id="Build Variants" order="2" side_tool="true" />
+      <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" anchor="right" id="Assistant" order="3" visible="true" weight="0.23801917" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
     </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
 </project>
