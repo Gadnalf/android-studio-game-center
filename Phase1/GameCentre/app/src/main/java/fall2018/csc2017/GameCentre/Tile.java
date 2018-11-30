@@ -50,7 +50,7 @@ abstract class Tile implements Comparable<Tile>, Serializable {
     /**
      * A tile with a background id; look up and set the id.
      *
-     * @param backgroundId
+     * @param backgroundId backgroundId of the tile
      */
     Tile(int backgroundId) {
         id = backgroundId + 1;

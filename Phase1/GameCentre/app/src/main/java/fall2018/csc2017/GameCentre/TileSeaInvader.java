@@ -1,15 +1,12 @@
 package fall2018.csc2017.GameCentre;
 
-public class TileSeaInvader extends Tile{
-    public TileSeaInvader(int id, int background) {
-        super(id, background);
-    }
+class TileSeaInvader extends Tile{
 
     /**
      * A tile with a background id; look up and set the id.
      *
      */
-    public TileSeaInvader(int backgroundId) {
+    TileSeaInvader(int backgroundId) {
         super(backgroundId);
         // This looks so ugly.
         switch (backgroundId + 1) {
