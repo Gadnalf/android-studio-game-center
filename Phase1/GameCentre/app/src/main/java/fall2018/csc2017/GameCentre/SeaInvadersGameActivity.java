@@ -31,7 +31,6 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
                 seaInvadersBoardManager.updateScoreboard();
                 timerHandler.removeCallbacks(timerRunnable);
             }
-
             if (seaInvadersBoardManager.puzzleSolved()) {
                 Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + seaInvadersBoardManager.getScore(),
                         Toast.LENGTH_SHORT).show();
@@ -39,8 +38,10 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
                 seaInvadersBoardManager.resetGame();
                 timerHandler.removeCallbacks(timerRunnable);
             }
-            timerHandler.postDelayed(this,
+            else{
+                timerHandler.postDelayed(this,
                     1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
+            }
         }
     };
 
