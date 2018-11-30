@@ -128,9 +128,6 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
         assertEquals(16, newSecond.getId());
          }
 
-    @Test
-    public void setBoardSize() {
-    }
 
     @Test
     public void getScore() {
@@ -187,5 +184,24 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
         assertEquals(true, boardManager.isValidTap(14));
         assertEquals(false, boardManager.isValidTap(10));
     }
+
+    @Test
+    public void testGameOver() {
+        assertFalse(boardManager.gameOver());
+    }
+
+    @Test
+    public void testGetSlidingTilesSettings() {
+        SlidingTilesSettings originalSlidingTilesSettings = boardManager.getSlidingTileSettings();
+        String user = "phil2";
+        SlidingTilesSettings newSlidingTileSettings =  new SlidingTilesSettings(boardSize, 5);
+        SlidingTilesBoardManager slidingTilesBoardManager = new SlidingTilesBoardManager(user,
+                newSlidingTileSettings);
+        slidingTilesBoardManager.setGameSettings(originalSlidingTilesSettings);
+        assertEquals(
+                slidingTilesBoardManager.getSlidingTileSettings(),
+                boardManager.getSlidingTileSettings());
+    }
+
 
 }
