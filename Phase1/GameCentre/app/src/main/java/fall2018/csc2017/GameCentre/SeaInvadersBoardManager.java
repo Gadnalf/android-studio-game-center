@@ -47,7 +47,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         return this.puzzleSolved;
     }
 
-    private void checkIfPuzzleIsSolved() {
+    public void checkIfPuzzleIsSolved() {
         boolean noMoreInvaders = getInvaderPositions().size() == 0;
         boolean finishedFinalRound = this.currentRound == ((SeaInvadersSettings) this.gameSettings).getNumRounds();
         boolean gameAintOver = gameOver() == false;
@@ -55,8 +55,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                 //TODO: when you update the rounds between spawn and move to be indep we'll need to alter this too
                 && finishedFinalRound
                 && gameAintOver) {
-            updateScoreboard();
-            resetGame();
             this.puzzleSolved = true;
         } else {
             this.puzzleSolved = false;
@@ -202,15 +200,10 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
                 int col1 = pos % this.gameSettings.getBoardSize();
                 if (row1 + 1 < this.gameSettings.getBoardSize()) {
                     board.swapTiles(row1, col1, row1 + 1, col1, true);
-//                    board.updateTile(pos, new InvaderTile());
-//                    board.updateTile(pos, new TileSizeFour(2, 2));
-//                    board.updateTile(pos, new InvaderTile(), false);
                 } else {
                     setGameOver(true);
                 }
             }
-        } else {
-            resetGame();
         }
     }
 
@@ -263,7 +256,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     public double getScore() {
         //TODO: improve (2)
         double round = getCurrentRound();
-        boolean invadersLeft = getInvaderPositions().size() == 0;
+        boolean invadersLeft = getInvaderPositions().size() > 0;
         if (!invadersLeft) {
             return round * 2 + 1;
         } else {
@@ -273,15 +266,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     @Override
     public void resetGame() {
-        if (gameOver()) {
-            Toast.makeText(getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored: " + getScore(),
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        if (puzzleSolved()) {
-            Toast.makeText(getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + getScore(),
-                    Toast.LENGTH_SHORT).show();
-        }
         setCurrentRound(0);
         recomputeStartTime();
         List<Tile> tiles;
@@ -335,9 +319,5 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
-        updateScoreboard();
-        if (gameOver()) {
-            resetGame();
-        }
     }
 }
