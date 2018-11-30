@@ -162,7 +162,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     @Override
     public void fireAndUpdate(int position) {
         int closestEnemy = getClosestEnemyPosInThisCol(position);
-        board.updateTile(closestEnemy, new EmptyTile());
+        board.updateTile(closestEnemy, new TileSeaInvader(- 1));
     }
 
 

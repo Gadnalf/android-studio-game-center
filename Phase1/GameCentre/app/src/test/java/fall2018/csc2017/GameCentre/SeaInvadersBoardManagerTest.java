@@ -35,7 +35,7 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
     public void removeAllInvaders(SeaInvadersBoardManager seaInvadersBoardManager) {
         ArrayList<Integer> invaders = seaInvadersBoardManager.getInvaderPositions();
         for (int pos : invaders) {
-            seaInvadersBoardManager.board.updateTile(pos, new EmptyTile());
+            seaInvadersBoardManager.board.updateTile(pos, new TileSeaInvader(-1));
         }
     }
 
