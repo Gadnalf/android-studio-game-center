@@ -12,6 +12,7 @@ Name: Philip Borui Cai
 Email: philip.cai@mail.utoronto.ca
 Phone: 1-416-271-6939
 Git log Username: Philip <philip.cai@mail.utoronto.ca>
+Git log Username: caiphili <at0micDerp!>
 
 Team Member 3:
 Name: Brydon Parker
