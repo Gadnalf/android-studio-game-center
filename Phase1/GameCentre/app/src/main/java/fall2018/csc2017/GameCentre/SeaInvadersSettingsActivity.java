@@ -196,7 +196,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
         secSpawnAndMoveDisplay.setText(tmp);
         ((SeaInvadersSettings) seaInvadersBoardManager.getGameSettings()).setSecsBeforeMove(secSpawnAndMove);
         ((SeaInvadersSettings) seaInvadersBoardManager.getGameSettings()).setSecsBeforeSpawn(secSpawnAndMove);
-//        seaInvadersBoardManager.setBoardSize(secSpawnAndMove);
+        seaInvadersBoardManager.resetGame();
     }
 
     void updateRoundsDisplay() {
@@ -204,5 +204,6 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
         numRoundsDisply.setText(tmp);
         ((SeaInvadersSettings)
                 seaInvadersBoardManager.getGameSettings()).setNumRounds(numRoundses);
+        seaInvadersBoardManager.resetGame();
     }
 }
