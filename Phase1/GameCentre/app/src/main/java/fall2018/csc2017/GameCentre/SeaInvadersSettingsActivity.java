@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 
 
-public class SeaInvaderSettingActivity extends AppCompatActivity {
+public class SeaInvadersSettingsActivity extends AppCompatActivity {
     /**
      * The board size display.
      */

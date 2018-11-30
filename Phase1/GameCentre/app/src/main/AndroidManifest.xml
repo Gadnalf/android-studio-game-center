@@ -27,7 +27,7 @@
         <activity android:name=".AlphabetTilesStartingActivity" />
         <activity android:name=".AlphabetTilesGameActivity" />
         <activity android:name=".SeaInvadersStartingActivity" />
-        <activity android:name=".SeaInvaderSettingActivity"></activity>
+        <activity android:name=".SeaInvadersSettingsActivity"></activity>
     </application>
 
 </manifest>
