@@ -205,13 +205,13 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
                             tiles.set(j + boardSize, saveTile);
                         }
                     }else if(move == 3){
-                        if(0 <= j - 1){
+                        if(0 <= j - 1 && j % boardSize != 0){
                             Tile saveTile = tiles.get(j);
                             tiles.set(j , tiles.get(j - 1));
                             tiles.set(j - 1, saveTile);
                         }
                     }else{
-                        if( j + 1 < tiles.size()){
+                        if( j + 1 < tiles.size() && j % boardSize != 3){
                             Tile saveTile = tiles.get(j);
                             tiles.set(j , tiles.get(j + 1));
                             tiles.set(j + 1, saveTile);
