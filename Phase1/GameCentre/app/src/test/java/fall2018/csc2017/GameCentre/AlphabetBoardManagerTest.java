@@ -25,15 +25,27 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
 
     @Override
     public void testUpdateScoreboard() {
+        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
+        boardManager.getBoard().setTiles(emptyTiles);
+        boardManager.getBoard().updateTile(0, new TileAlpha(4));
+        assertEquals("The score is not correct.", 32, boardManager.getScore(), 0);
     }
 
     @Test
     public void testGameOver() {
+        List<Tile> gameOverTiles = AlphabetTilesTestingHelpers.makeGameOverTiles(5);
+        boardManager.getBoard().setTiles(gameOverTiles);
+        assertTrue(boardManager.gameOver());
+
     }
 
 
     @Test
     public void puzzleSolved() {
+        List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
+        boardManager.getBoard().setTiles(emptyTiles);
+        boardManager.getBoard().updateTile(0, new TileAlpha(10));
+        assertTrue(boardManager.puzzleSolved());
     }
 
     @Test
