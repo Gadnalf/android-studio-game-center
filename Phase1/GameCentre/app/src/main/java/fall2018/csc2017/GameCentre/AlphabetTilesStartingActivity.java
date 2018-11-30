@@ -33,6 +33,7 @@ public class AlphabetTilesStartingActivity extends AppCompatActivity {
         setupStartingActivity();
         addGameScoreBoardButton();
         addUserScoreBoardButton();
+        addReturnButtonListener();
     }
 
     private void setupStartingActivity() {
@@ -201,5 +202,18 @@ public class AlphabetTilesStartingActivity extends AppCompatActivity {
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
         startActivity(tmp);
+    }
+
+    /**
+     * Activates the return button.
+     */
+    private void addReturnButtonListener() {
+        Button returnButton = findViewById(R.id.return_button);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                finish();
+            }
+        });
     }
 }

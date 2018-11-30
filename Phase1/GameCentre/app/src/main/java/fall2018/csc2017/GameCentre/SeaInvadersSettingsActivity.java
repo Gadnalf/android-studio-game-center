@@ -54,8 +54,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sea_invader_setting);
         secSpawnAndMove = 4;
         numRoundses = 12;
-        user = getIntent().getStringExtra("user");
-        setupStartingActivity();
+        gameHub = SaveAndLoad.loadGameHubTemp(this);
         seaInvadersBoardManager = gameHub.getSeaInvadersBoardManager();
         addStartButtonListener();
         addConfirmButtonListener();
@@ -100,7 +99,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
                         new SlidingTilesSettings(4,4)),
                 new SeaInvadersBoardManager(user,
                         new SeaInvadersSettings(4, 4,
-                                12, 4)),
+                                12, 3)),
                 new AlphabetTilesBoardManager(user,
                         new AlphabetTilesSettings(4 ,4)),
 
@@ -193,17 +192,18 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     }
 
     void updateSecSpawnAndMoveDisplay() {
-        String tmp = "Select : Seconds between spawning and swimming in game" + secSpawnAndMove;
+        String tmp = "Select : Seconds between spawning and swimming in game: " + secSpawnAndMove;
         secSpawnAndMoveDisplay.setText(tmp);
         ((SeaInvadersSettings) seaInvadersBoardManager.getGameSettings()).setSecsBeforeMove(secSpawnAndMove);
         ((SeaInvadersSettings) seaInvadersBoardManager.getGameSettings()).setSecsBeforeSpawn(secSpawnAndMove);
-//        seaInvadersBoardManager.setBoardSize(secSpawnAndMove);
+        seaInvadersBoardManager.resetGame();
     }
 
     void updateRoundsDisplay() {
-        String tmp = "Select Number of Roundses: " + numRoundses;
+        String tmp = "Select Number of Rounds: " + numRoundses;
         numRoundsDisply.setText(tmp);
         ((SeaInvadersSettings)
                 seaInvadersBoardManager.getGameSettings()).setNumRounds(numRoundses);
+        seaInvadersBoardManager.resetGame();
     }
 }

@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -23,16 +24,21 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
              seaInvadersBoardManager.setAppCompatActivity(appCompatActivity);
             seaInvadersBoardManager.swim();
             seaInvadersBoardManager.spawnTheInvaders();
-             if (seaInvadersBoardManager.isGameOver()) {
-                 timerHandler.removeCallbacks(timerRunnable);
-                 seaInvadersBoardManager.resetGame();
-             }
-             else{
-                 timerHandler.postDelayed(this,
-                         1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
-             }
-//            seaInvadersBoardManager.board.notifyObservers();
-//                timerHandler.postDelayed(this, 5000);
+            if (seaInvadersBoardManager.gameOver()) {
+                Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored: " + seaInvadersBoardManager.getScore(),
+                        Toast.LENGTH_SHORT).show();
+                seaInvadersBoardManager.resetGame();
+                seaInvadersBoardManager.updateScoreboard();
+            }
+
+            if (seaInvadersBoardManager.puzzleSolved()) {
+                Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + seaInvadersBoardManager.getScore(),
+                        Toast.LENGTH_SHORT).show();
+                seaInvadersBoardManager.updateScoreboard();
+                seaInvadersBoardManager.resetGame();
+            }
+            timerHandler.postDelayed(this,
+                    1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
         }
     };
 

@@ -58,24 +58,34 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
     }
 
     boolean gameOver() {
-        boolean over = false;
+        boolean over = true;
         int boardSize = board.getBoardSize();
         for(int i = 0; i < boardSize; i ++) {
             for(int j = 0; j < boardSize; j ++){
                 if(board.getTile(i , j).getId() == 0){
-                    return false;
+                    over = false;
+                    break;
                 } else if (board.getTile(i , j).getId() == 26) {
-                    return true;
+                    over = true;
+                    break;
                 } else {
-                    over = allDifferentTiles();
+                    Tile current_tile = board.getTile(i, j);
+                    Tile above = i == 0 ? null : board.getTile( i - 1, j);
+                    Tile below = i == getGameSettings().getBoardSize() - 1 ? null : board.getTile(i + 1, j);
+                    Tile left = j == 0 ? null : board.getTile(i, j - 1);
+                    Tile right = j == getGameSettings().getBoardSize()- 1 ? null : board.getTile(i, j + 1);
+                    int current_id = current_tile.getId();
+                    if((below != null && below.getId() == current_id)
+                            || (above != null && above.getId() == current_id)
+                            || (left != null && left.getId() == current_id)
+                            || (right != null && right.getId() == current_id)){
+                        over = false;
+                        break;
+                    }
                 }
             }
         }
         return over;
-    }
-
-    boolean allDifferentTiles() {
-        return false;
     }
 
     /**

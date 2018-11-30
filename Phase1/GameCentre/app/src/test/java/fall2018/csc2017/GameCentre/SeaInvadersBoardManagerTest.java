@@ -26,10 +26,10 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
 
     @Test
     public void testGameOver() {
-        assertFalse(boardManager.isGameOver());
+        assertFalse(boardManager.gameOver());
         boardManager.board.swapTiles(4, 0, 0, 0);
         boardManager.swim();
-        assertTrue(boardManager.isGameOver());
+        assertTrue(boardManager.gameOver());
     }
 
     public void removeAllInvaders(SeaInvadersBoardManager seaInvadersBoardManager) {
@@ -39,26 +39,32 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
         }
     }
 
+
     @Test
     public void puzzleSolved() {
         boardManager.setGameOver(true);
         assertEquals((long) boardManager.score, (long) 0.0); // start w 0
         boardManager.setCurrentRound(5);
+        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
         assertEquals(boardManager.puzzleSolved(), false); // 5 moves => not finished
         double scoreMove5 = boardManager.getScore();
         assertTrue(scoreMove5 > 0);
         boardManager.setCurrentRound(10);
+        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
         assertEquals(boardManager.puzzleSolved(), false);
         boardManager.setGameOver(false); // puzzle isnt solved if the game is over
+        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
         boolean puzzleSolved = boardManager.puzzleSolved();
         assertEquals(puzzleSolved, false); // still inavders in there
         removeAllInvaders(boardManager);
+        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
         assertEquals(boardManager.puzzleSolved(), true);
-        assertTrue(boardManager.score > scoreMove5);
+        assertTrue(boardManager.getScore() > scoreMove5);
         boardManager.board.updateTile(
                 5 * 5 - 1,
                 new InvaderTile()
         );
+        ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
         assertFalse(boardManager.puzzleSolved()); //invader at end => puzzle not solved
     }
 

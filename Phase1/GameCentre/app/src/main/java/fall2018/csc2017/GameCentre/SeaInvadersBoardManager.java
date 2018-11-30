@@ -17,6 +17,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     int currentRound = 0;
     ArrayList<Integer> invaderPositions = new ArrayList<Integer>();
     boolean gameOver = false;
+    boolean puzzleSolved = false;
 
     /**
      * Manage a board that has been pre-populated.
@@ -43,17 +44,20 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     @Override
     boolean puzzleSolved() {
+        return this.puzzleSolved;
+    }
+
+    public void checkIfPuzzleIsSolved() {
         boolean noMoreInvaders = getInvaderPositions().size() == 0;
         boolean finishedFinalRound = this.currentRound == ((SeaInvadersSettings) this.gameSettings).getNumRounds();
-        boolean gameAintOver = isGameOver() == false;
+        boolean gameAintOver = gameOver() == false;
         if (noMoreInvaders
                 //TODO: when you update the rounds between spawn and move to be indep we'll need to alter this too
                 && finishedFinalRound
                 && gameAintOver) {
-            updateScoreboard();
-            return true;
+            this.puzzleSolved = true;
         } else {
-            return false;
+            this.puzzleSolved = false;
         }
     }
 
@@ -168,11 +172,16 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * based on the time inverval specified in SeaInvadersSettings
      */
     public void spawnTheInvaders() {
-        ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
-        for (int pos : newSpawnPositions) {
-//            board.updateTile(pos, new InvaderTile());
-//            board.swapTiles(0, 0, 1, 1, false);
-            board.updateTile(pos, new InvaderTile(), true);
+        checkIfPuzzleIsSolved();
+        if (!puzzleSolved() && !gameOver() &&
+                this.currentRound < ((SeaInvadersSettings) this.gameSettings).getNumRounds()) {
+            ArrayList<Integer> newSpawnPositions = getInvaderSpawnPositions();
+            this.currentRound += 1;
+            for (int pos : newSpawnPositions) {
+                //            board.updateTile(pos, new InvaderTile());
+                //            board.swapTiles(0, 0, 1, 1, false);
+                board.updateTile(pos, new InvaderTile(), true);
+            }
         }
     }
 
@@ -182,19 +191,15 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * one row at a time
      */
     public void swim() {
-        if (!puzzleSolved() && !isGameOver() &&
-                this.currentRound < ((SeaInvadersSettings) this.gameSettings).getNumRounds()) {
+        checkIfPuzzleIsSolved();
+        if (!puzzleSolved() && !gameOver()) {
             //TODO: separate spawn and move rounds (2)
-            this.currentRound += 1;
             ArrayList<Integer> invaderPositions = getInvaderPositions();
             for (int pos : invaderPositions) {
                 int row1 = pos / this.gameSettings.getBoardSize();
                 int col1 = pos % this.gameSettings.getBoardSize();
                 if (row1 + 1 < this.gameSettings.getBoardSize()) {
                     board.swapTiles(row1, col1, row1 + 1, col1, true);
-//                    board.updateTile(pos, new InvaderTile());
-//                    board.updateTile(pos, new TileSizeFour(2, 2));
-//                    board.updateTile(pos, new InvaderTile(), false);
                 } else {
                     setGameOver(true);
                 }
@@ -249,18 +254,18 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     @Override
     public double getScore() {
-
         //TODO: improve (2)
-        int round = getCurrentRound();
-        double time = getTimePlayed() / 1000000;
-        double score = round / time;
-        return score;
+        double round = getCurrentRound();
+        boolean invadersLeft = getInvaderPositions().size() > 0;
+        if (!invadersLeft) {
+            return round * 2 + 1;
+        } else {
+            return round;
+        }
     }
 
     @Override
     public void resetGame() {
-        Toast.makeText(getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored" + getScore(),
-                Toast.LENGTH_SHORT).show();
         setCurrentRound(0);
         recomputeStartTime();
         List<Tile> tiles;
@@ -268,6 +273,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         setLastOccupiedColumnToStart();
         this.board.setTiles(tiles);
         setGameOver(false);
+        this.puzzleSolved = false;
 //        setBoard(new Board(tiles));
 //        this.board = new Board(tiles);
 //        this = new SeaInvadersBoardManager(
@@ -275,6 +281,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 //                (SeaInvadersSettings) getGameSettings());
 
     }
+
 
     public SeaInvadersSettings getSeaInvaderSettings() {
         return (SeaInvadersSettings) getGameSettings();
@@ -304,16 +311,13 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         this.invaderPositions = invaderPositions;
     }
 
-    public boolean isGameOver() {
+    @Override
+    public boolean gameOver() {
         return gameOver;
     }
 
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
-        updateScoreboard();
-//        if (isGameOver()) {
-//            resetGame();
-//        }
     }
 }
