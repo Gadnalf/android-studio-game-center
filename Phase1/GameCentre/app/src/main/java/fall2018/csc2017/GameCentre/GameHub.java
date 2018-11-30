@@ -26,11 +26,11 @@ public class GameHub implements Serializable {
         this.slidingTilesBoardManager = slidingTilesBoardManager;
     }
 
-    public void setZTileBoardManager(AlphabetTilesBoardManager alphabetTilesBoardManager) {
+    public void setAlphabetTilesBoardManager(AlphabetTilesBoardManager alphabetTilesBoardManager) {
         this.alphabetTilesBoardManager = alphabetTilesBoardManager;
     }
 
-    public AlphabetTilesBoardManager getZTileBoardManager() {
+    public AlphabetTilesBoardManager getAlphabetTilesBoardManager() {
         return alphabetTilesBoardManager;
     }
 

@@ -47,7 +47,7 @@ public class AlphabetTilesSettingsActivity extends AppCompatActivity {
         boardSize = 4;
         numUndoes = 3;
         gameHub = SaveAndLoad.loadGameHubTemp(this);
-        alphabetTilesBoardManager = gameHub.getZTileBoardManager();
+        alphabetTilesBoardManager = gameHub.getAlphabetTilesBoardManager();
         addStartButtonListener();
         addUnlimitedUndoListener();
         addConfirmButtonListener();
@@ -86,7 +86,7 @@ public class AlphabetTilesSettingsActivity extends AppCompatActivity {
 
     private void switchToGame() {
         Intent tmp = new Intent(this, AlphabetTilesGameActivity.class);
-        gameHub.setZTileBoardManager(alphabetTilesBoardManager);
+        gameHub.setAlphabetTilesBoardManager(alphabetTilesBoardManager);
         SaveAndLoad.saveGameHubTemp(
                 gameHub, this);
 //        saveToFile(TEMP_SAVE_FILENAME);
