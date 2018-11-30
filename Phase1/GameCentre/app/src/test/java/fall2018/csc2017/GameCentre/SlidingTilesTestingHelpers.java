@@ -50,7 +50,7 @@ public class SlidingTilesTestingHelpers {
      * @return
      */
     static GameData makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
-                                                   boolean swapTiles) {
+                                            boolean swapTiles) {
         GameData gameData = SaveAndLoad.loadGameHubPermanent(
                 userName, appCompatActivity
         );
