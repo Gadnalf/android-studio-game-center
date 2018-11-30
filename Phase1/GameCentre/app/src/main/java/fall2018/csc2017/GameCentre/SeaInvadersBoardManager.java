@@ -145,7 +145,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         int col = position % this.getGameSettings().getBoardSize();
         if (row+1 == this.getGameSettings().getBoardSize() &&
                 col == this.lastOccupiedColumn &&
-                getClosestEnemyPosInThisCol(position) > 0) {
+                getClosestEnemyPosInThisCol(position) >= 0) {
             return true;
         } else {
             return false;

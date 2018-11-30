@@ -34,7 +34,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     /**
      * The undo setting. (-1 indicates infinite)
      */
-    private int numRoundses;
+    private int numRounds;
 
     private SeaInvadersBoardManager seaInvadersBoardManager;
     /**
@@ -53,7 +53,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sea_invader_setting);
         secSpawnAndMove = 4;
-        numRoundses = 12;
+        numRounds = 12;
         gameHub = SaveAndLoad.loadGameHubTemp(this);
         seaInvadersBoardManager = gameHub.getSeaInvadersBoardManager();
         addStartButtonListener();
@@ -83,7 +83,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
                 if(secSpawnAndMove == 4) {
                     updateSecSpawnAndMoveDisplay();
                 }
-                if (numRoundses == 12) {
+                if (numRounds == 12) {
                     updateRoundsDisplay();
                 }
                 switchToGame();
@@ -142,7 +142,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
                 if(input.equals("")){
                     updateRoundsDisplay();
                 }else {
-                    numRoundses = Integer.valueOf(input);
+                    numRounds = Integer.valueOf(input);
                     updateRoundsDisplay();
                 }
             }
@@ -150,7 +150,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the 5x5 button.
+     * Activate the 5 second spawn button.
      */
     void addFiveSecSpawnAndMoveButtonListener() {
         Button button_5x5 = findViewById(R.id.five);
@@ -164,7 +164,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the 4x4 button.
+     * Activate the 4x second spawn button.
      */
     void addFourSecSpawnAndMoveButtonListener() {
         Button button_4x4 = findViewById(R.id.four);
@@ -178,7 +178,7 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the 3x3 button.
+     * Activate the 3 second spawn button.
      */
     void addThreeSecSpawnAndMoveButtonListener() {
         Button button_3x3 = findViewById(R.id.three);
@@ -200,10 +200,10 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     }
 
     void updateRoundsDisplay() {
-        String tmp = "Select Number of Rounds: " + numRoundses;
+        String tmp = "Select Number of Rounds: " + numRounds;
         numRoundsDisply.setText(tmp);
         ((SeaInvadersSettings)
-                seaInvadersBoardManager.getGameSettings()).setNumRounds(numRoundses);
+                seaInvadersBoardManager.getGameSettings()).setNumRounds(numRounds);
         seaInvadersBoardManager.resetGame();
     }
 }
