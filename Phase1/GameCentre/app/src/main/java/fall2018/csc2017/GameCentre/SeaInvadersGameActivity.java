@@ -29,6 +29,7 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
                         Toast.LENGTH_SHORT).show();
                 seaInvadersBoardManager.resetGame();
                 seaInvadersBoardManager.updateScoreboard();
+                timerHandler.removeCallbacks(timerRunnable);
             }
 
             if (seaInvadersBoardManager.puzzleSolved()) {
@@ -36,6 +37,7 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
                         Toast.LENGTH_SHORT).show();
                 seaInvadersBoardManager.updateScoreboard();
                 seaInvadersBoardManager.resetGame();
+                timerHandler.removeCallbacks(timerRunnable);
             }
             timerHandler.postDelayed(this,
                     1000 * (int) ((SeaInvadersSettings) seaInvadersBoardManager.gameSettings).getSecsBeforeMove());
