@@ -121,7 +121,6 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
             swipeLeft();
         } else if (direction == 3) {
             swipeRight();}
-        updateScoreboard();
         randomSpawn();
         updateScoreboard();
     }
