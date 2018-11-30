@@ -41,7 +41,7 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
 
 
     @Test
-    public void puzzleSolved() {
+    public void testPuzzleSolved() {
         List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
         boardManager.getBoard().setTiles(emptyTiles);
         boardManager.getBoard().updateTile(0, new TileAlpha(10));
@@ -49,8 +49,21 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
     }
 
     @Test
-    public void isValidSwipe() {
+    public void testSwipeUp() {
+
     }
 
+    @Test
+    public void testSwipeDown() {}
 
+
+    @Test
+    public void testSwipeLeft() {
+
+    }
+    
+    @Test
+    public void testSwipeRight() {
+
+    }
 }
