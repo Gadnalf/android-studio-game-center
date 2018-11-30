@@ -1,7 +1,5 @@
 package fall2018.csc2017.GameCentre;
 
-import android.support.v7.app.AppCompatActivity;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -161,7 +159,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     void swim() {
         checkIfPuzzleIsSolved();
         if (!puzzleSolved() && !gameOver()) {
-            //TODO: separate spawn and move rounds (2)
             ArrayList<Integer> invaderPositions = getInvaderPositions();
             for (int pos : invaderPositions) {
                 int row1 = pos / this.gameSettings.getBoardSize();
@@ -208,10 +205,10 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         }
         Collections.shuffle(positions);
 //        ArrayList randomPositions = (ArrayList) positions.subList(0,
-        ArrayList randomPositions = new ArrayList(
+        positions = new ArrayList(
                 positions.subList(0,
                 ((SeaInvadersSettings)  this.gameSettings).getNumSpawn()));
-        return randomPositions;
+        return positions;
     }
 
     /**
@@ -220,7 +217,6 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      */
     @Override
     public double computeScore() {
-        //TODO: improve (2)
         double round = getCurrentRound();
         boolean invadersLeft = getInvaderPositions().size() > 0;
         if (!invadersLeft) {
