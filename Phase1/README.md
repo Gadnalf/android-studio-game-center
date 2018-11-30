@@ -1,6 +1,31 @@
 # CS Project
 https://markus.teach.cs.toronto.edu/git/csc207-2018-09-reg/group_0684
 
+### GAME #1: Sliding Tiles
+- The goal of this game is to exchange the blank tiles with adjacent tiles to arrange tiles in order.
+- Once the game is solved the game will be automatically resetted.
+- The available board sizes are 3x3, 4x4, and 5x5 which are freely chosen by an user.
+- The exchange of the blank tiles with adjacent tiles are done by tapping on the adjacent tiles (to be swapped) to the blank tiles.
+- Scores are updated based on time and number of moves made. Lesser move made and lesser time spent to solve the puzzle will earn the user a better score.
+- Only the higheset scored game will be recorded on the scoreboard. 
+
+### GAME #2: Sea Invaders
+- The goal of this game is to shoot the invaders (squid) to prevent them from reaching the bottom of the screen. 
+- 
+- The available board sizes are 
+- The shooting can be done by tapping on the ship. 
+- Only the higheset scored game will be recorded on the scoreboard. 
+
+### GAME #3: Alphabet Tiles 
+- The goal of this game is to stack the alphabet tiles to reach the K tile. Yet, if the player wishes to continue on with the game, he/she may do so upto the Z tile. 
+- Once the Z tile is reached the game will automatically reset.  
+- A player of this game can swipe up, down, left or right.
+- The swipping on the board will stack the same tiles together in the direction of the swipe.
+- The available board sizes are 4x4, 5x5, 6x6 which are freely chosen by an user.
+- Scores are updated based on the available tiles on the board only. The alphabets worth powers of two. Later alphabet the user reach, better (by an exponential increase) score the user will earn. 
+- This game was inspired by the existing game 2048. 
+- Only the higheset scored game will be recorded on the scoreboard. 
+
 ### lifting up the application
 1. pull the master
 2. open android studio, open existing android studio project
