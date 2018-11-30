@@ -43,8 +43,9 @@ public class SeaInvadersStartingActivity extends AppCompatActivity {
                                 user,
                                 new SlidingTilesSettings(4,4)),
                         new SeaInvadersBoardManager(user,
-                                new SeaInvadersSettings(.5, .5)),
-                        new AlphabetTilesBoardManager( user,
+                                new SeaInvadersSettings(4, 4,
+                                        12, 4)),
+                        new AlphabetTilesBoardManager(user,
                                 new AlphabetTilesSettings(4 ,4)),
 
                         user),
@@ -167,10 +168,12 @@ public class SeaInvadersStartingActivity extends AppCompatActivity {
      * Switch to the settings view.
      */
     private void switchToSetting() {
-//        Intent tmp = new Intent(this,SeaInvadersSettingsActivity.class);
+//        Intent tmp = new Intent(this,
+//                SeaInvadersSettingsActivity.class);
 //        SaveAndLoad.saveGameHubTemp(
 //                gameHub, this);
 //        startActivity(tmp);
+        switchToGame();
     }
 
     /**
