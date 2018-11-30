@@ -338,7 +338,7 @@ public class AlphabetTilesBoardManager extends  AbstractBoardManager implements 
      *
      */
     @Override
-    public double getScore() {
+    public double computeScore() {
         int total_score = 0;
         int boardSize = board.getBoardSize();
         for(int i = 0; i < boardSize; i ++) {

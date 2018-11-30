@@ -47,7 +47,7 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
         boardManager.setCurrentRound(5);
         ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
         assertEquals(boardManager.puzzleSolved(), false); // 5 moves => not finished
-        double scoreMove5 = boardManager.getScore();
+        double scoreMove5 = boardManager.computeScore();
         assertTrue(scoreMove5 > 0);
         boardManager.setCurrentRound(10);
         ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
@@ -59,7 +59,7 @@ public class SeaInvadersBoardManagerTest extends AbstractBoardManagerTest {
         removeAllInvaders(boardManager);
         ((SeaInvadersBoardManager) boardManager).checkIfPuzzleIsSolved();
         assertEquals(boardManager.puzzleSolved(), true);
-        assertTrue(boardManager.getScore() > scoreMove5);
+        assertTrue(boardManager.computeScore() > scoreMove5);
         boardManager.board.updateTile(
                 5 * 5 - 1,
                 new InvaderTile()

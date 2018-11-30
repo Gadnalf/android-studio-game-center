@@ -43,6 +43,8 @@ public class SeaInvadersSettingsActivity extends AppCompatActivity {
     private GameData gameData;
 
     /**
+     *
+     *
      * User name.
      */
     private String user;

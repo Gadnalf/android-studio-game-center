@@ -66,6 +66,8 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
         if (solved) {
             if (getAppCompatActivity() != null) {
                 updateScoreboard();
+            } else {
+                this.score = computeScore(); //allows us to use in tests
             }
         }
         return solved;
@@ -198,23 +200,15 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     }
 
     /**
-     * notice higher a/b => lower score
-     * higher b => lower score
-     * lower a => lower score
-     * min a and max b => higher score
-     * we go with 10 bc I forget :)
-     * TODO: add why I went with 10
-     * - something to do with easier implementation
-     *
      * @return double that represent score of the game
      */
     @Override
-    public double getScore() {
-        double moveCount = (double) getMoveCount();
-        double timeWeight = (getTimePlayed()/1000);
+    public double computeScore() {
+        double moveCount = (double) getMoveCount()/4;
+        double timeWeight = (getTimePlayed()/7000);
         double numUndoesWeight = getSlidingTileSettings().getNumUndoes();
-        double score = 1/(timeWeight * (moveCount + numUndoesWeight));
-        return score*1000000; //want to maximize this
+        double score = 1/(timeWeight + moveCount + numUndoesWeight + 1);
+        return score*10000; //want to maximize this
     }
 
     /**

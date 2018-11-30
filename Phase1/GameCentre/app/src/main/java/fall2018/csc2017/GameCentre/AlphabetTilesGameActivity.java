@@ -100,7 +100,7 @@ public class AlphabetTilesGameActivity extends AbstractGameActivity implements S
         score.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Score: " +
-                        String.valueOf((int) alphabetTilesBoardManager.getScore()), Toast.LENGTH_SHORT).show();
+                        String.valueOf((int) alphabetTilesBoardManager.computeScore()), Toast.LENGTH_SHORT).show();
             }
         });
     }

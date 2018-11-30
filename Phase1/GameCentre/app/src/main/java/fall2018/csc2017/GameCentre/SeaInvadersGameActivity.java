@@ -24,7 +24,7 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
             seaInvadersBoardManager.swim();
             seaInvadersBoardManager.spawnTheInvaders();
             if (seaInvadersBoardManager.gameOver()) {
-                Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored: " + seaInvadersBoardManager.getScore(),
+                Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU LOSE! You're a Loser :) \nyou scored: " + seaInvadersBoardManager.computeScore(),
                         Toast.LENGTH_SHORT).show();
                 seaInvadersBoardManager.updateScoreboard();
                 seaInvadersBoardManager.resetGame();
@@ -33,7 +33,7 @@ public class SeaInvadersGameActivity extends AbstractGameActivity implements Ser
             }
             else {
                 if (seaInvadersBoardManager.puzzleSolved()) {
-                    Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + seaInvadersBoardManager.getScore(),
+                    Toast.makeText(seaInvadersBoardManager.getAppCompatActivity(), "YOU WON! Holy *!#$@#%!@#%:) \nyou scored: " + seaInvadersBoardManager.computeScore(),
                             Toast.LENGTH_SHORT).show();
                     seaInvadersBoardManager.updateScoreboard();
                     seaInvadersBoardManager.resetGame();

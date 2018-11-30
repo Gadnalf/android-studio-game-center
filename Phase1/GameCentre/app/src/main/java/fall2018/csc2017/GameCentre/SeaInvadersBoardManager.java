@@ -249,7 +249,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * @return double = score
      */
     @Override
-    public double getScore() {
+    public double computeScore() {
         //TODO: improve (2)
         double round = getCurrentRound();
         boolean invadersLeft = getInvaderPositions().size() > 0;

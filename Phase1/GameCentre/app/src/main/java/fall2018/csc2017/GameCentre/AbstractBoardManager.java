@@ -3,7 +3,6 @@ package fall2018.csc2017.GameCentre;
 import android.support.v7.app.AppCompatActivity;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -196,13 +195,17 @@ abstract public class AbstractBoardManager implements Serializable {
      * your scoring function
      * @return score in the form of double.
      */
-    abstract public double getScore();
+    abstract public double computeScore();
+
+    public double getScore() {
+        return this.score;
+    }
 
     /**
      * load update and then save the scoreboard
      */
     void updateScoreboard() {
-        this.score = getScore();
+        this.score = computeScore();
         if (this.appCompatActivity != null) {
             ScoreBoard.addScoreToSavedScoreboard(this.user,
                     this.score,
@@ -217,9 +220,15 @@ abstract public class AbstractBoardManager implements Serializable {
         this.startTime = System.nanoTime();
     }
 
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
     AbstractTilesFactory getTilesFactory() {
         return tilesFactory;
     }
 
     public void resetGame() {}
+
+
 }

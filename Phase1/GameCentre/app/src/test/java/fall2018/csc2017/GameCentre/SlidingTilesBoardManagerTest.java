@@ -26,25 +26,48 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
         String user = "phil";
         SlidingTilesSettings slidingTileSettings =  new SlidingTilesSettings(boardSize, 4);
         boardManager = new SlidingTilesBoardManager(board, user, slidingTileSettings);
+
     }
 
 //    public void testScoreUpating(Method updater) {
 //        updater();
-//        assertEquals((long) boardManager.getScore(), (long) 10.0);
+//        assertEquals((long) boardManager.computeScore(), (long) 10.0);
 //        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
 //        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
 //        updateScoreboard();
-//        assert boardManager.getScore() < 10.0;
+//        assert boardManager.computeScore() < 10.0;
 //    }
 
     @Override
     public void testUpdateScoreboard() {
+        boardManager.setStartTime(System.nanoTime() - (long) (Math.pow(10, 10)*30.0)); //-30 seconds
+        long initScore = (long) boardManager.computeScore();
+        assertEquals(initScore, (long) 9589);
         boardManager.updateScoreboard();
-        assertEquals((long) boardManager.getScore(), (long) 10.0);
         SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
         SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
         boardManager.updateScoreboard();
-        assertTrue(boardManager.getScore() < 10.0);
+        assertTrue((long) boardManager.getScore() == (long) 6481);
+    }
+
+    @Test
+    public void testScoreComputation() {
+        boardManager.setStartTime(System.nanoTime() - (long) (Math.pow(10, 10)*30.0)); //-30 seconds
+        long initScore = (long) boardManager.computeScore();
+        assertEquals(initScore, (long) 9589);
+        boardManager.setMoveCount(1);
+        long move1Score = (long) boardManager.computeScore();
+        assertEquals(move1Score, (long) 7734);
+        boardManager.setMoveCount(2);
+        long move2Score = (long) boardManager.computeScore();
+        assertEquals(move2Score, (long) 6481);
+        boardManager.setStartTime(System.nanoTime() - (long) (Math.pow(10, 10)*60.0)); //-60 secs
+        boardManager.setMoveCount(1);
+        long move1Sec60Score = (long) boardManager.computeScore();
+        assertEquals(move1Sec60Score, (long) 7486);
+        boardManager.setMoveCount(2);
+        long move2Sec60Score = (long) boardManager.computeScore();
+        assertEquals(move2Sec60Score, (long) 6306);
     }
 
     @Test
@@ -54,12 +77,13 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
 
     @Test
     public void testPuzzleSolved() {
+        boardManager.setStartTime(System.nanoTime() - (long) (Math.pow(10, 10)*30.0)); //-30 seconds
         System.out.println(boardManager.puzzleSolved());
-        assertEquals((long) boardManager.getScore(), (long) 10.0);
+        assertEquals((long) boardManager.getScore(), (long) 9589);
         SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
         SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
         System.out.println(boardManager.puzzleSolved());
-        assertTrue(boardManager.getScore() < 10.0);
+        assertTrue((long) boardManager.getScore() == (long) 6481);
     }
 
 

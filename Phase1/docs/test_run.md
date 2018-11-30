@@ -36,3 +36,7 @@
 
 ### auto save
 - new game, move, leave come back same spot
+
+### Sea invaders
+- scoreboard updates after losing and winning game
+- 

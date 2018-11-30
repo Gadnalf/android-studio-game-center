@@ -20,7 +20,7 @@ class MovementController {
         if (abstractBoardManager.isValidTap(position)) {
             abstractBoardManager.touchMove(position);
             if (abstractBoardManager.puzzleSolved()) {
-                double newScore = abstractBoardManager.getScore();
+                double newScore = abstractBoardManager.computeScore();
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "you scored=" + newScore, Toast.LENGTH_SHORT).show();
                 abstractBoardManager.resetGame();

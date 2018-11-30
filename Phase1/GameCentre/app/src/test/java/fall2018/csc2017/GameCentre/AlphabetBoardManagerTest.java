@@ -97,6 +97,6 @@ public class AlphabetBoardManagerTest extends AbstractBoardManagerTest {
         List<Tile> emptyTiles = AlphabetTilesTestingHelpers.makeEmptyTiles(5);
         boardManager.getBoard().setTiles(emptyTiles);
         boardManager.getBoard().updateTile(0, new TileAlpha(4));
-        assertEquals("The score is not correct.", 32, boardManager.getScore(), 0);
+        assertEquals("The score is not correct.", 32, boardManager.computeScore(), 0);
     }
 }
