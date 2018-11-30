@@ -139,6 +139,14 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
         }
     }
 
+    /**
+     * Check if there was any moves made
+     *
+     * @return false if no moves are made from the current state, true otherwise
+     */
+    @Override
+    public boolean moveIsEmpty(){return  moves.empty();}
+
     @Override
     boolean gameOver(){
         return false;
@@ -158,7 +166,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     boolean isValidUndo(int position) {
         int row = position / getGameSettings().getBoardSize();
         int col = position % getGameSettings().getBoardSize();
-        int blankId = getBoard().numTiles();
+        int blankId = 25;
         Tile current = getBoard().getTile(row, col);
         return (current.getId() == blankId);
     }
@@ -171,7 +179,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     @Override
     void tapUndo(int position) {
         if(isValidUndo(position)){
-            int numUndoes = ((SlidingTilesSettings) gameSettings).getNumUndoes();
+            int numUndoes = (gameSettings).getNumUndoes();
             int[] lastMove = moves.pop();
             int row1 = lastMove[0];
             int col1 = lastMove[1];
@@ -213,8 +221,8 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
         double moveCount = (double) getMoveCount();
         double timeWeight = (getTimePlayed()/1000);
         double numUndoesWeight = getSlidingTileSettings().getNumUndoes();
-        double score = 1/(timeWeight * (moveCount + numUndoesWeight));
-        return score*1000000; //want to maximize this
+        double score = 1/(timeWeight * (moveCount + numUndoesWeight)) * 1000000;
+        return Math.round(score);
     }
 
     /**
