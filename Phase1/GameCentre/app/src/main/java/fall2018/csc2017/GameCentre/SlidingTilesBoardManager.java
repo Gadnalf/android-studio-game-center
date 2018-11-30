@@ -138,6 +138,11 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
     }
 
     @Override
+    boolean gameOver(){
+        return false;
+    }
+
+    @Override
     void swipeTo(int direction) {
     }
 

@@ -276,6 +276,11 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     }
 
+    @Override
+    boolean gameOver(){
+        return false;
+    }
+
     public SeaInvadersSettings getSeaInvaderSettings() {
         return (SeaInvadersSettings) getGameSettings();
     }
