@@ -76,6 +76,8 @@ public class SlidingTilesTestingHelpers {
     static void swapFirstTwoTiles(SlidingTilesBoardManager slidingTilesBoardManager) {
         slidingTilesBoardManager.getBoard().swapTiles(0, 0, 0, 1);
         slidingTilesBoardManager.moveCount += 1;
+        int[] move = {0, 0, 0, 1};
+        slidingTilesBoardManager.moves.push(move);
 //        int numTiles = slidingTilesBoardManager.getBoard().getBoardSize() * slidingTilesBoardManager.getBoard().getBoardSize();
 //        slidingTilesBoardManager.touchMove(numTiles);
 //        slidingTilesBoardManager.touchMove(numTiles-1);

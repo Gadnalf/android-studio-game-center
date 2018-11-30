@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.*;
 
@@ -54,8 +55,8 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
     @Test
     public void testPuzzleSolved() {
         System.out.println(boardManager.puzzleSolved());
-        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
-        SlidingTilesTestingHelpers.swapFirstTwoTiles((SlidingTilesBoardManager) boardManager);
+        SlidingTilesTestingHelpers.swapFirstTwoTiles(boardManager);
+        SlidingTilesTestingHelpers.swapFirstTwoTiles(boardManager);
         System.out.println(boardManager.puzzleSolved());
         assertTrue(boardManager.getScore() > 0);
     }
@@ -71,7 +72,15 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
 
     @Test
     public void tapUndo() {
-    }
+        boardManager.board.updateTile(0, new TileNum(24));
+        boardManager.board.updateTile(1, new TileNum(15));
+        SlidingTilesTestingHelpers.swapFirstTwoTiles(boardManager);
+        Tile secondTile = boardManager.board.getTile(0, 1);
+        assertEquals(25, secondTile.getId());
+        boardManager.tapUndo(1);
+        Tile newSecond = boardManager.board.getTile(0, 1);
+        assertEquals(16, newSecond.getId());
+         }
 
     @Test
     public void setBoardSize() {
