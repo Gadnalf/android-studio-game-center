@@ -20,5 +20,7 @@ public class AccountManagerTest {
         assertEquals("Johnny", accountManager.getName());
         accountManager.login("Bobby", "Best");
         assertEquals("Bobby", accountManager.getName());
+        accountManager.logout();
+        assertEquals("Guest", accountManager.getName());
     }
 }
