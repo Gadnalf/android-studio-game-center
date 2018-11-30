@@ -1,7 +1,6 @@
 package fall2018.csc2017.GameCentre;
 
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,25 +12,15 @@ import java.util.List;
 public class SeaInvadersBoardManager extends AbstractBoardManager implements Serializable {
 
 
-    int lastOccupiedColumn; //TODO: make sure he starts here
-    int currentRound = 0;
-    ArrayList<Integer> invaderPositions = new ArrayList<Integer>();
-    boolean gameOver = false;
+    int lastOccupiedColumn;
+    private int currentRound = 0;
+    private ArrayList<Integer> invaderPositions = new ArrayList<>();
+    private boolean gameOver = false;
     boolean puzzleSolved = false;
 
     /**
      * Manage a board that has been pre-populated.
-     *
-     * @param board the board
      */
-    SeaInvadersBoardManager(Board board, String user, SeaInvadersSettings seaInvadersSettings,
-                            AppCompatActivity appCompatActivity) {
-        super(board, user, seaInvadersSettings,
-                appCompatActivity, new SeaInvadersTileFactory());
-        this.lastOccupiedColumn = seaInvadersSettings.getBoardSize() - 1;
-    }
-
-
     SeaInvadersBoardManager(String user, SeaInvadersSettings seaInvadersSettings) {
         super(user, seaInvadersSettings, new SeaInvadersTileFactory());
         this.lastOccupiedColumn = seaInvadersSettings.getBoardSize() - 1;
@@ -47,18 +36,11 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         return this.puzzleSolved;
     }
 
-    public void checkIfPuzzleIsSolved() {
+    void checkIfPuzzleIsSolved() {
         boolean noMoreInvaders = getInvaderPositions().size() == 0;
         boolean finishedFinalRound = this.currentRound == ((SeaInvadersSettings) this.gameSettings).getNumRounds();
-        boolean gameAintOver = gameOver() == false;
-        if (noMoreInvaders
-                //TODO: when you update the rounds between spawn and move to be indep we'll need to alter this too
-                && finishedFinalRound
-                && gameAintOver) {
-            this.puzzleSolved = true;
-        } else {
-            this.puzzleSolved = false;
-        }
+        boolean gameAintOver = !gameOver();
+        puzzleSolved = (noMoreInvaders && finishedFinalRound && gameAintOver);
     }
 
     /**
@@ -74,11 +56,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
         }
         int row = position / getGameSettings().getBoardSize();
         int col = position % getGameSettings().getBoardSize();
-        if (row == getGameSettings().getBoardSize() - 1 && col != this.lastOccupiedColumn) {
-            return true;
-        } else {
-            return false;
-        }
+        return (row == getGameSettings().getBoardSize() - 1 && col != this.lastOccupiedColumn);
 
     }
 
@@ -91,9 +69,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     @Override
     void touchMove(int position) {
 
-        int row = position / this.getGameSettings().getBoardSize();
         int col = position % this.getGameSettings().getBoardSize();
-        int blankId = board.numTiles();
         if (isValidTap(position)) {
             board.swapTiles(
                     this.getGameSettings().getBoardSize() - 1,
@@ -114,12 +90,12 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * then we return this
      * we know this is the closest bc we sort in descending order
      * when we get invader positions
-     * @param position
-     * @return
+     * @param position the position of the shooter
+     * @return Returns an integer representing the position of the closest enemy in the column, and -1 if no enemy is available.
      */
-    public int getClosestEnemyPosInThisCol(int position) {
+    int getClosestEnemyPosInThisCol(int position) {
         int shooterCol = position % this.getGameSettings().getBoardSize();
-        for (int pos : (ArrayList<Integer>) getInvaderPositions()) {
+        for (int pos : getInvaderPositions()) {
             int enemyCol = pos % this.getGameSettings().getBoardSize();
             if (shooterCol == enemyCol) {
                 return pos;
@@ -132,20 +108,16 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     /**
      * return true if there's an enemy to shoot at
      *
-     * @param position
-     * @return
+     * @param position the position of the shooter
+     * @return Returns true if there is a kraken to shoot, and false otherwise.
      */
     @Override
     boolean isValidShoot(int position) {
         int row = position / this.getGameSettings().getBoardSize();
         int col = position % this.getGameSettings().getBoardSize();
-        if (row+1 == this.getGameSettings().getBoardSize() &&
+        return (row+1 == this.getGameSettings().getBoardSize() &&
                 col == this.lastOccupiedColumn &&
-                getClosestEnemyPosInThisCol(position) >= 0) {
-            return true;
-        } else {
-            return false;
-        }
+                getClosestEnemyPosInThisCol(position) >= 0);
     }
 
     /**
@@ -153,7 +125,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * see MovementController processTapMovement for ideas on where to start
      * Should be somewhat similar to undo
      *
-     * @param position
+     * @param position the position of the shooter
      */
     @Override
     public void fireAndUpdate(int position) {
@@ -167,7 +139,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * - for every invader on the board we need to move them down 1 at a time
      * based on the time inverval specified in SeaInvadersSettings
      */
-    public void spawnTheInvaders() {
+    void spawnTheInvaders() {
         checkIfPuzzleIsSolved();
         if (!puzzleSolved() && !gameOver() &&
                 this.currentRound < ((SeaInvadersSettings) this.gameSettings).getNumRounds()) {
@@ -186,7 +158,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * starts all the invaders swimming towards the bottom of the board
      * one row at a time
      */
-    public void swim() {
+    void swim() {
         checkIfPuzzleIsSolved();
         if (!puzzleSolved() && !gameOver()) {
             //TODO: separate spawn and move rounds (2)
@@ -205,10 +177,9 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
 
     /**
      * loop over the board and identify all the invaders
-     * @return
+     * @return Returns an ArrayList representing the positions of every enemy.
      */
-    public ArrayList<Integer> getInvaderPositions() {
-        //TODO: make more efficient (3)
+    ArrayList<Integer> getInvaderPositions() {
         ArrayList<Integer> invaderPositions = new ArrayList<Integer>();
         Iterator boardIterator = board.iterator();
         for (int pos = 0;
@@ -229,8 +200,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
      * return new positions for invader spawning
      * @return ArrayList of new spawn positions
      */
-    public ArrayList getInvaderSpawnPositions() {
-        //TODO: improve this, want to be more random (2)
+    ArrayList getInvaderSpawnPositions() {
         ArrayList positions = new ArrayList();
 
         for (int i = 0; i < this.gameSettings.getBoardSize(); i++) {
@@ -279,33 +249,33 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     }
 
 
-    public SeaInvadersSettings getSeaInvaderSettings() {
+    private SeaInvadersSettings getSeaInvaderSettings() {
         return (SeaInvadersSettings) getGameSettings();
     }
 
-    public void setLastOccupiedColumnToStart() {
+    private void setLastOccupiedColumnToStart() {
         this.lastOccupiedColumn = getSeaInvaderSettings().getBoardSize() - 1;
     }
+//
+//    public int getLastOccupiedColumn() {
+//        return lastOccupiedColumn;
+//    }
+//
+//    public void setLastOccupiedColumn(int lastOccupiedColumn) {
+//        this.lastOccupiedColumn = lastOccupiedColumn;
+//    }
 
-    public int getLastOccupiedColumn() {
-        return lastOccupiedColumn;
-    }
-
-    public void setLastOccupiedColumn(int lastOccupiedColumn) {
-        this.lastOccupiedColumn = lastOccupiedColumn;
-    }
-
-    public int getCurrentRound() {
+    private int getCurrentRound() {
         return currentRound;
     }
 
-    public void setCurrentRound(int currentRound) {
+    void setCurrentRound(int currentRound) {
         this.currentRound = currentRound;
     }
-
-    public void setInvaderPositions(ArrayList<Integer> invaderPositions) {
-        this.invaderPositions = invaderPositions;
-    }
+//
+//    public void setInvaderPositions(ArrayList<Integer> invaderPositions) {
+//        this.invaderPositions = invaderPositions;
+//    }
 
     @Override
     public boolean gameOver() {
@@ -313,7 +283,7 @@ public class SeaInvadersBoardManager extends AbstractBoardManager implements Ser
     }
 
 
-    public void setGameOver(boolean gameOver) {
+    void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
 }

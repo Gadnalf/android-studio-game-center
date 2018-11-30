@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-import fall2018.csc2017.GameCentre.R;
-
 /**
  * A Tile in a sliding tiles puzzle.
  */
@@ -52,7 +50,7 @@ abstract class Tile implements Comparable<Tile>, Serializable {
     /**
      * A tile with a background id; look up and set the id.
      *
-     * @param backgroundId
+     * @param backgroundId backgroundId of the tile
      */
     Tile(int backgroundId) {
         id = backgroundId + 1;

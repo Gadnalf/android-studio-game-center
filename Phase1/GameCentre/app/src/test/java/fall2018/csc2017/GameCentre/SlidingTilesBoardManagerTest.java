@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.*;
 
@@ -88,16 +89,44 @@ public class SlidingTilesBoardManagerTest extends AbstractBoardManagerTest {
 
 
     @Test
-    public void touchMove() {
+    public void testTouchMove() {
+        boardManager.board.updateTile(0, new TileNum(24));
+        boardManager.board.updateTile(1, new TileNum(4));
+        boardManager.board.updateTile(4, new TileNum(6));
+        boardManager.touchMove(1);
+        Tile newFirst = boardManager.board.getTile(0, 0);
+        assertEquals(5, newFirst.getId());
+        assertEquals(25, boardManager.board.getTile(0, 1).getId());
+        boardManager.touchMove(0);
+        Tile newSecond = boardManager.board.getTile(0, 1);
+        assertEquals(5, newSecond.getId());
+        boardManager.touchMove(4);
+        boardManager.touchMove(0);
+        Tile sameDown = boardManager.board.getTile(1, 0);
+        assertEquals(7, sameDown.getId());
     }
 
     @Test
     public void isValidUndo() {
+        boardManager.board.updateTile(0, new TileNum(24));
+        boardManager.board.updateTile(1, new TileNum(15));
+        assertTrue(boardManager.isValidUndo(0));
+        assertFalse(boardManager.isValidUndo(1));
     }
 
     @Test
     public void tapUndo() {
-    }
+        boardManager.board.updateTile(0, new TileNum(24));
+        boardManager.board.updateTile(1, new TileNum(15));
+        assertTrue(boardManager.moveIsEmpty());
+        SlidingTilesTestingHelpers.swapFirstTwoTiles(boardManager);
+        Tile secondTile = boardManager.board.getTile(0, 1);
+        assertEquals(25, secondTile.getId());
+        assertFalse(boardManager.moveIsEmpty());
+        boardManager.tapUndo(1);
+        Tile newSecond = boardManager.board.getTile(0, 1);
+        assertEquals(16, newSecond.getId());
+         }
 
     @Test
     public void setBoardSize() {

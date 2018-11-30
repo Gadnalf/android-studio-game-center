@@ -10,7 +10,7 @@ public class SlidingTilesTestingHelpers {
      * Make a set of tiles that are in order.
      * @return a set of tiles that are in order
      */
-    public static List<Tile> makeTiles(int boardSize) {
+    static List<Tile> makeTiles(int boardSize) {
         List<Tile> tiles = new ArrayList<>();
         int numTiles = boardSize*boardSize;
 
@@ -43,14 +43,14 @@ public class SlidingTilesTestingHelpers {
     }
 
     /**
-     * Make a game hub w winnning scoreboard
+     * Make a game hub w winning scoreboard
      * @param userName
      * @param appCompatActivity
      * @param swapTiles
      * @return
      */
-    public static GameData makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
-                                                   boolean swapTiles) {
+    static GameData makeWinningBoardManager(String userName, AppCompatActivity appCompatActivity,
+                                            boolean swapTiles) {
         GameData gameData = SaveAndLoad.loadGameHubPermanent(
                 userName, appCompatActivity
         );
@@ -73,9 +73,11 @@ public class SlidingTilesTestingHelpers {
     /**
      * Shuffle a few tiles.
      */
-    public static void swapFirstTwoTiles(SlidingTilesBoardManager slidingTilesBoardManager) {
+    static void swapFirstTwoTiles(SlidingTilesBoardManager slidingTilesBoardManager) {
         slidingTilesBoardManager.getBoard().swapTiles(0, 0, 0, 1);
         slidingTilesBoardManager.moveCount += 1;
+        int[] move = {0, 0, 0, 1};
+        slidingTilesBoardManager.moves.push(move);
 //        int numTiles = slidingTilesBoardManager.getBoard().getBoardSize() * slidingTilesBoardManager.getBoard().getBoardSize();
 //        slidingTilesBoardManager.touchMove(numTiles);
 //        slidingTilesBoardManager.touchMove(numTiles-1);
