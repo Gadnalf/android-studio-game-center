@@ -3,6 +3,8 @@ package fall2018.csc2017.GameCentre;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.junit.Assert.*;
 
 public class ScoreBoardTest {
@@ -110,4 +112,30 @@ public class ScoreBoardTest {
                 (long) scoreBoard.getPerGameScoreBoard().get(gameSettings1.getGameId()).getMaxScore(),
                 1);
     }
+
+    @Test
+    public void setAndGetScoreBoards() {
+        HashMap perGameScoreboard = scoreBoard.getPerGameScoreBoard();
+        HashMap perUserScoreboard = scoreBoard.getPerUserScoreBoard();
+        ScoreBoard newScoreboard = new ScoreBoard(user2, gameSettings2);
+        newScoreboard.setPerUserScoreBoard(perUserScoreboard);
+        newScoreboard.setPerGameScoreBoard(perGameScoreboard);
+        assertEquals(newScoreboard.getPerUserScoreBoard(),
+                scoreBoard.getPerUserScoreBoard());
+        assertEquals(newScoreboard.getPerGameScoreBoard(),
+                scoreBoard.getPerGameScoreBoard());
+    }
+
+    @Test
+    public void getAndSetUser() {
+        scoreBoard.setUser(user1);
+        assertEquals(scoreBoard.getUser(), user1);
+    }
+
+    @Test
+    public void getAndSetGameSettings() {
+        scoreBoard.setGameSettings(gameSettings3);
+        assertEquals(scoreBoard.getGameSettings(), gameSettings3);
+    }
+
 }
