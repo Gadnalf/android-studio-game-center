@@ -1,7 +1,6 @@
 package fall2018.csc2017.GameCentre;
 
 import android.support.v7.app.AppCompatActivity;
-
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -23,6 +22,13 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
                 appCompatActivity, new SlidingTilesTileFactory());
     }
 
+    /**
+     * Manage a board that has been pre-populated.
+     *
+     * @param board the board
+     * @param user the user
+     * @param slidingTilesSettings the setting of the sliding tile games.
+     */
     SlidingTilesBoardManager(Board board, String user, SlidingTilesSettings slidingTilesSettings) {
         super(board, user, slidingTilesSettings, new SlidingTilesTileFactory());
     }
@@ -30,8 +36,8 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
 
     /**
      * manage a new board
-     * @param user
-     * @param slidingTilesSettings
+     * @param user user
+     * @param slidingTilesSettings the setting of the sliding tiles games. 
      */
     SlidingTilesBoardManager(String user, SlidingTilesSettings slidingTilesSettings) {
         super(user, slidingTilesSettings, new SlidingTilesTileFactory());
@@ -180,6 +186,11 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
 
     }
 
+    /**
+     * Sets the board size and generates a new board for the sliding tiles game.
+     *
+     * @param boardSize size of the board indicated by integer.
+     */
     @Override
     public void setBoardSize(int boardSize) {
         super.setBoardSize(boardSize);
@@ -195,7 +206,7 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
      * TODO: add why I went with 10
      * - something to do with easier implementation
      *
-     * @return
+     * @return double that represent score of the game
      */
     @Override
     public double getScore() {
@@ -206,8 +217,13 @@ class SlidingTilesBoardManager extends AbstractBoardManager implements Serializa
         return 10-(a/b); //want to maximize this
     }
 
+    /**
+     * Returns the settings of the sliding tiles game currently being played
+     *
+     * @return SlidingTileSettings class
+     */
 
-    public SlidingTilesSettings getSlidingTileSettings() {
+    SlidingTilesSettings getSlidingTileSettings() {
         return (SlidingTilesSettings) getGameSettings();
     }
 

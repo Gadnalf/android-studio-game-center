@@ -21,82 +21,82 @@
 //        // This looks so ugly.
 //        switch (backgroundId + 1) {
 //            case 1:
-//                background = R.drawable.tile_5x5_1;
+//                background = R.drawable.tile_1;
 //                break;
 //            case 2:
-//                background = R.drawable.tile_5x5_2;
+//                background = R.drawable.tile_2;
 //                break;
 //            case 3:
-//                background = R.drawable.tile_5x5_3;
+//                background = R.drawable.tile_3;
 //                break;
 //            case 4:
-//                background = R.drawable.tile_5x5_4;
+//                background = R.drawable.tile_4;
 //                break;
 //            case 5:
-//                background = R.drawable.tile_5x5_5;
+//                background = R.drawable.tile_5;
 //                break;
 //            case 6:
-//                background = R.drawable.tile_5x5_6;
+//                background = R.drawable.tile_6;
 //                break;
 //            case 7:
-//                background = R.drawable.tile_5x5_7;
+//                background = R.drawable.tile_7;
 //                break;
 //            case 8:
-//                background = R.drawable.tile_5x5_8;
+//                background = R.drawable.tile_8;
 //                break;
 //            case 9:
-//                background = R.drawable.tile_5x5_9;
+//                background = R.drawable.tile_9;
 //                break;
 //            case 10:
-//                background = R.drawable.tile_5x5_10;
+//                background = R.drawable.tile_10;
 //                break;
 //            case 11:
-//                background = R.drawable.tile_5x5_11;
+//                background = R.drawable.tile_11;
 //                break;
 //            case 12:
-//                background = R.drawable.tile_5x5_12;
+//                background = R.drawable.tile_12;
 //                break;
 //            case 13:
-//                background = R.drawable.tile_5x5_13;
+//                background = R.drawable.tile_13;
 //                break;
 //            case 14:
-//                background = R.drawable.tile_5x5_14;
+//                background = R.drawable.tile_14;
 //                break;
 //            case 15:
-//                background = R.drawable.tile_5x5_15;
+//                background = R.drawable.tile_15;
 //                break;
 //            case 16:
-//                background = R.drawable.tile_5x5_16;
+//                background = R.drawable.tile_16;
 //                break;
 //            case 17:
-//                background = R.drawable.tile_5x5_17;
+//                background = R.drawable.tile_17;
 //                break;
 //            case 18:
-//                background = R.drawable.tile_5x5_18;
+//                background = R.drawable.tile_18;
 //                break;
 //            case 19:
-//                background = R.drawable.tile_5x5_19;
+//                background = R.drawable.tile_19;
 //                break;
 //            case 20:
-//                background = R.drawable.tile_5x5_20;
+//                background = R.drawable.tile_20;
 //                break;
 //            case 21:
-//                background = R.drawable.tile_5x5_21;
+//                background = R.drawable.tile_21;
 //                break;
 //            case 22:
-//                background = R.drawable.tile_5x5_22;
+//                background = R.drawable.tile_22;
 //                break;
 //            case 23:
-//                background = R.drawable.tile_5x5_23;
+//                background = R.drawable.tile_23;
 //                break;
 //            case 24:
-//                background = R.drawable.tile_5x5_24;
+//                background = R.drawable.tile_24;
 //                break;
 //            case 25:
-//                background = R.drawable.tile_5x5_25;
+//                background = R.drawable.tile_25;
 //                break;
 //            default:
-//                background = R.drawable.tile_5x5_25;
+//                background = R.drawable.tile_25;
 //
 //        }
 //    }

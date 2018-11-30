@@ -111,10 +111,10 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     /**
      * Swap the tiles at (row1, col1) and (row2, col2)
      *
-     * @param row1 the first tile row
-     * @param col1 the first tile col
-     * @param row2 the second tile row
-     * @param col2 the second tile col
+     * @param row1 the first tile row.
+     * @param col1 the first tile col.
+     * @param row2 the second tile row.
+     * @param col2 the second tile col.
      */
     void swapTiles(int row1, int col1, int row2, int col2) {
         Tile temp = tiles[row1][col1];
@@ -124,6 +124,15 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
+    /**
+     * Swap the tiles at (row1, col1) and (row2, col2)
+     *
+     * @param row1 the first tile row.
+     * @param col1 the first tile col.
+     * @param row2 the second tile row.
+     * @param col2 the second tile col.
+     * @param notifyObservers for the Sea invaders returns boolean.
+     */
     void swapTiles(int row1, int col1, int row2, int col2, boolean notifyObservers) {
         Tile temp = tiles[row1][col1];
         tiles[row1][col1] = tiles[row2][col2];
@@ -182,49 +191,12 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         setTiles(newTiles);
     }
 
-    void fixedShuffle(List<Tile> tiles){
-        List<Integer> random = new ArrayList<>();
-        for (int i = 0; i < 200; i++){
-            random.add(1);
-            random.add(2);
-            random.add(3);
-            random.add(4);
-        }
-        Collections.shuffle(random);
-        for(int i = 0; i < random.size(); i++){
-            int move = random.get(i);
-            for(int j = 0; j < tiles.size(); j ++){
-                if(tiles.get(j).getId() == 25){
-                    if(move == 1){
-                        if(0 <= j - boardSize){
-                         Tile saveTile = tiles.get(j);
-                         tiles.set(j , tiles.get(j - boardSize));
-                         tiles.set(j - boardSize, saveTile);
-                        }
-                    }else if(move == 2){
-                        if( j + boardSize < tiles.size()){
-                            Tile saveTile = tiles.get(j);
-                            tiles.set(j , tiles.get(j + boardSize));
-                            tiles.set(j + boardSize, saveTile);
-                        }
-                    }else if(move == 3){
-                        if(0 <= j - 1 && j % boardSize != 0){
-                            Tile saveTile = tiles.get(j);
-                            tiles.set(j , tiles.get(j - 1));
-                            tiles.set(j - 1, saveTile);
-                        }
-                    }else{
-                        if( j + 1 < tiles.size() && j % boardSize != 3){
-                            Tile saveTile = tiles.get(j);
-                            tiles.set(j , tiles.get(j + 1));
-                            tiles.set(j + 1, saveTile);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
+    /**
+     * Checks whether the board state is not solvable.
+     *
+     * @param newTiles a list of tiles of numbers.
+     * @return true if it is impossible to solve else false.
+     */
     private boolean isImpossible(List<Tile> newTiles){
         int inversions = 0;
         int blank = 24;
@@ -248,10 +220,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
                 return false;
             }
         }
-        if(boardSize % 2 == 1 & inversions%2 == 0){
-                return false;
-        }
-        return true;
+        return !(boardSize % 2 == 1 & inversions%2 == 0);
     }
 
     /**
